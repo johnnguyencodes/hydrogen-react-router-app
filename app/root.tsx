@@ -16,6 +16,7 @@ import {FOOTER_QUERY, HEADER_QUERY} from '~/lib/fragments';
 import resetStyles from '~/styles/reset.css?url';
 import appStyles from '~/styles/app.css?url';
 import tailwindCss from './styles/tailwind.css?url';
+import '@fancyapps/ui/dist/fancybox/fancybox.css';
 import {PageLayout} from './components/PageLayout';
 
 export type RootLoader = typeof loader;
@@ -156,7 +157,9 @@ export function Layout({children}: {children?: React.ReactNode}) {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body
+        className={`${process.env.NODE_ENV === 'development' ? 'debug-screens' : ''} bg-[var(--color-bg-0)] overflow-x-hidden`}
+      >
         {children}
         <ScrollRestoration nonce={nonce} />
         <Scripts nonce={nonce} />

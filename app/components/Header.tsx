@@ -1,12 +1,9 @@
-import {Suspense} from 'react';
-import {Await, NavLink, useAsyncValue} from 'react-router';
-import {
-  type CartViewPayload,
-  useAnalytics,
-  useOptimisticCart,
-} from '@shopify/hydrogen';
+import {useEffect, useState} from 'react';
+import {NavLink} from 'react-router';
 import type {HeaderQuery, CartApiQueryFragment} from 'storefrontapi.generated';
 import {useAside} from '~/components/Aside';
+import {Button} from './ui/button';
+import {AlignJustify, MoonStar, Sun} from 'lucide-react';
 
 interface HeaderProps {
   header: HeaderQuery;
@@ -17,26 +14,35 @@ interface HeaderProps {
 
 type Viewport = 'desktop' | 'mobile';
 
-export function Header({
-  header,
-  isLoggedIn,
-  cart,
-  publicStoreDomain,
-}: HeaderProps) {
+export function Header({header, publicStoreDomain}: HeaderProps) {
   const {shop, menu} = header;
   return (
-    <header className="header">
-      <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
-        <strong>{shop.name}</strong>
-      </NavLink>
-      <HeaderMenu
-        menu={menu}
-        viewport="desktop"
-        primaryDomainUrl={header.shop.primaryDomain.url}
-        publicStoreDomain={publicStoreDomain}
-      />
-      <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
-    </header>
+    <div>
+      <header className="header relative bg-[var(--color-bg-5)] text-[var(--color-fg-text)] before:content-[''] before:absolute before:inset-0 before:-mx-[calc((100vw-100%)/2)] before:w-screen before:bg-[var(--color-bg-5)] flex items-center h-16 text-base">
+        <NavLink
+          prefetch="intent"
+          to="/"
+          style={activeLinkStyle}
+          className="z-10 ml-5 2xl:ml-0"
+          end
+        >
+          <strong>{shop.name}</strong>
+        </NavLink>
+        <div className="relative z-10 flex-1">
+          <div className="hidden sm:block">
+            <HeaderMenu
+              menu={menu}
+              viewport="desktop"
+              primaryDomainUrl={header.shop.primaryDomain.url}
+              publicStoreDomain={publicStoreDomain}
+            />
+          </div>
+        </div>
+        <div className="flex sm:hidden z-50 items-center mr-5">
+          <HeaderMenuMobileToggle />
+        </div>
+      </header>
+    </div>
   );
 }
 
@@ -51,66 +57,118 @@ export function HeaderMenu({
   viewport: Viewport;
   publicStoreDomain: HeaderProps['publicStoreDomain'];
 }) {
-  const className = `header-menu-${viewport}`;
+  const headerMenuClassName = `header-menu-${viewport} flex items-center justify-between w-full`;
   const {close} = useAside();
 
-  return (
-    <nav className={className} role="navigation">
-      {viewport === 'mobile' && (
-        <NavLink
-          end
-          onClick={close}
-          prefetch="intent"
-          style={activeLinkStyle}
-          to="/"
-        >
-          Home
-        </NavLink>
-      )}
-      {(menu || FALLBACK_HEADER_MENU).items.map((item) => {
-        if (!item.url) return null;
+  const loadFromLocalStorage = (key: string): string | null => {
+    try {
+      if (typeof window !== 'undefined') {
+        return localStorage.getItem(key);
+      }
+    } catch (error) {
+      console.warn(`Unable to access localStorage for key: ${key}`, error);
+    }
+    return null;
+  };
 
-        // if the url is internal, we strip the domain
-        const url =
-          item.url.includes('myshopify.com') ||
-          item.url.includes(publicStoreDomain) ||
-          item.url.includes(primaryDomainUrl)
-            ? new URL(item.url).pathname
-            : item.url;
-        return (
-          <NavLink
-            className="header-menu-item"
-            end
-            key={item.id}
-            onClick={close}
-            prefetch="intent"
-            style={activeLinkStyle}
-            to={url}
-          >
-            {item.title}
-          </NavLink>
-        );
-      })}
-    </nav>
-  );
-}
+  const {isDarkMode, toggleDarkMode} = useDarkMode();
 
-function HeaderCtas({
-  isLoggedIn,
-  cart,
-}: Pick<HeaderProps, 'isLoggedIn' | 'cart'>) {
+  function useDarkMode() {
+    const [isDarkMode, setIsDarkMode] = useState(false);
+
+    useEffect(() => {
+      const savedTheme = loadFromLocalStorage('theme');
+
+      const prefersDark = window.matchMedia?.(
+        '(prefers-color-scheme: dark)',
+      ).matches;
+      const shouldUseDark =
+        savedTheme === 'dark' || (!savedTheme && prefersDark);
+
+      setIsDarkMode(shouldUseDark);
+      document.documentElement.classList.toggle('dark', shouldUseDark);
+    }, []);
+
+    const toggleDarkMode = () => {
+      setIsDarkMode((prev) => {
+        const nextMode = !prev;
+        document.documentElement.classList.toggle('dark', nextMode);
+        localStorage.setItem('theme', nextMode ? 'dark' : 'light');
+        return nextMode;
+      });
+    };
+
+    return {isDarkMode, toggleDarkMode};
+  }
   return (
-    <nav className="header-ctas" role="navigation">
-      <HeaderMenuMobileToggle />
-      <NavLink prefetch="intent" to="/account" style={activeLinkStyle}>
-        <Suspense fallback="Sign in">
-          <Await resolve={isLoggedIn} errorElement="Sign in">
-            {(isLoggedIn) => (isLoggedIn ? 'Account' : 'Sign in')}
-          </Await>
-        </Suspense>
-      </NavLink>
-      <SearchToggle />
-      <CartToggle cart={cart} />
+    <nav className={headerMenuClassName} role="navigation">
+      <div className="flex items-center mx-auto">
+        {HEADER_MENU_1.items.map((item) => {
+          if (!item.url) return null;
+
+          // if the url is internal, we strip the domain
+          const url =
+            item.url.includes('myshopify.com') ||
+            item.url.includes(publicStoreDomain) ||
+            item.url.includes(primaryDomainUrl)
+              ? new URL(item.url).pathname
+              : item.url;
+          return (
+            <NavLink
+              className="header-menu-item text-[var(--color-fg-text)] mx-2"
+              end={false}
+              key={item.id}
+              onClick={close}
+              prefetch="intent"
+              style={({isActive}) => ({
+                fontWeight: isActive ? 'bold' : undefined,
+              })}
+              to={url}
+            >
+              {item.title}
+            </NavLink>
+          );
+        })}
+        <span className="mx-2">|</span>
+        {HEADER_MENU_2.items.map((item) => {
+          if (!item.url) return null;
+
+          // if the url is internal, we strip the domain
+          const url =
+            item.url.includes('myshopify.com') ||
+            item.url.includes(publicStoreDomain) ||
+            item.url.includes(primaryDomainUrl)
+              ? new URL(item.url).pathname
+              : item.url;
+          return (
+            <NavLink
+              className="header-menu-item text-[var(--color-fg-text)] mx-2"
+              end={false}
+              key={item.id}
+              onClick={close}
+              prefetch="intent"
+              style={({isActive}) => ({
+                fontWeight: isActive ? 'bold' : undefined,
+              })}
+              to={url}
+            >
+              {item.title}
+            </NavLink>
+          );
+        })}
+      </div>
+      <Button
+        onClick={toggleDarkMode}
+        className="w-7 h-7 mr-5 2xl:mr-0"
+        data-testid="themeToggle"
+        variant="default"
+      >
+        {isDarkMode ? (
+          <MoonStar className="h-4 w-4"></MoonStar>
+        ) : (
+          <Sun className="h-4 w-4"></Sun>
+        )}
+      </Button>
     </nav>
   );
 }
@@ -118,12 +176,13 @@ function HeaderCtas({
 function HeaderMenuMobileToggle() {
   const {open} = useAside();
   return (
-    <button
-      className="header-menu-mobile-toggle reset"
-      onClick={() => open('mobile')}
-    >
-      <h3>☰</h3>
-    </button>
+    <nav role="navigation">
+      <button onClick={() => open('mobile')}>
+        <h3>
+          <AlignJustify />
+        </h3>
+      </button>
+    </nav>
   );
 }
 
@@ -136,83 +195,59 @@ function SearchToggle() {
   );
 }
 
-function CartBadge({count}: {count: number | null}) {
-  const {open} = useAside();
-  const {publish, shop, cart, prevCart} = useAnalytics();
-
-  return (
-    <a
-      href="/cart"
-      onClick={(e) => {
-        e.preventDefault();
-        open('cart');
-        publish('cart_viewed', {
-          cart,
-          prevCart,
-          shop,
-          url: window.location.href || '',
-        } as CartViewPayload);
-      }}
-    >
-      Cart {count === null ? <span>&nbsp;</span> : count}
-    </a>
-  );
-}
-
-function CartToggle({cart}: Pick<HeaderProps, 'cart'>) {
-  return (
-    <Suspense fallback={<CartBadge count={null} />}>
-      <Await resolve={cart}>
-        <CartBanner />
-      </Await>
-    </Suspense>
-  );
-}
-
-function CartBanner() {
-  const originalCart = useAsyncValue() as CartApiQueryFragment | null;
-  const cart = useOptimisticCart(originalCart);
-  return <CartBadge count={cart?.totalQuantity ?? 0} />;
-}
-
-const FALLBACK_HEADER_MENU = {
-  id: 'gid://shopify/Menu/199655587896',
+const HEADER_MENU_1 = {
+  id: '',
   items: [
     {
-      id: 'gid://shopify/MenuItem/461609500728',
-      resourceId: null,
-      tags: [],
-      title: 'Collections',
-      type: 'HTTP',
-      url: '/collections',
-      items: [],
-    },
-    {
-      id: 'gid://shopify/MenuItem/461609533496',
-      resourceId: null,
-      tags: [],
-      title: 'Blog',
-      type: 'HTTP',
-      url: '/blogs/journal',
-      items: [],
-    },
-    {
-      id: 'gid://shopify/MenuItem/461609566264',
-      resourceId: null,
-      tags: [],
-      title: 'Policies',
-      type: 'HTTP',
-      url: '/policies',
-      items: [],
-    },
-    {
-      id: 'gid://shopify/MenuItem/461609599032',
-      resourceId: 'gid://shopify/Page/92591030328',
-      tags: [],
+      id: 'header-menu-about',
       title: 'About',
-      type: 'PAGE',
-      url: '/pages/about',
-      items: [],
+      url: '/about',
+    },
+    {
+      id: 'header-menu-projects',
+      title: 'Projects',
+      url: '/projects',
+    },
+    {
+      id: 'header-menu-gadgets',
+      title: 'Gadgets',
+      url: '/gadgets',
+    },
+    {
+      id: 'header-menu-blog',
+      title: 'Blog',
+      url: '/blogs/blog',
+    },
+  ],
+};
+
+const HEADER_MENU_2 = {
+  id: '',
+  items: [
+    {
+      id: 'header-menu-plants',
+      title: 'Plants',
+      url: '/plants',
+    },
+    {
+      id: 'header-menu-photography',
+      title: 'Photography',
+      url: '/photography',
+    },
+    {
+      id: 'header-menu-trails',
+      title: 'Trails',
+      url: '/trails',
+    },
+    {
+      id: 'header-menu-curios',
+      title: 'Curios',
+      url: '/curios',
+    },
+    {
+      id: 'header-menu-notes',
+      title: 'Notes',
+      url: '/blogs/notes',
     },
   ],
 };
@@ -226,6 +261,6 @@ function activeLinkStyle({
 }) {
   return {
     fontWeight: isActive ? 'bold' : undefined,
-    color: isPending ? 'grey' : 'black',
+    color: isPending ? 'var(--color-fg-text)' : 'var(--color-fg-text)',
   };
 }
