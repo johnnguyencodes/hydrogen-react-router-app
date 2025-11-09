@@ -1,6 +1,6 @@
 import {useState, MouseEvent} from 'react';
 import {CheckButton} from './CheckButton';
-import {ImageExtended, ImageProps} from './types';
+import type {ImageExtended, ImageProps} from './types';
 import * as styles from './styles';
 import {getStyle} from './styles';
 

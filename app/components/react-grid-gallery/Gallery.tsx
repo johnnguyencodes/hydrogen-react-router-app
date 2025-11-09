@@ -2,7 +2,7 @@ import {MouseEvent} from 'react';
 import {Image} from './Image';
 import {useContainerWidth} from './useContainerWidth';
 import {buildLayoutFlat} from './buildLayout';
-import {Image as ImageInterface, GalleryProps} from './types';
+import type {Image as ImageInterface, GalleryProps} from './types';
 import * as styles from './styles';
 
 export const Gallery = <T extends ImageInterface>({
