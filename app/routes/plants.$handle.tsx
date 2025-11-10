@@ -1,5 +1,9 @@
 // React and Remix imports
-import {useLoaderData, type LoaderFunctionArgs} from 'react-router';
+import {
+  useLoaderData,
+  type LoaderFunctionArgs,
+  type MetaFunction,
+} from 'react-router';
 import type {Route} from './+types/plants.$handle';
 import {CarouselImages} from '~/components/CarouselImages';
 import {
@@ -16,7 +20,6 @@ import {PlantPageTitle} from '~/components/PlantPageTitle';
 import useFancybox from '~/lib/useFancybox';
 import {Fancybox} from '@fancyapps/ui';
 import {getSeoMeta} from '@shopify/hydrogen';
-import {type MetaFunction} from 'react-router';
 
 // export const meta: Route.MetaFunction = ({data}) => {
 //   return [
@@ -110,23 +113,28 @@ async function loadCriticalData(args: LoaderFunctionArgs) {
       //  }]
       {namespace: 'plant', key: 'measurement'},
       {namespace: 'plant', key: 'watering-frequency'},
+      {namespace: 'seo', key: 'meta-description'},
     ],
   };
 
   // Shopify storefront query using product handle
   const {product} = await storefront.query(PRODUCT_QUERY, {variables});
-  const {seoMetaData} = await storefront.query(SEO_METADATA_QUERY, {variables});
 
   if (!product?.id) {
     throw new Response(null, {status: 404});
   }
 
+  const metafieldValues = extractMetafieldValues(
+    product.metafields.filter(Boolean) as PlantCriticalMetafield[],
+  );
+
+  const {metaDescription} = metafieldValues;
+
   return {
     product,
     seo: {
-      title: 'This is a product page title',
-      description: 'This is a product page description',
-      // description: seoMetaData.metaDescription || product.descriptionHtml,
+      title: product.title,
+      description: metaDescription || '',
     },
   };
 }
@@ -159,8 +167,9 @@ function loadDeferredData({context, params}: LoaderFunctionArgs) {
   return {journalPromise, carouselCopyPromise};
 }
 
-export const meta: MetaFunction<typeof loader> = ({matches}) => {
-  return getSeoMeta(...matches.map((match) => match.data.seo));
+export const meta: MetaFunction<typeof loader> = ({data, matches}) => {
+  console.log('matches:', matches);
+  return getSeoMeta((matches as any)[1].data.seo, data!.seo);
 };
 
 // =========================
@@ -329,7 +338,7 @@ const PRODUCT_QUERY = `#graphql
 
 /**
  * Deferred journal query — fetches only the journal metafield by key.
- * This is different from how the metafield query is structured in the PRODUCT_QUERY because we are only querying for one singula
+ * This is different from how the metafield query is structured in the PRODUCT_QUERY because we are only querying for one singular
  * metafield, so this can be directly defined in the graphql query.
  */
 const JOURNAL_QUERY = `#graphql
@@ -356,17 +365,4 @@ const CAROUSEL_COPY_QUERY = `#graphql
       }
     }
   }
-` as const;
-
-const SEO_METADATA_QUERY = `#graphql
-  query SeoMetaData($handle: String!) {
-    product(handle: $handle) {
-      metaDescription: metafield(namespace: "global", key: "description_tag") {
-        namespace
-        key
-        value
-        type
-    }
-  }
-}
 ` as const;
