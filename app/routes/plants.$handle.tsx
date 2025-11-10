@@ -21,13 +21,6 @@ import useFancybox from '~/lib/useFancybox';
 import {Fancybox} from '@fancyapps/ui';
 import {getSeoMeta} from '@shopify/hydrogen';
 
-// export const meta: Route.MetaFunction = ({data}) => {
-//   return [
-//     title: `${data?.product.title | John Nguyen Codes ?? ""}`,
-//     description
-//   ]
-// }
-
 // =========================
 //
 // Loader Function
@@ -168,7 +161,6 @@ function loadDeferredData({context, params}: LoaderFunctionArgs) {
 }
 
 export const meta: MetaFunction<typeof loader> = ({data, matches}) => {
-  console.log('matches:', matches);
   return getSeoMeta((matches as any)[1].data.seo, data!.seo);
 };
 
