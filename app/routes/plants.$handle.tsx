@@ -1,6 +1,9 @@
 // React and Remix imports
-import {useState} from 'react';
-import {useLoaderData, type LoaderFunctionArgs} from 'react-router';
+import {
+  useLoaderData,
+  type LoaderFunctionArgs,
+  type MetaFunction,
+} from 'react-router';
 import type {Route} from './+types/plants.$handle';
 import {CarouselImages} from '~/components/CarouselImages';
 import {
@@ -16,6 +19,8 @@ import {PlantPageJournalComponent} from '~/components/PlantPageJournalComponent'
 import {PlantPageTitle} from '~/components/PlantPageTitle';
 import useFancybox from '~/lib/useFancybox';
 import {Fancybox} from '@fancyapps/ui';
+import {getSeoMeta} from '@shopify/hydrogen';
+
 // =========================
 //
 // Loader Function
@@ -101,6 +106,7 @@ async function loadCriticalData(args: LoaderFunctionArgs) {
       //  }]
       {namespace: 'plant', key: 'measurement'},
       {namespace: 'plant', key: 'watering-frequency'},
+      {namespace: 'seo', key: 'meta-description'},
     ],
   };
 
@@ -111,7 +117,19 @@ async function loadCriticalData(args: LoaderFunctionArgs) {
     throw new Response(null, {status: 404});
   }
 
-  return {product};
+  const metafieldValues = extractMetafieldValues(
+    product.metafields.filter(Boolean) as PlantCriticalMetafield[],
+  );
+
+  const {metaDescription} = metafieldValues;
+
+  return {
+    product,
+    seo: {
+      title: product.title,
+      description: metaDescription || '',
+    },
+  };
 }
 
 /**
@@ -141,6 +159,10 @@ function loadDeferredData({context, params}: LoaderFunctionArgs) {
 
   return {journalPromise, carouselCopyPromise};
 }
+
+export const meta: MetaFunction<typeof loader> = ({data, matches}) => {
+  return getSeoMeta((matches as any)[1].data.seo, data!.seo);
+};
 
 // =========================
 // React Component
@@ -308,7 +330,7 @@ const PRODUCT_QUERY = `#graphql
 
 /**
  * Deferred journal query — fetches only the journal metafield by key.
- * This is different from how the metafield query is structured in the PRODUCT_QUERY because we are only querying for one singula
+ * This is different from how the metafield query is structured in the PRODUCT_QUERY because we are only querying for one singular
  * metafield, so this can be directly defined in the graphql query.
  */
 const JOURNAL_QUERY = `#graphql
