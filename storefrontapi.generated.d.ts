@@ -653,6 +653,18 @@ export type PlantCarouselCopyQuery = {
   }>;
 };
 
+export type SeoMetaDataQueryVariables = StorefrontAPI.Exact<{
+  handle: StorefrontAPI.Scalars['String']['input'];
+}>;
+
+export type SeoMetaDataQuery = {
+  product?: StorefrontAPI.Maybe<{
+    metaDescription?: StorefrontAPI.Maybe<
+      Pick<StorefrontAPI.Metafield, 'namespace' | 'key' | 'value' | 'type'>
+    >;
+  }>;
+};
+
 export type FeaturedCollectionFragment = Pick<
   StorefrontAPI.Collection,
   'id' | 'title' | 'handle'
@@ -1295,6 +1307,10 @@ interface GeneratedQueryTypes {
   '#graphql\n  query PlantCarouselCopy($handle: String!) {\n    product(handle: $handle) {\n      journal: metafield(namespace: "plant", key: "carousel-copy") {\n        namespace\n        key\n        value\n        type\n      }\n    }\n  }\n': {
     return: PlantCarouselCopyQuery;
     variables: PlantCarouselCopyQueryVariables;
+  };
+  '#graphql\n  query SeoMetaData($handle: String!) {\n    product(handle: $handle) {\n      metaDescription: metafield(namespace: "global", key: "description_tag") {\n        namespace\n        key\n        value\n        type\n    }\n  }\n}\n': {
+    return: SeoMetaDataQuery;
+    variables: SeoMetaDataQueryVariables;
   };
   '#graphql\n  fragment FeaturedCollection on Collection {\n    id\n    title\n    image {\n      id\n      url\n      altText\n      width\n      height\n    }\n    handle\n  }\n  query FeaturedCollection($country: CountryCode, $language: LanguageCode)\n    @inContext(country: $country, language: $language) {\n    collections(first: 1, sortKey: UPDATED_AT, reverse: true) {\n      nodes {\n        ...FeaturedCollection\n      }\n    }\n  }\n': {
     return: FeaturedCollectionQuery;

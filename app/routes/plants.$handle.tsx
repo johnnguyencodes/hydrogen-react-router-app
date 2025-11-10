@@ -1,5 +1,4 @@
 // React and Remix imports
-import {useState} from 'react';
 import {useLoaderData, type LoaderFunctionArgs} from 'react-router';
 import type {Route} from './+types/plants.$handle';
 import {CarouselImages} from '~/components/CarouselImages';
@@ -16,6 +15,16 @@ import {PlantPageJournalComponent} from '~/components/PlantPageJournalComponent'
 import {PlantPageTitle} from '~/components/PlantPageTitle';
 import useFancybox from '~/lib/useFancybox';
 import {Fancybox} from '@fancyapps/ui';
+import {getSeoMeta} from '@shopify/hydrogen';
+import {type MetaFunction} from 'react-router';
+
+// export const meta: Route.MetaFunction = ({data}) => {
+//   return [
+//     title: `${data?.product.title | John Nguyen Codes ?? ""}`,
+//     description
+//   ]
+// }
+
 // =========================
 //
 // Loader Function
@@ -106,12 +115,20 @@ async function loadCriticalData(args: LoaderFunctionArgs) {
 
   // Shopify storefront query using product handle
   const {product} = await storefront.query(PRODUCT_QUERY, {variables});
+  const {seoMetaData} = await storefront.query(SEO_METADATA_QUERY, {variables});
 
   if (!product?.id) {
     throw new Response(null, {status: 404});
   }
 
-  return {product};
+  return {
+    product,
+    seo: {
+      title: 'This is a product page title',
+      description: 'This is a product page description',
+      // description: seoMetaData.metaDescription || product.descriptionHtml,
+    },
+  };
 }
 
 /**
@@ -141,6 +158,10 @@ function loadDeferredData({context, params}: LoaderFunctionArgs) {
 
   return {journalPromise, carouselCopyPromise};
 }
+
+export const meta: MetaFunction<typeof loader> = ({matches}) => {
+  return getSeoMeta(...matches.map((match) => match.data.seo));
+};
 
 // =========================
 // React Component
@@ -335,4 +356,17 @@ const CAROUSEL_COPY_QUERY = `#graphql
       }
     }
   }
+` as const;
+
+const SEO_METADATA_QUERY = `#graphql
+  query SeoMetaData($handle: String!) {
+    product(handle: $handle) {
+      metaDescription: metafield(namespace: "global", key: "description_tag") {
+        namespace
+        key
+        value
+        type
+    }
+  }
+}
 ` as const;
