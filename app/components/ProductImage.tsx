@@ -1,23 +1,35 @@
-import type {ProductVariantFragment} from 'storefrontapi.generated';
 import {Image} from '@shopify/hydrogen';
+import clsx from 'clsx';
 
 export function ProductImage({
   image,
-}: {
-  image: ProductVariantFragment['image'];
-}) {
+  alt,
+  id,
+  className,
+  sizes,
+}: ProductImageProps) {
   if (!image) {
-    return <div className="product-image" />;
+    return <div className="product-image"></div>;
   }
+
   return (
-    <div className="product-image">
-      <Image
-        alt={image.altText || 'Product Image'}
-        aspectRatio="1/1"
-        data={image}
-        key={image.id}
-        sizes="(min-width: 45em) 50vw, 100vw"
-      />
+    <div className="product-image cursor-zoom-in">
+      <a
+        data-fancybox="gallery"
+        href={image.url}
+        data-sizes="100vw"
+        data-lazy-src={image.url}
+      >
+        <Image
+          id={id}
+          alt={alt || 'Product Image'}
+          aspectRatio="1/1"
+          data={image}
+          className={clsx(className)}
+          sizes={sizes}
+          loading="lazy"
+        ></Image>
+      </a>
     </div>
   );
 }

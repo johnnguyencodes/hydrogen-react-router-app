@@ -40,6 +40,7 @@ export function PlantPageJournalComponent({
                     productTitle={productTitle}
                     latestCarouselDateString={latestCarouselDateString}
                     backgroundColor={index % 2 === 0 ? 4 : 0}
+                    fancyboxRef={fancyboxRef}
                   />
                 ))}
               </div>
