@@ -1,5 +1,5 @@
 import {type MetaFunction} from 'react-router';
-import HeroCarousel2 from '../components/HeroCarousel';
+import HeroCarousel from '../components/HeroCarousel';
 import type {Route} from './+types/_index';
 
 export const meta: MetaFunction = () => {
@@ -48,14 +48,14 @@ const carouselItems = [
 export default function Homepage() {
   return (
     <div className="home-page xxs:mx-5 2xl:mx-0 mt-4">
-      <HeroCarousel2
+      <HeroCarousel
         items={carouselItems}
         autoPlay={true}
         autoPlayInterval={15000}
       />
       <header className="hero rounded-md text-base lg:top-4">
         <h1 className="hero-title text-pretty text-5xl font-medium text-[var(--color-fg-green)] max-w-[30ch] mb-5">
-          Web developer, plant dad, and an{' '}
+          Web developer, plant dad, a gym rat, and an{' '}
           <span className="bg-[var(--color-bg-4)]">
             <i>
               <u>obsessed</u>
