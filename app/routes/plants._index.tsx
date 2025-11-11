@@ -8,10 +8,8 @@ import {
 import type {Route} from './+types/plants._index';
 import {Suspense} from 'react';
 import {Image, Money} from '@shopify/hydrogen';
-import type {
-  FeaturedCollectionFragment,
-  RecommendedProductsQuery,
-} from 'storefrontapi.generated';
+import type {RecommendedProductsQuery} from 'storefrontapi.generated';
+import HeroCarousel from '../components/HeroCarousel';
 
 export const meta: MetaFunction = () => {
   return [{title: 'Hydrogen | Home'}];
@@ -38,7 +36,7 @@ async function loadCriticalData({context}: LoaderFunctionArgs) {
   ]);
 
   return {
-    featuredCollection: collections.nodes[0],
+    featuredCollections: collections.nodes,
   };
 }
 
@@ -61,35 +59,82 @@ function loadDeferredData({context}: LoaderFunctionArgs) {
   };
 }
 
+const carouselItems = [
+  <div
+    key="1"
+    className="flex h-96 items-center justify-center bg-gradient-to-br from-blue-500 to-purple-600 text-white"
+  >
+    <div className="text-center">
+      <h2 className="text-4xl font-bold mb-2">Slide 1</h2>
+      <p className="text-lg">Welcome to the carousel</p>
+    </div>
+  </div>,
+  <div
+    key="2"
+    className="flex h-96 items-center justify-center bg-gradient-to-br from-green-500 to-teal-600 text-white"
+  >
+    <div className="text-center">
+      <h2 className="text-4xl font-bold mb-2">Slide 2</h2>
+      <p className="text-lg">Navigate with arrows or dots</p>
+    </div>
+  </div>,
+  <div
+    key="3"
+    className="flex h-96 items-center justify-center bg-gradient-to-br from-orange-500 to-red-600 text-white"
+  >
+    <div className="text-center">
+      <h2 className="text-4xl font-bold mb-2">Slide 3</h2>
+      <p className="text-lg">Smooth transitions included</p>
+    </div>
+  </div>,
+  <div
+    key="4"
+    className="flex h-96 items-center justify-center bg-gradient-to-br from-pink-500 to-rose-600 text-white"
+  >
+    <div className="text-center">
+      <h2 className="text-4xl font-bold mb-2">Slide 4</h2>
+      <p className="text-lg">Click any dot to jump to a slide</p>
+    </div>
+  </div>,
+];
+
 export default function Plantpage() {
   const data = useLoaderData<typeof loader>();
   return (
     <div className="plants-page xxs:mx-5 2xl:mx-0">
-      <FeaturedCollection collection={data.featuredCollection} />
+      <HeroCarousel
+        items={carouselItems}
+        autoPlay={true}
+        autoPlayInterval={15000}
+      />
+      <FeaturedCollections collections={data.featuredCollections} />
       <RecommendedProducts products={data.recommendedProducts} />
     </div>
   );
 }
 
-function FeaturedCollection({
-  collection,
+function FeaturedCollections({
+  collections,
 }: {
-  collection: FeaturedCollectionFragment;
+  collections: PlantCollectionArray;
 }) {
-  if (!collection) return null;
-  const image = collection?.image;
   return (
-    <Link
-      className="featured-collection"
-      to={`/collections/${collection.handle}`}
-    >
-      {image && (
-        <div className="featured-collection-image">
-          <Image data={image} sizes="100vw" />
-        </div>
-      )}
-      <h1>{collection.title}</h1>
-    </Link>
+    <div>
+      {collections.map((collection) => (
+        <Link
+          key={collection.handle}
+          className="featured-collection"
+          to={`/collections/${collection.handle}`}
+        >
+          {collection.image && (
+            <div className="featured-collection-image">
+              <Image data={collection.image} sizes="100vw" />
+            </div>
+          )}
+          <h1>{collection.title}</h1>
+        </Link>
+      ))}
+    </div>
   );
 }
 
@@ -139,7 +184,7 @@ function RecommendedProducts({
 }
 
 const FEATURED_COLLECTION_QUERY = `#graphql
-  fragment FeaturedCollection on Collection {
+  fragment FeaturedCollections on Collection {
     id
     title
     image {
@@ -151,11 +196,11 @@ const FEATURED_COLLECTION_QUERY = `#graphql
     }
     handle
   }
-  query FeaturedCollection($country: CountryCode, $language: LanguageCode)
+  query FeaturedCollections($country: CountryCode, $language: LanguageCode)
     @inContext(country: $country, language: $language) {
-    collections(first: 1, sortKey: UPDATED_AT, reverse: true) {
+    collections(first: 6, sortKey: UPDATED_AT, reverse: true) {
       nodes {
-        ...FeaturedCollection
+        ...FeaturedCollections
       }
     }
   }
