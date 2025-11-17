@@ -127,7 +127,16 @@ async function loadCriticalData(args: LoaderFunctionArgs) {
     product,
     seo: {
       title: product.title,
-      description: metaDescription || '',
+      description: metaDescription ?? '',
+      url: `https://www.johnnguyen.codes/plants/${product.handle}`,
+      media: [
+        {
+          url: product.images.nodes[0].url,
+          width: product.images.nodes[0].width,
+          height: product.images.nodes[0].height,
+          altText: product.images.nodes[0].altText,
+        },
+      ],
     },
   };
 }
@@ -161,7 +170,10 @@ function loadDeferredData({context, params}: LoaderFunctionArgs) {
 }
 
 export const meta: MetaFunction<typeof loader> = ({data, matches}) => {
-  return getSeoMeta((matches as any)[1].data.seo, data!.seo);
+  const rootSeo = (matches as any)[1].data?.seo;
+  const pageSeo = data?.seo;
+
+  return getSeoMeta(rootSeo, pageSeo);
 };
 
 // =========================

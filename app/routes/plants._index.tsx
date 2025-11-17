@@ -109,6 +109,7 @@ export default function Plantpage() {
       />
       <FeaturedCollections collections={data.featuredCollections} />
       <RecommendedProducts products={data.featuredProducts} />
+      <PlantBlogPosts />
     </div>
   );
 }
@@ -157,7 +158,10 @@ function RecommendedProducts({
 }) {
   return (
     <div className="featured-products">
-      <h2>Featured Plants</h2>
+      <div className="flex-row">
+        <h2>Featured Plants</h2>
+        <Link to="/collections/all-plants">See all plants</Link>
+      </div>
       <Suspense fallback={<div>Loading...</div>}>
         <Await resolve={products}>
           {(response) => (
@@ -193,6 +197,18 @@ function RecommendedProducts({
         </Await>
       </Suspense>
       <br />
+    </div>
+  );
+}
+
+function PlantBlogPosts() {
+  return (
+    <div className="plant-blog-posts">
+      <h3>Fertilizer and Watering</h3>
+      <h3>Soil</h3>
+      <h3>Plant Shelf and Care Regimen</h3>
+      <h3>Recommended Sellers</h3>
+      <h3>Knowledge Center</h3>
     </div>
   );
 }
