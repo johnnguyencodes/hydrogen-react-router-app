@@ -156,7 +156,7 @@ function FeaturedCollections({
                 />
               </div>
             )}
-            <h3 className="absolute bottom-1.5 border border-[var(--color-fg-green)] rounded-lg px-2 py-1 ml-2 mb-1">
+            <h3 className="absolute bottom-1.5 border border-[var(--color-fg-green)] bg-[var(--color-bg-5)] text-[var(--color-fg-text)] rounded-lg px-2 py-1 ml-2 mb-1">
               {collection.title}
             </h3>
           </Link>
