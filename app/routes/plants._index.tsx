@@ -8,7 +8,10 @@ import {
 import type {Route} from './+types/plants._index';
 import {Suspense} from 'react';
 import {Image, Money} from '@shopify/hydrogen';
-import type {RecommendedProductsQuery} from 'storefrontapi.generated';
+import type {
+  RecommendedProductsQuery,
+  CollectionQuery,
+} from 'storefrontapi.generated';
 import HeroCarousel from '../components/HeroCarousel';
 
 export const meta: MetaFunction = () => {
@@ -54,8 +57,18 @@ function loadDeferredData({context}: LoaderFunctionArgs) {
       return null;
     });
 
+  const favoriteCollection = context.storefront
+    .query(PRODUCTS_BY_COLLECTION_QUERY, {
+      variables: {handle: 'favorites'},
+    })
+    .catch((error) => {
+      console.error(error);
+      return null;
+    });
+
   return {
     featuredProducts,
+    favoriteCollection,
   };
 }
 
@@ -100,6 +113,7 @@ const carouselItems = [
 
 export default function Plantpage() {
   const data = useLoaderData<typeof loader>();
+  console.log('data:', data);
   return (
     <div className="plants-page xxs:mx-5 2xl:mx-0">
       <HeroCarousel
@@ -108,6 +122,7 @@ export default function Plantpage() {
         autoPlayInterval={15000}
       />
       <FeaturedCollections collections={data.featuredCollections} />
+      <FavoriteProducts collection={data.favoriteCollection} />
       <RecommendedProducts products={data.featuredProducts} />
       <PlantBlogPosts />
     </div>
@@ -156,6 +171,14 @@ function RecommendedProducts({
 }: {
   products: Promise<RecommendedProductsQuery | null>;
 }) {
+  function formatIsoToMDY(iso: string): string {
+    const d = new Date(iso);
+    const mm = String(d.getUTCMonth() + 1).padStart(2, '0');
+    const dd = String(d.getUTCDate()).padStart(2, '0');
+    const yyyy = d.getUTCFullYear();
+    return `${mm}-${dd}-${yyyy}`;
+  }
+
   return (
     <div className="featured-products">
       <div className="flex-row">
@@ -186,6 +209,9 @@ function RecommendedProducts({
                             <h4 className="text-md text-[var(--color-fg-green)]">
                               {product.title}
                             </h4>
+                            <p>
+                              Last updated: {formatIsoToMDY(product.updatedAt)}
+                            </p>
                           </div>
                         </Link>
                       </div>
@@ -196,7 +222,54 @@ function RecommendedProducts({
           )}
         </Await>
       </Suspense>
-      <br />
+    </div>
+  );
+}
+
+function FavoriteProducts({
+  collection,
+}: {
+  collection: Promise<CollectionQuery | null>;
+}) {
+  return (
+    <div className="favorite-products">
+      <div className="flex-row">
+        <h2>Favorite Plants</h2>
+      </div>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Await resolve={collection}>
+          {(response) => (
+            <div className="favorite-products-container flex-shrink-0 lg:inline lg:max-w-[350px] xl:max-w-[650px]">
+              <div className="flex gap-3 overflow-x-auto scrollbar-hide">
+                {response
+                  ? response.collection?.products.nodes.map((product) => (
+                      <div
+                        className="rounded-md bg-[var(--color-bg-dim)] overflow-hidden flex-shrink-0 w-64"
+                        key={product.id}
+                      >
+                        <Link
+                          className="favorite-product"
+                          to={`/plants/${product.handle}`}
+                        >
+                          <div className="p-2">
+                            <Image
+                              data={product.images.nodes[0]}
+                              aspectRatio="1/1"
+                              sizes="(min-width: 45em) 20vw, 50vw"
+                            />
+                            <h4 className="text-md text-[var(--color-fg-green)]">
+                              {product.title}
+                            </h4>
+                          </div>
+                        </Link>
+                      </div>
+                    ))
+                  : null}
+              </div>
+            </div>
+          )}
+        </Await>
+      </Suspense>
     </div>
   );
 }
@@ -204,6 +277,9 @@ function RecommendedProducts({
 function PlantBlogPosts() {
   return (
     <div className="plant-blog-posts">
+      <h2>Plant Knowledge Center</h2>
+      <p>Here's what I learned from taking care of my plants:</p>
+
       <h3>Fertilizer and Watering</h3>
       <h3>Soil</h3>
       <h3>Plant Shelf and Care Regimen</h3>
@@ -241,12 +317,7 @@ const FEATURED_PRODUCTS_QUERY = `#graphql
     id
     title
     handle
-    priceRange {
-      minVariantPrice {
-        amount
-        currencyCode
-      }
-    }
+    updatedAt
     images(first: 1) {
       nodes {
         id
@@ -263,6 +334,40 @@ const FEATURED_PRODUCTS_QUERY = `#graphql
     products(first: 8, sortKey: UPDATED_AT, reverse: true) {
       nodes {
         ...FeaturedProduct
+      }
+    }
+  }
+` as const;
+
+const PRODUCTS_BY_COLLECTION_QUERY = `#graphql
+  fragment favoriteProduct on Product {
+    id
+    title
+    handle
+    updatedAt
+    images(first: 1) {
+      nodes {
+        url
+        altText
+        width
+        height
+      }
+    }
+  }
+
+  query ProductsByCollection(
+    $handle: String!
+    $country: CountryCode
+    $language: LanguageCode
+  ) @inContext(country: $country, language: $language) {
+    collection(handle: $handle) {
+      id
+      title
+      handle
+      products(first: 50) {
+        nodes {
+          ...favoriteProduct
+        }
       }
     }
   }

@@ -129,6 +129,7 @@ async function loadCriticalData(args: LoaderFunctionArgs) {
       title: product.title,
       description: metaDescription ?? '',
       url: `https://www.johnnguyen.codes/plants/${product.handle}`,
+      relativeUrlPath: `/plants/${product.handle}`,
       media: [
         {
           url: product.images.nodes[0].url,

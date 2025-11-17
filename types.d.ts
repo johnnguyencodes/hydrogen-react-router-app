@@ -1,6 +1,7 @@
 import {
   ProductVariantFragment,
   FeaturedCollectionFragment,
+  type ProductFragment,
 } from 'storefrontapi.generated';
 
 export {};
