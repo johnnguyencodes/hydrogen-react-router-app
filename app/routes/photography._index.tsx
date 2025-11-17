@@ -18,6 +18,9 @@ export default function Photography() {
         10-25-2025 (My first set of pictures I shot with my Nikon D850 and
         edited in lightroom)
       </Link>
+      <Link to="/photography/11-13-2025" className="block">
+        11-13-2025 (My first landscape photos)
+      </Link>
     </div>
   );
 }

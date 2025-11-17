@@ -46,8 +46,8 @@ async function loadCriticalData({context}: LoaderFunctionArgs) {
  * Make sure to not throw any errors here, as it will cause the page to 500.
  */
 function loadDeferredData({context}: LoaderFunctionArgs) {
-  const recommendedProducts = context.storefront
-    .query(RECOMMENDED_PRODUCTS_QUERY)
+  const featuredProducts = context.storefront
+    .query(FEATURED_PRODUCTS_QUERY)
     .catch((error) => {
       // Log query errors, but don't throw them so the page can still render
       console.error(error);
@@ -55,7 +55,7 @@ function loadDeferredData({context}: LoaderFunctionArgs) {
     });
 
   return {
-    recommendedProducts,
+    featuredProducts,
   };
 }
 
@@ -108,7 +108,7 @@ export default function Plantpage() {
         autoPlayInterval={15000}
       />
       <FeaturedCollections collections={data.featuredCollections} />
-      <RecommendedProducts products={data.recommendedProducts} />
+      <RecommendedProducts products={data.featuredProducts} />
     </div>
   );
 }
@@ -118,22 +118,34 @@ function FeaturedCollections({
 }: {
   collections: PlantCollectionArray;
 }) {
+  const featuredCollections = collections.filter(
+    (collection) =>
+      collection.handle !== 'favorites' && collection.handle !== 'all-plants',
+  );
   return (
     <div>
-      {collections.map((collection) => (
-        <Link
-          key={collection.handle}
-          className="featured-collection"
-          to={`/collections/${collection.handle}`}
-        >
-          {collection.image && (
-            <div className="featured-collection-image">
-              <Image data={collection.image} sizes="100vw" />
-            </div>
-          )}
-          <h1>{collection.title}</h1>
-        </Link>
-      ))}
+      <h2>Featured Collections</h2>
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-5">
+        {featuredCollections.map((collection) => (
+          <Link
+            key={collection.handle}
+            className="featured-collection relative rounded-md"
+            to={`/collections/${collection.handle}`}
+          >
+            {collection.image && (
+              <div className="featured-collection-image">
+                <Image
+                  data={collection.image}
+                  sizes="(min-width: 45em) 20vw, 50vw"
+                />
+              </div>
+            )}
+            <h3 className="absolute bottom-1.5 border border-[var(--color-fg-green)] rounded-lg px-2 py-1 ml-2 mb-1">
+              {collection.title}
+            </h3>
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }
@@ -144,36 +156,38 @@ function RecommendedProducts({
   products: Promise<RecommendedProductsQuery | null>;
 }) {
   return (
-    <div className="recommended-products">
-      <h2>Recommended Products</h2>
+    <div className="featured-products">
+      <h2>Featured Plants</h2>
       <Suspense fallback={<div>Loading...</div>}>
         <Await resolve={products}>
           {(response) => (
-            <div className="recommended-products-grid">
-              {response
-                ? response.products.nodes.map((product) => (
-                    <div
-                      className="rounded-md bg-[var(--color-bg-dim)]"
-                      key={product.id}
-                    >
-                      <Link
-                        className="recommended-product"
-                        to={`/${product.productType}/${product.handle}`}
+            <div className="featured-products-container flex-shrink-0 lg:inline lg:max-w-[350px] xl:max-w-[650px]">
+              <div className="flex gap-3 overflow-x-auto scrollbar-hide">
+                {response
+                  ? response.products.nodes.map((product) => (
+                      <div
+                        className="rounded-md bg-[var(--color-bg-dim)] overflow-hidden flex-shrink-0 w-64"
+                        key={product.id}
                       >
-                        <div className="p-5">
-                          <Image
-                            data={product.images.nodes[0]}
-                            aspectRatio="1/1"
-                            sizes="(min-width: 45em) 20vw, 50vw"
-                          />
-                          <h4 className="text-md text-[var(--color-fg-green)]">
-                            {product.title}
-                          </h4>
-                        </div>
-                      </Link>
-                    </div>
-                  ))
-                : null}
+                        <Link
+                          className="featured-product"
+                          to={`/${product.productType}/${product.handle}`}
+                        >
+                          <div className="p-2">
+                            <Image
+                              data={product.images.nodes[0]}
+                              aspectRatio="1/1"
+                              sizes="(min-width: 45em) 20vw, 50vw"
+                            />
+                            <h4 className="text-md text-[var(--color-fg-green)]">
+                              {product.title}
+                            </h4>
+                          </div>
+                        </Link>
+                      </div>
+                    ))
+                  : null}
+              </div>
             </div>
           )}
         </Await>
@@ -198,7 +212,7 @@ const FEATURED_COLLECTION_QUERY = `#graphql
   }
   query FeaturedCollections($country: CountryCode, $language: LanguageCode)
     @inContext(country: $country, language: $language) {
-    collections(first: 6, sortKey: UPDATED_AT, reverse: true) {
+    collections(first: 10, sortKey: UPDATED_AT, reverse: true) {
       nodes {
         ...FeaturedCollections
       }
@@ -206,8 +220,8 @@ const FEATURED_COLLECTION_QUERY = `#graphql
   }
 ` as const;
 
-const RECOMMENDED_PRODUCTS_QUERY = `#graphql
-  fragment RecommendedProduct on Product {
+const FEATURED_PRODUCTS_QUERY = `#graphql
+  fragment FeaturedProduct on Product {
     id
     title
     handle
@@ -228,11 +242,11 @@ const RECOMMENDED_PRODUCTS_QUERY = `#graphql
     }
     productType
   }
-  query RecommendedProducts ($country: CountryCode, $language: LanguageCode)
+  query FeaturedProducts ($country: CountryCode, $language: LanguageCode)
     @inContext(country: $country, language: $language) {
-    products(first: 250, sortKey: UPDATED_AT, reverse: true) {
+    products(first: 8, sortKey: UPDATED_AT, reverse: true) {
       nodes {
-        ...RecommendedProduct
+        ...FeaturedProduct
       }
     }
   }
