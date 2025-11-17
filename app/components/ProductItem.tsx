@@ -24,7 +24,7 @@ export function ProductItem({
       className="product-item"
       key={product.id}
       prefetch="intent"
-      to={variantUrl}
+      to={`/plants/${product.handle}`}
     >
       {image && (
         <Image
