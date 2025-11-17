@@ -9,13 +9,17 @@ export default function Photography() {
       <p>Checkout my photography albums</p>
 
       <Link to="/photography/08-22-2025" className="block">
-        08-22-2025
+        08-22-2025 (My first rolls of photography with Pentax 17)
       </Link>
       <Link to="/photography/09-10-2025" className="block">
-        09-10-2025
+        09-10-2025 (My first two rolls that I developed and scanned at home)
       </Link>
       <Link to="/photography/10-25-2025" className="block">
-        10-25-2025
+        10-25-2025 (My first set of pictures I shot with my Nikon D850 and
+        edited in lightroom)
+      </Link>
+      <Link to="/photography/11-13-2025" className="block">
+        11-13-2025 (My first landscape photos)
       </Link>
     </div>
   );

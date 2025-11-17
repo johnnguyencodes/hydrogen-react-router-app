@@ -1,4 +1,8 @@
-import {ProductVariantFragment} from 'storefrontapi.generated';
+import {
+  ProductVariantFragment,
+  FeaturedCollectionFragment,
+  type ProductFragment,
+} from 'storefrontapi.generated';
 
 export {};
 
@@ -57,6 +61,33 @@ declare global {
 
   export type AdminFile = FilesResponse['files']['edges'][number]['node'];
 
+  type ShopifyFilesResponse = {
+    data: {
+      files: {
+        edges: Array<{
+          node: {
+            id: string;
+            url: string;
+            alt: string;
+            createdAt: string;
+          };
+        }>;
+      };
+    };
+  };
+
+  type AdminResponse = any | null;
+
+  type AdminAPIResponse = {
+    errors: Error[] | null;
+    data: object | null;
+  };
+
+  type AdminClient = (
+    query: string | null,
+    options: {variables: object | null},
+  ) => Promise<AdminResponse>;
+
   type AdminImageWithMetadata = AdminFile & {
     meta: {
       category: string;
@@ -65,6 +96,14 @@ declare global {
       ext: string;
     };
   };
+
+  export type PlantCollection = {
+    title: FeaturedCollectionFragment['title'];
+    image: FeaturedCollectionFragment['image'] | null;
+    handle: FeaturedCollectionFragment['handle'];
+  };
+
+  export type PlantCollectionArray = PlantCollection[];
 
   type ProductImageProps = {
     image: ProductVariantFragment['image'];
@@ -170,31 +209,4 @@ declare global {
     value: string;
     type: string;
   };
-
-  type ShopifyFilesResponse = {
-    data: {
-      files: {
-        edges: Array<{
-          node: {
-            id: string;
-            url: string;
-            alt: string;
-            createdAt: string;
-          };
-        }>;
-      };
-    };
-  };
-
-  type AdminResponse = any | null;
-
-  type AdminAPIResponse = {
-    errors: Error[] | null;
-    data: object | null;
-  };
-
-  type AdminClient = (
-    query: string | null,
-    options: {variables: object | null},
-  ) => Promise<AdminResponse>;
 }

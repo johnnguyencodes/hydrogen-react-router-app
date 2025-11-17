@@ -9,9 +9,10 @@ import type {Route} from './+types/plants._index';
 import {Suspense} from 'react';
 import {Image, Money} from '@shopify/hydrogen';
 import type {
-  FeaturedCollectionFragment,
   RecommendedProductsQuery,
+  CollectionQuery,
 } from 'storefrontapi.generated';
+import HeroCarousel from '../components/HeroCarousel';
 
 export const meta: MetaFunction = () => {
   return [{title: 'Hydrogen | Home'}];
@@ -38,7 +39,7 @@ async function loadCriticalData({context}: LoaderFunctionArgs) {
   ]);
 
   return {
-    featuredCollection: collections.nodes[0],
+    featuredCollections: collections.nodes,
   };
 }
 
@@ -48,48 +49,120 @@ async function loadCriticalData({context}: LoaderFunctionArgs) {
  * Make sure to not throw any errors here, as it will cause the page to 500.
  */
 function loadDeferredData({context}: LoaderFunctionArgs) {
-  const recommendedProducts = context.storefront
-    .query(RECOMMENDED_PRODUCTS_QUERY)
+  const featuredProducts = context.storefront
+    .query(FEATURED_PRODUCTS_QUERY)
     .catch((error) => {
       // Log query errors, but don't throw them so the page can still render
       console.error(error);
       return null;
     });
 
+  const favoriteCollection = context.storefront
+    .query(PRODUCTS_BY_COLLECTION_QUERY, {
+      variables: {handle: 'favorites'},
+    })
+    .catch((error) => {
+      console.error(error);
+      return null;
+    });
+
   return {
-    recommendedProducts,
+    featuredProducts,
+    favoriteCollection,
   };
 }
 
+const carouselItems = [
+  <div
+    key="1"
+    className="flex h-96 items-center justify-center bg-gradient-to-br from-blue-500 to-purple-600 text-white"
+  >
+    <div className="text-center">
+      <h2 className="text-4xl font-bold mb-2">Slide 1</h2>
+      <p className="text-lg">Welcome to the carousel</p>
+    </div>
+  </div>,
+  <div
+    key="2"
+    className="flex h-96 items-center justify-center bg-gradient-to-br from-green-500 to-teal-600 text-white"
+  >
+    <div className="text-center">
+      <h2 className="text-4xl font-bold mb-2">Slide 2</h2>
+      <p className="text-lg">Navigate with arrows or dots</p>
+    </div>
+  </div>,
+  <div
+    key="3"
+    className="flex h-96 items-center justify-center bg-gradient-to-br from-orange-500 to-red-600 text-white"
+  >
+    <div className="text-center">
+      <h2 className="text-4xl font-bold mb-2">Slide 3</h2>
+      <p className="text-lg">Smooth transitions included</p>
+    </div>
+  </div>,
+  <div
+    key="4"
+    className="flex h-96 items-center justify-center bg-gradient-to-br from-pink-500 to-rose-600 text-white"
+  >
+    <div className="text-center">
+      <h2 className="text-4xl font-bold mb-2">Slide 4</h2>
+      <p className="text-lg">Click any dot to jump to a slide</p>
+    </div>
+  </div>,
+];
+
 export default function Plantpage() {
   const data = useLoaderData<typeof loader>();
+  console.log('data:', data);
   return (
     <div className="plants-page xxs:mx-5 2xl:mx-0">
-      <FeaturedCollection collection={data.featuredCollection} />
-      <RecommendedProducts products={data.recommendedProducts} />
+      <HeroCarousel
+        items={carouselItems}
+        autoPlay={true}
+        autoPlayInterval={15000}
+      />
+      <FeaturedCollections collections={data.featuredCollections} />
+      <FavoriteProducts collection={data.favoriteCollection} />
+      <RecommendedProducts products={data.featuredProducts} />
+      <PlantBlogPosts />
     </div>
   );
 }
 
-function FeaturedCollection({
-  collection,
+function FeaturedCollections({
+  collections,
 }: {
-  collection: FeaturedCollectionFragment;
+  collections: PlantCollectionArray;
 }) {
-  if (!collection) return null;
-  const image = collection?.image;
+  const featuredCollections = collections.filter(
+    (collection) =>
+      collection.handle !== 'favorites' && collection.handle !== 'all-plants',
+  );
   return (
-    <Link
-      className="featured-collection"
-      to={`/collections/${collection.handle}`}
-    >
-      {image && (
-        <div className="featured-collection-image">
-          <Image data={image} sizes="100vw" />
-        </div>
-      )}
-      <h1>{collection.title}</h1>
-    </Link>
+    <div>
+      <h2>Featured Collections</h2>
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-5">
+        {featuredCollections.map((collection) => (
+          <Link
+            key={collection.handle}
+            className="featured-collection relative rounded-md"
+            to={`/collections/${collection.handle}`}
+          >
+            {collection.image && (
+              <div className="featured-collection-image">
+                <Image
+                  data={collection.image}
+                  sizes="(min-width: 45em) 20vw, 50vw"
+                />
+              </div>
+            )}
+            <h3 className="absolute bottom-1.5 border border-[var(--color-fg-green)] rounded-lg px-2 py-1 ml-2 mb-1">
+              {collection.title}
+            </h3>
+          </Link>
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -98,48 +171,126 @@ function RecommendedProducts({
 }: {
   products: Promise<RecommendedProductsQuery | null>;
 }) {
+  function formatIsoToMDY(iso: string): string {
+    const d = new Date(iso);
+    const mm = String(d.getUTCMonth() + 1).padStart(2, '0');
+    const dd = String(d.getUTCDate()).padStart(2, '0');
+    const yyyy = d.getUTCFullYear();
+    return `${mm}-${dd}-${yyyy}`;
+  }
+
   return (
-    <div className="recommended-products">
-      <h2>Recommended Products</h2>
+    <div className="featured-products">
+      <div className="flex-row">
+        <h2>Featured Plants</h2>
+        <Link to="/collections/all-plants">See all plants</Link>
+      </div>
       <Suspense fallback={<div>Loading...</div>}>
         <Await resolve={products}>
           {(response) => (
-            <div className="recommended-products-grid">
-              {response
-                ? response.products.nodes.map((product) => (
-                    <div
-                      className="rounded-md bg-[var(--color-bg-dim)]"
-                      key={product.id}
-                    >
-                      <Link
-                        className="recommended-product"
-                        to={`/${product.productType}/${product.handle}`}
+            <div className="featured-products-container flex-shrink-0 lg:inline lg:max-w-[350px] xl:max-w-[650px]">
+              <div className="flex gap-3 overflow-x-auto scrollbar-hide">
+                {response
+                  ? response.products.nodes.map((product) => (
+                      <div
+                        className="rounded-md bg-[var(--color-bg-dim)] overflow-hidden flex-shrink-0 w-64"
+                        key={product.id}
                       >
-                        <div className="p-5">
-                          <Image
-                            data={product.images.nodes[0]}
-                            aspectRatio="1/1"
-                            sizes="(min-width: 45em) 20vw, 50vw"
-                          />
-                          <h4 className="text-md text-[var(--color-fg-green)]">
-                            {product.title}
-                          </h4>
-                        </div>
-                      </Link>
-                    </div>
-                  ))
-                : null}
+                        <Link
+                          className="featured-product"
+                          to={`/${product.productType}/${product.handle}`}
+                        >
+                          <div className="p-2">
+                            <Image
+                              data={product.images.nodes[0]}
+                              aspectRatio="1/1"
+                              sizes="(min-width: 45em) 20vw, 50vw"
+                            />
+                            <h4 className="text-md text-[var(--color-fg-green)]">
+                              {product.title}
+                            </h4>
+                            <p>
+                              Last updated: {formatIsoToMDY(product.updatedAt)}
+                            </p>
+                          </div>
+                        </Link>
+                      </div>
+                    ))
+                  : null}
+              </div>
             </div>
           )}
         </Await>
       </Suspense>
-      <br />
+    </div>
+  );
+}
+
+function FavoriteProducts({
+  collection,
+}: {
+  collection: Promise<CollectionQuery | null>;
+}) {
+  return (
+    <div className="favorite-products">
+      <div className="flex-row">
+        <h2>Favorite Plants</h2>
+      </div>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Await resolve={collection}>
+          {(response) => (
+            <div className="favorite-products-container flex-shrink-0 lg:inline lg:max-w-[350px] xl:max-w-[650px]">
+              <div className="flex gap-3 overflow-x-auto scrollbar-hide">
+                {response
+                  ? response.collection?.products.nodes.map((product) => (
+                      <div
+                        className="rounded-md bg-[var(--color-bg-dim)] overflow-hidden flex-shrink-0 w-64"
+                        key={product.id}
+                      >
+                        <Link
+                          className="favorite-product"
+                          to={`/plants/${product.handle}`}
+                        >
+                          <div className="p-2">
+                            <Image
+                              data={product.images.nodes[0]}
+                              aspectRatio="1/1"
+                              sizes="(min-width: 45em) 20vw, 50vw"
+                            />
+                            <h4 className="text-md text-[var(--color-fg-green)]">
+                              {product.title}
+                            </h4>
+                          </div>
+                        </Link>
+                      </div>
+                    ))
+                  : null}
+              </div>
+            </div>
+          )}
+        </Await>
+      </Suspense>
+    </div>
+  );
+}
+
+function PlantBlogPosts() {
+  return (
+    <div className="plant-blog-posts">
+      <h2>Plant Knowledge Center</h2>
+      <p>Here's what I learned from taking care of my plants:</p>
+
+      <h3>Fertilizer and Watering</h3>
+      <h3>Soil</h3>
+      <h3>Plant Shelf and Care Regimen</h3>
+      <h3>Recommended Sellers</h3>
+      <h3>Knowledge Center</h3>
     </div>
   );
 }
 
 const FEATURED_COLLECTION_QUERY = `#graphql
-  fragment FeaturedCollection on Collection {
+  fragment FeaturedCollections on Collection {
     id
     title
     image {
@@ -151,27 +302,22 @@ const FEATURED_COLLECTION_QUERY = `#graphql
     }
     handle
   }
-  query FeaturedCollection($country: CountryCode, $language: LanguageCode)
+  query FeaturedCollections($country: CountryCode, $language: LanguageCode)
     @inContext(country: $country, language: $language) {
-    collections(first: 1, sortKey: UPDATED_AT, reverse: true) {
+    collections(first: 10, sortKey: UPDATED_AT, reverse: true) {
       nodes {
-        ...FeaturedCollection
+        ...FeaturedCollections
       }
     }
   }
 ` as const;
 
-const RECOMMENDED_PRODUCTS_QUERY = `#graphql
-  fragment RecommendedProduct on Product {
+const FEATURED_PRODUCTS_QUERY = `#graphql
+  fragment FeaturedProduct on Product {
     id
     title
     handle
-    priceRange {
-      minVariantPrice {
-        amount
-        currencyCode
-      }
-    }
+    updatedAt
     images(first: 1) {
       nodes {
         id
@@ -183,11 +329,45 @@ const RECOMMENDED_PRODUCTS_QUERY = `#graphql
     }
     productType
   }
-  query RecommendedProducts ($country: CountryCode, $language: LanguageCode)
+  query FeaturedProducts ($country: CountryCode, $language: LanguageCode)
     @inContext(country: $country, language: $language) {
-    products(first: 250, sortKey: UPDATED_AT, reverse: true) {
+    products(first: 8, sortKey: UPDATED_AT, reverse: true) {
       nodes {
-        ...RecommendedProduct
+        ...FeaturedProduct
+      }
+    }
+  }
+` as const;
+
+const PRODUCTS_BY_COLLECTION_QUERY = `#graphql
+  fragment favoriteProduct on Product {
+    id
+    title
+    handle
+    updatedAt
+    images(first: 1) {
+      nodes {
+        url
+        altText
+        width
+        height
+      }
+    }
+  }
+
+  query ProductsByCollection(
+    $handle: String!
+    $country: CountryCode
+    $language: LanguageCode
+  ) @inContext(country: $country, language: $language) {
+    collection(handle: $handle) {
+      id
+      title
+      handle
+      products(first: 50) {
+        nodes {
+          ...favoriteProduct
+        }
       }
     }
   }
