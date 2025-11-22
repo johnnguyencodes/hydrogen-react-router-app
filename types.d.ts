@@ -209,4 +209,19 @@ declare global {
     value: string;
     type: string;
   };
+
+  type PageSeoData = {
+    title: string;
+    description: string;
+    url: string;
+    relativeUrlPath: string;
+    media: mediaSeoData[];
+  };
+
+  type MediaSeoData = {
+    url: string;
+    width: number;
+    height: number;
+    altText: string;
+  };
 }

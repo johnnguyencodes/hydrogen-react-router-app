@@ -13,6 +13,19 @@ import type {
   CollectionQuery,
 } from 'storefrontapi.generated';
 import HeroCarousel from '../components/HeroCarousel';
+import {plantBlogPostSeoData as fertilizerAndWatering} from './plants.blog.fertilizer-and-watering';
+import {plantBlogPostSeoData as soil} from './plants.blog.soil';
+import {plantBlogPostSeoData as plantShelfSetupAndCare} from './plants.blog.plant-shelf-setup-and-care';
+import {plantBlogPostSeoData as recommendedSellers} from './plants.blog.recommended-sellers';
+import {plantBlogPostSeoData as knowledgeCenter} from './plants.blog.knowledge-center';
+
+const allBlogPostSeo = [
+  fertilizerAndWatering,
+  soil,
+  plantShelfSetupAndCare,
+  recommendedSellers,
+  knowledgeCenter,
+];
 
 export const meta: MetaFunction = () => {
   return [{title: 'Hydrogen | Home'}];
@@ -280,11 +293,28 @@ function PlantBlogPosts() {
       <h2>Plant Knowledge Center</h2>
       <p>Here's what I learned from taking care of my plants:</p>
 
-      <h3>Fertilizer and Watering</h3>
-      <h3>Soil</h3>
-      <h3>Plant Shelf and Care Regimen</h3>
-      <h3>Recommended Sellers</h3>
-      <h3>Knowledge Center</h3>
+      {allBlogPostSeo.map((blogPost, index) => (
+        <div key={blogPost.relativeUrlPath}>
+          <div className="rounded-md bg-[var(--color-bg-dim)] overflow-hidden flex-shrink-0 w-64">
+            <Link
+              className="featured-product"
+              to={`${blogPost.relativeUrlPath}`}
+            >
+              <div className="p-2">
+                <Image
+                  data={blogPost.media[0]}
+                  aspectRatio="1/1"
+                  sizes="(min-width: 45em) 20vw, 50vw"
+                />
+                <h4 className="text-md text-[var(--color-fg-green)]">
+                  {blogPost.title}
+                </h4>
+                <p>{blogPost.description}</p>
+              </div>
+            </Link>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
