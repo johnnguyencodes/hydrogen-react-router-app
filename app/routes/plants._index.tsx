@@ -13,19 +13,10 @@ import type {
   CollectionQuery,
 } from 'storefrontapi.generated';
 import HeroCarousel from '../components/HeroCarousel';
-import {plantBlogPostSeoData as fertilizerAndWatering} from './plants.blog.fertilizer-and-watering';
-import {plantBlogPostSeoData as soil} from './plants.blog.soil';
-import {plantBlogPostSeoData as plantShelfSetupAndCare} from './plants.blog.plant-shelf-setup-and-care';
-import {plantBlogPostSeoData as recommendedSellers} from './plants.blog.recommended-sellers';
-import {plantBlogPostSeoData as knowledgeCenter} from './plants.blog.knowledge-center';
-
-const allBlogPostSeo = [
-  fertilizerAndWatering,
-  soil,
-  plantShelfSetupAndCare,
-  recommendedSellers,
-  knowledgeCenter,
-];
+import {PlantCard} from '~/components/PlantCard';
+import {PlantFeaturedCollections} from '~/components/PlantFeaturedCollections';
+import {PlantLastUpdated} from '~/components/PlantLastUpdated';
+import {PlantBlogPostSection} from '~/components/PlantBlogPostSection';
 
 export const meta: MetaFunction = () => {
   return [{title: 'Hydrogen | Home'}];
@@ -134,112 +125,15 @@ export default function Plantpage() {
         autoPlay={true}
         autoPlayInterval={15000}
       />
-      <FeaturedCollections collections={data.featuredCollections} />
-      <FavoriteProducts collection={data.favoriteCollection} />
-      <RecommendedProducts products={data.featuredProducts} />
-      <PlantBlogPosts />
+      <PlantFeaturedCollections collections={data.featuredCollections} />
+      <FavoritePlants collection={data.favoriteCollection} />
+      <PlantLastUpdated products={data.featuredProducts} />
+      <PlantBlogPostSection />
     </div>
   );
 }
 
-function FeaturedCollections({
-  collections,
-}: {
-  collections: PlantCollectionArray;
-}) {
-  const featuredCollections = collections.filter(
-    (collection) =>
-      collection.handle !== 'favorites' && collection.handle !== 'all-plants',
-  );
-  return (
-    <div>
-      <h2>Featured Collections</h2>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-5">
-        {featuredCollections.map((collection) => (
-          <Link
-            key={collection.handle}
-            className="featured-collection relative rounded-md"
-            to={`/collections/${collection.handle}`}
-          >
-            {collection.image && (
-              <div className="featured-collection-image">
-                <Image
-                  data={collection.image}
-                  sizes="(min-width: 45em) 20vw, 50vw"
-                />
-              </div>
-            )}
-            <h3 className="absolute bottom-1.5 border border-[var(--color-fg-green)] bg-[var(--color-bg-5)] text-[var(--color-fg-text)] rounded-lg px-2 py-1 ml-2 mb-1">
-              {collection.title}
-            </h3>
-          </Link>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function RecommendedProducts({
-  products,
-}: {
-  products: Promise<RecommendedProductsQuery | null>;
-}) {
-  function formatIsoToMDY(iso: string): string {
-    const d = new Date(iso);
-    const mm = String(d.getUTCMonth() + 1).padStart(2, '0');
-    const dd = String(d.getUTCDate()).padStart(2, '0');
-    const yyyy = d.getUTCFullYear();
-    return `${mm}-${dd}-${yyyy}`;
-  }
-
-  return (
-    <div className="featured-products">
-      <div className="flex-row">
-        <h2>Featured Plants</h2>
-        <Link to="/collections/all-plants">See all plants</Link>
-      </div>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Await resolve={products}>
-          {(response) => (
-            <div className="featured-products-container flex-shrink-0 lg:inline lg:max-w-[350px] xl:max-w-[650px]">
-              <div className="flex gap-3 overflow-x-auto scrollbar-hide">
-                {response
-                  ? response.products.nodes.map((product) => (
-                      <div
-                        className="rounded-md bg-[var(--color-bg-dim)] overflow-hidden flex-shrink-0 w-64"
-                        key={product.id}
-                      >
-                        <Link
-                          className="featured-product"
-                          to={`/${product.productType}/${product.handle}`}
-                        >
-                          <div className="p-2">
-                            <Image
-                              data={product.images.nodes[0]}
-                              aspectRatio="1/1"
-                              sizes="(min-width: 45em) 20vw, 50vw"
-                            />
-                            <h4 className="text-md text-[var(--color-fg-green)]">
-                              {product.title}
-                            </h4>
-                            <p>
-                              Last updated: {formatIsoToMDY(product.updatedAt)}
-                            </p>
-                          </div>
-                        </Link>
-                      </div>
-                    ))
-                  : null}
-              </div>
-            </div>
-          )}
-        </Await>
-      </Suspense>
-    </div>
-  );
-}
-
-function FavoriteProducts({
+function FavoritePlants({
   collection,
 }: {
   collection: Promise<CollectionQuery | null>;
@@ -256,26 +150,7 @@ function FavoriteProducts({
               <div className="flex gap-3 overflow-x-auto scrollbar-hide">
                 {response
                   ? response.collection?.products.nodes.map((product) => (
-                      <div
-                        className="rounded-md bg-[var(--color-bg-dim)] overflow-hidden flex-shrink-0 w-64"
-                        key={product.id}
-                      >
-                        <Link
-                          className="favorite-product"
-                          to={`/plants/${product.handle}`}
-                        >
-                          <div className="p-2">
-                            <Image
-                              data={product.images.nodes[0]}
-                              aspectRatio="1/1"
-                              sizes="(min-width: 45em) 20vw, 50vw"
-                            />
-                            <h4 className="text-md text-[var(--color-fg-green)]">
-                              {product.title}
-                            </h4>
-                          </div>
-                        </Link>
-                      </div>
+                      <PlantCard {...product} key={product.id} />
                     ))
                   : null}
               </div>
@@ -283,38 +158,6 @@ function FavoriteProducts({
           )}
         </Await>
       </Suspense>
-    </div>
-  );
-}
-
-function PlantBlogPosts() {
-  return (
-    <div className="plant-blog-posts">
-      <h2>Plant Knowledge Center</h2>
-      <p>Here's what I learned from taking care of my plants:</p>
-
-      {allBlogPostSeo.map((blogPost, index) => (
-        <div key={blogPost.relativeUrlPath}>
-          <div className="rounded-md bg-[var(--color-bg-dim)] overflow-hidden flex-shrink-0 w-64">
-            <Link
-              className="featured-product"
-              to={`${blogPost.relativeUrlPath}`}
-            >
-              <div className="p-2">
-                <Image
-                  data={blogPost.media[0]}
-                  aspectRatio="1/1"
-                  sizes="(min-width: 45em) 20vw, 50vw"
-                />
-                <h4 className="text-md text-[var(--color-fg-green)]">
-                  {blogPost.title}
-                </h4>
-                <p>{blogPost.description}</p>
-              </div>
-            </Link>
-          </div>
-        </div>
-      ))}
     </div>
   );
 }
