@@ -17,10 +17,7 @@ import {PlantCard} from '~/components/PlantCard';
 import {PlantFeaturedCollections} from '~/components/PlantFeaturedCollections';
 import {PlantLastUpdated} from '~/components/PlantLastUpdated';
 import {PlantBlogPostSection} from '~/components/PlantBlogPostSection';
-
-export const meta: MetaFunction = () => {
-  return [{title: 'Hydrogen | Home'}];
-};
+import {getSeoMeta} from '@shopify/hydrogen';
 
 export async function loader(args: LoaderFunctionArgs) {
   // Start fetching non-critical data without blocking time to first byte
@@ -42,8 +39,27 @@ async function loadCriticalData({context}: LoaderFunctionArgs) {
     // Add other queries here, so that they are loaded in parallel
   ]);
 
+  const pageSeoData = {
+    title: 'Plant Home Page',
+    description: 'My home page for my plants',
+    url: 'https://www.johnnguyen.codes/plants',
+    relativeUrlPath: '/plants',
+    pageType: 'plants',
+    updatedAt: '2025-11-26T12:53:28-08:00',
+    publishedAt: '2020-05-05T03:20:10-07:00',
+    media: [
+      {
+        url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/750x600.jpg?v=1763844438',
+        width: 750,
+        height: 600,
+        altText: 'This is the plant home page featured image',
+      },
+    ],
+  };
+
   return {
     featuredCollections: collections.nodes,
+    seo: pageSeoData,
   };
 }
 
@@ -75,6 +91,13 @@ function loadDeferredData({context}: LoaderFunctionArgs) {
     favoriteCollection,
   };
 }
+
+export const meta: MetaFunction<typeof loader> = ({data, matches}) => {
+  const rootSeo = (matches as any)[1].data?.seo;
+  const pageSeo = data?.seo;
+
+  return getSeoMeta(rootSeo, pageSeo);
+};
 
 const carouselItems = [
   <div

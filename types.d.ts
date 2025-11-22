@@ -222,6 +222,9 @@ declare global {
     description: string;
     url: string;
     relativeUrlPath: string;
+    pageType: string;
+    publishedAt: string;
+    updatedAt: string;
     media: mediaSeoData[];
   };
 

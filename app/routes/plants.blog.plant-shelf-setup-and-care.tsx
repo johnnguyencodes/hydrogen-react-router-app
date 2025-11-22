@@ -6,11 +6,14 @@ export const plantBlogPostSeoData = {
   description: 'I explain my plant setup in detail',
   url: 'https://www.johnnguyen.codes/plants/blog/plant-shelf-setup-and-care',
   relativeUrlPath: '/plants/blog/plant-shelf-setup-and-care',
+  pageType: 'plants',
+  updatedAt: '2025-11-24T12:53:28-08:00',
+  publishedAt: '2020-05-05T03:20:10-07:00',
   media: [
     {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/466x466.png?v=1763330761',
-      width: 466,
-      height: 466,
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/750x600.jpg?v=1763844438',
+      width: 750,
+      height: 600,
       altText: 'This is the blog featured image',
     },
   ],
