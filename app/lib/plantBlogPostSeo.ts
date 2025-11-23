@@ -4,7 +4,7 @@ import {plantBlogPostSeoData as plantShelfSetupAndCare} from '../routes/plants.b
 import {plantBlogPostSeoData as recommendedSellers} from '../routes/plants.blog.recommended-sellers';
 import {plantBlogPostSeoData as knowledgeCenter} from '../routes/plants.blog.knowledge-center';
 
-export const allBlogPostSeo = [
+export const plantBlogPostSeo = [
   fertilizerAndWatering,
   soil,
   plantShelfSetupAndCare,

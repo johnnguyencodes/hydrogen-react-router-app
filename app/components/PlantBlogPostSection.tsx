@@ -1,14 +1,14 @@
 import {Image} from '@shopify/hydrogen';
 import {Link} from 'react-router';
-import {allBlogPostSeo} from '~/lib/plantBlogPostSeo';
+import {plantBlogPostSeo} from '~/lib/plantBlogPostSeo';
 
-export function PlantBlogPostSection() {
+export function BlogPostSection() {
   return (
     <div className="plant-blog-posts">
       <h2>Plant Knowledge Center</h2>
       <p>Here's what I learned from taking care of my plants:</p>
-      <div className="grid sm:grid-cols-2 gap-10">
-        {allBlogPostSeo.map((blogPost, index) =>
+      <div className="grid sm:grid-cols-2 gap-5">
+        {plantBlogPostSeo.map((blogPost, index) =>
           index === 0 ? (
             <div className="col-span-1" key={blogPost.relativeUrlPath}>
               <div className="rounded-md bg-[var(--color-bg-dim)] overflow-hidden flex-shrink-0 w-full">
@@ -34,7 +34,7 @@ export function PlantBlogPostSection() {
           ) : null,
         )}
         <div className="col-span-1">
-          {allBlogPostSeo.map((blogPost, index) =>
+          {plantBlogPostSeo.map((blogPost, index) =>
             index > 0 ? (
               <div key={blogPost.relativeUrlPath}>
                 <div className="rounded-md bg-[var(--color-bg-dim)] overflow-hidden flex-shrink-0 w-full h-40 mb-5">

@@ -11,7 +11,7 @@ import HeroCarousel from '../components/HeroCarousel';
 import {PlantCard} from '~/components/PlantCard';
 import {PlantFeaturedCollections} from '~/components/PlantFeaturedCollections';
 import {PlantLastUpdated} from '~/components/PlantLastUpdated';
-import {PlantBlogPostSection} from '~/components/PlantBlogPostSection';
+import {BlogPostSection} from '~/components/PlantBlogPostSection';
 import {getSeoMeta} from '@shopify/hydrogen';
 
 export async function loader(args: LoaderFunctionArgs) {
@@ -146,7 +146,7 @@ export default function Plantpage() {
       <PlantFeaturedCollections collections={data.featuredCollections} />
       <FavoritePlants collection={data.favoriteCollection} />
       <PlantLastUpdated products={data.featuredProducts} />
-      <PlantBlogPostSection />
+      <BlogPostSection />
     </div>
   );
 }
