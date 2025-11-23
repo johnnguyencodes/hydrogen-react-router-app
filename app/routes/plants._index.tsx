@@ -1,17 +1,12 @@
 import {
   Await,
   useLoaderData,
-  Link,
   type MetaFunction,
   type LoaderFunctionArgs,
 } from 'react-router';
 import type {Route} from './+types/plants._index';
 import {Suspense} from 'react';
-import {Image, Money} from '@shopify/hydrogen';
-import type {
-  RecommendedProductsQuery,
-  CollectionQuery,
-} from 'storefrontapi.generated';
+import type {CollectionQuery} from 'storefrontapi.generated';
 import HeroCarousel from '../components/HeroCarousel';
 import {PlantCard} from '~/components/PlantCard';
 import {PlantFeaturedCollections} from '~/components/PlantFeaturedCollections';
