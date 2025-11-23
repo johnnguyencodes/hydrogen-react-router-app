@@ -13,6 +13,7 @@ import {PlantFeaturedCollections} from '~/components/PlantFeaturedCollections';
 import {PlantLastUpdated} from '~/components/PlantLastUpdated';
 import {BlogPostSection} from '~/components/PlantBlogPostSection';
 import {getSeoMeta} from '@shopify/hydrogen';
+import {PlantsFavorites} from '~/components/PlantFavorites';
 
 export async function loader(args: LoaderFunctionArgs) {
   // Start fetching non-critical data without blocking time to first byte
@@ -97,85 +98,46 @@ export const meta: MetaFunction<typeof loader> = ({data, matches}) => {
 const carouselItems = [
   <div
     key="1"
-    className="flex h-96 items-center justify-center bg-gradient-to-br from-blue-500 to-purple-600 text-white"
+    className="flex h-96 items-center justify-center bg-[url('https://files.johnnguyen.codes/cdn/shop/files/photography--2025-11-13--001--full-frame--nikon-d850--35mm-105mm-zoom-ais--45mp--iso-1000--f8--1-250s.jpg')] bg-cover bg-center text-[var(--color-fg-text)]"
   >
     <div className="text-center">
-      <h2 className="text-4xl font-bold mb-2">Slide 1</h2>
-      <p className="text-lg">Welcome to the carousel</p>
+      <h1 className="text-5xl font-bold mb-2">The Plant Shelf</h1>
+      <p className="text-lg">Welcome to my page all about my plants</p>
     </div>
   </div>,
   <div
     key="2"
-    className="flex h-96 items-center justify-center bg-gradient-to-br from-green-500 to-teal-600 text-white"
+    className="flex h-96 items-center justify-center bg-[url('https://files.johnnguyen.codes/cdn/shop/files/photography--2025-11-13--002--full-frame--nikon-d850--35mm-105mm-zoom-ais--45mp--iso-64--f56--1-3s.jpg')] bg-cover bg-center text-[var(--color-fg-text)]"
   >
     <div className="text-center">
-      <h2 className="text-4xl font-bold mb-2">Slide 2</h2>
+      <h2 className="text-5xl font-bold mb-2">Slide 2</h2>
       <p className="text-lg">Navigate with arrows or dots</p>
     </div>
   </div>,
   <div
     key="3"
-    className="flex h-96 items-center justify-center bg-gradient-to-br from-orange-500 to-red-600 text-white"
+    className="flex h-96 items-center justify-center bg-[url('https://files.johnnguyen.codes/cdn/shop/files/photography--2025-11-13--013--full-frame--nikon-d850--35mm-105mm-zoom-ais--45mp--iso-200--f56--1-3s.jpg')] bg-cover bg-center text-[var(--color-fg-text)]"
   >
     <div className="text-center">
-      <h2 className="text-4xl font-bold mb-2">Slide 3</h2>
+      <h2 className="text-5xl font-bold mb-2">Slide 3</h2>
       <p className="text-lg">Smooth transitions included</p>
-    </div>
-  </div>,
-  <div
-    key="4"
-    className="flex h-96 items-center justify-center bg-gradient-to-br from-pink-500 to-rose-600 text-white"
-  >
-    <div className="text-center">
-      <h2 className="text-4xl font-bold mb-2">Slide 4</h2>
-      <p className="text-lg">Click any dot to jump to a slide</p>
     </div>
   </div>,
 ];
 
 export default function Plantpage() {
   const data = useLoaderData<typeof loader>();
-  console.log('data:', data);
   return (
-    <div className="plants-page xxs:mx-5 2xl:mx-0">
+    <div className="plants-page mt-5">
       <HeroCarousel
         items={carouselItems}
         autoPlay={true}
         autoPlayInterval={15000}
       />
       <PlantFeaturedCollections collections={data.featuredCollections} />
-      <FavoritePlants collection={data.favoriteCollection} />
+      <PlantsFavorites collection={data.favoriteCollection} />
       <PlantLastUpdated products={data.featuredProducts} />
       <BlogPostSection />
-    </div>
-  );
-}
-
-function FavoritePlants({
-  collection,
-}: {
-  collection: Promise<CollectionQuery | null>;
-}) {
-  return (
-    <div className="favorite-products">
-      <div className="flex-row">
-        <h2>Favorite Plants</h2>
-      </div>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Await resolve={collection}>
-          {(response) => (
-            <div className="favorite-products-container flex-shrink-0 lg:inline lg:max-w-[350px] xl:max-w-[650px]">
-              <div className="flex gap-3 overflow-x-auto scrollbar-hide">
-                {response
-                  ? response.collection?.products.nodes.map((product) => (
-                      <PlantCard {...product} key={product.id} />
-                    ))
-                  : null}
-              </div>
-            </div>
-          )}
-        </Await>
-      </Suspense>
     </div>
   );
 }

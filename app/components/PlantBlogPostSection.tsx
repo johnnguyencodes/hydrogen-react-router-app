@@ -1,17 +1,24 @@
 import {Image} from '@shopify/hydrogen';
 import {Link} from 'react-router';
 import {plantBlogPostSeo} from '~/lib/plantBlogPostSeo';
+import {formatTimeStampToMDY} from '~/lib/plantPageUtils';
 
 export function BlogPostSection() {
   return (
-    <div className="plant-blog-posts">
-      <h2>Plant Knowledge Center</h2>
-      <p>Here's what I learned from taking care of my plants:</p>
+    <div className="plant-blog-posts 2xl:mb-16">
+      <div className="mb-5">
+        <h2 className="text-3xl font-medium leading tight text-[var(--color-fg-green)]">
+          Plant Knowledge Center
+        </h2>
+        <p className="text-[var(--color-fg-text)] py-1">
+          Here's what I learned from taking care of my plants:
+        </p>
+      </div>
       <div className="grid sm:grid-cols-2 gap-5">
         {plantBlogPostSeo.map((blogPost, index) =>
           index === 0 ? (
             <div className="col-span-1" key={blogPost.relativeUrlPath}>
-              <div className="rounded-md bg-[var(--color-bg-dim)] overflow-hidden flex-shrink-0 w-full">
+              <div className="rounded-md bg-[var(--color-bg-1)] overflow-hidden flex-shrink-0 w-full p-2">
                 <Link
                   className="featured-product"
                   to={`${blogPost.relativeUrlPath}`}
@@ -22,11 +29,15 @@ export function BlogPostSection() {
                       aspectRatio="1/1"
                       sizes="(min-width: 45em) 20vw, 50vw"
                     />
-                    <h4 className="text-md text-[var(--color-fg-green)]">
-                      {blogPost.title}
-                    </h4>
-                    <p>{blogPost.description}</p>
-                    <p>{blogPost.publishedAt}</p>
+                    <div className="pt-2">
+                      <h4 className="text-2xl font-medium text-[var(--color-fg-green)]">
+                        {blogPost.title}
+                      </h4>
+                      <div className="text-[var(--color-fg-text)] text-lg">
+                        <p className="py-1">{blogPost.description}</p>
+                        <p>{formatTimeStampToMDY(blogPost.publishedAt)}</p>
+                      </div>
+                    </div>
                   </div>
                 </Link>
               </div>
@@ -37,7 +48,7 @@ export function BlogPostSection() {
           {plantBlogPostSeo.map((blogPost, index) =>
             index > 0 ? (
               <div key={blogPost.relativeUrlPath}>
-                <div className="rounded-md bg-[var(--color-bg-dim)] overflow-hidden flex-shrink-0 w-full h-40 mb-5">
+                <div className="rounded-md bg-[var(--color-bg-2)] overflow-hidden flex-shrink-0 w-full h-46 mb-5 p-2">
                   <Link
                     className="featured-product"
                     to={`${blogPost.relativeUrlPath}`}
@@ -51,12 +62,14 @@ export function BlogPostSection() {
                           height={200}
                         />
                       </div>
-                      <div className="col-span-3">
-                        <h4 className="text-md text-[var(--color-fg-green)]">
+                      <div className="col-span-3 p-2">
+                        <h4 className="text-2xl font-medium text-[var(--color-fg-green)]">
                           {blogPost.title}
                         </h4>
-                        <p>{blogPost.description}</p>
-                        <p>{blogPost.publishedAt}</p>
+                        <div className="text-[var(--color-fg-text)] text-lg">
+                          <p className="py-1">{blogPost.description}</p>
+                          <p>{formatTimeStampToMDY(blogPost.publishedAt)}</p>
+                        </div>
                       </div>
                     </div>
                   </Link>

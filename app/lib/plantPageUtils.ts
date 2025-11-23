@@ -63,3 +63,11 @@ export function returnFormattedDate(dateBroughtHome: string): string {
 function toCamelCase(str: string) {
   return str.replace(/-([a-z])/g, (_, char) => char.toUpperCase());
 }
+
+export function formatTimeStampToMDY(iso: string): string {
+  const d = new Date(iso);
+  const mm = String(d.getUTCMonth() + 1).padStart(2, '0');
+  const dd = String(d.getUTCDate()).padStart(2, '0');
+  const yyyy = d.getUTCFullYear();
+  return `${mm}-${dd}-${yyyy}`;
+}
