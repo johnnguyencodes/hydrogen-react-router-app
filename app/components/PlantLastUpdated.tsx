@@ -9,10 +9,17 @@ export function PlantLastUpdated({
   products: Promise<RecommendedProductsQuery | null>;
 }) {
   return (
-    <div className="featured-products">
-      <div className="flex-row">
-        <h2>Featured Plants</h2>
-        <Link to="/collections/all-plants">See all plants</Link>
+    <div className="featured-products 2xl:mb-16">
+      <div className="flex flex-row mb-5 justify-between content-between">
+        <h2 className="text-3xl font-medium leading tight text-[var(--color-fg-green)]">
+          Featured Plants
+        </h2>
+        <Link
+          to="/collections/all-plants"
+          className="text-[var(--color-fg-text)] py-1"
+        >
+          See all plants
+        </Link>
       </div>
       <Suspense fallback={<div>Loading...</div>}>
         <Await resolve={products}>

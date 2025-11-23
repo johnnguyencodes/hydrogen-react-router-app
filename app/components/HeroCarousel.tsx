@@ -30,7 +30,7 @@ export default function HeroCarousel({
   }, [autoPlay, autoPlayInterval, items.length]);
 
   return (
-    <div className="relative w-full">
+    <div className="relative xxs:-mx-5 xxs:rounded-none xl:-mx-25 overflow-hidden 2xl:-mx-20 2xl:mb-16 first:2xl:mt-10 2xl:rounded-t-lg 2xl:rounded-b-lg">
       {/* Carousel Content */}
       <div className="overflow-hidden rounded-lg">
         <div
