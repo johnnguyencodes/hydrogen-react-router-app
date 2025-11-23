@@ -123,22 +123,24 @@ async function loadCriticalData(args: LoaderFunctionArgs) {
 
   const {metaDescription} = metafieldValues;
 
+  const plantPageSeoData = {
+    title: product.title,
+    description: metaDescription ?? '',
+    url: `https://www.johnnguyen.codes/plants/${product.handle}`,
+    relativeUrlPath: `/plants/${product.handle}`,
+    media: [
+      {
+        url: product.images.nodes[0].url,
+        width: product.images.nodes[0].width,
+        height: product.images.nodes[0].height,
+        altText: product.images.nodes[0].altText,
+      },
+    ],
+  };
+
   return {
     product,
-    seo: {
-      title: product.title,
-      description: metaDescription ?? '',
-      url: `https://www.johnnguyen.codes/plants/${product.handle}`,
-      relativeUrlPath: `/plants/${product.handle}`,
-      media: [
-        {
-          url: product.images.nodes[0].url,
-          width: product.images.nodes[0].width,
-          height: product.images.nodes[0].height,
-          altText: product.images.nodes[0].altText,
-        },
-      ],
-    },
+    seo: plantPageSeoData,
   };
 }
 

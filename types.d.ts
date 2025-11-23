@@ -209,4 +209,29 @@ declare global {
     value: string;
     type: string;
   };
+
+  type PlantCardProps = Pick<Product, 'id' | 'handle' | 'title'> & {
+    images: {
+      nodes: Array<Pick<Image, 'id' | 'url' | 'altText' | 'width' | 'height'>>;
+    };
+    updatedAt?: string;
+  };
+
+  type PageSeoData = {
+    title: string;
+    description: string;
+    url: string;
+    relativeUrlPath: string;
+    pageType: string;
+    publishedAt: string;
+    updatedAt: string;
+    media: mediaSeoData[];
+  };
+
+  type MediaSeoData = {
+    url: string;
+    width: number;
+    height: number;
+    altText: string;
+  };
 }
