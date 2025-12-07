@@ -74,6 +74,13 @@ const carouselItems = [
 ];
 
 // Gear and Film
+// 	Camera bodies
+// 		Nikon F2
+// 		Nikon D850
+// 		Nikon F6
+// 		Pentax 17
+// 		Hasselblad 501c/m
+// 		Polaroid 120
 // 	Lenses
 // 		F-Mount lenses
 // 			AIS 28 f2.8
@@ -101,13 +108,6 @@ const carouselItems = [
 // 		Vision 3 200T
 // 		Vision 3 500T
 // 		Vision 3 50D
-// 	Camera bodies
-// 		Nikon F2
-// 		Nikon D850
-// 		Nikon F6
-// 		Pentax 17
-// 		Hasselblad 501c/m
-// 		Polaroid 120
 // 	Equipment
 // 		Veo Active 53
 // 		Veo Vanguard Tripod
@@ -120,7 +120,7 @@ const carouselItems = [
 // 		Copy Stand
 // 		D850 Sigma 105mm lens
 // 	Photos
-// 	Magazine
+// 	Articles
 
 export default function Photography() {
   return (
@@ -138,7 +138,7 @@ export default function Photography() {
           <p>Photos</p>
         </div>
         <div>
-          <p>Journal</p>
+          <p>Magazine</p>
         </div>
       </div>
       <PhotographyArticleSection />

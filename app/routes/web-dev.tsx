@@ -1,7 +1,7 @@
-export default function Gadgets() {
+export default function WebDev() {
   return (
-    <div className="gadgets-page xxs:mx-5 2xl:mx-0">
-      <p>This is the Gadgets page</p>
+    <div className="dev-env-page xxs:mx-5 2xl:mx-0">
+      <p>This is the WebDev page</p>
       <p>
         Donec cursus ipsum quis felis imperdiet pretium. Maecenas ut mauris
         pellentesque, blandit nunc ut, facilisis enim. Fusce cursus rhoncus

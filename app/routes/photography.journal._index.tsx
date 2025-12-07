@@ -73,55 +73,6 @@ const carouselItems = [
   </div>,
 ];
 
-// Gear and Film
-// 	Lenses
-// 		F-Mount lenses
-// 			AIS 28 f2.8
-// 			AIS 50 f1.8
-// 			AIS 105 f2.5
-// 			AIS 35-105mm f3.5-4.5
-// 			AIS 80mm-200mm f4
-// 			Sigma 105mm lens
-// 			AF-S 16-35mm
-// 			AF-S 28-300mm
-// 			AF-S 200-500mm
-// 		V-Series
-// 			50mm
-// 			80mm
-// 			150mm
-// 		Misc
-// 		  Pentax 17 lens
-// 		  Polaroid 120 lens
-// 	Film
-// 		Gold 200
-// 		Fuji 400
-// 		Tmax 400
-// 		Kodak Double-X 5222
-// 		P3200
-// 		Vision 3 200T
-// 		Vision 3 500T
-// 		Vision 3 50D
-// 	Camera bodies
-// 		Nikon F2
-// 		Nikon D850
-// 		Nikon F6
-// 		Pentax 17
-// 		Hasselblad 501c/m
-// 		Polaroid 120
-// 	Equipment
-// 		Veo Active 53
-// 		Veo Vanguard Tripod
-// 		Sekonic L-758DR light meter
-// 	Development kits and Scanning
-// 	  C41
-// 	  ECN-2
-// 	  Xtol
-// 		Valoi 365
-// 		Copy Stand
-// 		D850 Sigma 105mm lens
-// 	Photos
-// 	Magazine
-
 export default function Photography() {
   return (
     <div className="photography xxs:mx-5 2xl:mx-0">
@@ -138,7 +89,7 @@ export default function Photography() {
           <p>Photos</p>
         </div>
         <div>
-          <p>Journal</p>
+          <p>Magazine</p>
         </div>
       </div>
       <PhotographyArticleSection />

@@ -15,9 +15,9 @@ export async function loader(args: LoaderFunctionArgs) {
 async function loadCriticalData({context}: LoaderFunctionArgs) {
   const pageSeoData = {
     title: 'Photography Home Page',
-    description: 'My home page for my photography',
-    url: 'https://www.johnnguyen.codes/photography',
-    relativePath: '/photography',
+    description: 'My home page for my photography film and gear',
+    url: 'https://www.johnnguyen.codes/photography/film-and-gear',
+    relativePath: '/photography/film-and-gear',
     pageType: 'photography',
     updatedAt: '2025-11-26T12:53:28-08:00',
     publishedAt: '2020-05-05T03:20:10-07:00',
@@ -26,7 +26,7 @@ async function loadCriticalData({context}: LoaderFunctionArgs) {
         url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/750x600.jpg?v=1763844438',
         width: 750,
         height: 600,
-        altText: 'This is the photagraphy home page featured image',
+        altText: 'This is the photagraphy film and gear page featured image',
       },
     ],
   };
@@ -74,6 +74,13 @@ const carouselItems = [
 ];
 
 // Gear and Film
+// 	Camera bodies
+// 		Nikon F2
+// 		Nikon D850
+// 		Nikon F6
+// 		Pentax 17
+// 		Hasselblad 501c/m
+// 		Polaroid 120
 // 	Lenses
 // 		F-Mount lenses
 // 			AIS 28 f2.8
@@ -101,13 +108,6 @@ const carouselItems = [
 // 		Vision 3 200T
 // 		Vision 3 500T
 // 		Vision 3 50D
-// 	Camera bodies
-// 		Nikon F2
-// 		Nikon D850
-// 		Nikon F6
-// 		Pentax 17
-// 		Hasselblad 501c/m
-// 		Polaroid 120
 // 	Equipment
 // 		Veo Active 53
 // 		Veo Vanguard Tripod
@@ -119,8 +119,6 @@ const carouselItems = [
 // 		Valoi 365
 // 		Copy Stand
 // 		D850 Sigma 105mm lens
-// 	Photos
-// 	Magazine
 
 export default function Photography() {
   return (
@@ -138,7 +136,7 @@ export default function Photography() {
           <p>Photos</p>
         </div>
         <div>
-          <p>Journal</p>
+          <p>Magazine</p>
         </div>
       </div>
       <PhotographyArticleSection />
