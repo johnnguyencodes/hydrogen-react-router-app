@@ -1,6 +1,40 @@
 import {Gallery} from '../../app/components/react-grid-gallery/Gallery';
 import useFancybox from '~/lib/useFancybox';
 import type {Route} from './+types/photography.11-13-2025';
+import type {MetaFunction} from 'react-router';
+import {getSeoMeta} from '@shopify/hydrogen';
+
+export const photographyArticleSeoData = {
+  title: 'My first landscape pictures',
+  description:
+    'Description about my experiences shooting my first landscape pictures.',
+  url: 'https://www.johnnguyen.codes/photography/11-13-2025',
+  relativeUrlPath: '/photography/11-13-2025',
+  pageType: 'photography',
+  updatedAt: '2025-11-29T12:53:28-08:00',
+  publishedAt: '2020-05-10T03:20:10-07:00',
+  media: [
+    {
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/750x600.jpg?v=1763844438',
+      width: 750,
+      height: 600,
+      altText: 'This is the photography page featured image',
+    },
+  ],
+};
+
+export function loader() {
+  return {
+    seo: photographyArticleSeoData,
+  };
+}
+
+export const meta: MetaFunction<typeof loader> = ({data, matches}) => {
+  const rootSeo = (matches as any)[1].data?.seo;
+  const pageSeo = data?.seo;
+
+  return getSeoMeta(rootSeo, pageSeo);
+};
 
 export default function Photography() {
   const [fancyboxRef] = useFancybox({

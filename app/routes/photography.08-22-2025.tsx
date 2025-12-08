@@ -1,6 +1,40 @@
 import {Gallery} from '../../app/components/react-grid-gallery/Gallery';
 import useFancybox from '~/lib/useFancybox';
 import type {Route} from './+types/photography.08-22-2025';
+import {getSeoMeta} from '@shopify/hydrogen';
+import type {MetaFunction} from 'react-router';
+
+export const photographyArticleSeoData = {
+  title: 'My first two rolls of 35mm film ever with my Pentax 17',
+  description:
+    'Description about my experiences using this camera as a beginner photographer',
+  url: 'https://www.johnnguyen.codes/photography/08-22-2025',
+  relativeUrlPath: '/photography/08-22-2025',
+  pageType: 'photography',
+  updatedAt: '2025-11-25T12:53:28-08:00',
+  publishedAt: '2020-05-06T03:20:10-07:00',
+  media: [
+    {
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/750x600.jpg?v=1763844438',
+      width: 750,
+      height: 600,
+      altText: 'This is the photography page featured image',
+    },
+  ],
+};
+
+export function loader() {
+  return {
+    seo: photographyArticleSeoData,
+  };
+}
+
+export const meta: MetaFunction<typeof loader> = ({data, matches}) => {
+  const rootSeo = (matches as any)[1].data?.seo;
+  const pageSeo = data?.seo;
+
+  return getSeoMeta(rootSeo, pageSeo);
+};
 
 export default function Photography() {
   const [fancyboxRef] = useFancybox({

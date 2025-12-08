@@ -228,6 +228,8 @@ declare global {
     media: mediaSeoData[];
   };
 
+  type PageSeoDataArray = PageSeoData[];
+
   type MediaSeoData = {
     url: string;
     width: number;

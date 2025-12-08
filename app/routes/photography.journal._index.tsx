@@ -1,12 +1,9 @@
 import {Link, type LoaderFunctionArgs, type MetaFunction} from 'react-router';
 import type {Route} from './+types/photography._index';
+import {photographyArticleSeoData} from '~/lib/photographyArticleSeoData';
 import {formatTimeStampToMDY} from '~/lib/plantPageUtils';
 import {getSeoMeta} from '@shopify/hydrogen';
 import {PhotographyArticleSection} from '~/components/PhotographyArticleSection';
-import {photographyArticleSeoData} from '~/lib/photographyArticleSeoData';
-import {photographyLensSeoData} from '~/lib/photographyLensSeoData';
-import {photographyFilmSeoData} from '~/lib/photographyFilmSeoData';
-import {photographyCameraSeoData} from '~/lib/photographyCameraSeoData';
 import HeroCarousel from '~/components/HeroCarousel';
 
 export async function loader(args: LoaderFunctionArgs) {
@@ -17,8 +14,9 @@ export async function loader(args: LoaderFunctionArgs) {
 
 async function loadCriticalData({context}: LoaderFunctionArgs) {
   const pageSeoData = {
-    title: 'Photography Home Page',
-    description: 'My home page for my photography',
+    title: 'Photography Journal',
+    description:
+      'My home page for my thoughts and reflections about photography',
     url: 'https://www.johnnguyen.codes/photography',
     relativeUrlPath: '/photography',
     pageType: 'photography',
@@ -76,64 +74,6 @@ const carouselItems = [
   </div>,
 ];
 
-// update seodata to include titleTag for titles used on the website
-
-// Gear and Film
-// 	Lenses
-// 		F-Mount lenses
-// 			AIS 28 f2.8
-// 			AIS 50 f1.8
-// 			AIS 105 f2.5
-// 			AIS 35-105mm f3.5-4.5
-// 			AIS 80mm-200mm f4
-// 			Sigma 105mm lens
-// 			AF-S 16-35mm
-// 			AF-S 28-300mm
-// 			AF-S 200-500mm
-// 		V-Series
-// 			50mm
-// 			80mm
-// 			150mm
-// 		Misc
-// 		  Pentax 17 lens
-// 		  Polaroid 120 lens
-// 	Film
-// 		Gold 200
-// 		Fuji 400
-// 		Tmax 400
-// 		Kodak Double-X 5222
-// 		P3200
-// 		Vision 3 200T
-// 		Vision 3 500T
-// 		Vision 3 50D
-// 	Camera bodies
-// 		Nikon F2
-// 		Nikon D850
-// 		Nikon F6
-// 		Pentax 17
-// 		Hasselblad 501c/m
-// 		Polaroid 120
-// 	Equipment
-// 		Veo Active 53
-// 		Veo Vanguard Tripod
-// 		Sekonic L-758DR light meter
-// 	Development kits and Scanning
-// 	  C41
-// 	  ECN-2
-// 	  Xtol
-// 		Valoi 365
-// 		Copy Stand
-// 		D850 Sigma 105mm lens
-// 	Photos
-// 	Magazine
-
-const allSeoData = [
-  ...photographyArticleSeoData,
-  ...photographyLensSeoData,
-  ...photographyFilmSeoData,
-  ...photographyCameraSeoData,
-];
-
 export default function Photography() {
   return (
     <div className="photography xxs:mx-5 2xl:mx-0">
@@ -142,24 +82,9 @@ export default function Photography() {
         autoPlay={true}
         autoPlayInterval={15000}
       />
-      <div className="grid sm:grid-cols-1 md:grid-cols-3">
-        <div>
-          <Link to="/photography/film-and-gear" className="underline">
-            Film and Gear
-          </Link>
-        </div>
-        <div>
-          <Link to="/photography/photos" className="underline">
-            Photos
-          </Link>
-        </div>
-        <div>
-          <Link to="/photography/journal" className="underline">
-            Journal
-          </Link>
-        </div>
-      </div>
-      <PhotographyArticleSection seoData={allSeoData} />
+      <h1>Journal Page</h1>
+      <div className="grid sm:grid-cols-1 md:grid-cols-3"></div>
+      <PhotographyArticleSection seoData={photographyArticleSeoData} />
     </div>
   );
 }

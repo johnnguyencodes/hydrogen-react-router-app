@@ -156,6 +156,33 @@ export function HeaderMenu({
             </NavLink>
           );
         })}
+        <span className="mx-2">|</span>
+        {HEADER_MENU_3.items.map((item) => {
+          if (!item.url) return null;
+
+          // if the url is internal, we strip the domain
+          const url =
+            item.url.includes('myshopify.com') ||
+            item.url.includes(publicStoreDomain) ||
+            item.url.includes(primaryDomainUrl)
+              ? new URL(item.url).pathname
+              : item.url;
+          return (
+            <NavLink
+              className="header-menu-item text-[var(--color-fg-text)] mx-2"
+              end={false}
+              key={item.id}
+              onClick={close}
+              prefetch="intent"
+              style={({isActive}) => ({
+                fontWeight: isActive ? 'bold' : undefined,
+              })}
+              to={url}
+            >
+              {item.title}
+            </NavLink>
+          );
+        })}
       </div>
       <Button
         onClick={toggleDarkMode}
@@ -199,24 +226,19 @@ const HEADER_MENU_1 = {
   id: '',
   items: [
     {
-      id: 'header-menu-about',
-      title: 'About',
-      url: '/about',
+      id: 'header-menu-photography',
+      title: 'Photography',
+      url: '/photography',
     },
     {
-      id: 'header-menu-projects',
-      title: 'Projects',
-      url: '/projects',
+      id: 'header-menu-plants',
+      title: 'Plants',
+      url: '/plants',
     },
     {
-      id: 'header-menu-gadgets',
-      title: 'Gadgets',
-      url: '/gadgets',
-    },
-    {
-      id: 'header-menu-blog',
-      title: 'Blog',
-      url: '/blogs/blog',
+      id: 'header-menu-trails',
+      title: 'Trails',
+      url: '/trails',
     },
   ],
 };
@@ -225,29 +247,20 @@ const HEADER_MENU_2 = {
   id: '',
   items: [
     {
-      id: 'header-menu-plants',
-      title: 'Plants',
-      url: '/plants',
+      id: 'header-menu-web-dev',
+      title: 'Web Dev',
+      url: '/web-dev',
     },
+  ],
+};
+
+const HEADER_MENU_3 = {
+  id: '',
+  items: [
     {
-      id: 'header-menu-photography',
-      title: 'Photography',
-      url: '/photography',
-    },
-    {
-      id: 'header-menu-trails',
-      title: 'Trails',
-      url: '/trails',
-    },
-    {
-      id: 'header-menu-curios',
-      title: 'Curios',
-      url: '/curios',
-    },
-    {
-      id: 'header-menu-notes',
-      title: 'Notes',
-      url: '/blogs/notes',
+      id: 'header-menu-about',
+      title: 'About',
+      url: '/about',
     },
   ],
 };
