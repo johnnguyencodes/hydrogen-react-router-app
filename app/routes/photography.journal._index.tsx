@@ -14,8 +14,9 @@ export async function loader(args: LoaderFunctionArgs) {
 
 async function loadCriticalData({context}: LoaderFunctionArgs) {
   const pageSeoData = {
-    title: 'Photography Home Page',
-    description: 'My home page for my photography',
+    title: 'Photography Journal',
+    description:
+      'My home page for my thoughts and reflections about photography',
     url: 'https://www.johnnguyen.codes/photography',
     relativeUrlPath: '/photography',
     pageType: 'photography',
@@ -81,18 +82,9 @@ export default function Photography() {
         autoPlay={true}
         autoPlayInterval={15000}
       />
-      <div className="grid sm:grid-cols-1 md:grid-cols-3">
-        <div>
-          <p>Film and Gear</p>
-        </div>
-        <div>
-          <p>Photos</p>
-        </div>
-        <div>
-          <p>Magazine</p>
-        </div>
-      </div>
-      <PhotographyArticleSection />
+      <h1>Journal Page</h1>
+      <div className="grid sm:grid-cols-1 md:grid-cols-3"></div>
+      <PhotographyArticleSection seoData={photographyArticleSeoData} />
     </div>
   );
 }

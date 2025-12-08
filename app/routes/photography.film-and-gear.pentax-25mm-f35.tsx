@@ -3,7 +3,7 @@ import {formatTimeStampToMDY} from '~/lib/plantPageUtils';
 import {getSeoMeta} from '@shopify/hydrogen';
 
 export const photographyLensSeoData = {
-  title: 'Photography Home Page',
+  title: 'Pentax 25mm f/3.5 HD Lens',
   description: 'This is about the Pentax 25mm f/3.5 HD lens.',
   url: 'https://www.johnnguyen.codes/photography/film-and-gear/pentax-25mm-f35-hd',
   relativeUrlPath: '/photography/film-and-gear/pentax-25mm-f35-hd',

@@ -1,36 +1,28 @@
-import {Link, type LoaderFunctionArgs, type MetaFunction} from 'react-router';
+import {Link, type MetaFunction} from 'react-router';
 import type {Route} from './+types/photography._index';
-import {photographyArticleSeoData} from '~/lib/photographyArticleSeoData';
 import {formatTimeStampToMDY} from '~/lib/plantPageUtils';
 import {getSeoMeta} from '@shopify/hydrogen';
-import {PhotographyArticleSection} from '~/components/PhotographyArticleSection';
 import HeroCarousel from '~/components/HeroCarousel';
 
-export async function loader(args: LoaderFunctionArgs) {
-  const criticalData = await loadCriticalData(args);
+export const pageSeoData = {
+  title: 'Photos',
+  description: 'My home page for my photos',
+  url: 'https://www.johnnguyen.codes/photography/photos',
+  relativeUrlPath: '/photography/photos',
+  pageType: 'photography',
+  updatedAt: '2025-11-26T12:53:28-08:00',
+  publishedAt: '2020-05-05T03:20:10-07:00',
+  media: [
+    {
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/750x600.jpg?v=1763844438',
+      width: 750,
+      height: 600,
+      altText: 'This is the photagraphy film and gear page featured image',
+    },
+  ],
+};
 
-  return {...criticalData};
-}
-
-async function loadCriticalData({context}: LoaderFunctionArgs) {
-  const pageSeoData = {
-    title: 'Photography Home Page',
-    description: 'My home page for my photography',
-    url: 'https://www.johnnguyen.codes/photography',
-    relativeUrlPath: '/photography',
-    pageType: 'photography',
-    updatedAt: '2025-11-26T12:53:28-08:00',
-    publishedAt: '2020-05-05T03:20:10-07:00',
-    media: [
-      {
-        url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/750x600.jpg?v=1763844438',
-        width: 750,
-        height: 600,
-        altText: 'This is the photagraphy home page featured image',
-      },
-    ],
-  };
-
+export function loader() {
   return {
     seo: pageSeoData,
   };
@@ -73,55 +65,6 @@ const carouselItems = [
   </div>,
 ];
 
-// Gear and Film
-// 	Camera bodies
-// 		Nikon F2
-// 		Nikon D850
-// 		Nikon F6
-// 		Pentax 17
-// 		Hasselblad 501c/m
-// 		Polaroid 120
-// 	Lenses
-// 		F-Mount lenses
-// 			AIS 28 f2.8
-// 			AIS 50 f1.8
-// 			AIS 105 f2.5
-// 			AIS 35-105mm f3.5-4.5
-// 			AIS 80mm-200mm f4
-// 			Sigma 105mm lens
-// 			AF-S 16-35mm
-// 			AF-S 28-300mm
-// 			AF-S 200-500mm
-// 		V-Series
-// 			50mm
-// 			80mm
-// 			150mm
-// 		Misc
-// 		  Pentax 17 lens
-// 		  Polaroid 120 lens
-// 	Film
-// 		Gold 200
-// 		Fuji 400
-// 		Tmax 400
-// 		Kodak Double-X 5222
-// 		P3200
-// 		Vision 3 200T
-// 		Vision 3 500T
-// 		Vision 3 50D
-// 	Equipment
-// 		Veo Active 53
-// 		Veo Vanguard Tripod
-// 		Sekonic L-758DR light meter
-// 	Development kits and Scanning
-// 	  C41
-// 	  ECN-2
-// 	  Xtol
-// 		Valoi 365
-// 		Copy Stand
-// 		D850 Sigma 105mm lens
-// 	Photos
-// 	Articles
-
 export default function Photography() {
   return (
     <div className="photography xxs:mx-5 2xl:mx-0">
@@ -131,17 +74,8 @@ export default function Photography() {
         autoPlayInterval={15000}
       />
       <div className="grid sm:grid-cols-1 md:grid-cols-3">
-        <div>
-          <p>Film and Gear</p>
-        </div>
-        <div>
-          <p>Photos</p>
-        </div>
-        <div>
-          <p>Magazine</p>
-        </div>
+        <p>Here are all my photos</p>
       </div>
-      <PhotographyArticleSection />
     </div>
   );
 }

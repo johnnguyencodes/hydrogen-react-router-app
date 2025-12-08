@@ -3,7 +3,7 @@ import {formatTimeStampToMDY} from '~/lib/plantPageUtils';
 import {getSeoMeta} from '@shopify/hydrogen';
 
 export const photographyFilmSeoData = {
-  title: 'Photography Home Page',
+  title: 'Kodak Vison3 500T',
   description: 'This is about Kodak Vision3 500T',
   url: 'https://www.johnnguyen.codes/photography/film-and-gear/kodak-vision3-500t',
   relativeUrlPath: '/photography/film-and-gear/kodak-vision3-500t',

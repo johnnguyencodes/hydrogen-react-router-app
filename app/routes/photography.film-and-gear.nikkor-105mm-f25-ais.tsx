@@ -3,7 +3,7 @@ import {formatTimeStampToMDY} from '~/lib/plantPageUtils';
 import {getSeoMeta} from '@shopify/hydrogen';
 
 export const photographyLensSeoData = {
-  title: 'Photography Home Page',
+  title: 'Nikkor 105mm f/2.5 AI-S',
   description: 'This is about the Nikkor 105mm f/2.5 AI-S lens.',
   url: 'https://www.johnnguyen.codes/photography/film-and-gear/nikkor-105mm-f25-ais',
   relativeUrlPath: '/photography/film-and-gear/nikkor-105mm-f25-ais',

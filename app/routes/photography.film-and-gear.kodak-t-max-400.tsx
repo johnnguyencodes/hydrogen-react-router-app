@@ -3,7 +3,7 @@ import {formatTimeStampToMDY} from '~/lib/plantPageUtils';
 import {getSeoMeta} from '@shopify/hydrogen';
 
 export const photographyFilmSeoData = {
-  title: 'Photography Home Page',
+  title: 'Kodak T-Max 400 Film',
   description: 'This is about Kodak T-Max 400 film',
   url: 'https://www.johnnguyen.codes/photography/film-and-gear/kodak-t-max-400',
   relativeUrlPath: '/photography/film-and-gear/kodak-t-max-400',

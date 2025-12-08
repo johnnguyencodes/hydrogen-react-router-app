@@ -3,7 +3,7 @@ import {formatTimeStampToMDY} from '~/lib/plantPageUtils';
 import {getSeoMeta} from '@shopify/hydrogen';
 
 export const photographyFilmSeoData = {
-  title: 'Photography Home Page',
+  title: 'Kodak Gold 200',
   description: 'This is about Kodak Gold 200 film',
   url: 'https://www.johnnguyen.codes/photography/film-and-gear/kodak-gold-200',
   relativeUrlPath: '/photography/film-and-gear/kodak-gold-200',

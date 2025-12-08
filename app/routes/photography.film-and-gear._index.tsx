@@ -9,31 +9,25 @@ import {photographyLensSeoData} from '~/lib/photographyLensSeoData';
 import {photographyFilmSeoData} from '~/lib/photographyFilmSeoData';
 import {photographyCameraSeoData} from '~/lib/photographyCameraSeoData';
 
-export async function loader(args: LoaderFunctionArgs) {
-  const criticalData = await loadCriticalData(args);
+export const pageSeoData = {
+  title: 'Photography Film and Gear',
+  description: 'My home page for my photography film and gear',
+  url: 'https://www.johnnguyen.codes/photography/film-and-gear',
+  relativeUrlPath: '/photography/film-and-gear',
+  pageType: 'photography',
+  updatedAt: '2025-11-26T12:53:28-08:00',
+  publishedAt: '2020-05-05T03:20:10-07:00',
+  media: [
+    {
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/750x600.jpg?v=1763844438',
+      width: 750,
+      height: 600,
+      altText: 'This is the photagraphy film and gear page featured image',
+    },
+  ],
+};
 
-  return {...criticalData};
-}
-
-async function loadCriticalData({context}: LoaderFunctionArgs) {
-  const pageSeoData = {
-    title: 'Photography Home Page',
-    description: 'My home page for my photography film and gear',
-    url: 'https://www.johnnguyen.codes/photography/film-and-gear',
-    relativeUrlPath: '/photography/film-and-gear',
-    pageType: 'photography',
-    updatedAt: '2025-11-26T12:53:28-08:00',
-    publishedAt: '2020-05-05T03:20:10-07:00',
-    media: [
-      {
-        url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/750x600.jpg?v=1763844438',
-        width: 750,
-        height: 600,
-        altText: 'This is the photagraphy film and gear page featured image',
-      },
-    ],
-  };
-
+export function loader() {
   return {
     seo: pageSeoData,
   };

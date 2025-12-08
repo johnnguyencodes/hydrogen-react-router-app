@@ -3,7 +3,7 @@ import {formatTimeStampToMDY} from '~/lib/plantPageUtils';
 import {getSeoMeta} from '@shopify/hydrogen';
 
 export const photographyLensSeoData = {
-  title: 'Photography Home Page',
+  title: 'Nikkor 35mm - 105mm f/3.5 - 4.5 AI-S',
   description: 'This is about the Nikkor 35mm - 105mm f/3.5 - 4.5 AI-S lens.',
   url: 'https://www.johnnguyen.codes/photography/film-and-gear/nikkor-35mm-105mm-f35-45-ais',
   relativeUrlPath: '/photography/film-and-gear/nikkor-28mm-f28-ais',

@@ -3,7 +3,7 @@ import {formatTimeStampToMDY} from '~/lib/plantPageUtils';
 import {getSeoMeta} from '@shopify/hydrogen';
 
 export const photographyLensSeoData = {
-  title: 'Photography Home Page',
+  title: 'Nikkor 80mm - 200mm f/4 AI-S',
   description: 'This is about the Nikkor 80mm - 200mm f/4 AI-S lens.',
   url: 'https://www.johnnguyen.codes/photography/film-and-gear/nikkor-80mm-205mm-f4-ais',
   relativeUrlPath: '/photography/film-and-gear/nikkor-80mm-105mm-f4-ais',

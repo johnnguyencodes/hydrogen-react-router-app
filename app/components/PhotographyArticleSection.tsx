@@ -17,9 +17,9 @@ export function PhotographyArticleSection({
           Here are my articles about photography
         </p>
       </div>
-      <div className="sm:columns-1 md:columns-2 lg:columns-3 gap-5">
+      <div className="sm:columns-1 md:columns-2 lg:columns-3 xl:columns-4 gap-5">
         {seoData.map((article, index) => (
-          <div className="col-span-1" key={article.relativeUrlPath}>
+          <div className="col-span-1 mb-3" key={article.relativeUrlPath}>
             <div className="rounded-md bg-[var(--color-bg-1)] overflow-hidden flex-shrink-0 w-full p-2">
               <Link
                 className="featured-product"

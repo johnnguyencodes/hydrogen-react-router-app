@@ -3,7 +3,7 @@ import {formatTimeStampToMDY} from '~/lib/plantPageUtils';
 import {getSeoMeta} from '@shopify/hydrogen';
 
 export const photographyFilmSeoData = {
-  title: 'Photography Home Page',
+  title: 'Kodak T-Max P3200',
   description: 'This is about Kodak T-Max P3200 film',
   url: 'https://www.johnnguyen.codes/photography/film-and-gear/kodak-t-max-p3200',
   relativeUrlPath: '/photography/film-and-gear/kodak-t-max-p3200',

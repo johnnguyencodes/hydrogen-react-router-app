@@ -3,7 +3,7 @@ import {formatTimeStampToMDY} from '~/lib/plantPageUtils';
 import {getSeoMeta} from '@shopify/hydrogen';
 
 export const photographyLensSeoData = {
-  title: 'Photography Home Page',
+  title: 'Sigma 105mm f/2.8 EX DG OS HSM Lens',
   description: 'This is about the Sigma 105mm f/2.8 EX DG OS HSM lens.',
   url: 'https://www.johnnguyen.codes/photography/film-and-gear/sigma-105mm-f28',
   relativeUrlPath: '/photography/film-and-gear/sigma-105mm-f28',

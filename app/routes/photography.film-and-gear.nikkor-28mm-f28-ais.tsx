@@ -3,7 +3,7 @@ import {getSeoMeta} from '@shopify/hydrogen';
 import type {MetaFunction} from 'react-router';
 
 export const photographyLensSeoData = {
-  title: 'Photography Home Page',
+  title: 'Nikkor 28mm f/2.8 AI-S Lens',
   description: 'This is about the Nikkor 28mm f/2.8 AI-S lens.',
   url: 'https://www.johnnguyen.codes/photography/film-and-gear/nikkor-28mm-f28-ais',
   relativeUrlPath: '/photography/film-and-gear/nikkor-28mm-f28-ais',

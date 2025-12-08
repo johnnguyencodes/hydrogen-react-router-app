@@ -3,7 +3,7 @@ import {formatTimeStampToMDY} from '~/lib/plantPageUtils';
 import {getSeoMeta} from '@shopify/hydrogen';
 
 export const photographyFilmSeoData = {
-  title: 'Photography Home Page',
+  title: 'Kodak Double-X 5222 Film',
   description: 'This is about Kodak Double-X 5222 film',
   url: 'https://www.johnnguyen.codes/photography/film-and-gear/kodak-double-x-5222',
   relativeUrlPath: '/photography/film-and-gear/kodak-double-x-5222',

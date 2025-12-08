@@ -1,9 +1,12 @@
 import {Link, type LoaderFunctionArgs, type MetaFunction} from 'react-router';
 import type {Route} from './+types/photography._index';
-import {photographyArticleSeoData} from '~/lib/photographyArticleSeoData';
 import {formatTimeStampToMDY} from '~/lib/plantPageUtils';
 import {getSeoMeta} from '@shopify/hydrogen';
 import {PhotographyArticleSection} from '~/components/PhotographyArticleSection';
+import {photographyArticleSeoData} from '~/lib/photographyArticleSeoData';
+import {photographyLensSeoData} from '~/lib/photographyLensSeoData';
+import {photographyFilmSeoData} from '~/lib/photographyFilmSeoData';
+import {photographyCameraSeoData} from '~/lib/photographyCameraSeoData';
 import HeroCarousel from '~/components/HeroCarousel';
 
 export async function loader(args: LoaderFunctionArgs) {
@@ -73,6 +76,8 @@ const carouselItems = [
   </div>,
 ];
 
+// update seodata to include titleTag for titles used on the website
+
 // Gear and Film
 // 	Lenses
 // 		F-Mount lenses
@@ -122,6 +127,13 @@ const carouselItems = [
 // 	Photos
 // 	Magazine
 
+const allSeoData = [
+  ...photographyArticleSeoData,
+  ...photographyLensSeoData,
+  ...photographyFilmSeoData,
+  ...photographyCameraSeoData,
+];
+
 export default function Photography() {
   return (
     <div className="photography xxs:mx-5 2xl:mx-0">
@@ -132,16 +144,22 @@ export default function Photography() {
       />
       <div className="grid sm:grid-cols-1 md:grid-cols-3">
         <div>
-          <p>Film and Gear</p>
+          <Link to="/photography/film-and-gear" className="underline">
+            Film and Gear
+          </Link>
         </div>
         <div>
-          <p>Photos</p>
+          <Link to="/photography/photos" className="underline">
+            Photos
+          </Link>
         </div>
         <div>
-          <p>Journal</p>
+          <Link to="/photography/journal" className="underline">
+            Journal
+          </Link>
         </div>
       </div>
-      <PhotographyArticleSection seoData={photographyArticleSeoData} />
+      <PhotographyArticleSection seoData={allSeoData} />
     </div>
   );
 }
