@@ -2,11 +2,11 @@ import {type LoaderFunctionArgs, type MetaFunction} from 'react-router';
 import {formatTimeStampToMDY} from '~/lib/plantPageUtils';
 import {getSeoMeta} from '@shopify/hydrogen';
 
-export const photographyCameraSeoData = {
-  title: 'Photography - Nikon F2',
-  description: 'This is about Nikon F2',
-  url: 'https://www.johnnguyen.codes/photography/film-and-gear/nikon-f2',
-  relativeUrlPath: '/photography/film-and-gear/nikon-f2',
+export const photographyLensSeoData = {
+  title: 'Photography Home Page',
+  description: 'This is about the Pentax 25mm f/3.5 HD lens.',
+  url: 'https://www.johnnguyen.codes/photography/film-and-gear/pentax-25mm-f35-hd',
+  relativeUrlPath: '/photography/film-and-gear/pentax-25mm-f35-hd',
   pageType: 'photography',
   updatedAt: '2025-11-26T12:53:28-08:00',
   publishedAt: '2020-05-05T03:20:10-07:00',
@@ -22,7 +22,7 @@ export const photographyCameraSeoData = {
 
 export function loader() {
   return {
-    seo: photographyCameraSeoData,
+    seo: photographyLensSeoData,
   };
 }
 
@@ -36,7 +36,7 @@ export const meta: MetaFunction<typeof loader> = ({data, matches}) => {
 export default function Photography() {
   return (
     <div className="photography xxs:mx-5 2xl:mx-0">
-      <p>This is about Nikon F2.</p>
+      <p>This is about the Pentax 25mm f/3.5 HD lens.</p>
     </div>
   );
 }

@@ -7,7 +7,7 @@ import {getSeoMeta} from '@shopify/hydrogen';
 export const photographyArticleSeoData = {
   title: 'My first pictures shot with my Nikon D850',
   description:
-    'Description about my experiences shooting pictures with my Nikon D850. Lorem ipsum lorem ipsum',
+    'Description about my experiences shooting pictures with my Nikon D850',
   url: 'https://www.johnnguyen.codes/photography/10-25-2025',
   relativeUrlPath: '/photography/10-25-2025',
   pageType: 'photography',

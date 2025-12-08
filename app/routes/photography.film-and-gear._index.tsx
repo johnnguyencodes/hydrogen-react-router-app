@@ -5,6 +5,9 @@ import {formatTimeStampToMDY} from '~/lib/plantPageUtils';
 import {getSeoMeta} from '@shopify/hydrogen';
 import {PhotographyArticleSection} from '~/components/PhotographyArticleSection';
 import HeroCarousel from '~/components/HeroCarousel';
+import {photographyLensSeoData} from '~/lib/photographyLensSeoData';
+import {photographyFilmSeoData} from '~/lib/photographyFilmSeoData';
+import {photographyCameraSeoData} from '~/lib/photographyCameraSeoData';
 
 export async function loader(args: LoaderFunctionArgs) {
   const criticalData = await loadCriticalData(args);
@@ -17,7 +20,7 @@ async function loadCriticalData({context}: LoaderFunctionArgs) {
     title: 'Photography Home Page',
     description: 'My home page for my photography film and gear',
     url: 'https://www.johnnguyen.codes/photography/film-and-gear',
-    relativePath: '/photography/film-and-gear',
+    relativeUrlPath: '/photography/film-and-gear',
     pageType: 'photography',
     updatedAt: '2025-11-26T12:53:28-08:00',
     publishedAt: '2020-05-05T03:20:10-07:00',
@@ -73,53 +76,6 @@ const carouselItems = [
   </div>,
 ];
 
-// Gear and Film
-// 	Camera bodies
-// 		Nikon F2
-// 		Nikon D850
-// 		Nikon F6
-// 		Pentax 17
-// 		Hasselblad 501c/m
-// 		Polaroid 120
-// 	Lenses
-// 		F-Mount lenses
-// 			AIS 28 f2.8
-// 			AIS 50 f1.8
-// 			AIS 105 f2.5
-// 			AIS 35-105mm f3.5-4.5
-// 			AIS 80mm-200mm f4
-// 			Sigma 105mm lens
-// 			AF-S 16-35mm
-// 			AF-S 28-300mm
-// 			AF-S 200-500mm
-// 		V-Series
-// 			50mm
-// 			80mm
-// 			150mm
-// 		Misc
-// 		  Pentax 17 lens
-// 		  Polaroid 120 lens
-// 	Film
-// 		Gold 200
-// 		Fuji 400
-// 		Tmax 400
-// 		Kodak Double-X 5222
-// 		P3200
-// 		Vision 3 200T
-// 		Vision 3 500T
-// 		Vision 3 50D
-// 	Equipment
-// 		Veo Active 53
-// 		Veo Vanguard Tripod
-// 		Sekonic L-758DR light meter
-// 	Development kits and Scanning
-// 	  C41
-// 	  ECN-2
-// 	  Xtol
-// 		Valoi 365
-// 		Copy Stand
-// 		D850 Sigma 105mm lens
-
 export default function Photography() {
   return (
     <div className="photography xxs:mx-5 2xl:mx-0">
@@ -128,18 +84,9 @@ export default function Photography() {
         autoPlay={true}
         autoPlayInterval={15000}
       />
-      <div className="grid sm:grid-cols-1 md:grid-cols-3">
-        <div>
-          <p>Film and Gear</p>
-        </div>
-        <div>
-          <p>Photos</p>
-        </div>
-        <div>
-          <p>Magazine</p>
-        </div>
-      </div>
-      <PhotographyArticleSection />
+      <PhotographyArticleSection seoData={photographyLensSeoData} />
+      <PhotographyArticleSection seoData={photographyFilmSeoData} />
+      <PhotographyArticleSection seoData={photographyCameraSeoData} />
     </div>
   );
 }

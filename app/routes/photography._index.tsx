@@ -17,7 +17,7 @@ async function loadCriticalData({context}: LoaderFunctionArgs) {
     title: 'Photography Home Page',
     description: 'My home page for my photography',
     url: 'https://www.johnnguyen.codes/photography',
-    relativePath: '/photography',
+    relativeUrlPath: '/photography',
     pageType: 'photography',
     updatedAt: '2025-11-26T12:53:28-08:00',
     publishedAt: '2020-05-05T03:20:10-07:00',
@@ -141,7 +141,7 @@ export default function Photography() {
           <p>Journal</p>
         </div>
       </div>
-      <PhotographyArticleSection />
+      <PhotographyArticleSection seoData={photographyArticleSeoData} />
     </div>
   );
 }

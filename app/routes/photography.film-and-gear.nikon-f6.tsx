@@ -3,10 +3,10 @@ import {formatTimeStampToMDY} from '~/lib/plantPageUtils';
 import {getSeoMeta} from '@shopify/hydrogen';
 
 export const photographyCameraSeoData = {
-  title: 'Photography - Nikon F2',
-  description: 'This is about Nikon F2',
-  url: 'https://www.johnnguyen.codes/photography/film-and-gear/nikon-f2',
-  relativeUrlPath: '/photography/film-and-gear/nikon-f2',
+  title: 'Photography - Nikon F6',
+  description: 'This is about Nikon F6',
+  url: 'https://www.johnnguyen.codes/photography/film-and-gear/nikon-f6',
+  relativeUrlPath: '/photography/film-and-gear/nikon-f6',
   pageType: 'photography',
   updatedAt: '2025-11-26T12:53:28-08:00',
   publishedAt: '2020-05-05T03:20:10-07:00',
@@ -36,7 +36,7 @@ export const meta: MetaFunction<typeof loader> = ({data, matches}) => {
 export default function Photography() {
   return (
     <div className="photography xxs:mx-5 2xl:mx-0">
-      <p>This is about Nikon F2.</p>
+      <p>This is about Nikon F6.</p>
     </div>
   );
 }

@@ -1,11 +1,14 @@
 import {Image} from '@shopify/hydrogen';
 import {Link} from 'react-router';
-import {photographyArticleSeoData} from '~/lib/photographyArticleSeoData';
 import {formatTimeStampToMDY} from '~/lib/plantPageUtils';
 
-export function PhotographyArticleSection() {
+export function PhotographyArticleSection({
+  seoData,
+}: {
+  seoData: PageSeoDataArray;
+}) {
   return (
-    <div className="plant-blog-posts 2xl:mb-16">
+    <div className="article-posts 2xl:mb-16">
       <div className="mb-5">
         <h2 className="text-3xl font-medium leading tight text-[var(--color-fg-green)]">
           Photography Articles Center
@@ -15,7 +18,7 @@ export function PhotographyArticleSection() {
         </p>
       </div>
       <div className="sm:columns-1 md:columns-2 lg:columns-3 gap-5">
-        {photographyArticleSeoData.map((article, index) => (
+        {seoData.map((article, index) => (
           <div className="col-span-1" key={article.relativeUrlPath}>
             <div className="rounded-md bg-[var(--color-bg-1)] overflow-hidden flex-shrink-0 w-full p-2">
               <Link
