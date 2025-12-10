@@ -70,6 +70,24 @@ const carouselItems = [
   </div>,
 ];
 
+const lensArticleProps: PhotographyArticleSectionProps = {
+  pageSeoDataArray: photographyLensSeoData,
+  sectionTitle: 'Lens',
+  sectionDescription: 'Check out my cool lens',
+};
+
+const filmArticleProps: PhotographyArticleSectionProps = {
+  pageSeoDataArray: photographyFilmSeoData,
+  sectionTitle: 'Film',
+  sectionDescription: 'Check out my film stocks',
+};
+
+const cameraArticleProps: PhotographyArticleSectionProps = {
+  pageSeoDataArray: photographyCameraSeoData,
+  sectionTitle: 'Cameras',
+  sectionDescription: 'Check out my cool cameras',
+};
+
 export default function Photography() {
   return (
     <div className="photography xxs:mx-5 2xl:mx-0">
@@ -78,9 +96,15 @@ export default function Photography() {
         autoPlay={true}
         autoPlayInterval={15000}
       />
-      <PhotographyArticleSection seoData={photographyLensSeoData} />
-      <PhotographyArticleSection seoData={photographyFilmSeoData} />
-      <PhotographyArticleSection seoData={photographyCameraSeoData} />
+      <PhotographyArticleSection
+        photographyArticleSectionProps={lensArticleProps}
+      />
+      <PhotographyArticleSection
+        photographyArticleSectionProps={filmArticleProps}
+      />
+      <PhotographyArticleSection
+        photographyArticleSectionProps={cameraArticleProps}
+      />
     </div>
   );
 }

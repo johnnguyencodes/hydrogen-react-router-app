@@ -228,6 +228,12 @@ declare global {
     media: mediaSeoData[];
   };
 
+  type PhotographyArticleSectionProps = {
+    pageSeoDataArray: pageSeoDataArray;
+    sectionTitle: string;
+    sectionDescription: string;
+  };
+
   type PageSeoDataArray = PageSeoData[];
 
   type MediaSeoData = {
