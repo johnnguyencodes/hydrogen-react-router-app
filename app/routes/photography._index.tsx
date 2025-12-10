@@ -1,7 +1,7 @@
 import {Link, type LoaderFunctionArgs, type MetaFunction} from 'react-router';
 import type {Route} from './+types/photography._index';
 import {formatTimeStampToMDY} from '~/lib/plantPageUtils';
-import {getSeoMeta} from '@shopify/hydrogen';
+import {getSeoMeta, Image} from '@shopify/hydrogen';
 import {PhotographyArticleSection} from '~/components/PhotographyArticleSection';
 import {photographyArticleSeoData} from '~/lib/photographyArticleSeoData';
 import {photographyLensSeoData} from '~/lib/photographyLensSeoData';
@@ -134,6 +134,21 @@ const allSeoData = [
   ...photographyCameraSeoData,
 ];
 
+const articleProps: PhotographyArticleSectionProps = {
+  pageSeoDataArray: allSeoData,
+  sectionTitle: 'This is the title',
+  sectionDescription: 'This is the description',
+};
+
+const photoMedia = [
+  {
+    url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/750x600.jpg?v=1763844438',
+    width: 750,
+    height: 600,
+    altText: 'This is the photography page featured image',
+  },
+];
+
 export default function Photography() {
   return (
     <div className="photography xxs:mx-5 2xl:mx-0">
@@ -142,24 +157,76 @@ export default function Photography() {
         autoPlay={true}
         autoPlayInterval={15000}
       />
-      <div className="grid sm:grid-cols-1 md:grid-cols-3">
-        <div>
-          <Link to="/photography/film-and-gear" className="underline">
-            Film and Gear
-          </Link>
+      <div className="sm:columns-1 lg:columns-3 gap-5">
+        <div className="col-span-1 mb-3">
+          <div className="rounded-md bg-[var(--color-bg-1)] overflow-hidden flex-shrink-0 w-full p-2">
+            <Link className="featured-product" to="/photography/film-and-gear">
+              <div className="p-2">
+                <Image
+                  data={photoMedia[0]}
+                  aspectRatio="1/1"
+                  sizes="(min-width: 45em) 20vw, 50vw"
+                />
+                <div className="pt-2">
+                  <h4 className="text-2xl font-medium text-[var(--color-fg-green)]">
+                    Film and Gear
+                  </h4>
+                  <div className="text-[var(--color-fg-text)] text-lg">
+                    <p className="py-1">Page about my film and gear</p>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          </div>
         </div>
-        <div>
-          <Link to="/photography/photos" className="underline">
-            Photos
-          </Link>
+        <div className="col-span-1 mb-3">
+          <div className="rounded-md bg-[var(--color-bg-1)] overflow-hidden flex-shrink-0 w-full p-2">
+            <Link className="featured-product" to="/photography/film-and-gear">
+              <div className="p-2">
+                <Image
+                  data={photoMedia[0]}
+                  aspectRatio="1/1"
+                  sizes="(min-width: 45em) 20vw, 50vw"
+                />
+                <div className="pt-2">
+                  <h4 className="text-2xl font-medium text-[var(--color-fg-green)]">
+                    Photos
+                  </h4>
+                  <div className="text-[var(--color-fg-text)] text-lg">
+                    <p className="py-1">Page for my photos</p>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          </div>
         </div>
-        <div>
-          <Link to="/photography/journal" className="underline">
-            Journal
-          </Link>
+        <div className="col-span-1 mb-3">
+          <div className="rounded-md bg-[var(--color-bg-1)] overflow-hidden flex-shrink-0 w-full p-2">
+            <Link className="featured-product" to="/photography/film-and-gear">
+              <div className="p-2">
+                <Image
+                  data={photoMedia[0]}
+                  aspectRatio="1/1"
+                  sizes="(min-width: 45em) 20vw, 50vw"
+                />
+                <div className="pt-2">
+                  <h4 className="text-2xl font-medium text-[var(--color-fg-green)]">
+                    Journal
+                  </h4>
+                  <div className="text-[var(--color-fg-text)] text-lg">
+                    <p className="py-1">
+                      Page about my reflections on photography
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          </div>
         </div>
       </div>
-      <PhotographyArticleSection seoData={allSeoData} />
+      <PhotographyArticleSection
+        photographyArticleSectionProps={articleProps}
+      />
     </div>
   );
 }
