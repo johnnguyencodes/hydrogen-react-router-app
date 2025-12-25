@@ -181,7 +181,7 @@ export default function Photography() {
         </div>
         <div className="col-span-1 mb-3">
           <div className="rounded-md bg-[var(--color-bg-1)] overflow-hidden flex-shrink-0 w-full p-2">
-            <Link className="featured-product" to="/photography/film-and-gear">
+            <Link className="featured-product" to="/photography/photos">
               <div className="p-2">
                 <Image
                   data={photoMedia[0]}
@@ -202,7 +202,7 @@ export default function Photography() {
         </div>
         <div className="col-span-1 mb-3">
           <div className="rounded-md bg-[var(--color-bg-1)] overflow-hidden flex-shrink-0 w-full p-2">
-            <Link className="featured-product" to="/photography/film-and-gear">
+            <Link className="featured-product" to="/photography/journal">
               <div className="p-2">
                 <Image
                   data={photoMedia[0]}
