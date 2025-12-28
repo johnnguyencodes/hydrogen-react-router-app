@@ -4,6 +4,7 @@ import {useContainerWidth} from './useContainerWidth';
 import {buildLayoutFlat} from './buildLayout';
 import type {Image as ImageInterface, GalleryProps} from './types';
 import * as styles from './styles';
+import {PhotographyImage} from '../PhotographyImage';
 
 export const Gallery = <T extends ImageInterface>({
   images,
@@ -44,20 +45,19 @@ export const Gallery = <T extends ImageInterface>({
     <div id={id} className="ReactGridGallery" ref={containerRef}>
       <div style={styles.gallery}>
         {thumbnails.map((item, index) => (
-          <Image
-            key={item.key || index}
-            item={item}
-            index={index}
-            margin={margin}
-            height={rowHeight}
-            isSelectable={enableImageSelection}
-            onClick={handleClick}
-            onSelect={handleSelect}
-            tagStyle={tagStyle}
-            tileViewportStyle={tileViewportStyle}
-            thumbnailStyle={thumbnailStyle}
-            thumbnailImageComponent={thumbnailImageComponent}
-          />
+          <div key={index}>
+            <PhotographyImage
+              image={{
+                __typename: 'Image',
+                url: item.src,
+              }}
+              alt={item.alt}
+              key={item.src ?? index}
+              id={item.src ?? index}
+              className="hover:brightness-90"
+              data-fancybox="gallery"
+            />
+          </div>
         ))}
       </div>
     </div>

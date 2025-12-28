@@ -44,6 +44,12 @@ export const meta: MetaFunction<typeof loader> = ({data, matches}) => {
   return getSeoMeta(rootSeo, pageSeo);
 };
 
+const journalProps: PhotographyArticleSectionProps = {
+  pageSeoDataArray: photographyArticleSeoData,
+  sectionTitle: 'My journal',
+  sectionDescription: 'A place for reflections about photography',
+};
+
 const carouselItems = [
   <div
     key="1"
@@ -84,7 +90,9 @@ export default function Photography() {
       />
       <h1>Journal Page</h1>
       <div className="grid sm:grid-cols-1 md:grid-cols-3"></div>
-      <PhotographyArticleSection seoData={photographyArticleSeoData} />
+      <PhotographyArticleSection
+        photographyArticleSectionProps={journalProps}
+      />
     </div>
   );
 }

@@ -3,10 +3,10 @@ import {formatTimeStampToMDY} from '~/lib/plantPageUtils';
 import {getSeoMeta} from '@shopify/hydrogen';
 
 export const photographyLensSeoData = {
-  title: 'Pentax 25mm f/3.5 HD Lens',
-  description: 'This is about the Pentax 25mm f/3.5 HD lens.',
-  url: 'https://www.johnnguyen.codes/photography/film-and-gear/pentax-25mm-f35-hd',
-  relativeUrlPath: '/photography/film-and-gear/pentax-25mm-f35-hd',
+  title: 'Nikkor 35mm - 105mm f/3.5 - f/4.5 AI-S',
+  description: 'This is about the Nikkor 35mm - 105mm f/3.5 - 4.5 AI-S lens.',
+  url: 'https://www.johnnguyen.codes/photography/film-and-gear/nikkor-35mm-105mm-f35-f45-ais',
+  relativeUrlPath: '/photography/film-and-gear/nikkor-35mm-105mm-f35-f45-ais',
   pageType: 'photography',
   updatedAt: '2025-11-26T12:53:28-08:00',
   publishedAt: '2020-05-05T03:20:10-07:00',
@@ -36,7 +36,7 @@ export const meta: MetaFunction<typeof loader> = ({data, matches}) => {
 export default function Photography() {
   return (
     <div className="photography xxs:mx-5 2xl:mx-0">
-      <p>This is about the Pentax 25mm f/3.5 HD lens.</p>
+      <p>This is about the Nikkor 35mm-105mm f/3.5 - 4.5 AI-S lens.</p>
     </div>
   );
 }

@@ -5,8 +5,8 @@ import {getSeoMeta} from '@shopify/hydrogen';
 export const photographyLensSeoData = {
   title: 'Sigma 105mm f/2.8 EX DG OS HSM Lens',
   description: 'This is about the Sigma 105mm f/2.8 EX DG OS HSM lens.',
-  url: 'https://www.johnnguyen.codes/photography/film-and-gear/sigma-105mm-f28',
-  relativeUrlPath: '/photography/film-and-gear/sigma-105mm-f28',
+  url: 'https://www.johnnguyen.codes/photography/film-and-gear/sigma-105mm-f28-os-hsm-macro',
+  relativeUrlPath: '/photography/film-and-gear/sigma-105mm-f28-os-hsm-macro',
   pageType: 'photography',
   updatedAt: '2025-11-26T12:53:28-08:00',
   publishedAt: '2020-05-05T03:20:10-07:00',
