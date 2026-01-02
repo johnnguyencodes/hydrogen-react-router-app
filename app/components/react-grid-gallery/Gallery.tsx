@@ -1,5 +1,3 @@
-import {MouseEvent} from 'react';
-import {Image} from './Image';
 import {useContainerWidth} from './useContainerWidth';
 import {buildLayoutFlat} from './buildLayout';
 import type {Image as ImageInterface, GalleryProps} from './types';
@@ -9,53 +7,47 @@ import {PhotographyImage} from '../PhotographyImage';
 export const Gallery = <T extends ImageInterface>({
   images,
   id = 'ReactGridGallery',
-  enableImageSelection = false,
-  onSelect = () => {},
-  rowHeight = 180,
-  maxRows,
+  rowHeight,
+  maxItems = 9999999,
   margin = 2,
-  defaultContainerWidth = 0,
-  onClick = () => {},
-  tileViewportStyle,
-  thumbnailStyle,
-  tagStyle,
-  thumbnailImageComponent,
+  defaultContainerWidth = 1400,
 }: GalleryProps<T>): JSX.Element => {
   const {containerRef, containerWidth} = useContainerWidth(
     defaultContainerWidth,
   );
 
-  const thumbnails = buildLayoutFlat<T>(images, {
-    containerWidth,
-    maxRows,
-    rowHeight,
-    margin,
-  });
-
-  const handleSelect = (index: number, event: MouseEvent<HTMLElement>) => {
-    event.preventDefault();
-    onSelect(index, images[index], event);
-  };
-
-  const handleClick = (index: number, event: MouseEvent<HTMLElement>) => {
-    onClick(index, images[index], event);
-  };
+  const thumbnails: GalleryThumbnail<PhotographyImageWithMetadata>[] =
+    buildLayoutFlat<T>(images, {
+      containerWidth,
+      maxItems,
+      rowHeight,
+      margin,
+    });
 
   return (
     <div id={id} className="ReactGridGallery" ref={containerRef}>
       <div style={styles.gallery}>
-        {thumbnails.map((item, index) => (
-          <div key={index}>
+        {thumbnails.map((thumbnail) => (
+          <div
+            key={thumbnail.image.url}
+            style={{
+              width: thumbnail.scaledWidth,
+              height: thumbnail.scaledHeight,
+              margin,
+              position: 'relative',
+              overflow: 'hidden',
+            }}
+          >
             <PhotographyImage
-              image={{
-                __typename: 'Image',
-                url: item.src,
-              }}
-              alt={item.alt}
-              key={item.src ?? index}
-              id={item.src ?? index}
+              image={thumbnail}
+              alt=""
+              key={thumbnail.image.url}
               className="hover:brightness-90"
               data-fancybox="gallery"
+              height={thumbnail.scaledHeight}
+              width={
+                rowHeight * (thumbnail.image.width / thumbnail.image.height)
+              }
             />
           </div>
         ))}

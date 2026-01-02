@@ -9,8 +9,8 @@ export interface ImageTag {
 }
 
 export interface Image {
+  image: PhotographyImageWithMetadata;
   key?: Key;
-  src: string;
   width: number;
   height: number;
   nano?: string;
@@ -32,7 +32,7 @@ export type ImageExtended<T extends Image = Image> = T & {
 
 export interface BuildLayoutOptions {
   containerWidth: number;
-  maxRows?: number;
+  maxItems?: number;
   rowHeight?: number;
   margin?: number;
 }
@@ -90,7 +90,7 @@ export interface GalleryProps<T extends Image = Image> {
   enableImageSelection?: boolean;
   onSelect?: EventHandler<T>;
   rowHeight?: number;
-  maxRows?: number;
+  maxItems?: number;
   margin?: number;
   defaultContainerWidth?: number;
   onClick?: EventHandler<T>;
