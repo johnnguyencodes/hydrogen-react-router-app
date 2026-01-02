@@ -3,6 +3,7 @@ import useFancybox from '~/lib/useFancybox';
 import type {Route} from './+types/photography.10-25-2025';
 import type {MetaFunction} from 'react-router';
 import {getSeoMeta} from '@shopify/hydrogen';
+import {fancyboxOptions} from '~/lib/fancyboxOptions';
 
 export const photographyArticleSeoData = {
   title: 'My first pictures shot with my Nikon D850',
@@ -37,42 +38,7 @@ export const meta: MetaFunction<typeof loader> = ({data, matches}) => {
 };
 
 export default function Photography() {
-  const [fancyboxRef] = useFancybox({
-    on: {
-      '*': (_fb, slide) => {
-        const img = slide.$el?.querySelector(
-          'img, picture img',
-        ) as HTMLImageElement | null;
-        if (img) {
-          img.loading = 'eager'; // don’t lazy the modal image
-          // @ts-ignore – new attribute in modern browsers
-          img.fetchPriority = 'high'; // promote in Chromium
-          img.decoding = 'sync'; // decode sooner
-        }
-      },
-    },
-    placeFocusBack: false,
-    Carousel: {
-      Lazyload: {
-        preload: 9,
-      },
-      infinite: true,
-      Thumbs: {
-        type: 'classic',
-      },
-      Toolbar: {
-        display: {
-          left: ['counter'],
-          right: ['close'],
-        },
-      },
-      Zoomable: {
-        Panzoom: {
-          mouseMoveFactor: 1.0,
-        },
-      },
-    },
-  });
+  const [fancyboxRef] = useFancybox(fancyboxOptions);
   const images = [
     {
       src: 'https://files.johnnguyen.codes/cdn/shop/files/photography--2025-10-25--001--full-frame--nikon-d850--sigma-105mm-macro--45mp--iso-64--f8--1-30s.jpg',

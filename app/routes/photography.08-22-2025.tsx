@@ -3,6 +3,7 @@ import useFancybox from '~/lib/useFancybox';
 import type {Route} from './+types/photography.08-22-2025';
 import {getSeoMeta} from '@shopify/hydrogen';
 import type {MetaFunction} from 'react-router';
+import {fancyboxOptions} from '~/lib/fancyboxOptions';
 
 export const photographyArticleSeoData = {
   title: 'My first two rolls of 35mm film ever with my Pentax 17',
@@ -37,42 +38,7 @@ export const meta: MetaFunction<typeof loader> = ({data, matches}) => {
 };
 
 export default function Photography() {
-  const [fancyboxRef] = useFancybox({
-    on: {
-      '*': (_fb, slide) => {
-        const img = slide.$el?.querySelector(
-          'img, picture img',
-        ) as HTMLImageElement | null;
-        if (img) {
-          img.loading = 'eager'; // don’t lazy the modal image
-          // @ts-ignore – new attribute in modern browsers
-          img.fetchPriority = 'high'; // promote in Chromium
-          img.decoding = 'sync'; // decode sooner
-        }
-      },
-    },
-    placeFocusBack: false,
-    Carousel: {
-      Lazyload: {
-        preload: 9,
-      },
-      infinite: true,
-      Thumbs: {
-        type: 'classic',
-      },
-      Toolbar: {
-        display: {
-          left: ['counter'],
-          right: ['close'],
-        },
-      },
-      Zoomable: {
-        Panzoom: {
-          mouseMoveFactor: 1.0,
-        },
-      },
-    },
-  });
+  const [fancyboxRef] = useFancybox(fancyboxOptions);
   const images = [
     {
       src: 'https://files.johnnguyen.codes/cdn/shop/files/photography--2025-08-22--012--half-frame--pentax-17--25mm--fujifilm--400--unknown--unknown.jpg',

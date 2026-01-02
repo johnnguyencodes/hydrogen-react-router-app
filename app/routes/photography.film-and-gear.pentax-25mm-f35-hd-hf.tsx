@@ -7,6 +7,7 @@ import {formatTimeStampToMDY} from '~/lib/plantPageUtils';
 import {getSeoMeta} from '@shopify/hydrogen';
 import useFancybox from '~/lib/useFancybox';
 import {Gallery} from '~/components/react-grid-gallery';
+import {fancyboxOptions} from '~/lib/fancyboxOptions';
 
 export const photographyLensSeoData = {
   title: 'Pentax 25mm f/3.5 HD HF Lens',
@@ -69,42 +70,7 @@ export default function Photography() {
 
   const images = rawImages;
 
-  const [fancyboxRef] = useFancybox({
-    on: {
-      '*': (_fb, slide) => {
-        const img = slide.$el?.querySelector(
-          'img, picture img',
-        ) as HTMLImageElement | null;
-        if (img) {
-          img.loading = 'eager'; // don’t lazy the modal image
-          // @ts-ignore – new attribute in modern browsers
-          img.fetchPriority = 'high'; // promote in Chromium
-          img.decoding = 'sync'; // decode sooner
-        }
-      },
-    },
-    placeFocusBack: false,
-    Carousel: {
-      Lazyload: {
-        preload: 9,
-      },
-      infinite: true,
-      Thumbs: {
-        type: 'classic',
-      },
-      Toolbar: {
-        display: {
-          left: ['counter'],
-          right: ['close'],
-        },
-      },
-      Zoomable: {
-        Panzoom: {
-          mouseMoveFactor: 1.0,
-        },
-      },
-    },
-  });
+  const [fancyboxRef] = useFancybox(fancyboxOptions);
 
   return (
     <div className="photography xxs:mx-5 2xl:mx-0">

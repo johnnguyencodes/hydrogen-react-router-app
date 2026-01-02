@@ -20,6 +20,7 @@ import {PlantPageTitle} from '~/components/PlantPageTitle';
 import useFancybox from '~/lib/useFancybox';
 import {Fancybox} from '@fancyapps/ui';
 import {getSeoMeta} from '@shopify/hydrogen';
+import {fancyboxOptions} from '~/lib/fancyboxOptions';
 
 // =========================
 //
@@ -194,42 +195,7 @@ export const meta: MetaFunction<typeof loader> = ({data, matches}) => {
 export default function Plant() {
   // state, state setters, and state handlers
   const {product, journalPromise} = useLoaderData<typeof loader>();
-  const [fancyboxRef] = useFancybox({
-    on: {
-      '*': (_fb, slide) => {
-        const img = slide.$el?.querySelector(
-          'img, picture img',
-        ) as HTMLImageElement | null;
-        if (img) {
-          img.loading = 'eager'; // don’t lazy the modal image
-          // @ts-ignore – new attribute in modern browsers
-          img.fetchPriority = 'high'; // promote in Chromium
-          img.decoding = 'sync'; // decode sooner
-        }
-      },
-    },
-    placeFocusBack: false,
-    Carousel: {
-      Lazyload: {
-        preload: 999,
-      },
-      infinite: true,
-      Thumbs: {
-        type: 'classic',
-      },
-      Toolbar: {
-        display: {
-          left: ['counter'],
-          right: ['close'],
-        },
-      },
-      Zoomable: {
-        Panzoom: {
-          mouseMoveFactor: 1.0,
-        },
-      },
-    },
-  });
+  const [fancyboxRef] = useFancybox(fancyboxOptions);
 
   // preparing metafield data
   const metafieldValues = extractMetafieldValues(
