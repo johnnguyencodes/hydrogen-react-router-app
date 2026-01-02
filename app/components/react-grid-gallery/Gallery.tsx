@@ -12,7 +12,7 @@ export const Gallery = <T extends ImageInterface>({
   enableImageSelection = false,
   onSelect = () => {},
   rowHeight,
-  maxRows,
+  maxItems = 9999999,
   margin = 2,
   defaultContainerWidth = 1400,
   onClick = () => {},
@@ -28,7 +28,7 @@ export const Gallery = <T extends ImageInterface>({
   const thumbnails: GalleryThumbnail<PhotographyImageWithMetadata>[] =
     buildLayoutFlat<T>(images, {
       containerWidth,
-      maxRows,
+      maxItems,
       rowHeight,
       margin,
     });
@@ -42,16 +42,18 @@ export const Gallery = <T extends ImageInterface>({
   //   onClick(index, images[index], event);
   // };
 
+  console.log('thumbnails:', thumbnails);
+
   return (
     <div id={id} className="ReactGridGallery" ref={containerRef}>
       <div style={styles.gallery}>
         {thumbnails.map((thumbnail) => (
           <div
-            key={thumbnail.image.asset.url}
+            key={thumbnail.image.url}
             style={{
               width: thumbnail.scaledWidth,
               height: thumbnail.scaledHeight,
-              margin: margin,
+              margin,
               position: 'relative',
               overflow: 'hidden',
             }}
@@ -59,14 +61,12 @@ export const Gallery = <T extends ImageInterface>({
             <PhotographyImage
               image={thumbnail}
               alt=""
-              key={thumbnail.image.asset.url}
-              id={thumbnail.image.asset.url}
+              key={thumbnail.image.url}
               className="hover:brightness-90"
               data-fancybox="gallery"
               height={thumbnail.scaledHeight}
               width={
-                rowHeight *
-                (thumbnail.image.asset.width / thumbnail.image.asset.height)
+                rowHeight * (thumbnail.image.width / thumbnail.image.height)
               }
             />
           </div>

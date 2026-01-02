@@ -109,7 +109,9 @@ export default function Photography() {
   return (
     <div className="photography xxs:mx-5 2xl:mx-0">
       <p>This is about the Pentax 25mm f/3.5 HD lens.</p>
-      <Gallery images={images} rowHeight={150} maxRows={20} />
+      <div ref={fancyboxRef}>
+        <Gallery images={images} rowHeight={150} />
+      </div>
     </div>
   );
 }

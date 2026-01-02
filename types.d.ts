@@ -98,12 +98,9 @@ declare global {
   };
 
   export type PhotographyImage = {
-    alt: string;
-    asset: {
-      url: string;
-      height: number;
-      width: number;
-    };
+    url: string;
+    height: number;
+    width: number;
   };
 
   export type PhotographyImageWithMetadata = PhotographyImage & {
@@ -148,7 +145,6 @@ declare global {
 
   type PhotographyImageProps = {
     image: GalleryThumbnail<PhotographyImageWithMetadata>;
-    // key: string | number;
     alt?: string;
     id?: string;
     className?: string;

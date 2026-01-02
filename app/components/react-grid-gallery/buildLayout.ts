@@ -75,7 +75,7 @@ const getRows = <T extends Image = Image>(
   const [row, imagesLeft] = getRow(images, options);
   const nextRows = [...rows, row];
 
-  if (options.maxRows && nextRows.length >= options.maxRows) {
+  if (options.maxItems && nextRows.length >= options.maxItems) {
     return nextRows;
   }
   if (imagesLeft.length) {
@@ -86,7 +86,7 @@ const getRows = <T extends Image = Image>(
 
 export const buildLayout = <T extends Image = Image>(
   images: T[],
-  {containerWidth, maxRows, rowHeight, margin}: BuildLayoutOptions,
+  {containerWidth, maxItems, rowHeight, margin}: BuildLayoutOptions,
 ): ImageExtendedRow<T>[] => {
   rowHeight = typeof rowHeight === 'undefined' ? 180 : rowHeight;
   margin = typeof margin === 'undefined' ? 2 : margin;
@@ -94,7 +94,7 @@ export const buildLayout = <T extends Image = Image>(
   if (!images) return [];
   if (!containerWidth) return [];
 
-  const options = {containerWidth, maxRows, rowHeight, margin};
+  const options = {containerWidth, maxItems, rowHeight, margin};
   return getRows(images, options);
 };
 
