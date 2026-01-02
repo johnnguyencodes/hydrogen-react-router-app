@@ -97,10 +97,18 @@ declare global {
     };
   };
 
+  type PhotographyPageProps = {
+    images: PhotographyImageWithMetadata[];
+    HeroContent?: ReactNode;
+  };
+
   export type PhotographyImage = {
-    url: string;
-    height: number;
-    width: number;
+    alt: string;
+    image: {
+      url: string;
+      width: number;
+      height: number;
+    };
   };
 
   export type PhotographyImageWithMetadata = PhotographyImage & {
@@ -259,6 +267,7 @@ declare global {
     description: string;
     url: string;
     relativeUrlPath: string;
+    metaobjectType?: string;
     pageType: string;
     publishedAt: string;
     updatedAt: string;
