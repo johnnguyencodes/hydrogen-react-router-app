@@ -1,5 +1,3 @@
-import {MouseEvent} from 'react';
-import {Image} from './Image';
 import {useContainerWidth} from './useContainerWidth';
 import {buildLayoutFlat} from './buildLayout';
 import type {Image as ImageInterface, GalleryProps} from './types';
@@ -9,17 +7,10 @@ import {PhotographyImage} from '../PhotographyImage';
 export const Gallery = <T extends ImageInterface>({
   images,
   id = 'ReactGridGallery',
-  enableImageSelection = false,
-  onSelect = () => {},
   rowHeight,
   maxItems = 9999999,
   margin = 2,
   defaultContainerWidth = 1400,
-  onClick = () => {},
-  tileViewportStyle,
-  thumbnailStyle,
-  tagStyle,
-  thumbnailImageComponent,
 }: GalleryProps<T>): JSX.Element => {
   const {containerRef, containerWidth} = useContainerWidth(
     defaultContainerWidth,
@@ -32,17 +23,6 @@ export const Gallery = <T extends ImageInterface>({
       rowHeight,
       margin,
     });
-
-  // const handleSelect = (index: number, event: MouseEvent<HTMLElement>) => {
-  //   event.preventDefault();
-  //   onSelect(index, images[index], event);
-  // };
-
-  // const handleClick = (index: number, event: MouseEvent<HTMLElement>) => {
-  //   onClick(index, images[index], event);
-  // };
-
-  console.log('thumbnails:', thumbnails);
 
   return (
     <div id={id} className="ReactGridGallery" ref={containerRef}>
