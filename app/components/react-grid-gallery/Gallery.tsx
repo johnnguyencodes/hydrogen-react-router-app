@@ -11,10 +11,10 @@ export const Gallery = <T extends ImageInterface>({
   id = 'ReactGridGallery',
   enableImageSelection = false,
   onSelect = () => {},
-  rowHeight = 180,
+  rowHeight,
   maxRows,
   margin = 2,
-  defaultContainerWidth = 0,
+  defaultContainerWidth = 1400,
   onClick = () => {},
   tileViewportStyle,
   thumbnailStyle,
@@ -25,37 +25,49 @@ export const Gallery = <T extends ImageInterface>({
     defaultContainerWidth,
   );
 
-  const thumbnails = buildLayoutFlat<T>(images, {
-    containerWidth,
-    maxRows,
-    rowHeight,
-    margin,
-  });
+  const thumbnails: GalleryThumbnail<PhotographyImageWithMetadata>[] =
+    buildLayoutFlat<T>(images, {
+      containerWidth,
+      maxRows,
+      rowHeight,
+      margin,
+    });
 
-  const handleSelect = (index: number, event: MouseEvent<HTMLElement>) => {
-    event.preventDefault();
-    onSelect(index, images[index], event);
-  };
+  // const handleSelect = (index: number, event: MouseEvent<HTMLElement>) => {
+  //   event.preventDefault();
+  //   onSelect(index, images[index], event);
+  // };
 
-  const handleClick = (index: number, event: MouseEvent<HTMLElement>) => {
-    onClick(index, images[index], event);
-  };
+  // const handleClick = (index: number, event: MouseEvent<HTMLElement>) => {
+  //   onClick(index, images[index], event);
+  // };
 
   return (
     <div id={id} className="ReactGridGallery" ref={containerRef}>
       <div style={styles.gallery}>
-        {thumbnails.map((item, index) => (
-          <div key={index}>
+        {thumbnails.map((thumbnail) => (
+          <div
+            key={thumbnail.image.asset.url}
+            style={{
+              width: thumbnail.scaledWidth,
+              height: thumbnail.scaledHeight,
+              margin: margin,
+              position: 'relative',
+              overflow: 'hidden',
+            }}
+          >
             <PhotographyImage
-              image={{
-                __typename: 'Image',
-                url: item.src,
-              }}
-              alt={item.alt}
-              key={item.src ?? index}
-              id={item.src ?? index}
+              image={thumbnail}
+              alt=""
+              key={thumbnail.image.asset.url}
+              id={thumbnail.image.asset.url}
               className="hover:brightness-90"
               data-fancybox="gallery"
+              height={thumbnail.scaledHeight}
+              width={
+                rowHeight *
+                (thumbnail.image.asset.width / thumbnail.image.asset.height)
+              }
             />
           </div>
         ))}

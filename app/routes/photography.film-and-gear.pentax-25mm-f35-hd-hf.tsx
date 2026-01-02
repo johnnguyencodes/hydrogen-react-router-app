@@ -5,13 +5,15 @@ import {
 } from 'react-router';
 import {formatTimeStampToMDY} from '~/lib/plantPageUtils';
 import {getSeoMeta} from '@shopify/hydrogen';
+import useFancybox from '~/lib/useFancybox';
+import {Gallery} from '~/components/react-grid-gallery';
 
 export const photographyLensSeoData = {
   title: 'Pentax 25mm f/3.5 HD HF Lens',
   description: 'This is about the Pentax 25mm f/3.5 HD lens.',
   url: 'https://www.johnnguyen.codes/photography/film-and-gear/pentax-25mm-f35-hd-hf',
   relativeUrlPath: '/photography/film-and-gear/pentax-25mm-f35-hd-hf',
-  namespace: 'lens',
+  metaobjectType: 'lens',
   pageType: 'photography',
   updatedAt: '2025-11-26T12:53:28-08:00',
   publishedAt: '2020-05-05T03:20:10-07:00',
@@ -25,8 +27,8 @@ export const photographyLensSeoData = {
   ],
 };
 
-const namespace = photographyLensSeoData.namespace;
-const key = photographyLensSeoData.relativeUrlPath.split('/')[3];
+const metaobjectType = photographyLensSeoData.metaobjectType;
+const metaobjectHandle = photographyLensSeoData.relativeUrlPath.split('/')[3];
 
 export async function loader(args: LoaderFunctionArgs) {
   const criticalData = await loadCriticalData(args);
@@ -35,15 +37,18 @@ export async function loader(args: LoaderFunctionArgs) {
 }
 
 async function loadCriticalData({context}: LoaderFunctionArgs) {
-  const data = await context.storefront.query(IMAGES_QUERY, {
-    variables: {
-      namespace,
-      key,
+  const metaobject = await context.storefront.query(
+    PHOTOGRAPHY_METAOBJECT_QUERY,
+    {
+      variables: {
+        type: metaobjectType,
+        handle: metaobjectHandle,
+      },
     },
-  });
+  );
 
   return {
-    data,
+    metaobject,
     seo: photographyLensSeoData,
   };
 }
@@ -56,23 +61,65 @@ export const meta: MetaFunction<typeof loader> = ({data, matches}) => {
 };
 
 export default function Photography() {
-  const data = useLoaderData<typeof loader>();
+  const metaobject = useLoaderData<typeof loader>();
 
-  console.log('data', JSON.parse(data.criticalData.data.shop.images.value));
+  const rawImages = JSON.parse(
+    metaobject.criticalData.metaobject.metaobject.images.value,
+  ) as PhotographyImageWithMetadataArray;
+
+  const images = rawImages;
+
+  const [fancyboxRef] = useFancybox({
+    on: {
+      '*': (_fb, slide) => {
+        const img = slide.$el?.querySelector(
+          'img, picture img',
+        ) as HTMLImageElement | null;
+        if (img) {
+          img.loading = 'eager'; // don’t lazy the modal image
+          // @ts-ignore – new attribute in modern browsers
+          img.fetchPriority = 'high'; // promote in Chromium
+          img.decoding = 'sync'; // decode sooner
+        }
+      },
+    },
+    placeFocusBack: false,
+    Carousel: {
+      Lazyload: {
+        preload: 9,
+      },
+      infinite: true,
+      Thumbs: {
+        type: 'classic',
+      },
+      Toolbar: {
+        display: {
+          left: ['counter'],
+          right: ['close'],
+        },
+      },
+      Zoomable: {
+        Panzoom: {
+          mouseMoveFactor: 1.0,
+        },
+      },
+    },
+  });
 
   return (
     <div className="photography xxs:mx-5 2xl:mx-0">
       <p>This is about the Pentax 25mm f/3.5 HD lens.</p>
+      <Gallery images={images} rowHeight={150} maxRows={20} />
     </div>
   );
 }
 
-const IMAGES_QUERY = `#graphql
-  query shopMetafield($namespace: String!, $key: String!) {
-    shop {
-      images: metafield(namespace: $namespace, key: $key) {
+const PHOTOGRAPHY_METAOBJECT_QUERY = `#graphql
+  query getPhotographyImages($handle: String!, $type: String!) {
+    metaobject(handle: {handle: $handle, type: $type}) {
+      images: field(key: "images") {
         value
       }
     }
-}
+  }
 `;

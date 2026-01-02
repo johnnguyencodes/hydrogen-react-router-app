@@ -97,6 +97,36 @@ declare global {
     };
   };
 
+  export type PhotographyImage = {
+    alt: string;
+    asset: {
+      url: string;
+      height: number;
+      width: number;
+    };
+  };
+
+  export type PhotographyImageWithMetadata = PhotographyImage & {
+    meta: {
+      filetype: string;
+      date: string;
+      index: string;
+      filmFormat: string;
+      cameraBody: string;
+      lens: string;
+      filmStockBrand: string;
+      isoNumber: string;
+      aperture: string;
+      shutterspeed: string;
+    };
+  };
+
+  export type GalleryThumbnail<T> = {
+    image: T;
+    scaledWidth: number;
+    scaledHeight: number;
+  };
+
   export type PlantCollection = {
     title: FeaturedCollectionFragment['title'];
     image: FeaturedCollectionFragment['image'] | null;
@@ -114,6 +144,17 @@ declare global {
     width: number;
     height: number;
     sizes: string;
+  };
+
+  type PhotographyImageProps = {
+    image: GalleryThumbnail<PhotographyImageWithMetadata>;
+    // key: string | number;
+    alt?: string;
+    id?: string;
+    className?: string;
+    width: number;
+    height: number;
+    sizes?: string;
   };
 
   type AcquisitionData = {

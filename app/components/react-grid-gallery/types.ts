@@ -9,8 +9,8 @@ export interface ImageTag {
 }
 
 export interface Image {
+  image: PhotographyImageWithMetadata;
   key?: Key;
-  src: string;
   width: number;
   height: number;
   nano?: string;
