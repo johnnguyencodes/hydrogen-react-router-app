@@ -5,6 +5,7 @@ import {formatTimeStampToMDY} from '~/lib/plantPageUtils';
 import {getSeoMeta} from '@shopify/hydrogen';
 import {PhotographyArticleSection} from '~/components/PhotographyArticleSection';
 import HeroCarousel from '~/components/HeroCarousel';
+import {photography as pageSeoData} from '~/lib/photographyLandingPageSeoData';
 
 export async function loader(args: LoaderFunctionArgs) {
   const criticalData = await loadCriticalData(args);
@@ -13,25 +14,6 @@ export async function loader(args: LoaderFunctionArgs) {
 }
 
 async function loadCriticalData({context}: LoaderFunctionArgs) {
-  const pageSeoData = {
-    title: 'Photography Journal',
-    description:
-      'My home page for my thoughts and reflections about photography',
-    url: 'https://www.johnnguyen.codes/photography',
-    relativeUrlPath: '/photography',
-    pageType: 'photography',
-    updatedAt: '2025-11-26T12:53:28-08:00',
-    publishedAt: '2020-05-05T03:20:10-07:00',
-    media: [
-      {
-        url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/750x600.jpg?v=1763844438',
-        width: 750,
-        height: 600,
-        altText: 'This is the photagraphy home page featured image',
-      },
-    ],
-  };
-
   return {
     seo: pageSeoData,
   };

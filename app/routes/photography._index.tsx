@@ -3,10 +3,13 @@ import type {Route} from './+types/photography._index';
 import {formatTimeStampToMDY} from '~/lib/plantPageUtils';
 import {getSeoMeta, Image} from '@shopify/hydrogen';
 import {PhotographyArticleSection} from '~/components/PhotographyArticleSection';
+import {photographyPhotos as pageSeoData} from '~/lib/photographyLandingPageSeoData';
 import {photographyArticleSeoData} from '~/lib/photographyArticleSeoData';
 import {photographyLensSeoData} from '~/lib/photographyLensSeoData';
-import {photographyFilmSeoData} from '~/lib/photographyFilmSeoData';
-import {photographyCameraSeoData} from '~/lib/photographyCameraSeoData';
+import {photographyFilmStockSeoData} from '~/lib/photographyFilmStockSeoData';
+import {photographyFilmFormatSeoData} from '~/lib/photographyFilmFormatSeoData';
+import {photographyCameraBodySeoData} from '~/lib/photographyCameraBodySeoData';
+
 import HeroCarousel from '~/components/HeroCarousel';
 
 export async function loader(args: LoaderFunctionArgs) {
@@ -16,24 +19,6 @@ export async function loader(args: LoaderFunctionArgs) {
 }
 
 async function loadCriticalData({context}: LoaderFunctionArgs) {
-  const pageSeoData = {
-    title: 'Photography Home Page',
-    description: 'My home page for my photography',
-    url: 'https://www.johnnguyen.codes/photography',
-    relativeUrlPath: '/photography',
-    pageType: 'photography',
-    updatedAt: '2025-11-26T12:53:28-08:00',
-    publishedAt: '2020-05-05T03:20:10-07:00',
-    media: [
-      {
-        url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/750x600.jpg?v=1763844438',
-        width: 750,
-        height: 600,
-        altText: 'This is the photagraphy home page featured image',
-      },
-    ],
-  };
-
   return {
     seo: pageSeoData,
   };
@@ -130,8 +115,9 @@ const carouselItems = [
 const allSeoData = [
   ...photographyArticleSeoData,
   ...photographyLensSeoData,
-  ...photographyFilmSeoData,
-  ...photographyCameraSeoData,
+  ...photographyFilmStockSeoData,
+  ...photographyFilmFormatSeoData,
+  ...photographyCameraBodySeoData,
 ];
 
 const articleProps: PhotographyArticleSectionProps = {

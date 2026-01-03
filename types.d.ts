@@ -263,6 +263,7 @@ declare global {
   };
 
   type PageSeoData = {
+    status?: string;
     title: string;
     description: string;
     url: string;

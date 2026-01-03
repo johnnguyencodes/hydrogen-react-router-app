@@ -3,24 +3,7 @@ import type {Route} from './+types/photography._index';
 import {formatTimeStampToMDY} from '~/lib/plantPageUtils';
 import {getSeoMeta} from '@shopify/hydrogen';
 import HeroCarousel from '~/components/HeroCarousel';
-
-export const pageSeoData = {
-  title: 'Photos',
-  description: 'My home page for my photos',
-  url: 'https://www.johnnguyen.codes/photography/photos',
-  relativeUrlPath: '/photography/photos',
-  pageType: 'photography',
-  updatedAt: '2025-11-26T12:53:28-08:00',
-  publishedAt: '2020-05-05T03:20:10-07:00',
-  media: [
-    {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/750x600.jpg?v=1763844438',
-      width: 750,
-      height: 600,
-      altText: 'This is the photagraphy film and gear page featured image',
-    },
-  ],
-};
+import {photographyPhotos as pageSeoData} from '~/lib/photographyLandingPageSeoData';
 
 export function loader() {
   return {

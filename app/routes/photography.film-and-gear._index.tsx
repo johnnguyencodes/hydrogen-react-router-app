@@ -6,26 +6,10 @@ import {getSeoMeta} from '@shopify/hydrogen';
 import {PhotographyArticleSection} from '~/components/PhotographyArticleSection';
 import HeroCarousel from '~/components/HeroCarousel';
 import {photographyLensSeoData} from '~/lib/photographyLensSeoData';
-import {photographyFilmSeoData} from '~/lib/photographyFilmSeoData';
-import {photographyCameraSeoData} from '~/lib/photographyCameraSeoData';
-
-export const pageSeoData = {
-  title: 'Photography Film and Gear',
-  description: 'My home page for my photography film and gear',
-  url: 'https://www.johnnguyen.codes/photography/film-and-gear',
-  relativeUrlPath: '/photography/film-and-gear',
-  pageType: 'photography',
-  updatedAt: '2025-11-26T12:53:28-08:00',
-  publishedAt: '2020-05-05T03:20:10-07:00',
-  media: [
-    {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/750x600.jpg?v=1763844438',
-      width: 750,
-      height: 600,
-      altText: 'This is the photagraphy film and gear page featured image',
-    },
-  ],
-};
+import {photographyFilmStockSeoData} from '~/lib/photographyFilmStockSeoData';
+import {photographyFilmFormatSeoData} from '~/lib/photographyFilmFormatSeoData';
+import {photographyCameraBodySeoData} from '~/lib/photographyCameraBodySeoData';
+import {photographyFilmAndGear as pageSeoData} from '~/lib/photographyLandingPageSeoData';
 
 export function loader() {
   return {
@@ -76,14 +60,20 @@ const lensArticleProps: PhotographyArticleSectionProps = {
   sectionDescription: 'Check out my cool lens',
 };
 
-const filmArticleProps: PhotographyArticleSectionProps = {
-  pageSeoDataArray: photographyFilmSeoData,
+const filmStockArticleProps: PhotographyArticleSectionProps = {
+  pageSeoDataArray: photographyFilmStockSeoData,
   sectionTitle: 'Film',
   sectionDescription: 'Check out my film stocks',
 };
 
+const filmFormatArticleProps: PhotographyArticleSectionProps = {
+  pageSeoDataArray: photographyFilmFormatSeoData,
+  sectionTitle: 'Film Formats',
+  sectionDescription: 'Check out my film formats',
+};
+
 const cameraArticleProps: PhotographyArticleSectionProps = {
-  pageSeoDataArray: photographyCameraSeoData,
+  pageSeoDataArray: photographyCameraBodySeoData,
   sectionTitle: 'Cameras',
   sectionDescription: 'Check out my cool cameras',
 };
@@ -100,7 +90,10 @@ export default function Photography() {
         photographyArticleSectionProps={lensArticleProps}
       />
       <PhotographyArticleSection
-        photographyArticleSectionProps={filmArticleProps}
+        photographyArticleSectionProps={filmStockArticleProps}
+      />
+      <PhotographyArticleSection
+        photographyArticleSectionProps={filmFormatArticleProps}
       />
       <PhotographyArticleSection
         photographyArticleSectionProps={cameraArticleProps}
