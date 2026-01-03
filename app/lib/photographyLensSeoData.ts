@@ -10,9 +10,9 @@ export const pentax25mmF35HdHf: PageSeoData = {
   publishedAt: '2020-05-05T03:20:10-07:00',
   media: [
     {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/750x600.jpg?v=1763844438',
-      width: 750,
-      height: 600,
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-05--007--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773187',
+      width: 2048,
+      height: 1365,
       altText: 'This is the photagraphy home page featured imageee',
     },
   ],
@@ -30,9 +30,9 @@ export const nikkor35mm105mmF3545Ais: PageSeoData = {
   publishedAt: '2020-05-05T03:20:10-07:00',
   media: [
     {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/750x600.jpg?v=1763844438',
-      width: 750,
-      height: 600,
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-11-13--013--full-frame--nikon-d850--nikkor-35mm-105mm-f35-f45-ais--45mp--iso-200--f56--1-3s.jpg?v=1766773425"',
+      width: 4096,
+      height: 2731,
       altText: 'This is the photagraphy home page featured image',
     },
   ],
@@ -70,9 +70,9 @@ export const nikkor28mmF28Ais: PageSeoData = {
   publishedAt: '2020-05-05T03:20:10-07:00',
   media: [
     {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/750x600.jpg?v=1763844438',
-      width: 750,
-      height: 600,
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-25--002--full-frame--nikon-d850--nikkor-28mm-f28-ais--45mp--iso-400--f8--1-250s.jpg?v=1766772583',
+      width: 2048,
+      height: 1365,
       altText: 'This is the photagraphy home page featured image',
     },
   ],
@@ -90,9 +90,9 @@ export const nikkor50mmF18Ais: PageSeoData = {
   publishedAt: '2020-05-05T03:20:10-07:00',
   media: [
     {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/750x600.jpg?v=1763844438',
-      width: 750,
-      height: 600,
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-25--011--full-frame--nikon-d850--nikkor-50mm-f18-ais--45mp--iso-64--f4--1-500s.jpg?v=1766772468',
+      width: 2048,
+      height: 1365,
       altText: 'This is the photagraphy home page featured image',
     },
   ],
@@ -118,7 +118,8 @@ export const nikkor80mm200mmF4Ais: PageSeoData = {
   ],
 };
 
-export const sigma105mmF28OsHsmMacro = {
+export const sigma105mmF28OsHsmMacro: PageSeoData = {
+  status: 'active',
   title: 'Sigma 105mm f/2.8 EX DG OS HSM Lens',
   description: 'This is about the Sigma 105mm f/2.8 EX DG OS HSM lens.',
   url: 'https://www.johnnguyen.codes/photography/film-and-gear/sigma-105mm-f28-os-hsm-macro',
@@ -129,9 +130,9 @@ export const sigma105mmF28OsHsmMacro = {
   publishedAt: '2020-05-05T03:20:10-07:00',
   media: [
     {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/750x600.jpg?v=1763844438',
-      width: 750,
-      height: 600,
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-25--014--full-frame--nikon-d850--sigma-105mm-f28-os-hsm-macro--45mp--iso-400--f8--1-640s.jpg?v=1766773289',
+      width: 2048,
+      height: 1365,
       altText: 'This is the photagraphy home page featured image',
     },
   ],

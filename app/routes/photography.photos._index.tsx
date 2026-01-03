@@ -1,19 +1,45 @@
-import {Link, type MetaFunction} from 'react-router';
-import type {Route} from './+types/photography._index';
-import {formatTimeStampToMDY} from '~/lib/plantPageUtils';
+import {
+  Link,
+  useLoaderData,
+  type LoaderFunctionArgs,
+  type MetaFunction,
+} from 'react-router';
 import {getSeoMeta} from '@shopify/hydrogen';
 import HeroCarousel from '~/components/HeroCarousel';
 import {photographyPhotos as pageSeoData} from '~/lib/photographyLandingPageSeoData';
+import {PHOTOGRAPHY_METAOBJECT_QUERY} from '~/lib/photographyPageUtils';
+import PhotographyPage from '~/components/PhotographyPage';
 
-export function loader() {
+export async function loader(args: LoaderFunctionArgs) {
+  const criticalData = await loadCriticalData(args);
+
+  return criticalData;
+}
+
+async function loadCriticalData(args: LoaderFunctionArgs) {
+  const {context} = args;
+
+  const metaobjectType = 'allphotos';
+  const metaobjectHandle = 'allphotos';
+
+  const metaobject = await context.storefront.query(
+    PHOTOGRAPHY_METAOBJECT_QUERY,
+    {
+      variables: {type: metaobjectType, handle: metaobjectHandle},
+    },
+  );
+
   return {
-    seo: pageSeoData,
+    criticalData: {
+      metaobject,
+      seo: pageSeoData,
+    },
   };
 }
 
 export const meta: MetaFunction<typeof loader> = ({data, matches}) => {
   const rootSeo = (matches as any)[1].data?.seo;
-  const pageSeo = data?.seo;
+  const pageSeo = data?.criticalData.seo;
 
   return getSeoMeta(rootSeo, pageSeo);
 };
@@ -48,17 +74,67 @@ const carouselItems = [
   </div>,
 ];
 
-export default function Photography() {
+function PhotographyHero(): React.JSX.Element {
   return (
-    <div className="photography xxs:mx-5 2xl:mx-0">
+    <div>
+      <h1>{pageSeoData.title}</h1>
       <HeroCarousel
         items={carouselItems}
         autoPlay={true}
         autoPlayInterval={15000}
       />
-      <div className="grid sm:grid-cols-1 md:grid-cols-3">
-        <p>Here are all my photos</p>
-      </div>
     </div>
+  );
+}
+
+export default function Photography() {
+  const {criticalData} = useLoaderData<typeof loader>();
+
+  const rawMasterImages = JSON.parse(
+    criticalData.metaobject.metaobject.images.value,
+  ) as RawMasterPhotographyImages;
+
+  const parsedImages: PhotographyImageWithMetadata[] = [];
+  const seenUrls = new Set<string>(); // Tracks unique image URLs
+
+  for (const categoryKey in rawMasterImages) {
+    const subCategories = rawMasterImages[categoryKey];
+
+    for (const subCategoryKey in rawMasterImages[categoryKey]) {
+      const imagesArray = subCategories[subCategoryKey];
+
+      for (const item of imagesArray) {
+        // Check if we've already added this image URL
+        if (!seenUrls.has(item.image.url)) {
+          parsedImages.push(item); // Pushes the whole item
+          seenUrls.add(item.image.url); // Marks URL as seen
+        }
+      }
+    }
+  }
+
+  function sortImages(
+    a: PhotographyImageWithMetadata,
+    b: PhotographyImageWithMetadata,
+  ): number {
+    const {date: aDate, index: aIndex} = a.meta;
+    const {date: bDate, index: bIndex} = b.meta;
+
+    // sort by date (most recent first)
+    const aDateObj = new Date(aDate);
+    const bDateObj = new Date(bDate);
+
+    if (bDateObj.getTime() !== aDateObj.getTime()) {
+      return bDateObj.getTime() - aDateObj.getTime();
+    }
+
+    // Then, sort by index from highest to lowest (highest index is most recent)
+    return Number(bIndex) - Number(aIndex);
+  }
+
+  parsedImages.sort(sortImages);
+
+  return (
+    <PhotographyPage images={parsedImages} HeroContent={PhotographyHero} />
   );
 }
