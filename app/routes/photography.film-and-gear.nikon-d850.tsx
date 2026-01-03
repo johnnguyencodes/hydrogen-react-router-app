@@ -1,42 +1,39 @@
-import {type LoaderFunctionArgs, type MetaFunction} from 'react-router';
-import {formatTimeStampToMDY} from '~/lib/plantPageUtils';
-import {getSeoMeta} from '@shopify/hydrogen';
+import {
+  useLoaderData,
+  type LoaderFunctionArgs,
+  type MetaFunction,
+} from 'react-router';
+import {
+  loadPhotographyPageData,
+  createPhotographyPageMeta,
+} from '~/lib/photographyPageUtils';
+import PhotographyPage from '~/components/PhotographyPage';
+import {nikonD850 as seoData} from '~/lib/photographyCameraBodySeoData';
 
-export const photographyCameraSeoData = {
-  title: 'Phoography - Nikon D850',
-  description: 'This is about Nikon D850',
-  url: 'https://www.johnnguyen.codes/photography/film-and-gear/nikon-d850',
-  relativeUrlPath: '/photography/film-and-gear/nikon-d850',
-  pageType: 'photography',
-  updatedAt: '2025-11-26T12:53:28-08:00',
-  publishedAt: '2020-05-05T03:20:10-07:00',
-  media: [
-    {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/750x600.jpg?v=1763844438',
-      width: 750,
-      height: 600,
-      altText: 'This is the photagraphy home page featured image',
-    },
-  ],
-};
-
-export function loader() {
-  return {
-    seo: photographyCameraSeoData,
-  };
+export async function loader(args: LoaderFunctionArgs) {
+  return loadPhotographyPageData(args, seoData);
 }
 
 export const meta: MetaFunction<typeof loader> = ({data, matches}) => {
-  const rootSeo = (matches as any)[1].data?.seo;
-  const pageSeo = data?.seo;
-
-  return getSeoMeta(rootSeo, pageSeo);
+  return createPhotographyPageMeta(matches, data);
 };
 
-export default function Photography() {
+function PhotographyHero(): React.JSX.Element {
   return (
-    <div className="photography xxs:mx-5 2xl:mx-0">
-      <p>This is about Nikon D850.</p>
+    <div>
+      <h1>{seoData.title}</h1>
     </div>
   );
+}
+
+export default function Route() {
+  const {criticalData} = useLoaderData<typeof loader>();
+
+  console.log('criticalData:', criticalData);
+
+  const images = JSON.parse(
+    criticalData.metaobject.metaobject.images.value,
+  ) as PhotographyImageWithMetadata[];
+
+  return <PhotographyPage images={images} HeroContent={PhotographyHero} />;
 }

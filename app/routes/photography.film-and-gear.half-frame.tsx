@@ -8,7 +8,7 @@ import {
   createPhotographyPageMeta,
 } from '~/lib/photographyPageUtils';
 import PhotographyPage from '~/components/PhotographyPage';
-import {fujifilm400 as seoData} from '~/lib/photographyFilmStockSeoData';
+import {halfFrame as seoData} from '~/lib/photographyFilmFormatSeoData';
 
 export async function loader(args: LoaderFunctionArgs) {
   return loadPhotographyPageData(args, seoData);

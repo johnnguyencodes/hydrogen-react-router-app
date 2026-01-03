@@ -19,33 +19,34 @@ export function PhotographyArticleSection({
       </div>
       <div className="sm:columns-1 md:columns-2 lg:columns-3 gap-5">
         {photographyArticleSectionProps.pageSeoDataArray.map(
-          (article, index) => (
-            <div className="col-span-1 mb-3" key={article.relativeUrlPath}>
-              <div className="rounded-md bg-[var(--color-bg-1)] overflow-hidden flex-shrink-0 w-full p-2">
-                <Link
-                  className="featured-product"
-                  to={`${article.relativeUrlPath}`}
-                >
-                  <div className="p-2">
-                    <Image
-                      data={article.media[0]}
-                      aspectRatio="1/1"
-                      sizes="(min-width: 45em) 20vw, 50vw"
-                    />
-                    <div className="pt-2">
-                      <h4 className="text-2xl font-medium text-[var(--color-fg-green)]">
-                        {article.title}
-                      </h4>
-                      <div className="text-[var(--color-fg-text)] text-lg">
-                        <p className="py-1">{article.description}</p>
-                        <p>{formatTimeStampToMDY(article.publishedAt)}</p>
+          (article, index) =>
+            article.status === 'active' ? (
+              <div className="col-span-1 mb-3" key={article.relativeUrlPath}>
+                <div className="rounded-md bg-[var(--color-bg-1)] overflow-hidden flex-shrink-0 w-full p-2">
+                  <Link
+                    className="featured-product"
+                    to={`${article.relativeUrlPath}`}
+                  >
+                    <div className="p-2">
+                      <Image
+                        data={article.media[0]}
+                        aspectRatio="1/1"
+                        sizes="(min-width: 45em) 20vw, 50vw"
+                      />
+                      <div className="pt-2">
+                        <h4 className="text-2xl font-medium text-[var(--color-fg-green)]">
+                          {article.title}
+                        </h4>
+                        <div className="text-[var(--color-fg-text)] text-lg">
+                          <p className="py-1">{article.description}</p>
+                          <p>{formatTimeStampToMDY(article.publishedAt)}</p>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </Link>
+                  </Link>
+                </div>
               </div>
-            </div>
-          ),
+            ) : null,
         )}
       </div>
     </div>
