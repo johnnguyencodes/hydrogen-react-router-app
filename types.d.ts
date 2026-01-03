@@ -132,6 +132,12 @@ declare global {
     scaledHeight: number;
   };
 
+  export type RawMasterPhotographyImages = {
+    [category: string]: {
+      [subCategory: string]: PhotographyImageWithMetadata[];
+    };
+  };
+
   export type PlantCollection = {
     title: FeaturedCollectionFragment['title'];
     image: FeaturedCollectionFragment['image'] | null;

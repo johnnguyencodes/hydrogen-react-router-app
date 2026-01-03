@@ -30,7 +30,7 @@ export function PhotographyArticleSection({
                     <div className="p-2">
                       <Image
                         data={article.media[0]}
-                        aspectRatio="1/1"
+                        aspectRatio={`${article.media[0].width.toString()}/${article.media[0].height.toString()}`}
                         sizes="(min-width: 45em) 20vw, 50vw"
                       />
                       <div className="pt-2">

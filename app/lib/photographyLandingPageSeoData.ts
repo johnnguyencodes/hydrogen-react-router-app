@@ -39,6 +39,7 @@ export const photographyPhotos: PageSeoData = {
   description: 'My home page for my photos',
   url: 'https://www.johnnguyen.codes/photography/photos',
   relativeUrlPath: '/photography/photos',
+  metaobjectType: 'allphotos',
   pageType: 'photography',
   updatedAt: '2025-11-26T12:53:28-08:00',
   publishedAt: '2020-05-05T03:20:10-07:00',
