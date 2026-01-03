@@ -85,7 +85,7 @@ export type ThumbnailImageProps<T extends ImageExtended = ImageExtended> =
   };
 
 export interface GalleryProps<T extends Image = Image> {
-  images: T[];
+  images: PhotographyImageWithMetadata[];
   id?: string;
   enableImageSelection?: boolean;
   onSelect?: EventHandler<T>;

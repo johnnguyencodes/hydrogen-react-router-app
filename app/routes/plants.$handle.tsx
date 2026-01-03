@@ -171,6 +171,13 @@ function loadDeferredData({context, params}: LoaderFunctionArgs) {
   );
 
   return {journalPromise, carouselCopyPromise};
+  // to make this actual deferred data, wrap the return in `defer({journalPromise, carouselCopyPromise})` and then
+  // use <Suspense> and <Await> to stream in data after critical data is retrieved
+  // <Suspense fallback={<JournalSkeleton />}>
+  // <Await resolve={journalPromise}>
+  //   {(journalPromise) => <JournalComponent data={journalPromise} />}
+  // </Await>
+  // </Suspense>
 }
 
 export const meta: MetaFunction<typeof loader> = ({data, matches}) => {
