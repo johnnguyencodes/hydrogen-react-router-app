@@ -30,7 +30,7 @@ export const Gallery = <T extends ImageInterface>({
       margin,
     });
 
-  // Identify last row indices (Keep your logic)
+  // Identify last row indices
   const lastRowIndices: number[] = [];
   let currentRowWidth = 0;
   for (let i = 0; i < thumbnails.length; i++) {
@@ -46,7 +46,7 @@ export const Gallery = <T extends ImageInterface>({
   }
 
   return (
-    <div id={id} ref={containerRef} style={{width: '100%', overflow: 'hidden'}}>
+    <div id={id} ref={containerRef}>
       <div
         style={{
           ...styles.gallery,
@@ -85,7 +85,6 @@ export const Gallery = <T extends ImageInterface>({
                 alt=""
                 className="hover:brightness-90 block w-full h-full object-cover"
                 data-fancybox="gallery"
-                // No height/width props needed here as they are controlled by the container div
               />
             </div>
           );
