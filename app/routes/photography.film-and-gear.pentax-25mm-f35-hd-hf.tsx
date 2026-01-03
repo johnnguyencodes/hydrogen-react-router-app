@@ -8,28 +8,10 @@ import {
   createPhotographyPageMeta,
 } from '~/lib/photographyPageUtils';
 import PhotographyPage from '~/components/PhotographyPage';
-
-const photographyLensSeoData = {
-  title: 'Pentax 25mm f/3.5 HD HF Lens',
-  description: 'This is about the Pentax 25mm f/3.5 HD lens.',
-  url: 'https://www.johnnguyen.codes/photography/film-and-gear/pentax-25mm-f35-hd-hf',
-  relativeUrlPath: '/photography/film-and-gear/pentax-25mm-f35-hd-hf',
-  metaobjectType: 'lens',
-  pageType: 'photography',
-  updatedAt: '2025-11-26T12:53:28-08:00',
-  publishedAt: '2020-05-05T03:20:10-07:00',
-  media: [
-    {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/750x600.jpg?v=1763844438',
-      width: 750,
-      height: 600,
-      altText: 'This is the photagraphy home page featured imageee',
-    },
-  ],
-};
+import {pentax25mmF35HdHf as seoData} from '~/lib/photographyLensSeoData';
 
 export async function loader(args: LoaderFunctionArgs) {
-  return loadPhotographyPageData(args, photographyLensSeoData);
+  return loadPhotographyPageData(args, seoData);
 }
 
 export const meta: MetaFunction<typeof loader> = ({data, matches}) => {
@@ -39,12 +21,12 @@ export const meta: MetaFunction<typeof loader> = ({data, matches}) => {
 function PhotographyHero(): React.JSX.Element {
   return (
     <div>
-      <p>Hello! This is the coolest yeah hello yessss</p>
+      <h1>{seoData.title}</h1>
     </div>
   );
 }
 
-export default function Pentax25mmF35HdHfRoute() {
+export default function Route() {
   const {criticalData} = useLoaderData<typeof loader>();
 
   const images = JSON.parse(
