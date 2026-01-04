@@ -61,6 +61,11 @@ export const Gallery = <T extends ImageInterface>({
           const isLastRow = lastRowIndices.includes(index);
           const ratio = thumbnail.image.width / thumbnail.image.height;
 
+          const calcWidth = isLastRow
+            ? rowHeight * ratio
+            : thumbnail.scaledWidth;
+          const calcHeight = isLastRow ? rowHeight : thumbnail.scaledHeight;
+
           return (
             <div
               key={thumbnail.image.url}
@@ -85,6 +90,8 @@ export const Gallery = <T extends ImageInterface>({
                 alt=""
                 className="hover:brightness-90 block w-full h-full object-cover"
                 data-fancybox="gallery"
+                width={Math.round(calcWidth)}
+                height={Math.round(calcHeight)}
               />
             </div>
           );

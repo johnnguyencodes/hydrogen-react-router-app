@@ -113,7 +113,7 @@ declare global {
 
   export type PhotographyImageWithMetadata = PhotographyImage & {
     meta: {
-      filetype: string;
+      fileType: string;
       date: string;
       index: string;
       filmFormat: string;
