@@ -33,6 +33,8 @@ const rotationTransformMap: Record<number, string> = {
 const SELECTION_MARGIN = 16;
 
 export const gallery: CSSProperties = {
+  width: '100%',
+  overflow: 'hidden',
   display: 'flex',
   flexWrap: 'wrap',
 };

@@ -16,41 +16,86 @@ export const Gallery = <T extends ImageInterface>({
     defaultContainerWidth,
   );
 
+  const preparedImages = images.map((image) => ({
+    ...image,
+    width: image.image.width,
+    height: image.image.height,
+  })) as T[];
+
   const thumbnails: GalleryThumbnail<PhotographyImageWithMetadata>[] =
-    buildLayoutFlat<T>(images, {
+    buildLayoutFlat<T>(preparedImages, {
       containerWidth,
       maxItems,
       rowHeight,
       margin,
     });
 
+  // Identify last row indices
+  const lastRowIndices: number[] = [];
+  let currentRowWidth = 0;
+  for (let i = 0; i < thumbnails.length; i++) {
+    const thumb = thumbnails[i];
+    const thumbWidthWithMargin = thumb.scaledWidth + margin * 2;
+    if (currentRowWidth + thumbWidthWithMargin > containerWidth + 1) {
+      lastRowIndices.length = 0;
+      currentRowWidth = thumbWidthWithMargin;
+    } else {
+      currentRowWidth += thumbWidthWithMargin;
+    }
+    lastRowIndices.push(i);
+  }
+
   return (
-    <div id={id} className="ReactGridGallery" ref={containerRef}>
-      <div style={styles.gallery}>
-        {thumbnails.map((thumbnail) => (
-          <div
-            key={thumbnail.image.url}
-            style={{
-              width: thumbnail.scaledWidth,
-              height: thumbnail.scaledHeight,
-              margin,
-              position: 'relative',
-              overflow: 'hidden',
-            }}
-          >
-            <PhotographyImage
-              image={thumbnail}
-              alt=""
+    <div id={id} ref={containerRef}>
+      <div
+        style={{
+          ...styles.gallery,
+          margin: -margin,
+          display: 'flex',
+          flexWrap: 'wrap',
+          // Force all items in a row to have the same height
+          alignItems: 'stretch',
+        }}
+      >
+        {thumbnails.map((thumbnail, index) => {
+          const isLastRow = lastRowIndices.includes(index);
+          const ratio = thumbnail.image.width / thumbnail.image.height;
+
+          const calcWidth = isLastRow
+            ? rowHeight * ratio
+            : thumbnail.scaledWidth;
+          const calcHeight = isLastRow ? rowHeight : thumbnail.scaledHeight;
+
+          return (
+            <div
               key={thumbnail.image.url}
-              className="hover:brightness-90"
-              data-fancybox="gallery"
-              height={thumbnail.scaledHeight}
-              width={
-                rowHeight * (thumbnail.image.width / thumbnail.image.height)
-              }
-            />
-          </div>
-        ))}
+              style={{
+                margin,
+                position: 'relative',
+                overflow: 'hidden',
+                // flexGrow handles the "justification" stretching
+                flexGrow: isLastRow ? 0 : ratio * 100,
+                // flexBasis gives flexbox a starting point based on the image's proportions
+                flexBasis: isLastRow
+                  ? rowHeight * ratio
+                  : thumbnail.scaledWidth,
+                // We lock the height for the last row,
+                // but let the others find a common height that fits the width
+                height: isLastRow ? rowHeight : 'auto',
+                minHeight: isLastRow ? 'none' : rowHeight,
+              }}
+            >
+              <PhotographyImage
+                image={thumbnail}
+                alt=""
+                className="hover:brightness-90 block w-full h-full object-cover"
+                data-fancybox="gallery"
+                width={Math.round(calcWidth)}
+                height={Math.round(calcHeight)}
+              />
+            </div>
+          );
+        })}
       </div>
     </div>
   );

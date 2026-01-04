@@ -9,6 +9,7 @@ import {photographyLensSeoData} from '~/lib/photographyLensSeoData';
 import {photographyFilmStockSeoData} from '~/lib/photographyFilmStockSeoData';
 import {photographyFilmFormatSeoData} from '~/lib/photographyFilmFormatSeoData';
 import {photographyCameraBodySeoData} from '~/lib/photographyCameraBodySeoData';
+import {photographyLandingPageSeoData} from '~/lib/photographyLandingPageSeoData';
 
 import HeroCarousel from '~/components/HeroCarousel';
 
@@ -126,15 +127,6 @@ const articleProps: PhotographyArticleSectionProps = {
   sectionDescription: 'This is the description',
 };
 
-const photoMedia = [
-  {
-    url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/750x600.jpg?v=1763844438',
-    width: 750,
-    height: 600,
-    altText: 'This is the photography page featured image',
-  },
-];
-
 export default function Photography() {
   return (
     <div className="photography xxs:mx-5 2xl:mx-0">
@@ -149,8 +141,8 @@ export default function Photography() {
             <Link className="featured-product" to="/photography/film-and-gear">
               <div className="p-2">
                 <Image
-                  data={photoMedia[0]}
-                  aspectRatio="1/1"
+                  data={photographyLandingPageSeoData[1].media[0]}
+                  aspectRatio={`${photographyLandingPageSeoData[1].media[0].width.toString()}/${photographyLandingPageSeoData[1].media[0].height.toString()}`}
                   sizes="(min-width: 45em) 20vw, 50vw"
                 />
                 <div className="pt-2">
@@ -170,8 +162,8 @@ export default function Photography() {
             <Link className="featured-product" to="/photography/photos">
               <div className="p-2">
                 <Image
-                  data={photoMedia[0]}
-                  aspectRatio="1/1"
+                  data={photographyLandingPageSeoData[2].media[0]}
+                  aspectRatio={`${photographyLandingPageSeoData[2].media[0].width.toString()}/${photographyLandingPageSeoData[2].media[0].height.toString()}`}
                   sizes="(min-width: 45em) 20vw, 50vw"
                 />
                 <div className="pt-2">
@@ -191,8 +183,8 @@ export default function Photography() {
             <Link className="featured-product" to="/photography/journal">
               <div className="p-2">
                 <Image
-                  data={photoMedia[0]}
-                  aspectRatio="1/1"
+                  data={photographyLandingPageSeoData[3].media[0]}
+                  aspectRatio={`${photographyLandingPageSeoData[3].media[0].width.toString()}/${photographyLandingPageSeoData[3].media[0].height.toString()}`}
                   sizes="(min-width: 45em) 20vw, 50vw"
                 />
                 <div className="pt-2">

@@ -35,5 +35,7 @@ export default function Route() {
     criticalData.metaobject.metaobject.images.value,
   ) as PhotographyImageWithMetadata[];
 
+  console.log('images:', images);
+
   return <PhotographyPage images={images} HeroContent={PhotographyHero} />;
 }

@@ -13,7 +13,6 @@ import {pentax17 as seoData} from '~/lib/photographyCameraBodySeoData';
 export async function loader(args: LoaderFunctionArgs) {
   return loadPhotographyPageData(args, seoData);
 }
-
 export const meta: MetaFunction<typeof loader> = ({data, matches}) => {
   return createPhotographyPageMeta(matches, data);
 };
