@@ -43,10 +43,11 @@ export function MasonryGalleryImage({
         <Image
           data={image.image}
           alt={image.alt || 'Photography Image'}
-          className={clsx(
-            className,
-            'hover:brightness-90 block w-full h-full object-cover',
-          )}
+          // className={clsx(
+          //   className,
+          //   'hover:brightness-90 block w-full h-full object-cover',
+          // )}
+          className={clsx(className)}
           sizes={sizesString}
           loading="lazy"
         />

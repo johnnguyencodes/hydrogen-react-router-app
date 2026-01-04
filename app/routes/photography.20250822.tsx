@@ -19,7 +19,8 @@ export const meta: MetaFunction<typeof loader> = ({data, matches}) => {
 const masonryImages: MasonryGalleryImage[] = [
   {
     alt: 'image 1',
-    className: 'row-span-6 col-span-5',
+    className:
+      'col-span-12 row-span-10 sm:col-span-6 sm:row-span-8 lg:col-span-3 lg:row-span-4',
     image: {
       url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-09-10--073--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773186',
       width: 2048,

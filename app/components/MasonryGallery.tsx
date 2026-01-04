@@ -6,7 +6,7 @@ export default function MasonryGallery({
   images: MasonryGalleryImage[];
 }) {
   return (
-    <div className="p-4 max-w-screen-xl mx-auto">
+    <div className="mx-auto xxs:w-[320px] xs:w-[375px] sm:w-[640px] md:w-[768px] lg:w-[1024px] xl:w-[1280px] 2xl:w-[1400px]">
       <div className="grid grid-cols-12 auto-rows-[50px] gap-1">
         {images.map((item) => (
           <div
