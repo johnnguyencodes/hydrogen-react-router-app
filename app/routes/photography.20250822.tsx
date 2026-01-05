@@ -3,11 +3,28 @@ import PhotographyPage from '~/components/PhotographyPage';
 import {article20250822 as seoData} from '~/lib/photographyArticleSeoData';
 import {
   createPhotographyPageMeta,
-  loadPhotographyPageData,
+  loadPhotographyJournalData,
 } from '~/lib/photographyPageUtils';
+import {
+  masonryImagesGroup0,
+  masonryImagesGroup1,
+  masonryImagesGroup15,
+  masonryImagesGroup2,
+  masonryImagesGroup3,
+  masonryImagesGroup4,
+  masonryImagesGroup5,
+  masonryImagesGroup6,
+  masonryImagesGroup7,
+  masonryImagesGroup8,
+  masonryImagesGroup9,
+  masonryImagesGroup10,
+  masonryImagesGroup11,
+  thumbnails,
+} from '~/assets/imageData20250822';
+import MasonryGallery from '~/components/MasonryGallery';
 
 export async function loader(args: LoaderFunctionArgs) {
-  return loadPhotographyPageData(args, seoData);
+  return loadPhotographyJournalData(seoData);
 }
 
 export const meta: MetaFunction<typeof loader> = ({data, matches}) => {
@@ -17,813 +34,171 @@ export const meta: MetaFunction<typeof loader> = ({data, matches}) => {
 function PhotographyHero(): React.JSX.Element {
   return (
     <div>
-      <h1>{seoData.title}</h1>
+      <div className="prose mx-auto">
+        <h1 className="text-balance text-5xl font-medium text-[var(--color-fg-green)]">
+          {seoData.title}
+        </h1>
+      </div>
+      <div className="prose prose-p:text-[var(--color-fg-text)] prose-p:text-lg text-base prose-strong:text-[var(--color-fg-green)] max-w-prose mx-auto">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget
+          orci sagittis, blandit ligula id, malesuada elit. Sed ultricies nunc
+          nisl, eget gravida felis molestie consequat. Maecenas efficitur sed
+          turpis eu mattis. Vivamus cursus mauris in neque faucibus viverra.
+          Morbi vitae consectetur metus, a tempus arcu. Praesent tristique nibh
+          eget gravida malesuada. Suspendisse at vestibulum sem, sed commodo
+          magna. Curabitur volutpat non urna vitae elementum.
+        </p>
+      </div>
+      <MasonryGallery images={masonryImagesGroup0} />
+      <div className="prose prose-p:text-[var(--color-fg-text)] prose-p:text-lg text-base prose-strong:text-[var(--color-fg-green)] max-w-prose mx-auto">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget
+          orci sagittis, blandit ligula id, malesuada elit. Sed ultricies nunc
+          nisl, eget gravida felis molestie consequat. Maecenas efficitur sed
+          turpis eu mattis. Vivamus cursus mauris in neque faucibus viverra.
+          Morbi vitae consectetur metus, a tempus arcu. Praesent tristique nibh
+          eget gravida malesuada. Suspendisse at vestibulum sem, sed commodo
+          magna. Curabitur volutpat non urna vitae elementum.
+        </p>
+      </div>
+      <MasonryGallery images={masonryImagesGroup1} />
+      <MasonryGallery images={masonryImagesGroup15} />
+      <div className="prose prose-p:text-[var(--color-fg-text)] prose-p:text-lg text-base prose-strong:text-[var(--color-fg-green)] max-w-prose mx-auto">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget
+          orci sagittis, blandit ligula id, malesuada elit. Sed ultricies nunc
+          nisl, eget gravida felis molestie consequat. Maecenas efficitur sed
+          turpis eu mattis. Vivamus cursus mauris in neque faucibus viverra.
+          Morbi vitae consectetur metus, a tempus arcu. Praesent tristique nibh
+          eget gravida malesuada. Suspendisse at vestibulum sem, sed commodo
+          magna. Curabitur volutpat non urna vitae elementum.
+        </p>
+      </div>
+      <MasonryGallery images={masonryImagesGroup2} />
+      <div className="prose prose-p:text-[var(--color-fg-text)] prose-p:text-lg text-base prose-strong:text-[var(--color-fg-green)] max-w-prose mx-auto">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget
+          orci sagittis, blandit ligula id, malesuada elit. Sed ultricies nunc
+          nisl, eget gravida felis molestie consequat. Maecenas efficitur sed
+          turpis eu mattis. Vivamus cursus mauris in neque faucibus viverra.
+          Morbi vitae consectetur metus, a tempus arcu. Praesent tristique nibh
+          eget gravida malesuada. Suspendisse at vestibulum sem, sed commodo
+          magna. Curabitur volutpat non urna vitae elementum.
+        </p>
+      </div>
+      <MasonryGallery images={masonryImagesGroup3} />
+      <div className="prose prose-p:text-[var(--color-fg-text)] prose-p:text-lg text-base prose-strong:text-[var(--color-fg-green)] max-w-prose mx-auto">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget
+          orci sagittis, blandit ligula id, malesuada elit. Sed ultricies nunc
+          nisl, eget gravida felis molestie consequat. Maecenas efficitur sed
+          turpis eu mattis. Vivamus cursus mauris in neque faucibus viverra.
+          Morbi vitae consectetur metus, a tempus arcu. Praesent tristique nibh
+          eget gravida malesuada. Suspendisse at vestibulum sem, sed commodo
+          magna. Curabitur volutpat non urna vitae elementum.
+        </p>
+      </div>
+      <MasonryGallery images={masonryImagesGroup4} />
+      <div className="prose prose-p:text-[var(--color-fg-text)] prose-p:text-lg text-base prose-strong:text-[var(--color-fg-green)] max-w-prose mx-auto">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget
+          orci sagittis, blandit ligula id, malesuada elit. Sed ultricies nunc
+          nisl, eget gravida felis molestie consequat. Maecenas efficitur sed
+          turpis eu mattis. Vivamus cursus mauris in neque faucibus viverra.
+          Morbi vitae consectetur metus, a tempus arcu. Praesent tristique nibh
+          eget gravida malesuada. Suspendisse at vestibulum sem, sed commodo
+          magna. Curabitur volutpat non urna vitae elementum.
+        </p>
+      </div>
+      <MasonryGallery images={masonryImagesGroup5} />
+      <div className="prose prose-p:text-[var(--color-fg-text)] prose-p:text-lg text-base prose-strong:text-[var(--color-fg-green)] max-w-prose mx-auto">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget
+          orci sagittis, blandit ligula id, malesuada elit. Sed ultricies nunc
+          nisl, eget gravida felis molestie consequat. Maecenas efficitur sed
+          turpis eu mattis. Vivamus cursus mauris in neque faucibus viverra.
+          Morbi vitae consectetur metus, a tempus arcu. Praesent tristique nibh
+          eget gravida malesuada. Suspendisse at vestibulum sem, sed commodo
+          magna. Curabitur volutpat non urna vitae elementum.
+        </p>
+      </div>
+      <MasonryGallery images={masonryImagesGroup6} />
+      <div className="prose prose-p:text-[var(--color-fg-text)] prose-p:text-lg text-base prose-strong:text-[var(--color-fg-green)] max-w-prose mx-auto">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget
+          orci sagittis, blandit ligula id, malesuada elit. Sed ultricies nunc
+          nisl, eget gravida felis molestie consequat. Maecenas efficitur sed
+          turpis eu mattis. Vivamus cursus mauris in neque faucibus viverra.
+          Morbi vitae consectetur metus, a tempus arcu. Praesent tristique nibh
+          eget gravida malesuada. Suspendisse at vestibulum sem, sed commodo
+          magna. Curabitur volutpat non urna vitae elementum.
+        </p>
+      </div>
+      <MasonryGallery images={masonryImagesGroup7} />
+      <div className="prose prose-p:text-[var(--color-fg-text)] prose-p:text-lg text-base prose-strong:text-[var(--color-fg-green)] max-w-prose mx-auto">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget
+          orci sagittis, blandit ligula id, malesuada elit. Sed ultricies nunc
+          nisl, eget gravida felis molestie consequat. Maecenas efficitur sed
+          turpis eu mattis. Vivamus cursus mauris in neque faucibus viverra.
+          Morbi vitae consectetur metus, a tempus arcu. Praesent tristique nibh
+          eget gravida malesuada. Suspendisse at vestibulum sem, sed commodo
+          magna. Curabitur volutpat non urna vitae elementum.
+        </p>
+      </div>
+      <MasonryGallery images={masonryImagesGroup8} />
+      <div className="prose prose-p:text-[var(--color-fg-text)] prose-p:text-lg text-base prose-strong:text-[var(--color-fg-green)] max-w-prose mx-auto">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget
+          orci sagittis, blandit ligula id, malesuada elit. Sed ultricies nunc
+          nisl, eget gravida felis molestie consequat. Maecenas efficitur sed
+          turpis eu mattis. Vivamus cursus mauris in neque faucibus viverra.
+          Morbi vitae consectetur metus, a tempus arcu. Praesent tristique nibh
+          eget gravida malesuada. Suspendisse at vestibulum sem, sed commodo
+          magna. Curabitur volutpat non urna vitae elementum.
+        </p>
+      </div>
+      <MasonryGallery images={masonryImagesGroup9} />
+      <div className="prose prose-p:text-[var(--color-fg-text)] prose-p:text-lg text-base prose-strong:text-[var(--color-fg-green)] max-w-prose mx-auto">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget
+          orci sagittis, blandit ligula id, malesuada elit. Sed ultricies nunc
+          nisl, eget gravida felis molestie consequat. Maecenas efficitur sed
+          turpis eu mattis. Vivamus cursus mauris in neque faucibus viverra.
+          Morbi vitae consectetur metus, a tempus arcu. Praesent tristique nibh
+          eget gravida malesuada. Suspendisse at vestibulum sem, sed commodo
+          magna. Curabitur volutpat non urna vitae elementum.
+        </p>
+      </div>
+      <MasonryGallery images={masonryImagesGroup10} />
+      <div className="prose prose-p:text-[var(--color-fg-text)] prose-p:text-lg text-base prose-strong:text-[var(--color-fg-green)] max-w-prose mx-auto">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget
+          orci sagittis, blandit ligula id, malesuada elit. Sed ultricies nunc
+          nisl, eget gravida felis molestie consequat. Maecenas efficitur sed
+          turpis eu mattis. Vivamus cursus mauris in neque faucibus viverra.
+          Morbi vitae consectetur metus, a tempus arcu. Praesent tristique nibh
+          eget gravida malesuada. Suspendisse at vestibulum sem, sed commodo
+          magna. Curabitur volutpat non urna vitae elementum.
+        </p>
+      </div>
+      <MasonryGallery images={masonryImagesGroup11} />
+      <div className="prose prose-p:text-[var(--color-fg-text)] prose-p:text-lg text-base prose-strong:text-[var(--color-fg-green)] max-w-prose mx-auto">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget
+          orci sagittis, blandit ligula id, malesuada elit. Sed ultricies nunc
+          nisl, eget gravida felis molestie consequat. Maecenas efficitur sed
+          turpis eu mattis. Vivamus cursus mauris in neque faucibus viverra.
+          Morbi vitae consectetur metus, a tempus arcu. Praesent tristique nibh
+          eget gravida malesuada. Suspendisse at vestibulum sem, sed commodo
+          magna. Curabitur volutpat non urna vitae elementum.
+        </p>
+      </div>
     </div>
   );
 }
 
 export default function Route() {
-  return <PhotographyPage images={images} HeroContent={PhotographyHero} />;
+  return <PhotographyPage images={thumbnails} HeroContent={PhotographyHero} />;
 }
-const images: PhotographyImageWithMetadata[] = [
-  {
-    alt: '',
-    image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-09-10--073--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773186',
-      width: 2048,
-      height: 1365,
-    },
-    meta: {
-      fileType: 'photography',
-      date: '2025-09-10',
-      index: '073',
-      filmFormat: 'half-frame',
-      cameraBody: 'pentax-17',
-      lens: 'pentax-25mm-f35-hd-hf',
-      filmStockBrand: 'fujifilm',
-      isoNumber: '400',
-      aperture: 'unknown',
-      shutterspeed: 'unknown',
-    },
-  },
-  {
-    alt: '',
-    image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-09-10--072--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773186',
-      width: 1365,
-      height: 2048,
-    },
-    meta: {
-      fileType: 'photography',
-      date: '2025-09-10',
-      index: '072',
-      filmFormat: 'half-frame',
-      cameraBody: 'pentax-17',
-      lens: 'pentax-25mm-f35-hd-hf',
-      filmStockBrand: 'fujifilm',
-      isoNumber: '400',
-      aperture: 'unknown',
-      shutterspeed: 'unknown',
-    },
-  },
-  {
-    alt: '',
-    image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-09-10--071--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773186',
-      width: 1365,
-      height: 2048,
-    },
-    meta: {
-      fileType: 'photography',
-      date: '2025-09-10',
-      index: '071',
-      filmFormat: 'half-frame',
-      cameraBody: 'pentax-17',
-      lens: 'pentax-25mm-f35-hd-hf',
-      filmStockBrand: 'fujifilm',
-      isoNumber: '400',
-      aperture: 'unknown',
-      shutterspeed: 'unknown',
-    },
-  },
-  {
-    alt: '',
-    image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-09-10--070--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773186',
-      width: 1365,
-      height: 2048,
-    },
-    meta: {
-      fileType: 'photography',
-      date: '2025-09-10',
-      index: '070',
-      filmFormat: 'half-frame',
-      cameraBody: 'pentax-17',
-      lens: 'pentax-25mm-f35-hd-hf',
-      filmStockBrand: 'fujifilm',
-      isoNumber: '400',
-      aperture: 'unknown',
-      shutterspeed: 'unknown',
-    },
-  },
-  {
-    alt: '',
-    image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-09-10--068--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773187',
-      width: 1365,
-      height: 2048,
-    },
-    meta: {
-      fileType: 'photography',
-      date: '2025-09-10',
-      index: '068',
-      filmFormat: 'half-frame',
-      cameraBody: 'pentax-17',
-      lens: 'pentax-25mm-f35-hd-hf',
-      filmStockBrand: 'fujifilm',
-      isoNumber: '400',
-      aperture: 'unknown',
-      shutterspeed: 'unknown',
-    },
-  },
-  {
-    alt: '',
-    image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-09-10--058--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773186',
-      width: 1365,
-      height: 2048,
-    },
-    meta: {
-      fileType: 'photography',
-      date: '2025-09-10',
-      index: '058',
-      filmFormat: 'half-frame',
-      cameraBody: 'pentax-17',
-      lens: 'pentax-25mm-f35-hd-hf',
-      filmStockBrand: 'fujifilm',
-      isoNumber: '400',
-      aperture: 'unknown',
-      shutterspeed: 'unknown',
-    },
-  },
-  {
-    alt: '',
-    image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-09-10--056--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773186',
-      width: 1365,
-      height: 2048,
-    },
-    meta: {
-      fileType: 'photography',
-      date: '2025-09-10',
-      index: '056',
-      filmFormat: 'half-frame',
-      cameraBody: 'pentax-17',
-      lens: 'pentax-25mm-f35-hd-hf',
-      filmStockBrand: 'fujifilm',
-      isoNumber: '400',
-      aperture: 'unknown',
-      shutterspeed: 'unknown',
-    },
-  },
-  {
-    alt: '',
-    image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-09-10--052--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773185',
-      width: 2048,
-      height: 1370,
-    },
-    meta: {
-      fileType: 'photography',
-      date: '2025-09-10',
-      index: '052',
-      filmFormat: 'half-frame',
-      cameraBody: 'pentax-17',
-      lens: 'pentax-25mm-f35-hd-hf',
-      filmStockBrand: 'fujifilm',
-      isoNumber: '400',
-      aperture: 'unknown',
-      shutterspeed: 'unknown',
-    },
-  },
-  {
-    alt: '',
-    image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-09-10--050--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773187',
-      width: 1370,
-      height: 2048,
-    },
-    meta: {
-      fileType: 'photography',
-      date: '2025-09-10',
-      index: '050',
-      filmFormat: 'half-frame',
-      cameraBody: 'pentax-17',
-      lens: 'pentax-25mm-f35-hd-hf',
-      filmStockBrand: 'fujifilm',
-      isoNumber: '400',
-      aperture: 'unknown',
-      shutterspeed: 'unknown',
-    },
-  },
-  {
-    alt: '',
-    image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-09-10--049--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773185',
-      width: 1365,
-      height: 2048,
-    },
-    meta: {
-      fileType: 'photography',
-      date: '2025-09-10',
-      index: '049',
-      filmFormat: 'half-frame',
-      cameraBody: 'pentax-17',
-      lens: 'pentax-25mm-f35-hd-hf',
-      filmStockBrand: 'fujifilm',
-      isoNumber: '400',
-      aperture: 'unknown',
-      shutterspeed: 'unknown',
-    },
-  },
-  {
-    alt: '',
-    image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-09-10--048--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773186',
-      width: 1365,
-      height: 2048,
-    },
-    meta: {
-      fileType: 'photography',
-      date: '2025-09-10',
-      index: '048',
-      filmFormat: 'half-frame',
-      cameraBody: 'pentax-17',
-      lens: 'pentax-25mm-f35-hd-hf',
-      filmStockBrand: 'fujifilm',
-      isoNumber: '400',
-      aperture: 'unknown',
-      shutterspeed: 'unknown',
-    },
-  },
-  {
-    alt: '',
-    image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-09-10--046--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773186',
-      width: 1365,
-      height: 2048,
-    },
-    meta: {
-      fileType: 'photography',
-      date: '2025-09-10',
-      index: '046',
-      filmFormat: 'half-frame',
-      cameraBody: 'pentax-17',
-      lens: 'pentax-25mm-f35-hd-hf',
-      filmStockBrand: 'fujifilm',
-      isoNumber: '400',
-      aperture: 'unknown',
-      shutterspeed: 'unknown',
-    },
-  },
-  {
-    alt: '',
-    image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-09-10--044--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773186',
-      width: 2048,
-      height: 1370,
-    },
-    meta: {
-      fileType: 'photography',
-      date: '2025-09-10',
-      index: '044',
-      filmFormat: 'half-frame',
-      cameraBody: 'pentax-17',
-      lens: 'pentax-25mm-f35-hd-hf',
-      filmStockBrand: 'fujifilm',
-      isoNumber: '400',
-      aperture: 'unknown',
-      shutterspeed: 'unknown',
-    },
-  },
-  {
-    alt: '',
-    image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-09-10--040--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773186',
-      width: 2048,
-      height: 1370,
-    },
-    meta: {
-      fileType: 'photography',
-      date: '2025-09-10',
-      index: '040',
-      filmFormat: 'half-frame',
-      cameraBody: 'pentax-17',
-      lens: 'pentax-25mm-f35-hd-hf',
-      filmStockBrand: 'fujifilm',
-      isoNumber: '400',
-      aperture: 'unknown',
-      shutterspeed: 'unknown',
-    },
-  },
-  {
-    alt: '',
-    image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-09-10--038--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773186',
-      width: 2048,
-      height: 1365,
-    },
-    meta: {
-      fileType: 'photography',
-      date: '2025-09-10',
-      index: '038',
-      filmFormat: 'half-frame',
-      cameraBody: 'pentax-17',
-      lens: 'pentax-25mm-f35-hd-hf',
-      filmStockBrand: 'fujifilm',
-      isoNumber: '400',
-      aperture: 'unknown',
-      shutterspeed: 'unknown',
-    },
-  },
-  {
-    alt: '',
-    image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-09-10--032--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773187',
-      width: 2048,
-      height: 1370,
-    },
-    meta: {
-      fileType: 'photography',
-      date: '2025-09-10',
-      index: '032',
-      filmFormat: 'half-frame',
-      cameraBody: 'pentax-17',
-      lens: 'pentax-25mm-f35-hd-hf',
-      filmStockBrand: 'fujifilm',
-      isoNumber: '400',
-      aperture: 'unknown',
-      shutterspeed: 'unknown',
-    },
-  },
-  {
-    alt: '',
-    image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-09-10--030--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773187',
-      width: 2048,
-      height: 1365,
-    },
-    meta: {
-      fileType: 'photography',
-      date: '2025-09-10',
-      index: '030',
-      filmFormat: 'half-frame',
-      cameraBody: 'pentax-17',
-      lens: 'pentax-25mm-f35-hd-hf',
-      filmStockBrand: 'fujifilm',
-      isoNumber: '400',
-      aperture: 'unknown',
-      shutterspeed: 'unknown',
-    },
-  },
-  {
-    alt: '',
-    image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-09-10--028--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773187',
-      width: 1365,
-      height: 2048,
-    },
-    meta: {
-      fileType: 'photography',
-      date: '2025-09-10',
-      index: '028',
-      filmFormat: 'half-frame',
-      cameraBody: 'pentax-17',
-      lens: 'pentax-25mm-f35-hd-hf',
-      filmStockBrand: 'fujifilm',
-      isoNumber: '400',
-      aperture: 'unknown',
-      shutterspeed: 'unknown',
-    },
-  },
-  {
-    alt: '',
-    image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-09-10--026--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773187',
-      width: 2048,
-      height: 1365,
-    },
-    meta: {
-      fileType: 'photography',
-      date: '2025-09-10',
-      index: '026',
-      filmFormat: 'half-frame',
-      cameraBody: 'pentax-17',
-      lens: 'pentax-25mm-f35-hd-hf',
-      filmStockBrand: 'fujifilm',
-      isoNumber: '400',
-      aperture: 'unknown',
-      shutterspeed: 'unknown',
-    },
-  },
-  {
-    alt: '',
-    image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-09-10--024--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773187',
-      width: 2048,
-      height: 1370,
-    },
-    meta: {
-      fileType: 'photography',
-      date: '2025-09-10',
-      index: '024',
-      filmFormat: 'half-frame',
-      cameraBody: 'pentax-17',
-      lens: 'pentax-25mm-f35-hd-hf',
-      filmStockBrand: 'fujifilm',
-      isoNumber: '400',
-      aperture: 'unknown',
-      shutterspeed: 'unknown',
-    },
-  },
-  {
-    alt: '',
-    image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-09-10--022--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773187',
-      width: 1370,
-      height: 2048,
-    },
-    meta: {
-      fileType: 'photography',
-      date: '2025-09-10',
-      index: '022',
-      filmFormat: 'half-frame',
-      cameraBody: 'pentax-17',
-      lens: 'pentax-25mm-f35-hd-hf',
-      filmStockBrand: 'fujifilm',
-      isoNumber: '400',
-      aperture: 'unknown',
-      shutterspeed: 'unknown',
-    },
-  },
-  {
-    alt: '',
-    image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-09-10--020--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773187',
-      width: 1365,
-      height: 2048,
-    },
-    meta: {
-      fileType: 'photography',
-      date: '2025-09-10',
-      index: '020',
-      filmFormat: 'half-frame',
-      cameraBody: 'pentax-17',
-      lens: 'pentax-25mm-f35-hd-hf',
-      filmStockBrand: 'fujifilm',
-      isoNumber: '400',
-      aperture: 'unknown',
-      shutterspeed: 'unknown',
-    },
-  },
-  {
-    alt: '',
-    image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-09-10--014--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773185',
-      width: 1365,
-      height: 2048,
-    },
-    meta: {
-      fileType: 'photography',
-      date: '2025-09-10',
-      index: '014',
-      filmFormat: 'half-frame',
-      cameraBody: 'pentax-17',
-      lens: 'pentax-25mm-f35-hd-hf',
-      filmStockBrand: 'fujifilm',
-      isoNumber: '400',
-      aperture: 'unknown',
-      shutterspeed: 'unknown',
-    },
-  },
-  {
-    alt: '',
-    image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-09-10--013--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773187',
-      width: 2048,
-      height: 1365,
-    },
-    meta: {
-      fileType: 'photography',
-      date: '2025-09-10',
-      index: '013',
-      filmFormat: 'half-frame',
-      cameraBody: 'pentax-17',
-      lens: 'pentax-25mm-f35-hd-hf',
-      filmStockBrand: 'fujifilm',
-      isoNumber: '400',
-      aperture: 'unknown',
-      shutterspeed: 'unknown',
-    },
-  },
-  {
-    alt: '',
-    image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-09-10--012--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773186',
-      width: 1365,
-      height: 2048,
-    },
-    meta: {
-      fileType: 'photography',
-      date: '2025-09-10',
-      index: '012',
-      filmFormat: 'half-frame',
-      cameraBody: 'pentax-17',
-      lens: 'pentax-25mm-f35-hd-hf',
-      filmStockBrand: 'fujifilm',
-      isoNumber: '400',
-      aperture: 'unknown',
-      shutterspeed: 'unknown',
-    },
-  },
-  {
-    alt: '',
-    image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-09-10--010--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773187',
-      width: 1365,
-      height: 2048,
-    },
-    meta: {
-      fileType: 'photography',
-      date: '2025-09-10',
-      index: '010',
-      filmFormat: 'half-frame',
-      cameraBody: 'pentax-17',
-      lens: 'pentax-25mm-f35-hd-hf',
-      filmStockBrand: 'fujifilm',
-      isoNumber: '400',
-      aperture: 'unknown',
-      shutterspeed: 'unknown',
-    },
-  },
-  {
-    alt: '',
-    image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-09-10--009--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773186',
-      width: 1365,
-      height: 2048,
-    },
-    meta: {
-      fileType: 'photography',
-      date: '2025-09-10',
-      index: '009',
-      filmFormat: 'half-frame',
-      cameraBody: 'pentax-17',
-      lens: 'pentax-25mm-f35-hd-hf',
-      filmStockBrand: 'fujifilm',
-      isoNumber: '400',
-      aperture: 'unknown',
-      shutterspeed: 'unknown',
-    },
-  },
-  {
-    alt: '',
-    image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-09-10--008--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773187',
-      width: 1365,
-      height: 2048,
-    },
-    meta: {
-      fileType: 'photography',
-      date: '2025-09-10',
-      index: '008',
-      filmFormat: 'half-frame',
-      cameraBody: 'pentax-17',
-      lens: 'pentax-25mm-f35-hd-hf',
-      filmStockBrand: 'fujifilm',
-      isoNumber: '400',
-      aperture: 'unknown',
-      shutterspeed: 'unknown',
-    },
-  },
-  {
-    alt: '',
-    image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-09-10--006--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773189',
-      width: 1365,
-      height: 2048,
-    },
-    meta: {
-      fileType: 'photography',
-      date: '2025-09-10',
-      index: '006',
-      filmFormat: 'half-frame',
-      cameraBody: 'pentax-17',
-      lens: 'pentax-25mm-f35-hd-hf',
-      filmStockBrand: 'fujifilm',
-      isoNumber: '400',
-      aperture: 'unknown',
-      shutterspeed: 'unknown',
-    },
-  },
-  {
-    alt: '',
-    image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-08-22--062--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773185',
-      width: 1365,
-      height: 2048,
-    },
-    meta: {
-      fileType: 'photography',
-      date: '2025-08-22',
-      index: '062',
-      filmFormat: 'half-frame',
-      cameraBody: 'pentax-17',
-      lens: 'pentax-25mm-f35-hd-hf',
-      filmStockBrand: 'fujifilm',
-      isoNumber: '400',
-      aperture: 'unknown',
-      shutterspeed: 'unknown',
-    },
-  },
-  {
-    alt: '',
-    image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-08-22--058--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773187',
-      width: 2048,
-      height: 1365,
-    },
-    meta: {
-      fileType: 'photography',
-      date: '2025-08-22',
-      index: '058',
-      filmFormat: 'half-frame',
-      cameraBody: 'pentax-17',
-      lens: 'pentax-25mm-f35-hd-hf',
-      filmStockBrand: 'fujifilm',
-      isoNumber: '400',
-      aperture: 'unknown',
-      shutterspeed: 'unknown',
-    },
-  },
-  {
-    alt: '',
-    image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-08-22--042--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773187',
-      width: 2048,
-      height: 1370,
-    },
-    meta: {
-      fileType: 'photography',
-      date: '2025-08-22',
-      index: '042',
-      filmFormat: 'half-frame',
-      cameraBody: 'pentax-17',
-      lens: 'pentax-25mm-f35-hd-hf',
-      filmStockBrand: 'fujifilm',
-      isoNumber: '400',
-      aperture: 'unknown',
-      shutterspeed: 'unknown',
-    },
-  },
-  {
-    alt: '',
-    image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-08-22--040--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773187',
-      width: 1365,
-      height: 2048,
-    },
-    meta: {
-      fileType: 'photography',
-      date: '2025-08-22',
-      index: '040',
-      filmFormat: 'half-frame',
-      cameraBody: 'pentax-17',
-      lens: 'pentax-25mm-f35-hd-hf',
-      filmStockBrand: 'fujifilm',
-      isoNumber: '400',
-      aperture: 'unknown',
-      shutterspeed: 'unknown',
-    },
-  },
-  {
-    alt: '',
-    image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-08-22--038--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773186',
-      width: 1365,
-      height: 2048,
-    },
-    meta: {
-      fileType: 'photography',
-      date: '2025-08-22',
-      index: '038',
-      filmFormat: 'half-frame',
-      cameraBody: 'pentax-17',
-      lens: 'pentax-25mm-f35-hd-hf',
-      filmStockBrand: 'fujifilm',
-      isoNumber: '400',
-      aperture: 'unknown',
-      shutterspeed: 'unknown',
-    },
-  },
-  {
-    alt: '',
-    image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-08-22--018--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773187',
-      width: 1365,
-      height: 2048,
-    },
-    meta: {
-      fileType: 'photography',
-      date: '2025-08-22',
-      index: '018',
-      filmFormat: 'half-frame',
-      cameraBody: 'pentax-17',
-      lens: 'pentax-25mm-f35-hd-hf',
-      filmStockBrand: 'fujifilm',
-      isoNumber: '400',
-      aperture: 'unknown',
-      shutterspeed: 'unknown',
-    },
-  },
-  {
-    alt: '',
-    image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-08-22--017--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773187',
-      width: 2048,
-      height: 1365,
-    },
-    meta: {
-      fileType: 'photography',
-      date: '2025-08-22',
-      index: '017',
-      filmFormat: 'half-frame',
-      cameraBody: 'pentax-17',
-      lens: 'pentax-25mm-f35-hd-hf',
-      filmStockBrand: 'fujifilm',
-      isoNumber: '400',
-      aperture: 'unknown',
-      shutterspeed: 'unknown',
-    },
-  },
-  {
-    alt: '',
-    image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-08-22--016--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773186',
-      width: 1365,
-      height: 2048,
-    },
-    meta: {
-      fileType: 'photography',
-      date: '2025-08-22',
-      index: '016',
-      filmFormat: 'half-frame',
-      cameraBody: 'pentax-17',
-      lens: 'pentax-25mm-f35-hd-hf',
-      filmStockBrand: 'fujifilm',
-      isoNumber: '400',
-      aperture: 'unknown',
-      shutterspeed: 'unknown',
-    },
-  },
-  {
-    alt: '',
-    image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-08-22--014--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773186',
-      width: 1365,
-      height: 2048,
-    },
-    meta: {
-      fileType: 'photography',
-      date: '2025-08-22',
-      index: '014',
-      filmFormat: 'half-frame',
-      cameraBody: 'pentax-17',
-      lens: 'pentax-25mm-f35-hd-hf',
-      filmStockBrand: 'fujifilm',
-      isoNumber: '400',
-      aperture: 'unknown',
-      shutterspeed: 'unknown',
-    },
-  },
-  {
-    alt: '',
-    image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-08-22--013--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773187',
-      width: 2048,
-      height: 1365,
-    },
-    meta: {
-      fileType: 'photography',
-      date: '2025-08-22',
-      index: '013',
-      filmFormat: 'half-frame',
-      cameraBody: 'pentax-17',
-      lens: 'pentax-25mm-f35-hd-hf',
-      filmStockBrand: 'fujifilm',
-      isoNumber: '400',
-      aperture: 'unknown',
-      shutterspeed: 'unknown',
-    },
-  },
-  {
-    alt: '',
-    image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-08-22--012--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773186',
-      width: 2048,
-      height: 1365,
-    },
-    meta: {
-      fileType: 'photography',
-      date: '2025-08-22',
-      index: '012',
-      filmFormat: 'half-frame',
-      cameraBody: 'pentax-17',
-      lens: 'pentax-25mm-f35-hd-hf',
-      filmStockBrand: 'fujifilm',
-      isoNumber: '400',
-      aperture: 'unknown',
-      shutterspeed: 'unknown',
-    },
-  },
-];

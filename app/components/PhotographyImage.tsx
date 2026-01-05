@@ -22,7 +22,7 @@ export function PhotographyImage({
       >
         <Image
           id={id}
-          alt={image.alt || 'Photography Image'}
+          alt={image.image.alt || 'Photography Image'}
           data={image.image}
           className={(clsx('w-full h-full object-cover'), className)}
           sizes={`${width}px`}

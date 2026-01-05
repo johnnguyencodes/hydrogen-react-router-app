@@ -126,6 +126,19 @@ declare global {
     };
   };
 
+  export type MasonryGalleryImage = PhotographyImageWithMetadata & {
+    className: string;
+  };
+
+  export type MasonryGalleryImageProps = {
+    image: PhotographyImageWithMetadata;
+    id: string;
+    className: string;
+    dataFancyboxName: string;
+    height: number;
+    width: number;
+  };
+
   export type GalleryThumbnail<T> = {
     image: T;
     scaledWidth: number;
@@ -158,7 +171,7 @@ declare global {
   };
 
   type PhotographyImageProps = {
-    image: GalleryThumbnail<PhotographyImageWithMetadata>;
+    image: GalleryThumbnail<T>;
     alt?: string;
     id?: string;
     className?: string;

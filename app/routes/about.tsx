@@ -2,14 +2,11 @@ import {AnimatePresence, motion} from 'motion/react';
 import {useState, useEffect} from 'react';
 import {Button, ButtonGroup} from 'flowbite-react';
 import MasonryGallery from '~/components/MasonryGallery';
-import useFancybox from '~/lib/useFancybox';
 import '@fancyapps/ui/dist/fancybox/fancybox.css';
 import type {Route} from './+types/about';
 
 export default function About() {
   const [isVisible, setIsVisible] = useState(true);
-  const [fancyboxRef1] = useFancybox({});
-  const [fancyboxRef2] = useFancybox({});
 
   // Framer motion variables
   const container: React.CSSProperties = {
@@ -39,12 +36,112 @@ export default function About() {
   };
 
   // Masonry gallery
-  const images = [
-    {src: '', alt: 'Portrait 1', className: 'row-span-7 col-span-5'},
-    {src: '', alt: 'Portrait 2', className: 'row-span-20 col-span-7'},
-    {src: '', alt: 'Portrait 3', className: 'row-span-7 col-span-5'},
-    {src: '', alt: 'Portrait 4', className: 'row-span-12 col-span-5'},
-    {src: '', alt: 'Portrait 5', className: 'row-span-6 col-span-7'},
+  const images: PhotographyMasonryGalleryImage[] = [
+    {
+      alt: 'image 1',
+      className: 'row-span-7 col-span-5',
+      image: {
+        url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-09-10--073--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773186',
+        width: 2048,
+        height: 1365,
+      },
+      meta: {
+        fileType: 'photography',
+        date: '2025-09-10',
+        index: '073',
+        filmFormat: 'half-frame',
+        cameraBody: 'pentax-17',
+        lens: 'pentax-25mm-f35-hd-hf',
+        filmStockBrand: 'fujifilm',
+        isoNumber: '400',
+        aperture: 'unknown',
+        shutterspeed: 'unknown',
+      },
+    },
+    {
+      alt: 'image 2',
+      className: 'row-span-20 col-span-7',
+      image: {
+        url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-09-10--072--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773186',
+        width: 1365,
+        height: 2048,
+      },
+      meta: {
+        fileType: 'photography',
+        date: '2025-09-10',
+        index: '072',
+        filmFormat: 'half-frame',
+        cameraBody: 'pentax-17',
+        lens: 'pentax-25mm-f35-hd-hf',
+        filmStockBrand: 'fujifilm',
+        isoNumber: '400',
+        aperture: 'unknown',
+        shutterspeed: 'unknown',
+      },
+    },
+    {
+      alt: 'image 3',
+      className: 'row-span-7 col-span-5',
+      image: {
+        url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-09-10--071--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773186',
+        width: 1365,
+        height: 2048,
+      },
+      meta: {
+        fileType: 'photography',
+        date: '2025-09-10',
+        index: '071',
+        filmFormat: 'half-frame',
+        cameraBody: 'pentax-17',
+        lens: 'pentax-25mm-f35-hd-hf',
+        filmStockBrand: 'fujifilm',
+        isoNumber: '400',
+        aperture: 'unknown',
+        shutterspeed: 'unknown',
+      },
+    },
+    {
+      alt: '',
+      className: 'row-span-12 col-span-5',
+      image: {
+        url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-09-10--070--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773186',
+        width: 1365,
+        height: 2048,
+      },
+      meta: {
+        fileType: 'photography',
+        date: '2025-09-10',
+        index: '070',
+        filmFormat: 'half-frame',
+        cameraBody: 'pentax-17',
+        lens: 'pentax-25mm-f35-hd-hf',
+        filmStockBrand: 'fujifilm',
+        isoNumber: '400',
+        aperture: 'unknown',
+        shutterspeed: 'unknown',
+      },
+    },
+    {
+      alt: '',
+      className: 'row-span-6 col-span-7',
+      image: {
+        url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-09-10--068--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773187',
+        width: 1365,
+        height: 2048,
+      },
+      meta: {
+        fileType: 'photography',
+        date: '2025-09-10',
+        index: '068',
+        filmFormat: 'half-frame',
+        cameraBody: 'pentax-17',
+        lens: 'pentax-25mm-f35-hd-hf',
+        filmStockBrand: 'fujifilm',
+        isoNumber: '400',
+        aperture: 'unknown',
+        shutterspeed: 'unknown',
+      },
+    },
   ];
 
   return (
@@ -69,66 +166,6 @@ export default function About() {
         imperdiet leo. Mauris tempor euismod nulla vitae mollis.
       </p>
 
-      <div className="fancybox" ref={fancyboxRef1}>
-        <p>This is fancybox</p>
-        <a
-          data-fancybox="gallery"
-          href="https://cdn.shopify.com/s/files/1/0934/9293/6987/files/plants--mammillaria-crucigera-tlalocii-3--2025-05-25--carousel--001.webp?v=1748282238&width=1000&height=1000&crop=center"
-        >
-          <img
-            src="https://cdn.shopify.com/s/files/1/0934/9293/6987/files/plants--mammillaria-crucigera-tlalocii-3--2025-05-25--carousel--001.webp?v=1748282238&width=1000&height=1000&crop=center"
-            alt="Sample image #1"
-          />
-        </a>
-        <a
-          data-fancybox="gallery"
-          href="https://cdn.shopify.com/s/files/1/0934/9293/6987/files/plants--mammillaria-crucigera-tlalocii-3--2025-05-25--carousel--002.webp?v=1748282238&width=1000&height=1000&crop=center"
-        >
-          <img
-            src="https://cdn.shopify.com/s/files/1/0934/9293/6987/files/plants--mammillaria-crucigera-tlalocii-3--2025-05-25--carousel--002.webp?v=1748282238&width=1000&height=1000&crop=center"
-            alt="Sample image #1"
-          />
-        </a>
-        <a
-          data-fancybox="gallery"
-          href="https://cdn.shopify.com/s/files/1/0934/9293/6987/files/plants--mammillaria-crucigera-tlalocii-3--2025-05-25--carousel--003.webp?v=1748282238&width=1000&height=1000&crop=center"
-        >
-          <img
-            src="https://cdn.shopify.com/s/files/1/0934/9293/6987/files/plants--mammillaria-crucigera-tlalocii-3--2025-05-25--carousel--003.webp?v=1748282238&width=1000&height=1000&crop=center"
-            alt="Sample image #1"
-          />
-        </a>
-      </div>
-      <div className="fancybox" ref={fancyboxRef2}>
-        <p>This is fancybox</p>
-        <a
-          data-fancybox="gallery"
-          href="https://cdn.shopify.com/s/files/1/0934/9293/6987/files/plants--mammillaria-crucigera-tlalocii-3--2025-05-25--carousel--004.webp?v=1748282238&width=1000&height=1000&crop=center"
-        >
-          <img
-            src="https://cdn.shopify.com/s/files/1/0934/9293/6987/files/plants--mammillaria-crucigera-tlalocii-3--2025-05-25--carousel--004.webp?v=1748282238&width=1000&height=1000&crop=center"
-            alt="Sample image #1"
-          />
-        </a>
-        <a
-          data-fancybox="gallery"
-          href="https://cdn.shopify.com/s/files/1/0934/9293/6987/files/plants--mammillaria-crucigera-tlalocii-3--2025-05-25--carousel--005.webp?v=1748282238&width=1000&height=1000&crop=center"
-        >
-          <img
-            src="https://cdn.shopify.com/s/files/1/0934/9293/6987/files/plants--mammillaria-crucigera-tlalocii-3--2025-05-25--carousel--005.webp?v=1748282238&width=1000&height=1000&crop=center"
-            alt="Sample image #1"
-          />
-        </a>
-        <a
-          data-fancybox="gallery"
-          href="https://cdn.shopify.com/s/files/1/0934/9293/6987/files/plants--mammillaria-crucigera-tlalocii-3--2025-05-25--carousel--006.webp?v=1748282238&width=1000&height=1000&crop=center"
-        >
-          <img
-            src="https://cdn.shopify.com/s/files/1/0934/9293/6987/files/plants--mammillaria-crucigera-tlalocii-3--2025-05-25--carousel--006.webp?v=1748282238&width=1000&height=1000&crop=center"
-            alt="Sample image #1"
-          />
-        </a>
-      </div>
       <div style={container}>
         <p>This is framer motion</p>
         <AnimatePresence initial={false}>

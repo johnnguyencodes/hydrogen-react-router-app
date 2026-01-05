@@ -25,6 +25,14 @@ export async function loadPhotographyPageData(
   };
 }
 
+export async function loadPhotographyJournalData(seoData: PageSeoData) {
+  return {
+    criticalData: {
+      seo: seoData,
+    },
+  };
+}
+
 export function createPhotographyPageMeta(matches: any, data: any) {
   const rootSeo = matches?.[1]?.data?.seo;
   const pageSeo = data?.criticalData?.seo;

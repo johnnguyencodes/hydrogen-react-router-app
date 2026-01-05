@@ -71,3 +71,34 @@ body > main {
     height: 15px;
   }
 }
+
+/* Base mobile row span */
+.masonry-item {
+  grid-row: span var(--rs-base) / span var(--rs-base);
+}
+/* Update span at each breakpoint */
+@media (min-width: 640px) {
+  .masonry-item {
+    grid-row: span var(--rs-sm) / span var(--rs-sm);
+  }
+}
+@media (min-width: 768px) {
+  .masonry-item {
+    grid-row: span var(--rs-md) / span var(--rs-md);
+  }
+}
+@media (min-width: 1024px) {
+  .masonry-item {
+    grid-row: span var(--rs-lg) / span var(--rs-lg);
+  }
+}
+@media (min-width: 1280px) {
+  .masonry-item {
+    grid-row: span var(--rs-xl) / span var(--rs-xl);
+  }
+}
+@media (min-width: 1536px) {
+  .masonry-item {
+    grid-row: span var(--rs-2xl) / span var(--rs-2xl);
+  }
+}

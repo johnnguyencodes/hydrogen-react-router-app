@@ -1,7 +1,5 @@
 import {Link, type LoaderFunctionArgs, type MetaFunction} from 'react-router';
-import type {Route} from './+types/photography._index';
 import {photographyArticleSeoData} from '~/lib/photographyArticleSeoData';
-import {formatTimeStampToMDY} from '~/lib/plantPageUtils';
 import {getSeoMeta} from '@shopify/hydrogen';
 import {PhotographyArticleSection} from '~/components/PhotographyArticleSection';
 import HeroCarousel from '~/components/HeroCarousel';
