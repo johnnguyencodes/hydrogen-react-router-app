@@ -8,6 +8,7 @@ import {
 import {
   masonryImagesGroup0,
   masonryImagesGroup1,
+  masonryImagesGroup15,
   masonryImagesGroup2,
   masonryImagesGroup3,
   masonryImagesGroup4,
@@ -36,6 +37,7 @@ function PhotographyHero(): React.JSX.Element {
       <h1>{seoData.title}</h1>
       <MasonryGallery images={masonryImagesGroup0} />
       <MasonryGallery images={masonryImagesGroup1} />
+      <MasonryGallery images={masonryImagesGroup15} />
       <MasonryGallery images={masonryImagesGroup2} />
       <MasonryGallery images={masonryImagesGroup3} />
       <MasonryGallery images={masonryImagesGroup4} />

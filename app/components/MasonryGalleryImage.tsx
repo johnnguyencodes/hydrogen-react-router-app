@@ -44,7 +44,7 @@ export function MasonryGalleryImage({image, className, dataFancyboxName}) {
   ].join(', ');
 
   return (
-    <div className="product-image cursor-zoom-in h-full w-full">
+    <div className="product-image h-full w-full">
       <a data-fancybox={dataFancyboxName} href={image.image.url}>
         <Image
           data={image.image}
