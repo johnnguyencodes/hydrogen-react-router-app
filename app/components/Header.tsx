@@ -235,11 +235,11 @@ const HEADER_MENU_1 = {
       title: 'Plants',
       url: '/plants',
     },
-    {
-      id: 'header-menu-trails',
-      title: 'Trails',
-      url: '/trails',
-    },
+    // {
+    //   id: 'header-menu-trails',
+    //   title: 'Trails',
+    //   url: '/trails',
+    // },
   ],
 };
 

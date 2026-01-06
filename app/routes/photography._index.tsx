@@ -124,7 +124,8 @@ const allSeoData = [
 const articleProps: PhotographyArticleSectionProps = {
   pageSeoDataArray: allSeoData,
   sectionTitle: 'This is the title',
-  sectionDescription: 'This is the description',
+  sectionDescription:
+    'TThis is the description descriptionThis is the description descriptionThis is the description descriptionThis is the description descriptionThis is the description descriptionThis is the description descriptionThis is the description descriptionhis is the description description',
 };
 
 export default function Photography() {
@@ -135,72 +136,37 @@ export default function Photography() {
         autoPlay={true}
         autoPlayInterval={15000}
       />
+
       <div className="sm:columns-1 lg:columns-3 gap-5">
-        <div className="col-span-1 mb-3">
-          <div className="rounded-md bg-[var(--color-bg-1)] overflow-hidden flex-shrink-0 w-full p-2">
-            <Link className="featured-product" to="/photography/film-and-gear">
-              <div className="p-2">
-                <Image
-                  data={photographyLandingPageSeoData[1].media[0]}
-                  aspectRatio={`${photographyLandingPageSeoData[1].media[0].width.toString()}/${photographyLandingPageSeoData[1].media[0].height.toString()}`}
-                  sizes="(min-width: 45em) 20vw, 50vw"
-                />
-                <div className="pt-2">
-                  <h4 className="text-2xl font-medium text-[var(--color-fg-green)]">
-                    Film and Gear
-                  </h4>
-                  <div className="text-[var(--color-fg-text)] text-lg">
-                    <p className="py-1">Page about my film and gear</p>
-                  </div>
+        {photographyLandingPageSeoData.map((page) =>
+          page.title !== 'Photography Home Page' ? (
+            <Link to={page.relativeUrlPath} key={page.relativeUrlPath}>
+              <article className="relative flex flex-col overflow-hidden rounded-md bg-[var(--color-bg-4)] mb-3">
+                {/* 1. Image Container - defines the width and starts the stack */}
+                <div className="w-full">
+                  <Image
+                    data={page.media[0]}
+                    aspectRatio={`${page.media[0].width}/${page.media[0].height}`}
+                    sizes="(min-width: 45em) 20vw, 50vw"
+                    className="block w-full h-auto object-contain"
+                  />
                 </div>
-              </div>
-            </Link>
-          </div>
-        </div>
-        <div className="col-span-1 mb-3">
-          <div className="rounded-md bg-[var(--color-bg-1)] overflow-hidden flex-shrink-0 w-full p-2">
-            <Link className="featured-product" to="/photography/photos">
-              <div className="p-2">
-                <Image
-                  data={photographyLandingPageSeoData[2].media[0]}
-                  aspectRatio={`${photographyLandingPageSeoData[2].media[0].width.toString()}/${photographyLandingPageSeoData[2].media[0].height.toString()}`}
-                  sizes="(min-width: 45em) 20vw, 50vw"
-                />
-                <div className="pt-2">
-                  <h4 className="text-2xl font-medium text-[var(--color-fg-green)]">
-                    Photos
-                  </h4>
-                  <div className="text-[var(--color-fg-text)] text-lg">
-                    <p className="py-1">Page for my photos</p>
-                  </div>
+
+                {/* 2. Text Content - now sits naturally below the image */}
+                <div className="p-4 flex flex-col flex-1">
+                  <h3 className="mt-2 text-lg/6 font-semibold text-white">
+                    {/* Note: Removed 'absolute inset-0' span to keep link focused on title */}
+                    {page.title}
+                  </h3>
+
+                  <p className="mt-1 line-clamp-3 text-sm/6 text-gray-500 dark:text-gray-400">
+                    {page.description}
+                  </p>
                 </div>
-              </div>
+              </article>
             </Link>
-          </div>
-        </div>
-        <div className="col-span-1 mb-3">
-          <div className="rounded-md bg-[var(--color-bg-1)] overflow-hidden flex-shrink-0 w-full p-2">
-            <Link className="featured-product" to="/photography/journal">
-              <div className="p-2">
-                <Image
-                  data={photographyLandingPageSeoData[3].media[0]}
-                  aspectRatio={`${photographyLandingPageSeoData[3].media[0].width.toString()}/${photographyLandingPageSeoData[3].media[0].height.toString()}`}
-                  sizes="(min-width: 45em) 20vw, 50vw"
-                />
-                <div className="pt-2">
-                  <h4 className="text-2xl font-medium text-[var(--color-fg-green)]">
-                    Journal
-                  </h4>
-                  <div className="text-[var(--color-fg-text)] text-lg">
-                    <p className="py-1">
-                      Page about my reflections on photography
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </Link>
-          </div>
-        </div>
+          ) : null,
+        )}
       </div>
       <PhotographyArticleSection
         photographyArticleSectionProps={articleProps}

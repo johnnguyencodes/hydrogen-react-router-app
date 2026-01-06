@@ -57,7 +57,8 @@ const carouselItems = [
 const lensArticleProps: PhotographyArticleSectionProps = {
   pageSeoDataArray: photographyLensSeoData,
   sectionTitle: 'Lens',
-  sectionDescription: 'Check out my cool lens',
+  sectionDescription:
+    'CCheck out my cool lens checkoutCheck out my cool lens checkoutCheck out my cool lens checkoutCheck out my cool lens checkoutCheck out my cool lens checkoutCheck out my cool lens checkoutCheck out my cool lens checkoutCheck out my cool lens checkoutheck out my cool lens checkout',
 };
 
 const filmStockArticleProps: PhotographyArticleSectionProps = {
@@ -80,7 +81,7 @@ const cameraArticleProps: PhotographyArticleSectionProps = {
 
 export default function Photography() {
   return (
-    <div className="photography xxs:mx-5 2xl:mx-0">
+    <div className="photography">
       <HeroCarousel
         items={carouselItems}
         autoPlay={true}

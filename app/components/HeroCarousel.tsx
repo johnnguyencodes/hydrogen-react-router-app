@@ -30,37 +30,38 @@ export default function HeroCarousel({
   }, [autoPlay, autoPlayInterval, items.length]);
 
   return (
-    <div className="relative xxs:-mx-5 xxs:rounded-none xl:-mx-25 overflow-hidden 2xl:-mx-20 2xl:mb-16 first:2xl:mt-10 2xl:rounded-t-lg 2xl:rounded-b-lg">
-      {/* Carousel Content */}
-      <div className="overflow-hidden rounded-lg">
-        <div
-          className="flex transition-transform duration-500 ease-out"
-          style={{transform: `translateX(-${currentIndex * 100}%)`}}
-        >
-          {items.map((item, index) => (
-            <div key={index} className="min-w-full">
-              {item}
-            </div>
-          ))}
-        </div>
-      </div>
+    // <div className="relative xxs:-mx-5 xxs:rounded-none xl:-mx-25 overflow-hidden 2xl:-mx-20 2xl:mb-16 first:2xl:mt-10 2xl:rounded-t-lg 2xl:rounded-b-lg">
+    //   {/* Carousel Content */}
+    //   <div className="overflow-hidden rounded-lg">
+    //     <div
+    //       className="flex transition-transform duration-500 ease-out"
+    //       style={{transform: `translateX(-${currentIndex * 100}%)`}}
+    //     >
+    //       {items.map((item, index) => (
+    //         <div key={index} className="min-w-full">
+    //           {item}
+    //         </div>
+    //       ))}
+    //     </div>
+    //   </div>
 
-      {/* Dot Navigation */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-        {items.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => goToSlide(index)}
-            className={cn(
-              'h-2 rounded-full transition-all duration-300',
-              currentIndex === index
-                ? 'w-8 bg-primary'
-                : 'w-2 bg-primary/30 hover:bg-primary/50',
-            )}
-            aria-label={`Go to slide ${index + 1}`}
-          />
-        ))}
-      </div>
-    </div>
+    //   {/* Dot Navigation */}
+    //   <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+    //     {items.map((_, index) => (
+    //       <button
+    //         key={index}
+    //         onClick={() => goToSlide(index)}
+    //         className={cn(
+    //           'h-2 rounded-full transition-all duration-300',
+    //           currentIndex === index
+    //             ? 'w-8 bg-primary'
+    //             : 'w-2 bg-primary/30 hover:bg-primary/50',
+    //         )}
+    //         aria-label={`Go to slide ${index + 1}`}
+    //       />
+    //     ))}
+    //   </div>
+    // </div>
+    <div></div>
   );
 }

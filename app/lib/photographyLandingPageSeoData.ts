@@ -1,4 +1,5 @@
 export const photography: PageSeoData = {
+  status: 'active',
   title: 'Photography Home Page',
   description: 'My home page for my photography',
   url: 'https://www.johnnguyen.codes/photography',
@@ -17,6 +18,7 @@ export const photography: PageSeoData = {
 };
 
 export const photographyFilmAndGear: PageSeoData = {
+  status: 'active',
   title: 'Photography Film and Gear',
   description: 'My home page for my photography film and gear',
   url: 'https://www.johnnguyen.codes/photography/film-and-gear',
@@ -35,6 +37,7 @@ export const photographyFilmAndGear: PageSeoData = {
 };
 
 export const photographyPhotos: PageSeoData = {
+  status: 'active',
   title: 'Photos',
   description: 'My home page for my photos',
   url: 'https://www.johnnguyen.codes/photography/photos',
@@ -54,10 +57,11 @@ export const photographyPhotos: PageSeoData = {
 };
 
 export const photographyJournal: PageSeoData = {
+  status: 'active',
   title: 'Photography Journal',
   description: 'My home page for my thoughts and reflections about photography',
-  url: 'https://www.johnnguyen.codes/photography',
-  relativeUrlPath: '/photography',
+  url: 'https://www.johnnguyen.codes/photography/journal',
+  relativeUrlPath: '/photography/journal',
   pageType: 'photography',
   updatedAt: '2025-11-26T12:53:28-08:00',
   publishedAt: '2020-05-05T03:20:10-07:00',

@@ -1,4 +1,4 @@
-export const article20251113 = {
+export const article20251113: PageSeoData = {
   status: 'active',
   title: 'My first landscape pictures',
   description:
@@ -18,7 +18,7 @@ export const article20251113 = {
   ],
 };
 
-export const article20251025 = {
+export const article20251025: PageSeoData = {
   status: 'active',
   title: 'My first pictures shot with my Nikon D850',
   description:
@@ -38,7 +38,7 @@ export const article20251025 = {
   ],
 };
 
-export const article20251004 = {
+export const article20251004: PageSeoData = {
   status: 'active',
   title: 'My first two rolls that I developed and scanned myself.',
   description:
@@ -58,7 +58,7 @@ export const article20251004 = {
   ],
 };
 
-export const article20250822 = {
+export const article20250822: PageSeoData = {
   status: 'active',
   title: 'My first two rolls of 35mm film ever with my Pentax 17',
   description:
