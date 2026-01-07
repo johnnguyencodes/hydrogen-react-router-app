@@ -29,7 +29,7 @@ export function PhotographyArticleSection({
 
             return post.status === 'active' ? (
               <Link to={post.relativeUrlPath} key={post.relativeUrlPath}>
-                <article className="relative flex flex-col overflow-hidden rounded-md bg-[var(--color-bg-3)] mb-3">
+                <article className="relative flex flex-col overflow-hidden rounded-md bg-[var(--color-bg-2)] mb-3">
                   <div className="px-4 py-2 flex flex-col flex-1">
                     <h3 className="mt-2 text-lg/6 font-semibold text-[var(--color-fg-green)]">
                       {post.title}
@@ -62,7 +62,7 @@ export function PhotographyArticleSection({
                       className="block w-full h-auto object-contain"
                     />
                   </div>
-                  <div className="px-4 py-2 flex flex-col flex-1">
+                  <div className="px-4 pt-0.5 pb-3 flex flex-col flex-1 bg-[var(--color-bg-1)]">
                     <p className="mt-1 line-clamp-3 text-sm/6 text-[var(--color-fg-text)]">
                       {post.description}
                     </p>
