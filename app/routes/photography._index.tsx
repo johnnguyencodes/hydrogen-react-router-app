@@ -137,35 +137,33 @@ export default function Photography() {
       />
 
       <div className="sm:columns-1 lg:columns-3 gap-5">
-        {photographyLandingPageSeoData.map((page) =>
-          page.title !== 'Photography Home Page' ? (
+        {photographyLandingPageSeoData.map((page: PageSeoData) => {
+          return page.title !== 'Photography Home Page' ? (
             <Link to={page.relativeUrlPath} key={page.relativeUrlPath}>
-              <article className="relative flex flex-col overflow-hidden rounded-md bg-[var(--color-bg-4)] mb-3">
-                {/* 1. Image Container - defines the width and starts the stack */}
+              <article className="relative flex flex-col overflow-hidden rounded-md bg-[var(--color-bg-3)] mb-3">
+                <div className="p-4 flex flex-col flex-1">
+                  <h3 className="mt-2 text-3xl font-medium  text-[var(--color-fg-green)]">
+                    {page.title}
+                  </h3>
+                </div>
                 <div className="w-full">
                   <Image
                     data={page.media[0]}
-                    aspectRatio={`${page.media[0].width}/${page.media[0].height}`}
+                    aspectRatio={`${page.media[0].width.toString()}/${page.media[0].height.toString()}`}
                     sizes="(min-width: 45em) 20vw, 50vw"
                     className="block w-full h-auto object-contain"
                   />
                 </div>
-
-                {/* 2. Text Content - now sits naturally below the image */}
                 <div className="p-4 flex flex-col flex-1">
-                  <h3 className="mt-2 text-lg/6 font-semibold text-white">
-                    {/* Note: Removed 'absolute inset-0' span to keep link focused on title */}
-                    {page.title}
-                  </h3>
-
-                  <p className="mt-1 line-clamp-3 text-sm/6 text-gray-500 dark:text-gray-400">
+                  <p className="mt-1 line-clamp-3 text-sm/6 text-[var(--color-fg-text)]">
                     {page.description}
                   </p>
                 </div>
               </article>
             </Link>
-          ) : null,
-        )}
+          ) : null;
+        })}
+        ;
       </div>
       <PhotographyArticleSection
         photographyArticleSectionProps={articleProps}

@@ -30,7 +30,7 @@ export function PhotographyArticleSection({
             return post.status === 'active' ? (
               <Link to={post.relativeUrlPath} key={post.relativeUrlPath}>
                 <article className="relative flex flex-col overflow-hidden rounded-md bg-[var(--color-bg-3)] mb-3">
-                  <div className="p-4 flex flex-col flex-1">
+                  <div className="px-4 py-2 flex flex-col flex-1">
                     <h3 className="mt-2 text-lg/6 font-semibold text-[var(--color-fg-green)]">
                       {post.title}
                     </h3>
@@ -54,7 +54,6 @@ export function PhotographyArticleSection({
                       </p>
                     </div>
                   </div>
-                  {/* 1. Image Container - defines the width and starts the stack */}
                   <div className="w-full">
                     <Image
                       data={post.media[0]}
@@ -63,9 +62,7 @@ export function PhotographyArticleSection({
                       className="block w-full h-auto object-contain"
                     />
                   </div>
-
-                  {/* 2. Text Content - now sits naturally below the image */}
-                  <div className="p-4 flex flex-col flex-1">
+                  <div className="px-4 py-2 flex flex-col flex-1">
                     <p className="mt-1 line-clamp-3 text-sm/6 text-[var(--color-fg-text)]">
                       {post.description}
                     </p>
