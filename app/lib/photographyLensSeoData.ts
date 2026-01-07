@@ -6,6 +6,7 @@ export const pentax25mmF35HdHf: PageSeoData = {
   relativeUrlPath: '/photography/film-and-gear/pentax-25mm-f35-hd-hf',
   metaobjectType: 'lens',
   pageType: 'photography',
+  tags: 'lens',
   updatedAt: '2025-11-26T12:53:28-08:00',
   publishedAt: '2020-05-05T03:20:10-07:00',
   media: [

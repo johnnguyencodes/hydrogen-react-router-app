@@ -6,6 +6,7 @@ export const fujifilm400: PageSeoData = {
   relativeUrlPath: '/photography/film-and-gear/fujifilm-400',
   metaobjectType: 'filmstock',
   pageType: 'photography',
+  tags: 'filmStock',
   updatedAt: '2025-11-26T12:53:28-08:00',
   publishedAt: '2020-05-05T03:20:10-07:00',
   media: [
@@ -26,6 +27,7 @@ export const kodakDoubleX5222: PageSeoData = {
   relativeUrlPath: '/photography/film-and-gear/kodak-double-x-5222',
   metaobjectType: 'filmstock',
   pageType: 'photography',
+  tags: 'filmStock',
   updatedAt: '2025-11-26T12:53:28-08:00',
   publishedAt: '2020-05-05T03:20:10-07:00',
   media: [
@@ -46,6 +48,7 @@ export const kodakGold200: PageSeoData = {
   relativeUrlPath: '/photography/film-and-gear/kodak-gold-200',
   metaobjectType: 'filmstock',
   pageType: 'photography',
+  tags: 'filmStock',
   updatedAt: '2025-11-26T12:53:28-08:00',
   publishedAt: '2020-05-05T03:20:10-07:00',
   media: [
@@ -66,6 +69,7 @@ export const kodakTMax400: PageSeoData = {
   relativeUrlPath: '/photography/film-and-gear/kodak-t-max-400',
   metaobjectType: 'filmstock',
   pageType: 'photography',
+  tags: 'filmStock',
   updatedAt: '2025-11-26T12:53:28-08:00',
   publishedAt: '2020-05-05T03:20:10-07:00',
   media: [
@@ -86,6 +90,7 @@ export const kodakTMaxP3200: PageSeoData = {
   relativeUrlPath: '/photography/film-and-gear/kodak-t-max-p3200',
   metaobjectType: 'filmstock',
   pageType: 'photography',
+  tags: 'filmStock',
   updatedAt: '2025-11-26T12:53:28-08:00',
   publishedAt: '2020-05-05T03:20:10-07:00',
   media: [
@@ -106,6 +111,7 @@ export const kodakVision3200T: PageSeoData = {
   relativeUrlPath: '/photography/film-and-gear/kodak-vision3-200t',
   metaobjectType: 'filmstock',
   pageType: 'photography',
+  tags: 'filmStock',
   updatedAt: '2025-11-26T12:53:28-08:00',
   publishedAt: '2020-05-05T03:20:10-07:00',
   media: [
@@ -126,6 +132,7 @@ export const kodakVision3500T: PageSeoData = {
   relativeUrlPath: '/photography/film-and-gear/kodak-vision3-500t',
   metaobjectType: 'filmstock',
   pageType: 'photography',
+  tags: 'filmStock',
   updatedAt: '2025-11-26T12:53:28-08:00',
   publishedAt: '2020-05-05T03:20:10-07:00',
   media: [
@@ -146,6 +153,7 @@ export const kodakVision350D: PageSeoData = {
   relativeUrlPath: '/photography/film-and-gear/kodak-vision3-50d',
   metaobjectType: 'filmstock',
   pageType: 'photography',
+  tags: 'filmStock',
   updatedAt: '2025-11-26T12:53:28-08:00',
   publishedAt: '2020-05-05T03:20:10-07:00',
   media: [

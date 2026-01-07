@@ -4,7 +4,7 @@ import {formatTimeStampToMDY} from '~/lib/plantPageUtils';
 import {getSeoMeta, Image} from '@shopify/hydrogen';
 import {PhotographyArticleSection} from '~/components/PhotographyArticleSection';
 import {photographyPhotos as pageSeoData} from '~/lib/photographyLandingPageSeoData';
-import {photographyArticleSeoData} from '~/lib/photographyArticleSeoData';
+import {photographyJournalSeoData} from '~/lib/photographyJournalSeoData';
 import {photographyLensSeoData} from '~/lib/photographyLensSeoData';
 import {photographyFilmStockSeoData} from '~/lib/photographyFilmStockSeoData';
 import {photographyFilmFormatSeoData} from '~/lib/photographyFilmFormatSeoData';
@@ -114,7 +114,7 @@ const carouselItems = [
 // 	Magazine
 
 const allSeoData = [
-  ...photographyArticleSeoData,
+  ...photographyJournalSeoData,
   ...photographyLensSeoData,
   ...photographyFilmStockSeoData,
   ...photographyFilmFormatSeoData,
@@ -124,13 +124,12 @@ const allSeoData = [
 const articleProps: PhotographyArticleSectionProps = {
   pageSeoDataArray: allSeoData,
   sectionTitle: 'This is the title',
-  sectionDescription:
-    'TThis is the description descriptionThis is the description descriptionThis is the description descriptionThis is the description descriptionThis is the description descriptionThis is the description descriptionThis is the description descriptionhis is the description description',
+  sectionDescription: 'This is the description',
 };
 
 export default function Photography() {
   return (
-    <div className="photography xxs:mx-5 2xl:mx-0">
+    <div className="photography xxs:mx-5 2xl:mx-0 w-full">
       <HeroCarousel
         items={carouselItems}
         autoPlay={true}

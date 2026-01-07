@@ -288,6 +288,7 @@ declare global {
     url: string;
     relativeUrlPath: string;
     metaobjectType?: string;
+    tags?: string;
     pageType: string;
     publishedAt: string;
     updatedAt: string;

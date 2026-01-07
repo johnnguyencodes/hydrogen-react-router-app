@@ -6,6 +6,7 @@ export const fullFrame: PageSeoData = {
   relativeUrlPath: '/photography/film-and-gear/full-frame',
   metaobjectType: 'filmformat',
   pageType: 'photography',
+  tags: 'filmFormat',
   updatedAt: '2025-11-26T12:53:28-08:00',
   publishedAt: '2020-05-05T03:20:10-07:00',
   media: [
@@ -26,6 +27,7 @@ export const halfFrame: PageSeoData = {
   relativeUrlPath: '/photography/film-and-gear/half-frame',
   metaobjectType: 'filmformat',
   pageType: 'photography',
+  tags: 'filmFormat',
   updatedAt: '2025-11-26T12:53:28-08:00',
   publishedAt: '2020-05-05T03:20:10-07:00',
   media: [

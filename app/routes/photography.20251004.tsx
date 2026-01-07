@@ -1,6 +1,6 @@
 import type {LoaderFunctionArgs, MetaFunction} from 'react-router';
 import PhotographyPage from '~/components/PhotographyPage';
-import {article20251004 as seoData} from '~/lib/photographyArticleSeoData';
+import {journal20251004 as seoData} from '~/lib/photographyJournalSeoData';
 import {
   createPhotographyPageMeta,
   loadPhotographyPageData,

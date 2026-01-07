@@ -6,6 +6,7 @@ export const nikonD850: PageSeoData = {
   relativeUrlPath: '/photography/film-and-gear/nikon-d850',
   metaobjectType: 'camerabody',
   pageType: 'photography',
+  tags: 'cameraBody',
   updatedAt: '2025-11-26T12:53:28-08:00',
   publishedAt: '2020-05-05T03:20:10-07:00',
   media: [
@@ -26,6 +27,7 @@ export const nikonF2: PageSeoData = {
   relativeUrlPath: '/photography/film-and-gear/nikon-f2',
   metaobjectType: 'camerabody',
   pageType: 'photography',
+  tags: 'cameraBody',
   updatedAt: '2025-11-26T12:53:28-08:00',
   publishedAt: '2020-05-05T03:20:10-07:00',
   media: [
@@ -46,6 +48,7 @@ export const nikonF6: PageSeoData = {
   relativeUrlPath: '/photography/film-and-gear/nikon-f6',
   metaobjectType: 'camerabody',
   pageType: 'photography',
+  tags: 'cameraBody',
   updatedAt: '2025-11-26T12:53:28-08:00',
   publishedAt: '2020-05-05T03:20:10-07:00',
   media: [
@@ -66,6 +69,7 @@ export const pentax17: PageSeoData = {
   relativeUrlPath: '/photography/film-and-gear/pentax-17',
   metaobjectType: 'camerabody',
   pageType: 'photography',
+  tags: 'cameraBody',
   updatedAt: '2025-11-26T12:53:28-08:00',
   publishedAt: '2020-05-05T03:20:10-07:00',
   media: [

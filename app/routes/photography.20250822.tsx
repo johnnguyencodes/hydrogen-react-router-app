@@ -1,6 +1,6 @@
 import type {LoaderFunctionArgs, MetaFunction} from 'react-router';
 import PhotographyPage from '~/components/PhotographyPage';
-import {article20250822 as seoData} from '~/lib/photographyArticleSeoData';
+import {journal20250822 as seoData} from '~/lib/photographyJournalSeoData';
 import {
   createPhotographyPageMeta,
   loadPhotographyJournalData,
@@ -39,7 +39,7 @@ function PhotographyHero(): React.JSX.Element {
           {seoData.title}
         </h1>
       </div>
-      <div className="prose prose-p:text-[var(--color-fg-text)] prose-p:text-lg text-base prose-strong:text-[var(--color-fg-green)] max-w-prose mx-auto">
+      <div className="prose prose-p:text-[var(--color-fg-text)] prose-p:text-md text-base prose-strong:text-[var(--color-fg-green)] max-w-prose mx-auto">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget
           orci sagittis, blandit ligula id, malesuada elit. Sed ultricies nunc
@@ -51,7 +51,7 @@ function PhotographyHero(): React.JSX.Element {
         </p>
       </div>
       <MasonryGallery images={masonryImagesGroup0} />
-      <div className="prose prose-p:text-[var(--color-fg-text)] prose-p:text-lg text-base prose-strong:text-[var(--color-fg-green)] max-w-prose mx-auto">
+      <div className="prose prose-p:text-[var(--color-fg-text)] prose-p:text-md text-base prose-strong:text-[var(--color-fg-green)] max-w-prose mx-auto">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget
           orci sagittis, blandit ligula id, malesuada elit. Sed ultricies nunc
@@ -64,7 +64,7 @@ function PhotographyHero(): React.JSX.Element {
       </div>
       <MasonryGallery images={masonryImagesGroup1} />
       <MasonryGallery images={masonryImagesGroup15} />
-      <div className="prose prose-p:text-[var(--color-fg-text)] prose-p:text-lg text-base prose-strong:text-[var(--color-fg-green)] max-w-prose mx-auto">
+      <div className="prose prose-p:text-[var(--color-fg-text)] prose-p:text-md text-base prose-strong:text-[var(--color-fg-green)] max-w-prose mx-auto">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget
           orci sagittis, blandit ligula id, malesuada elit. Sed ultricies nunc
@@ -76,7 +76,7 @@ function PhotographyHero(): React.JSX.Element {
         </p>
       </div>
       <MasonryGallery images={masonryImagesGroup2} />
-      <div className="prose prose-p:text-[var(--color-fg-text)] prose-p:text-lg text-base prose-strong:text-[var(--color-fg-green)] max-w-prose mx-auto">
+      <div className="prose prose-p:text-[var(--color-fg-text)] prose-p:text-md text-base prose-strong:text-[var(--color-fg-green)] max-w-prose mx-auto">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget
           orci sagittis, blandit ligula id, malesuada elit. Sed ultricies nunc
@@ -88,7 +88,7 @@ function PhotographyHero(): React.JSX.Element {
         </p>
       </div>
       <MasonryGallery images={masonryImagesGroup3} />
-      <div className="prose prose-p:text-[var(--color-fg-text)] prose-p:text-lg text-base prose-strong:text-[var(--color-fg-green)] max-w-prose mx-auto">
+      <div className="prose prose-p:text-[var(--color-fg-text)] prose-p:text-md text-base prose-strong:text-[var(--color-fg-green)] max-w-prose mx-auto">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget
           orci sagittis, blandit ligula id, malesuada elit. Sed ultricies nunc
@@ -100,7 +100,7 @@ function PhotographyHero(): React.JSX.Element {
         </p>
       </div>
       <MasonryGallery images={masonryImagesGroup4} />
-      <div className="prose prose-p:text-[var(--color-fg-text)] prose-p:text-lg text-base prose-strong:text-[var(--color-fg-green)] max-w-prose mx-auto">
+      <div className="prose prose-p:text-[var(--color-fg-text)] prose-p:text-md text-base prose-strong:text-[var(--color-fg-green)] max-w-prose mx-auto">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget
           orci sagittis, blandit ligula id, malesuada elit. Sed ultricies nunc
@@ -112,7 +112,7 @@ function PhotographyHero(): React.JSX.Element {
         </p>
       </div>
       <MasonryGallery images={masonryImagesGroup5} />
-      <div className="prose prose-p:text-[var(--color-fg-text)] prose-p:text-lg text-base prose-strong:text-[var(--color-fg-green)] max-w-prose mx-auto">
+      <div className="prose prose-p:text-[var(--color-fg-text)] prose-p:text-md text-base prose-strong:text-[var(--color-fg-green)] max-w-prose mx-auto">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget
           orci sagittis, blandit ligula id, malesuada elit. Sed ultricies nunc
@@ -124,7 +124,7 @@ function PhotographyHero(): React.JSX.Element {
         </p>
       </div>
       <MasonryGallery images={masonryImagesGroup6} />
-      <div className="prose prose-p:text-[var(--color-fg-text)] prose-p:text-lg text-base prose-strong:text-[var(--color-fg-green)] max-w-prose mx-auto">
+      <div className="prose prose-p:text-[var(--color-fg-text)] prose-p:text-md text-base prose-strong:text-[var(--color-fg-green)] max-w-prose mx-auto">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget
           orci sagittis, blandit ligula id, malesuada elit. Sed ultricies nunc
@@ -136,7 +136,7 @@ function PhotographyHero(): React.JSX.Element {
         </p>
       </div>
       <MasonryGallery images={masonryImagesGroup7} />
-      <div className="prose prose-p:text-[var(--color-fg-text)] prose-p:text-lg text-base prose-strong:text-[var(--color-fg-green)] max-w-prose mx-auto">
+      <div className="prose prose-p:text-[var(--color-fg-text)] prose-p:text-md text-base prose-strong:text-[var(--color-fg-green)] max-w-prose mx-auto">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget
           orci sagittis, blandit ligula id, malesuada elit. Sed ultricies nunc
@@ -148,7 +148,7 @@ function PhotographyHero(): React.JSX.Element {
         </p>
       </div>
       <MasonryGallery images={masonryImagesGroup8} />
-      <div className="prose prose-p:text-[var(--color-fg-text)] prose-p:text-lg text-base prose-strong:text-[var(--color-fg-green)] max-w-prose mx-auto">
+      <div className="prose prose-p:text-[var(--color-fg-text)] prose-p:text-md text-base prose-strong:text-[var(--color-fg-green)] max-w-prose mx-auto">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget
           orci sagittis, blandit ligula id, malesuada elit. Sed ultricies nunc
@@ -160,7 +160,7 @@ function PhotographyHero(): React.JSX.Element {
         </p>
       </div>
       <MasonryGallery images={masonryImagesGroup9} />
-      <div className="prose prose-p:text-[var(--color-fg-text)] prose-p:text-lg text-base prose-strong:text-[var(--color-fg-green)] max-w-prose mx-auto">
+      <div className="prose prose-p:text-[var(--color-fg-text)] prose-p:text-md text-base prose-strong:text-[var(--color-fg-green)] max-w-prose mx-auto">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget
           orci sagittis, blandit ligula id, malesuada elit. Sed ultricies nunc
@@ -172,7 +172,7 @@ function PhotographyHero(): React.JSX.Element {
         </p>
       </div>
       <MasonryGallery images={masonryImagesGroup10} />
-      <div className="prose prose-p:text-[var(--color-fg-text)] prose-p:text-lg text-base prose-strong:text-[var(--color-fg-green)] max-w-prose mx-auto">
+      <div className="prose prose-p:text-[var(--color-fg-text)] prose-p:text-md text-base prose-strong:text-[var(--color-fg-green)] max-w-prose mx-auto">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget
           orci sagittis, blandit ligula id, malesuada elit. Sed ultricies nunc
@@ -184,7 +184,7 @@ function PhotographyHero(): React.JSX.Element {
         </p>
       </div>
       <MasonryGallery images={masonryImagesGroup11} />
-      <div className="prose prose-p:text-[var(--color-fg-text)] prose-p:text-lg text-base prose-strong:text-[var(--color-fg-green)] max-w-prose mx-auto">
+      <div className="prose prose-p:text-[var(--color-fg-text)] prose-p:text-md text-base prose-strong:text-[var(--color-fg-green)] max-w-prose mx-auto">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget
           orci sagittis, blandit ligula id, malesuada elit. Sed ultricies nunc

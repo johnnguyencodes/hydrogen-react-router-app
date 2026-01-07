@@ -45,7 +45,7 @@ export function PageLayout({
           publicStoreDomain={publicStoreDomain}
         />
       )}
-      <main className="main-container mb-auto">{children}</main>
+      <main className="main-container mb-auto w-full">{children}</main>
       <Footer
         footer={footer}
         header={header}

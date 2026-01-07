@@ -1,4 +1,4 @@
-export const article20251113: PageSeoData = {
+export const journal20251113: PageSeoData = {
   status: 'active',
   title: 'My first landscape pictures',
   description:
@@ -6,6 +6,7 @@ export const article20251113: PageSeoData = {
   url: 'https://www.johnnguyen.codes/photography/20251113',
   relativeUrlPath: '/photography/20251113',
   pageType: 'photography',
+  tags: 'nikonD850',
   updatedAt: '2025-11-29T12:53:28-08:00',
   publishedAt: '2020-05-10T03:20:10-07:00',
   media: [
@@ -18,7 +19,7 @@ export const article20251113: PageSeoData = {
   ],
 };
 
-export const article20251025: PageSeoData = {
+export const journal20251025: PageSeoData = {
   status: 'active',
   title: 'My first pictures shot with my Nikon D850',
   description:
@@ -26,6 +27,7 @@ export const article20251025: PageSeoData = {
   url: 'https://www.johnnguyen.codes/photography/20251025',
   relativeUrlPath: '/photography/20251025',
   pageType: 'photography',
+  tags: 'nikonD850',
   updatedAt: '2025-11-27T12:53:28-08:00',
   publishedAt: '2020-05-08T03:20:10-07:00',
   media: [
@@ -38,7 +40,7 @@ export const article20251025: PageSeoData = {
   ],
 };
 
-export const article20251004: PageSeoData = {
+export const journal20251004: PageSeoData = {
   status: 'active',
   title: 'My first two rolls that I developed and scanned myself.',
   description:
@@ -46,6 +48,7 @@ export const article20251004: PageSeoData = {
   url: 'https://www.johnnguyen.codes/photography/20251004',
   relativeUrlPath: '/photography/20251004',
   pageType: 'photography',
+  tags: 'nikonF2, pentax17',
   updatedAt: '2025-11-26T12:53:28-08:00',
   publishedAt: '2020-05-07T03:20:10-07:00',
   media: [
@@ -58,7 +61,7 @@ export const article20251004: PageSeoData = {
   ],
 };
 
-export const article20250822: PageSeoData = {
+export const journal20250822: PageSeoData = {
   status: 'active',
   title: 'My first two rolls of 35mm film ever with my Pentax 17',
   description:
@@ -66,6 +69,7 @@ export const article20250822: PageSeoData = {
   url: 'https://www.johnnguyen.codes/photography/20250822',
   relativeUrlPath: '/photography/20250822',
   pageType: 'photography',
+  tags: 'pentax17',
   updatedAt: '2025-11-25T12:53:28-08:00',
   publishedAt: '2020-05-06T03:20:10-07:00',
   media: [
@@ -78,9 +82,9 @@ export const article20250822: PageSeoData = {
   ],
 };
 
-export const photographyArticleSeoData = [
-  article20251004,
-  article20250822,
-  article20251025,
-  article20251113,
+export const photographyJournalSeoData = [
+  journal20251004,
+  journal20250822,
+  journal20251025,
+  journal20251113,
 ];

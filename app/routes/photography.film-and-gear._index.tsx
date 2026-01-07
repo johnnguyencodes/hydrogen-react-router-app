@@ -1,6 +1,6 @@
 import {Link, type LoaderFunctionArgs, type MetaFunction} from 'react-router';
 import type {Route} from './+types/photography._index';
-import {photographyArticleSeoData} from '~/lib/photographyArticleSeoData';
+import {photographyJournalSeoData} from '~/lib/photographyJournalSeoData';
 import {formatTimeStampToMDY} from '~/lib/plantPageUtils';
 import {getSeoMeta} from '@shopify/hydrogen';
 import {PhotographyArticleSection} from '~/components/PhotographyArticleSection';
@@ -57,8 +57,7 @@ const carouselItems = [
 const lensArticleProps: PhotographyArticleSectionProps = {
   pageSeoDataArray: photographyLensSeoData,
   sectionTitle: 'Lens',
-  sectionDescription:
-    'CCheck out my cool lens checkoutCheck out my cool lens checkoutCheck out my cool lens checkoutCheck out my cool lens checkoutCheck out my cool lens checkoutCheck out my cool lens checkoutCheck out my cool lens checkoutCheck out my cool lens checkoutheck out my cool lens checkout',
+  sectionDescription: 'Check out my cool lens checkout',
 };
 
 const filmStockArticleProps: PhotographyArticleSectionProps = {

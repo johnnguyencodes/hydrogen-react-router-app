@@ -1,6 +1,6 @@
 import {Link, type LoaderFunctionArgs, type MetaFunction} from 'react-router';
 import type {Route} from './+types/photography._index';
-import {photographyArticleSeoData} from '~/lib/photographyArticleSeoData';
+import {photographyJournalSeoData} from '~/lib/photographyJournalSeoData';
 import {getSeoMeta} from '@shopify/hydrogen';
 import {PhotographyArticleSection} from '~/components/PhotographyArticleSection';
 import HeroCarousel from '~/components/HeroCarousel';
@@ -26,7 +26,7 @@ export const meta: MetaFunction<typeof loader> = ({data, matches}) => {
 };
 
 const journalProps: PhotographyArticleSectionProps = {
-  pageSeoDataArray: photographyArticleSeoData,
+  pageSeoDataArray: photographyJournalSeoData,
   sectionTitle: 'My journal',
   sectionDescription:
     'AA place for reflections about photographyA place for reflections about photographyA place for reflections about photographyA place for reflections about photographyA place for reflections about photographyA place for reflections about photographyA place for reflections about photographyA place for reflections about photography place for reflections about photography',
