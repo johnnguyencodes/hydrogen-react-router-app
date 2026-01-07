@@ -142,7 +142,7 @@ export default function Photography() {
             <Link to={page.relativeUrlPath} key={page.relativeUrlPath}>
               <article className="relative flex flex-col overflow-hidden rounded-md bg-[var(--color-bg-2)] mb-3">
                 <div className="px-4 py-2 flex flex-col flex-1">
-                  <h3 className="mt-2 text-3xl font-medium  text-[var(--color-fg-green)]">
+                  <h3 className="mt-2 text-3xl font-[400]  text-[var(--color-fg-green)]">
                     {page.title}
                   </h3>
                 </div>
@@ -154,7 +154,7 @@ export default function Photography() {
                     className="block w-full h-auto object-contain"
                   />
                 </div>
-                <div className="p-4 flex flex-col flex-1 bg-[var(--color-bg-0)]">
+                <div className="px-4 pt-0.5 flex flex-col flex-1 bg-[var(--color-bg-0)]">
                   <p className="mt-1 line-clamp-3 text-sm/6 text-[var(--color-fg-text)]">
                     {page.description}
                   </p>

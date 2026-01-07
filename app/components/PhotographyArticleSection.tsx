@@ -8,8 +8,8 @@ export function PhotographyArticleSection({
 }) {
   const location = useLocation();
   return (
-    <div className="article-posts 2xl:mb-16">
-      <div className="mb-5">
+    <div className="article-posts">
+      <div className="mb-1">
         <h2 className="text-3xl font-medium leading tight text-[var(--color-fg-green)]">
           {photographyArticleSectionProps.sectionTitle}
         </h2>
@@ -17,7 +17,7 @@ export function PhotographyArticleSection({
           {photographyArticleSectionProps.sectionDescription}
         </p>
       </div>
-      <div className="w-full mt-16 auto-rows-fr sm:mt-20 columns-1 md:columns-2 lg:columns-3 gap-3">
+      <div className="w-full auto-rows-fr columns-1 md:columns-2 lg:columns-3 gap-3">
         {photographyArticleSectionProps.pageSeoDataArray.map(
           (post: PageSeoData) => {
             const dateObj = new Date(post.publishedAt);
