@@ -35,29 +35,41 @@ export const meta: MetaFunction<typeof loader> = ({data, matches}) => {
 const carouselItems = [
   <div
     key="1"
-    className="flex h-96 items-center justify-center bg-[url('https://files.johnnguyen.codes/cdn/shop/files/photography--2025-11-13--001--full-frame--nikon-d850--35mm-105mm-zoom-ais--45mp--iso-1000--f8--1-250s.jpg')] bg-cover bg-center text-[var(--color-fg-text)]"
+    className="relative flex h-96 items-center justify-center bg-[url('https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-04--001--full-frame--nikon-f2--nikkor-35mm-105mm-f35-f45-ais--kodak-gold--200--unknown--unknown.jpg?v=1766773425')] bg-cover bg-center text-[var(--color-bg-dim)] dark:text-[var(--color-fg-text)]"
   >
-    <div className="text-center">
+    <div
+      aria-hidden="true"
+      className="absolute inset-0 bg-black opacity-30"
+    ></div>
+    <div className="text-center z-10">
       <h1 className="text-5xl font-bold mb-2">The Photography Shelf</h1>
-      <p className="text-lg">Welcome to my page all about my photography</p>
+      <p className="text-lg">Welcome to my page all about my photographyyyyy</p>
     </div>
   </div>,
   <div
     key="2"
-    className="flex h-96 items-center justify-center bg-[url('https://files.johnnguyen.codes/cdn/shop/files/photography--2025-11-13--002--full-frame--nikon-d850--35mm-105mm-zoom-ais--45mp--iso-64--f56--1-3s.jpg')] bg-cover bg-center text-[var(--color-fg-text)]"
+    className="relative flex h-96 items-center justify-center bg-[url('https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-25--008--full-frame--nikon-d850--sigma-105mm-f28-os-hsm-macro--45mp--iso-64--f8--1-400s.jpg?v=1766773288')] bg-cover bg-[center_bottom_30%] text-[var(--color-bg-dim)] dark:text-[var(--color-fg-text)]"
   >
-    <div className="text-center">
-      <h2 className="text-5xl font-bold mb-2">Slide 2</h2>
-      <p className="text-lg">Navigate with arrows or dots</p>
+    <div
+      aria-hidden="true"
+      className="absolute inset-0 bg-black opacity-30"
+    ></div>
+    <div className="text-center z-10">
+      <h1 className="text-5xl font-bold mb-2">The Photography Shelf</h1>
+      <p className="text-lg">Welcome to my page all about my photographyyyyy</p>
     </div>
   </div>,
   <div
     key="3"
-    className="flex h-96 items-center justify-center bg-[url('https://files.johnnguyen.codes/cdn/shop/files/photography--2025-11-13--013--full-frame--nikon-d850--35mm-105mm-zoom-ais--45mp--iso-200--f56--1-3s.jpg')] bg-cover bg-center text-[var(--color-fg-text)]"
+    className="relative flex h-96 items-center justify-center bg-[url('https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-04--007--full-frame--nikon-f2--nikkor-35mm-105mm-f35-f45-ais--kodak-gold--200--unknown--unknown.jpg?v=1766773427')] bg-cover bg-[center_bottom_35%] text-[var(--color-bg-dim)] dark:text-[var(--color-fg-text)]"
   >
-    <div className="text-center">
-      <h2 className="text-5xl font-bold mb-2">Slide 3</h2>
-      <p className="text-lg">Smooth transitions included</p>
+    <div
+      aria-hidden="true"
+      className="absolute inset-0 bg-black opacity-30"
+    ></div>
+    <div className="text-center z-10">
+      <h1 className="text-5xl font-bold mb-2">The Photography Shelf</h1>
+      <p className="text-lg">Welcome to my page all about my photographyyyyy</p>
     </div>
   </div>,
 ];

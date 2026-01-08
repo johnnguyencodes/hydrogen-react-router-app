@@ -52,7 +52,7 @@ export default function HeroCarousel({
             key={index}
             onClick={() => goToSlide(index)}
             className={cn(
-              'h-2 rounded-full transition-all duration-300',
+              'h-2 rounded-full transition-all duration-300 hover:cursor-pointer',
               currentIndex === index
                 ? 'w-8 bg-primary'
                 : 'w-2 bg-primary/30 hover:bg-primary/50',

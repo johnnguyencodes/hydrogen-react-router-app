@@ -16,7 +16,7 @@ export default function MasonryGallery({images}) {
   };
 
   return (
-    <div className="mx-auto xxs:w-[320px] xs:w-[375px] sm:w-[640px] md:w-[768px] lg:w-[1024px] xl:w-[1280px] 2xl:w-[1400px]">
+    <div className="mx-auto xxs:max-w-[320px] xs:max-w-[375px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] xl:max-w-[1280px] 2xl:max-w-[1400px]">
       <div className="grid grid-cols-12 gap-1">
         {images.map((item) => {
           const ratio = item.image.width / item.image.height;
