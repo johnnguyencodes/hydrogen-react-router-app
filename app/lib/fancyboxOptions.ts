@@ -17,6 +17,7 @@ export const fancyboxOptions = {
     Lazyload: {
       preload: 999,
     },
+    preload: 999,
     infinite: true,
     Thumbs: {
       type: 'classic',

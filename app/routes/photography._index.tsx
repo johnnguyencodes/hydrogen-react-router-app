@@ -5,10 +5,10 @@ import {getSeoMeta, Image} from '@shopify/hydrogen';
 import {PhotographyArticleSection} from '~/components/PhotographyArticleSection';
 import {photographyPhotos as pageSeoData} from '~/lib/photographyLandingPageSeoData';
 import {photographyJournalSeoData} from '~/lib/photographyJournalSeoData';
-import {photographyLensSeoData} from '~/lib/photographyLensSeoData';
-import {photographyFilmStockSeoData} from '~/lib/photographyFilmStockSeoData';
-import {photographyFilmFormatSeoData} from '~/lib/photographyFilmFormatSeoData';
-import {photographyCameraBodySeoData} from '~/lib/photographyCameraBodySeoData';
+// import {photographyLensSeoData} from '~/lib/photographyLensSeoData';
+// import {photographyFilmStockSeoData} from '~/lib/photographyFilmStockSeoData';
+// import {photographyFilmFormatSeoData} from '~/lib/photographyFilmFormatSeoData';
+// import {photographyCameraBodySeoData} from '~/lib/photographyCameraBodySeoData';
 import {photographyLandingPageSeoData} from '~/lib/photographyLandingPageSeoData';
 
 import HeroCarousel from '~/components/HeroCarousel';
@@ -127,10 +127,10 @@ const carouselItems = [
 
 const allSeoData = [
   ...photographyJournalSeoData,
-  ...photographyLensSeoData,
-  ...photographyFilmStockSeoData,
-  ...photographyFilmFormatSeoData,
-  ...photographyCameraBodySeoData,
+  // ...photographyLensSeoData,
+  // ...photographyFilmStockSeoData,
+  // ...photographyFilmFormatSeoData,
+  // ...photographyCameraBodySeoData,
 ];
 
 const articleProps: PhotographyArticleSectionProps = {
@@ -148,7 +148,7 @@ export default function Photography() {
         autoPlayInterval={15000}
       />
 
-      <div className="sm:columns-1 lg:columns-3 gap-5">
+      <div className="sm:columns-1 lg:columns-2 gap-5">
         {photographyLandingPageSeoData.map((page: PageSeoData) => {
           return page.title !== 'Photography Home Page' ? (
             <Link to={page.relativeUrlPath} key={page.relativeUrlPath}>

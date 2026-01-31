@@ -74,9 +74,9 @@ export const journal20250822: PageSeoData = {
   publishedAt: '2020-05-06T03:20:10-07:00',
   media: [
     {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-08-22--042--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773187',
-      width: 2048,
-      height: 1370,
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-08-22--038--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773186',
+      width: 1365,
+      height: 2048,
       altText: 'This is the photography page featured image',
     },
   ],

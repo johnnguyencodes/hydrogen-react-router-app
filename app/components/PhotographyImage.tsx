@@ -26,6 +26,11 @@ export function PhotographyImage({
           data={image.image}
           className={(clsx('w-full h-full object-cover'), className)}
           sizes={`${width}px`}
+          // sizes={
+          //   (navigator as any).connection?.effectiveType === '4g'
+          //     ? '100vw'
+          //     : `${width}px`
+          // }
           loading="lazy"
         ></Image>
       </a>
