@@ -74,7 +74,7 @@ const carouselItems = [
   </div>,
   <div
     key="2"
-    className="relative flex h-[600px] items-end-safe justify-start bg-[linear-gradient(rgba(0,0,0,0.40),rgba(0,0,0,0.40)),url('https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-25--008--full-frame--nikon-d850--sigma-105mm-f28-os-hsm-macro--45mp--iso-64--f8--1-400s.jpg?v=1766773288')] bg-cover bg-[center_85%] text-[var(--color-bg-dim)] dark:text-[var(--color-fg-text)]"
+    className="relative flex h-[600px] items-end-safe justify-start bg-[linear-gradient(rgba(0,0,0,0.25),rgba(0,0,0,0.25)),url('https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-25--008--full-frame--nikon-d850--sigma-105mm-f28-os-hsm-macro--45mp--iso-64--f8--1-400s.jpg?v=1766773288')] bg-cover bg-[center_85%] text-[var(--color-bg-dim)] dark:text-[var(--color-fg-text)]"
   >
     <div className="z-10 relative bottom-20 left-20">
       <h1 className="text-5xl font-bold mb-2">The Photography Shelf</h1>
