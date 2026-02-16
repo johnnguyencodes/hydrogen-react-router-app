@@ -1,4 +1,9 @@
-import {Link, type LoaderFunctionArgs, type MetaFunction} from 'react-router';
+import {
+  Link,
+  useLoaderData,
+  type LoaderFunctionArgs,
+  type MetaFunction,
+} from 'react-router';
 import type {Route} from './+types/photography._index';
 import {formatTimeStampToMDY} from '~/lib/plantPageUtils';
 import {getSeoMeta, Image} from '@shopify/hydrogen';
@@ -10,24 +15,46 @@ import {photographyJournalSeoData} from '~/lib/photographyJournalSeoData';
 // import {photographyFilmFormatSeoData} from '~/lib/photographyFilmFormatSeoData';
 // import {photographyCameraBodySeoData} from '~/lib/photographyCameraBodySeoData';
 import {photographyLandingPageSeoData} from '~/lib/photographyLandingPageSeoData';
+import {Gallery} from '../components/react-grid-gallery/';
+import {fancyboxOptions} from '~/lib/fancyboxOptions';
+import useFancybox from '~/lib/useFancybox';
+import {PHOTOGRAPHY_METAOBJECT_QUERY} from '~/lib/photographyPageUtils';
 
 import HeroCarousel from '~/components/HeroCarousel';
+import PhotographyPage from '~/components/PhotographyPage';
+import {useMemo} from 'react';
+import {Button} from '~/components/ui/button';
 
 export async function loader(args: LoaderFunctionArgs) {
   const criticalData = await loadCriticalData(args);
 
-  return {...criticalData};
+  return criticalData;
 }
 
-async function loadCriticalData({context}: LoaderFunctionArgs) {
+async function loadCriticalData(args: LoaderFunctionArgs) {
+  const {context} = args;
+
+  const metaobjectType = 'allphotos';
+  const metaobjectHandle = 'allphotos';
+
+  const metaobject = await context.storefront.query(
+    PHOTOGRAPHY_METAOBJECT_QUERY,
+    {
+      variables: {type: metaobjectType, handle: metaobjectHandle},
+    },
+  );
+
   return {
-    seo: pageSeoData,
+    criticalData: {
+      metaobject,
+      seo: pageSeoData,
+    },
   };
 }
 
 export const meta: MetaFunction<typeof loader> = ({data, matches}) => {
   const rootSeo = (matches as any)[1].data?.seo;
-  const pageSeo = data?.seo;
+  const pageSeo = data?.criticalData.seo;
 
   return getSeoMeta(rootSeo, pageSeo);
 };
@@ -35,41 +62,38 @@ export const meta: MetaFunction<typeof loader> = ({data, matches}) => {
 const carouselItems = [
   <div
     key="1"
-    className="relative flex h-96 items-center justify-center bg-[url('https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-04--001--full-frame--nikon-f2--nikkor-35mm-105mm-f35-f45-ais--kodak-gold--200--unknown--unknown.jpg?v=1766773425')] bg-cover bg-center text-[var(--color-bg-dim)] dark:text-[var(--color-fg-text)]"
+    className="relative flex h-[600px] items-end-safe justify-end bg-[linear-gradient(rgba(0,0,0,0.40),rgba(0,0,0,0.40)),url('https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-04--001--full-frame--nikon-f2--nikkor-35mm-105mm-f35-f45-ais--kodak-gold--200--unknown--unknown.jpg?v=1766773425')] bg-cover bg-center text-[var(--color-bg-dim)] dark:text-[var(--color-fg-text)]"
   >
-    <div
-      aria-hidden="true"
-      className="absolute inset-0 bg-black opacity-30"
-    ></div>
-    <div className="text-center z-10">
+    <div className="z-10 relative bottom-20 right-20 text-end">
       <h1 className="text-5xl font-bold mb-2">The Photography Shelf</h1>
       <p className="text-lg">Welcome to my page all about my photographyyyyy</p>
+      <Link to="/photography/20251004">
+        <Button variant="banner">Read more</Button>
+      </Link>
     </div>
   </div>,
   <div
     key="2"
-    className="relative flex h-96 items-center justify-center bg-[url('https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-25--008--full-frame--nikon-d850--sigma-105mm-f28-os-hsm-macro--45mp--iso-64--f8--1-400s.jpg?v=1766773288')] bg-cover bg-[center_bottom_30%] text-[var(--color-bg-dim)] dark:text-[var(--color-fg-text)]"
+    className="relative flex h-[600px] items-end-safe justify-start bg-[linear-gradient(rgba(0,0,0,0.40),rgba(0,0,0,0.40)),url('https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-25--008--full-frame--nikon-d850--sigma-105mm-f28-os-hsm-macro--45mp--iso-64--f8--1-400s.jpg?v=1766773288')] bg-cover bg-[center_85%] text-[var(--color-bg-dim)] dark:text-[var(--color-fg-text)]"
   >
-    <div
-      aria-hidden="true"
-      className="absolute inset-0 bg-black opacity-30"
-    ></div>
-    <div className="text-center z-10">
+    <div className="z-10 relative bottom-20 left-20">
       <h1 className="text-5xl font-bold mb-2">The Photography Shelf</h1>
       <p className="text-lg">Welcome to my page all about my photographyyyyy</p>
+      <Link to="/photography/20251025">
+        <Button variant="banner">Read more</Button>
+      </Link>
     </div>
   </div>,
   <div
     key="3"
-    className="relative flex h-96 items-center justify-center bg-[url('https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-04--007--full-frame--nikon-f2--nikkor-35mm-105mm-f35-f45-ais--kodak-gold--200--unknown--unknown.jpg?v=1766773427')] bg-cover bg-[center_bottom_35%] text-[var(--color-bg-dim)] dark:text-[var(--color-fg-text)]"
+    className="relative flex h-[600px] items-end-safe justify-start bg-[linear-gradient(rgba(0,0,0,0.25),rgba(0,0,0,0.25)),url('https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-08-22--038--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773186')] bg-cover bg-[center_81%] text-[var(--color-bg-dim)] dark:text-[var(--color-fg-text)]"
   >
-    <div
-      aria-hidden="true"
-      className="absolute inset-0 bg-black opacity-30"
-    ></div>
-    <div className="text-center z-10">
+    <div className="z-10 relative bottom-20 left-20">
       <h1 className="text-5xl font-bold mb-2">The Photography Shelf</h1>
       <p className="text-lg">Welcome to my page all about my photographyyyyy</p>
+      <Link to="/photography/20251025">
+        <Button variant="banner">Read more</Button>
+      </Link>
     </div>
   </div>,
 ];
@@ -135,11 +159,60 @@ const allSeoData = [
 
 const articleProps: PhotographyArticleSectionProps = {
   pageSeoDataArray: allSeoData,
-  sectionTitle: 'This is the title',
-  sectionDescription: 'This is the description',
+  sectionTitle: 'Read the journal',
+  sectionDescription:
+    'Follow my journey into photography through my articles below',
 };
 
 export default function Photography() {
+  const {criticalData} = useLoaderData<typeof loader>();
+
+  const rawMasterImages = JSON.parse(
+    criticalData.metaobject.metaobject.images.value,
+  ) as RawMasterPhotographyImages;
+
+  const parsedImages: PhotographyImageWithMetadata[] = [];
+  const seenUrls = new Set<string>(); // Tracks unique image URLs
+
+  for (const categoryKey in rawMasterImages) {
+    const subCategories = rawMasterImages[categoryKey];
+
+    for (const subCategoryKey in rawMasterImages[categoryKey]) {
+      const imagesArray = subCategories[subCategoryKey];
+
+      for (const item of imagesArray) {
+        // Check if we've already added this image URL
+        if (!seenUrls.has(item.image.url)) {
+          parsedImages.push(item); // Pushes the whole item
+          seenUrls.add(item.image.url); // Marks URL as seen
+        }
+      }
+    }
+  }
+
+  function sortImages(
+    a: PhotographyImageWithMetadata,
+    b: PhotographyImageWithMetadata,
+  ): number {
+    const {date: aDate, index: aIndex} = a.meta;
+    const {date: bDate, index: bIndex} = b.meta;
+
+    // sort by date (most recent first)
+    const aDateObj = new Date(aDate);
+    const bDateObj = new Date(bDate);
+
+    if (bDateObj.getTime() !== aDateObj.getTime()) {
+      return bDateObj.getTime() - aDateObj.getTime();
+    }
+
+    // Then, sort by index from highest to lowest (highest index is most recent)
+    return Number(bIndex) - Number(aIndex);
+  }
+
+  parsedImages.sort(sortImages);
+
+  const displayedImages = parsedImages.slice(0, 10);
+
   return (
     <div className="photography xxs:mx-5 2xl:mx-0 w-full">
       <HeroCarousel
@@ -148,33 +221,10 @@ export default function Photography() {
         autoPlayInterval={15000}
       />
 
-      <div className="sm:columns-1 lg:columns-2 gap-5">
-        {photographyLandingPageSeoData.map((page: PageSeoData) => {
-          return page.title !== 'Photography Home Page' ? (
-            <Link to={page.relativeUrlPath} key={page.relativeUrlPath}>
-              <article className="relative flex flex-col overflow-hidden rounded-md bg-[var(--color-bg-2)] mb-3">
-                <div className="px-4 py-2 flex flex-col flex-1">
-                  <h3 className="mt-2 text-3xl font-[400]  text-[var(--color-fg-green)]">
-                    {page.title}
-                  </h3>
-                </div>
-                <div className="w-full">
-                  <Image
-                    data={page.media[0]}
-                    aspectRatio={`${page.media[0].width.toString()}/${page.media[0].height.toString()}`}
-                    sizes="(min-width: 45em) 20vw, 50vw"
-                    className="block w-full h-auto object-contain"
-                  />
-                </div>
-                <div className="px-4 pt-0.5 flex flex-col flex-1 bg-[var(--color-bg-0)]">
-                  <p className="mt-1 line-clamp-3 text-sm/6 text-[var(--color-fg-text)]">
-                    {page.description}
-                  </p>
-                </div>
-              </article>
-            </Link>
-          ) : null;
-        })}
+      <h2>Recent images</h2>
+      <PhotographyPage images={displayedImages} />
+      <div className="flex justify-end">
+        <Link to="/photography/photos">See all photos</Link>
       </div>
       <PhotographyArticleSection
         photographyArticleSectionProps={articleProps}

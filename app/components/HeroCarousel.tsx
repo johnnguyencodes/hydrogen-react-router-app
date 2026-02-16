@@ -54,8 +54,8 @@ export default function HeroCarousel({
             className={cn(
               'h-2 rounded-full transition-all duration-300 hover:cursor-pointer',
               currentIndex === index
-                ? 'w-8 bg-primary'
-                : 'w-2 bg-primary/30 hover:bg-primary/50',
+                ? 'w-8 bg-[var(--color-bg-dim)] dark:bg-[var(--color-fg-text)]'
+                : 'w-2 bg-[var(--color-bg-dim)]/30 hover:bg-[var(--color-bg-dim)]/50 dark:bg-[var(--color-fg-text)]/30 dark:hover:bg-[var(--color-fg-text)]/50',
             )}
             aria-label={`Go to slide ${index + 1}`}
           />

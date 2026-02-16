@@ -11,7 +11,7 @@ export default function PhotographyPage({
   return (
     <div ref={fancyboxRef}>
       <div className="photography xxs:mx-5 2xl:mx-0 mx-auto">
-        <HeroContent />
+        {HeroContent && <HeroContent />}
         <Gallery images={images} rowHeight={180} />
       </div>
     </div>

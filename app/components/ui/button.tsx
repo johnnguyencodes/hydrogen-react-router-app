@@ -11,6 +11,8 @@ const buttonVariants = cva(
       variant: {
         default:
           'bg-[var(--color-fg-orange)] text-[var(--color-bg-dim)] shadow-xs hover:bg-[var(--color-fg-orange)]/90',
+        banner:
+          'bg-[var(--color-bg-dim)] dark:bg-[var(--color-fg-text)] text-[var(--color-fg-text)] dark:text-[var(--color-bg-dim)]',
         destructive:
           'bg-destructive text-white shadow-xs hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60',
         outline:

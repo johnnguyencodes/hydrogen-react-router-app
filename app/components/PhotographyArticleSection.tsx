@@ -8,7 +8,7 @@ export function PhotographyArticleSection({
 }) {
   const location = useLocation();
   return (
-    <div className="article-posts">
+    <div className="article-posts my-5">
       <div className="mb-1">
         <h2 className="text-3xl font-medium leading tight text-[var(--color-fg-green)]">
           {photographyArticleSectionProps.sectionTitle}
