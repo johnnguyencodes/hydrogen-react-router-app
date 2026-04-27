@@ -11,7 +11,7 @@ export const journal20251113: PageSeoData = {
   publishedAt: '2020-05-10T03:20:10-07:00',
   media: [
     {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-11-13--001--full-frame--nikon-d850--nikkor-35mm-105mm-f35-f45-ais--45mp--iso-1000--f8--1-250s.jpg?v=1766773425',
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-11-13--001--full-frame--nikon-d850--nikkor-35mm-105mm-f35-f45-ais--45mp--iso-1000--f8--1-250s.webp',
       width: 4096,
       height: 2731,
       altText: 'This is the photography page featured image',
@@ -32,7 +32,7 @@ export const journal20251025: PageSeoData = {
   publishedAt: '2020-05-08T03:20:10-07:00',
   media: [
     {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-25--008--full-frame--nikon-d850--sigma-105mm-f28-os-hsm-macro--45mp--iso-64--f8--1-400s.jpg?v=1766773288',
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-25--008--full-frame--nikon-d850--sigma-105mm-f28-os-hsm-macro--45mp--iso-64--f8--1-400s.webp',
       width: 2048,
       height: 1365,
       altText: 'This is the photography page featured image',
@@ -53,7 +53,7 @@ export const journal20251004: PageSeoData = {
   publishedAt: '2020-05-07T03:20:10-07:00',
   media: [
     {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-04--001--full-frame--nikon-f2--nikkor-35mm-105mm-f35-f45-ais--kodak-gold--200--unknown--unknown.jpg?v=1766773425',
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-04--001--full-frame--nikon-f2--nikkor-35mm-105mm-f35-f45-ais--kodak-gold--200--unknown--unknown.webp',
       width: 2048,
       height: 1365,
       altText: 'This is the photography page featured image',
@@ -74,7 +74,7 @@ export const journal20250822: PageSeoData = {
   publishedAt: '2020-05-06T03:20:10-07:00',
   media: [
     {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-08-22--038--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773186',
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-08-22--038--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.webp',
       width: 1365,
       height: 2048,
       altText: 'This is the photography page featured image',

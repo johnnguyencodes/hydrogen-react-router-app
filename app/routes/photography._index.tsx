@@ -62,7 +62,7 @@ export const meta: MetaFunction<typeof loader> = ({data, matches}) => {
 const carouselItems = [
   <div
     key="1"
-    className="relative flex h-[600px] items-end-safe justify-end bg-[linear-gradient(rgba(0,0,0,0.40),rgba(0,0,0,0.40)),url('https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-04--001--full-frame--nikon-f2--nikkor-35mm-105mm-f35-f45-ais--kodak-gold--200--unknown--unknown.jpg?v=1766773425')] bg-cover bg-center text-[var(--color-bg-dim)] dark:text-[var(--color-fg-text)]"
+    className="relative flex h-[600px] items-end-safe justify-end bg-[linear-gradient(rgba(0,0,0,0.40),rgba(0,0,0,0.40)),url('https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-04--001--full-frame--nikon-f2--nikkor-35mm-105mm-f35-f45-ais--kodak-gold--200--unknown--unknown.webp')] bg-cover bg-center text-[var(--color-bg-dim)] dark:text-[var(--color-fg-text)]"
   >
     <div className="z-10 relative bottom-20 right-20 text-end">
       <h1 className="text-5xl font-bold mb-2">The Photography Shelf</h1>
@@ -74,7 +74,7 @@ const carouselItems = [
   </div>,
   <div
     key="2"
-    className="relative flex h-[600px] items-end-safe justify-start bg-[linear-gradient(rgba(0,0,0,0.25),rgba(0,0,0,0.25)),url('https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-25--008--full-frame--nikon-d850--sigma-105mm-f28-os-hsm-macro--45mp--iso-64--f8--1-400s.jpg?v=1766773288')] bg-cover bg-[center_85%] text-[var(--color-bg-dim)] dark:text-[var(--color-fg-text)]"
+    className="relative flex h-[600px] items-end-safe justify-start bg-[linear-gradient(rgba(0,0,0,0.25),rgba(0,0,0,0.25)),url('https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-25--008--full-frame--nikon-d850--sigma-105mm-f28-os-hsm-macro--45mp--iso-64--f8--1-400s.webp')] bg-cover bg-[center_85%] text-[var(--color-bg-dim)] dark:text-[var(--color-fg-text)]"
   >
     <div className="z-10 relative bottom-20 left-20">
       <h1 className="text-5xl font-bold mb-2">The Photography Shelf</h1>
@@ -86,7 +86,7 @@ const carouselItems = [
   </div>,
   <div
     key="3"
-    className="relative flex h-[600px] items-end-safe justify-start bg-[linear-gradient(rgba(0,0,0,0.25),rgba(0,0,0,0.25)),url('https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-08-22--038--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773186')] bg-cover bg-[center_81%] text-[var(--color-bg-dim)] dark:text-[var(--color-fg-text)]"
+    className="relative flex h-[600px] items-end-safe justify-start bg-[linear-gradient(rgba(0,0,0,0.25),rgba(0,0,0,0.25)),url('https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-08-22--038--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.webp')] bg-cover bg-[center_81%] text-[var(--color-bg-dim)] dark:text-[var(--color-fg-text)]"
   >
     <div className="z-10 relative bottom-20 left-20">
       <h1 className="text-5xl font-bold mb-2">The Photography Shelf</h1>
@@ -221,10 +221,12 @@ export default function Photography() {
         autoPlayInterval={15000}
       />
 
-      <h2>Recent images</h2>
+      <p className="text-[var(--color-fg-text)]">Recent images</p>
       <PhotographyPage images={displayedImages} />
       <div className="flex justify-end">
-        <Link to="/photography/photos">See all photos</Link>
+        <Link to="/photography/photos" className="text-[var(--color-fg-text)]">
+          See all photos
+        </Link>
       </div>
       <PhotographyArticleSection
         photographyArticleSectionProps={articleProps}

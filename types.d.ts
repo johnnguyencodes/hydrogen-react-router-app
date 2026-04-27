@@ -178,6 +178,7 @@ declare global {
     width: number;
     height: number;
     sizes?: string;
+    loaderOptions?: ImageProps['loaderOptions'];
   };
 
   type AcquisitionData = {

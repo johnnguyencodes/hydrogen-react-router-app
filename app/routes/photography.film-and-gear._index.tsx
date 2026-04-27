@@ -27,7 +27,7 @@ export const meta: MetaFunction<typeof loader> = ({data, matches}) => {
 const carouselItems = [
   <div
     key="1"
-    className="flex h-96 items-center justify-center bg-[url('https://files.johnnguyen.codes/cdn/shop/files/photography--2025-11-13--001--full-frame--nikon-d850--35mm-105mm-zoom-ais--45mp--iso-1000--f8--1-250s.jpg')] bg-cover bg-center text-[var(--color-fg-text)]"
+    className="flex h-96 items-center justify-center bg-[url('https://files.johnnguyen.codes/cdn/shop/files/photography--2025-11-13--001--full-frame--nikon-d850--35mm-105mm-zoom-ais--45mp--iso-1000--f8--1-250s.webp')] bg-cover bg-center text-[var(--color-fg-text)]"
   >
     <div className="text-center">
       <h1 className="text-5xl font-bold mb-2">The Photography Shelf</h1>
@@ -36,7 +36,7 @@ const carouselItems = [
   </div>,
   <div
     key="2"
-    className="flex h-96 items-center justify-center bg-[url('https://files.johnnguyen.codes/cdn/shop/files/photography--2025-11-13--002--full-frame--nikon-d850--35mm-105mm-zoom-ais--45mp--iso-64--f56--1-3s.jpg')] bg-cover bg-center text-[var(--color-fg-text)]"
+    className="flex h-96 items-center justify-center bg-[url('https://files.johnnguyen.codes/cdn/shop/files/photography--2025-11-13--002--full-frame--nikon-d850--35mm-105mm-zoom-ais--45mp--iso-64--f56--1-3s.webp')] bg-cover bg-center text-[var(--color-fg-text)]"
   >
     <div className="text-center">
       <h2 className="text-5xl font-bold mb-2">Slide 2</h2>
@@ -45,7 +45,7 @@ const carouselItems = [
   </div>,
   <div
     key="3"
-    className="flex h-96 items-center justify-center bg-[url('https://files.johnnguyen.codes/cdn/shop/files/photography--2025-11-13--013--full-frame--nikon-d850--35mm-105mm-zoom-ais--45mp--iso-200--f56--1-3s.jpg')] bg-cover bg-center text-[var(--color-fg-text)]"
+    className="flex h-96 items-center justify-center bg-[url('https://files.johnnguyen.codes/cdn/shop/files/photography--2025-11-13--013--full-frame--nikon-d850--35mm-105mm-zoom-ais--45mp--iso-200--f56--1-3s.webp')] bg-cover bg-center text-[var(--color-fg-text)]"
   >
     <div className="text-center">
       <h2 className="text-5xl font-bold mb-2">Slide 3</h2>

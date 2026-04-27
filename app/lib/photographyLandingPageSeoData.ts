@@ -9,7 +9,7 @@ export const photography: PageSeoData = {
   publishedAt: '2020-05-05T03:20:10-07:00',
   media: [
     {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-05--007--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773187',
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-05--007--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.webp',
       width: 2048,
       height: 1365,
       altText: 'This is the photagraphy home page featured image',
@@ -28,7 +28,7 @@ export const photography: PageSeoData = {
 //   publishedAt: '2020-05-05T03:20:10-07:00',
 //   media: [
 //     {
-//       url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-05--007--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773187',
+//       url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-05--007--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.webp',
 //       width: 2048,
 //       height: 1365,
 //       altText: 'This is the photagraphy film and gear page featured image',
@@ -48,7 +48,7 @@ export const photographyPhotos: PageSeoData = {
   publishedAt: '2020-05-05T03:20:10-07:00',
   media: [
     {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-05--007--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773187',
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-05--007--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.webp',
       width: 2048,
       height: 1365,
       altText: 'This is the photagraphy film and gear page featured image',
@@ -67,7 +67,7 @@ export const photographyPhotos: PageSeoData = {
 //   publishedAt: '2020-05-05T03:20:10-07:00',
 //   media: [
 //     {
-//       url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-05--007--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773187',
+//       url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-05--007--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.webp',
 //       width: 2048,
 //       height: 1365,
 //       altText: 'This is the photagraphy home page featured image',

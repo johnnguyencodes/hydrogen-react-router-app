@@ -29,7 +29,7 @@ const images: PhotographyImageWithMetadata[] = [
   {
     alt: '',
     image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-11-13--013--full-frame--nikon-d850--nikkor-35mm-105mm-f35-f45-ais--45mp--iso-200--f56--1-3s.jpg?v=1766773425',
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-11-13--013--full-frame--nikon-d850--nikkor-35mm-105mm-f35-f45-ais--45mp--iso-200--f56--1-3s.webp',
       width: 4096,
       height: 2731,
     },
@@ -49,7 +49,7 @@ const images: PhotographyImageWithMetadata[] = [
   {
     alt: '',
     image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-11-13--002--full-frame--nikon-d850--nikkor-35mm-105mm-f35-f45-ais--45mp--iso-64--f56--1-3s.jpg?v=1766773425',
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-11-13--002--full-frame--nikon-d850--nikkor-35mm-105mm-f35-f45-ais--45mp--iso-64--f56--1-3s.webp',
       width: 4096,
       height: 2731,
     },
@@ -69,7 +69,7 @@ const images: PhotographyImageWithMetadata[] = [
   {
     alt: '',
     image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-11-13--001--full-frame--nikon-d850--nikkor-35mm-105mm-f35-f45-ais--45mp--iso-1000--f8--1-250s.jpg?v=1766773425',
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-11-13--001--full-frame--nikon-d850--nikkor-35mm-105mm-f35-f45-ais--45mp--iso-1000--f8--1-250s.webp',
       width: 4096,
       height: 2731,
     },
