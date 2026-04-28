@@ -2,7 +2,7 @@ import {useContainerWidth} from './useContainerWidth';
 import {buildLayoutFlat} from './buildLayout';
 import type {Image as ImageInterface, GalleryProps} from './types';
 import * as styles from './styles';
-import {PhotographyImage} from '../PhotographyImage';
+import {PhotographyGridImage} from '../PhotographyGridImage';
 
 export const Gallery = <T extends ImageInterface>({
   images,
@@ -85,14 +85,13 @@ export const Gallery = <T extends ImageInterface>({
                 minHeight: isLastRow ? 'none' : rowHeight,
               }}
             >
-              <PhotographyImage
+              <PhotographyGridImage
                 image={thumbnail}
                 alt=""
                 className="hover:brightness-90 block w-full h-full object-cover"
                 data-fancybox="gallery"
                 width={Math.round(calcWidth)}
                 height={Math.round(calcHeight)}
-                loaderOptions={{format: 'webp'}}
               />
             </div>
           );

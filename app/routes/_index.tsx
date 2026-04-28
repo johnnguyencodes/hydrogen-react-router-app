@@ -61,7 +61,7 @@ export default function Homepage() {
               <u>obsessed</u>
             </i>{' '}
           </span>
-          beginner photographer for the past 300 days.
+          beginner photographer.
         </h1>
         <div className="prose max-w-prose prose-p:text-small">
           <p className="hero-paragraph font-medium leading-tight max-w-prose text-pretty text-[var(--color-fg-text)]">

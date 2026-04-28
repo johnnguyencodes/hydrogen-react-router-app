@@ -26,7 +26,7 @@ export function Header({header, publicStoreDomain}: HeaderProps) {
           className="z-10 ml-5 2xl:ml-0"
           end
         >
-          <strong>{shop.name}</strong>
+          <strong>John Nguyen</strong>
         </NavLink>
         <div className="relative z-10 flex-1">
           <div className="hidden sm:block">

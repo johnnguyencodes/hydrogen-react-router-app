@@ -34,7 +34,6 @@ img {
 }
 
 aside {
-  background: var(--color-light);
   box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
   height: 100vh;
   width: min(var(--aside-width), 100vw);
