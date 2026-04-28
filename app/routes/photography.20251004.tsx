@@ -1,6 +1,6 @@
 import type {LoaderFunctionArgs, MetaFunction} from 'react-router';
 import PhotographyPage from '~/components/PhotographyPage';
-import {article20251004 as seoData} from '~/lib/photographyArticleSeoData';
+import {journal20251004 as seoData} from '~/lib/photographyJournalSeoData';
 import {
   createPhotographyPageMeta,
   loadPhotographyPageData,
@@ -29,7 +29,7 @@ const images: PhotographyImageWithMetadata[] = [
   {
     alt: '',
     image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-05--007--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773187',
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-05--007--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.webp',
       width: 2048,
       height: 1365,
     },
@@ -49,7 +49,7 @@ const images: PhotographyImageWithMetadata[] = [
   {
     alt: '',
     image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-05--006--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773187',
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-05--006--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.webp',
       width: 2048,
       height: 1365,
     },
@@ -69,7 +69,7 @@ const images: PhotographyImageWithMetadata[] = [
   {
     alt: '',
     image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-05--005--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773186',
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-05--005--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.webp',
       width: 1365,
       height: 2048,
     },
@@ -89,7 +89,7 @@ const images: PhotographyImageWithMetadata[] = [
   {
     alt: '',
     image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-05--004--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773184',
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-05--004--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.webp',
       width: 2048,
       height: 1365,
     },
@@ -109,7 +109,7 @@ const images: PhotographyImageWithMetadata[] = [
   {
     alt: '',
     image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-05--003--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773185',
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-05--003--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.webp',
       width: 1365,
       height: 2048,
     },
@@ -129,7 +129,7 @@ const images: PhotographyImageWithMetadata[] = [
   {
     alt: '',
     image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-05--002--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773187',
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-05--002--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.webp',
       width: 1365,
       height: 2048,
     },
@@ -149,7 +149,7 @@ const images: PhotographyImageWithMetadata[] = [
   {
     alt: '',
     image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-05--001--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.jpg?v=1766773186',
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-05--001--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.webp',
       width: 2048,
       height: 1365,
     },
@@ -169,7 +169,7 @@ const images: PhotographyImageWithMetadata[] = [
   {
     alt: '',
     image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-04--007--full-frame--nikon-f2--nikkor-35mm-105mm-f35-f45-ais--kodak-gold--200--unknown--unknown.jpg?v=1766773427',
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-04--007--full-frame--nikon-f2--nikkor-35mm-105mm-f35-f45-ais--kodak-gold--200--unknown--unknown.webp',
       width: 2048,
       height: 1365,
     },
@@ -189,7 +189,7 @@ const images: PhotographyImageWithMetadata[] = [
   {
     alt: '',
     image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-04--006--full-frame--nikon-f2--nikkor-35mm-105mm-f35-f45-ais--kodak-gold--200--unknown--unknown.jpg?v=1766773426',
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-04--006--full-frame--nikon-f2--nikkor-35mm-105mm-f35-f45-ais--kodak-gold--200--unknown--unknown.webp',
       width: 1365,
       height: 2048,
     },
@@ -209,7 +209,7 @@ const images: PhotographyImageWithMetadata[] = [
   {
     alt: '',
     image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-04--005--full-frame--nikon-f2--nikkor-35mm-105mm-f35-f45-ais--kodak-gold--200--unknown--unknown.jpg?v=1766773425',
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-04--005--full-frame--nikon-f2--nikkor-35mm-105mm-f35-f45-ais--kodak-gold--200--unknown--unknown.webp',
       width: 2048,
       height: 1365,
     },
@@ -229,7 +229,7 @@ const images: PhotographyImageWithMetadata[] = [
   {
     alt: '',
     image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-04--004--full-frame--nikon-f2--nikkor-35mm-105mm-f35-f45-ais--kodak-gold--200--unknown--unknown.jpg?v=1766773426',
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-04--004--full-frame--nikon-f2--nikkor-35mm-105mm-f35-f45-ais--kodak-gold--200--unknown--unknown.webp',
       width: 2048,
       height: 1365,
     },
@@ -249,7 +249,7 @@ const images: PhotographyImageWithMetadata[] = [
   {
     alt: '',
     image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-04--003--full-frame--nikon-f2--nikkor-35mm-105mm-f35-f45-ais--kodak-gold--200--unknown--unknown.jpg?v=1766773425',
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-04--003--full-frame--nikon-f2--nikkor-35mm-105mm-f35-f45-ais--kodak-gold--200--unknown--unknown.webp',
       width: 1365,
       height: 2048,
     },
@@ -269,7 +269,7 @@ const images: PhotographyImageWithMetadata[] = [
   {
     alt: '',
     image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-04--002--full-frame--nikon-f2--nikkor-35mm-105mm-f35-f45-ais--kodak-gold--200--unknown--unknown.jpg?v=1766773425',
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-04--002--full-frame--nikon-f2--nikkor-35mm-105mm-f35-f45-ais--kodak-gold--200--unknown--unknown.webp',
       width: 2048,
       height: 1365,
     },
@@ -289,7 +289,7 @@ const images: PhotographyImageWithMetadata[] = [
   {
     alt: '',
     image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-04--001--full-frame--nikon-f2--nikkor-35mm-105mm-f35-f45-ais--kodak-gold--200--unknown--unknown.jpg?v=1766773425',
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-04--001--full-frame--nikon-f2--nikkor-35mm-105mm-f35-f45-ais--kodak-gold--200--unknown--unknown.webp',
       width: 2048,
       height: 1365,
     },

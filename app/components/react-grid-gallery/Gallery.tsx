@@ -92,6 +92,7 @@ export const Gallery = <T extends ImageInterface>({
                 data-fancybox="gallery"
                 width={Math.round(calcWidth)}
                 height={Math.round(calcHeight)}
+                loaderOptions={{format: 'webp'}}
               />
             </div>
           );

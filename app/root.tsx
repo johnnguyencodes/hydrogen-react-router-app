@@ -160,7 +160,7 @@ export function Layout({children}: {children?: React.ReactNode}) {
       <body
         className={`${process.env.NODE_ENV === 'development' ? 'debug-screens' : ''} bg-[var(--color-bg-0)] overflow-x-hidden`}
       >
-        <div className="max-w-[1400px] mx-auto flex flex-col h-screen">
+        <div className="max-w-[1400px] mx-auto flex flex-col h-screen w-full">
           {children}
           <ScrollRestoration nonce={nonce} />
           <Scripts nonce={nonce} />

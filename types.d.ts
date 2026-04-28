@@ -178,6 +178,7 @@ declare global {
     width: number;
     height: number;
     sizes?: string;
+    loaderOptions?: ImageProps['loaderOptions'];
   };
 
   type AcquisitionData = {
@@ -288,6 +289,7 @@ declare global {
     url: string;
     relativeUrlPath: string;
     metaobjectType?: string;
+    tags?: string;
     pageType: string;
     publishedAt: string;
     updatedAt: string;

@@ -29,13 +29,9 @@ function PhotographyHero(): React.JSX.Element {
 export default function Route() {
   const {criticalData} = useLoaderData<typeof loader>();
 
-  console.log('criticalData:', criticalData);
-
   const images = JSON.parse(
     criticalData.metaobject.metaobject.images.value,
   ) as PhotographyImageWithMetadata[];
-
-  console.log('images:', images);
 
   return <PhotographyPage images={images} HeroContent={PhotographyHero} />;
 }

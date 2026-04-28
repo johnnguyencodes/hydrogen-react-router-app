@@ -9,6 +9,7 @@ import HeroCarousel from '~/components/HeroCarousel';
 import {photographyPhotos as pageSeoData} from '~/lib/photographyLandingPageSeoData';
 import {PHOTOGRAPHY_METAOBJECT_QUERY} from '~/lib/photographyPageUtils';
 import PhotographyPage from '~/components/PhotographyPage';
+import {useEffect, useMemo, useState} from 'react';
 
 export async function loader(args: LoaderFunctionArgs) {
   const criticalData = await loadCriticalData(args);
@@ -44,74 +45,43 @@ export const meta: MetaFunction<typeof loader> = ({data, matches}) => {
   return getSeoMeta(rootSeo, pageSeo);
 };
 
-const carouselItems = [
-  <div
-    key="1"
-    className="flex h-96 items-center justify-center bg-[url('https://files.johnnguyen.codes/cdn/shop/files/photography--2025-11-13--001--full-frame--nikon-d850--35mm-105mm-zoom-ais--45mp--iso-1000--f8--1-250s.jpg')] bg-cover bg-center text-[var(--color-fg-text)]"
-  >
-    <div className="text-center">
-      <h1 className="text-5xl font-bold mb-2">The Photography Shelf</h1>
-      <p className="text-lg">Welcome to my page all about my photography</p>
-    </div>
-  </div>,
-  <div
-    key="2"
-    className="flex h-96 items-center justify-center bg-[url('https://files.johnnguyen.codes/cdn/shop/files/photography--2025-11-13--002--full-frame--nikon-d850--35mm-105mm-zoom-ais--45mp--iso-64--f56--1-3s.jpg')] bg-cover bg-center text-[var(--color-fg-text)]"
-  >
-    <div className="text-center">
-      <h2 className="text-5xl font-bold mb-2">Slide 2</h2>
-      <p className="text-lg">Navigate with arrows or dots</p>
-    </div>
-  </div>,
-  <div
-    key="3"
-    className="flex h-96 items-center justify-center bg-[url('https://files.johnnguyen.codes/cdn/shop/files/photography--2025-11-13--013--full-frame--nikon-d850--35mm-105mm-zoom-ais--45mp--iso-200--f56--1-3s.jpg')] bg-cover bg-center text-[var(--color-fg-text)]"
-  >
-    <div className="text-center">
-      <h2 className="text-5xl font-bold mb-2">Slide 3</h2>
-      <p className="text-lg">Smooth transitions included</p>
-    </div>
-  </div>,
-];
-
-function PhotographyHero(): React.JSX.Element {
-  return (
-    <div>
-      <h1>{pageSeoData.title}</h1>
-      <HeroCarousel
-        items={carouselItems}
-        autoPlay={true}
-        autoPlayInterval={15000}
-      />
-    </div>
-  );
-}
-
 export default function Photography() {
   const {criticalData} = useLoaderData<typeof loader>();
+  const [filterStrings, setFilterStrings] = useState<string[]>([]);
+  const [filteredImages, setFilteredImages] = useState<
+    PhotographyImageWithMetadata[]
+  >([]);
 
-  const rawMasterImages = JSON.parse(
-    criticalData.metaobject.metaobject.images.value,
-  ) as RawMasterPhotographyImages;
+  const parsedImages = useMemo<PhotographyImageWithMetadata[]>(() => {
+    const rawMasterImages = JSON.parse(
+      criticalData.metaobject.metaobject.images.value,
+    ) as RawMasterPhotographyImages;
 
-  const parsedImages: PhotographyImageWithMetadata[] = [];
-  const seenUrls = new Set<string>(); // Tracks unique image URLs
+    const images: PhotographyImageWithMetadata[] = [];
+    const seenUrls = new Set<string>();
 
-  for (const categoryKey in rawMasterImages) {
-    const subCategories = rawMasterImages[categoryKey];
+    for (const categoryKey in rawMasterImages) {
+      const subCategories = rawMasterImages[categoryKey];
 
-    for (const subCategoryKey in rawMasterImages[categoryKey]) {
-      const imagesArray = subCategories[subCategoryKey];
+      for (const subCategoryKey in rawMasterImages[categoryKey]) {
+        const imagesArray = subCategories[subCategoryKey];
 
-      for (const item of imagesArray) {
-        // Check if we've already added this image URL
-        if (!seenUrls.has(item.image.url)) {
-          parsedImages.push(item); // Pushes the whole item
-          seenUrls.add(item.image.url); // Marks URL as seen
+        for (const item of imagesArray) {
+          // Check if we've already added this image URL
+          if (!seenUrls.has(item.image.url)) {
+            images.push(item); // Pushes the whole item
+            seenUrls.add(item.image.url); // Marks URL as seen
+          }
         }
       }
     }
-  }
+
+    return images.sort(sortImages);
+  }, [criticalData]);
+
+  useEffect(() => {
+    setFilteredImages(filterImages(parsedImages, filterStrings));
+  }, [parsedImages, filterStrings]);
 
   function sortImages(
     a: PhotographyImageWithMetadata,
@@ -134,7 +104,44 @@ export default function Photography() {
 
   parsedImages.sort(sortImages);
 
+  function toggleFilter(filterString: string) {
+    setFilterStrings((prev) =>
+      prev.includes(filterString)
+        ? prev.filter((f) => f !== filterString)
+        : [...prev, filterString],
+    );
+  }
+
+  function filterImages(
+    images: PhotographyImageWithMetadata[],
+    filterStrings: string[],
+  ) {
+    if (filterStrings.length === 0) return images;
+
+    return images.filter((image) =>
+      filterStrings.some((filter) => image.image.url.includes(filter)),
+    );
+  }
+
+  function PhotographyHero(): React.JSX.Element {
+    return (
+      <div>
+        <p>I have uploaded {parsedImages.length} images so far.</p>
+        <p>
+          Browse them all or use filter by lens, film stocks, formats, or camera
+          bodies!
+        </p>
+        <p>You are now viewing {filteredImages.length} images</p>
+      </div>
+    );
+  }
+
   return (
-    <PhotographyPage images={parsedImages} HeroContent={PhotographyHero} />
+    <div>
+      <button onClick={() => toggleFilter('nikon-d850')}>Nikon d850</button>
+      <button onClick={() => toggleFilter('45mp')}>45mp</button>
+      <p>Filter Strings: {filterStrings}</p>
+      <PhotographyPage images={filteredImages} HeroContent={PhotographyHero} />
+    </div>
   );
 }

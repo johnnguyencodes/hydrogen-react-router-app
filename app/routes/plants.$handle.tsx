@@ -232,9 +232,9 @@ export default function Plant() {
     latestCarouselDateString,
   );
 
-  const additonalDescription = `<p class="p1">(Plant photos taken on ${formattedCarousalImagesDate})`;
+  const additionalDescription = `<p class="p1">(Plant photos taken on ${formattedCarousalImagesDate})`;
   const modifiedProductDescription =
-    product.descriptionHtml + additonalDescription;
+    product.descriptionHtml + additionalDescription;
   const parsedAcquisition = JSON.parse(acquisition) as AcquisitionData;
   const parsedMeasurement = JSON.parse(measurement) as MeasurementDataArray;
   const datePlantAcquired = returnFormattedDate(parsedAcquisition.date);

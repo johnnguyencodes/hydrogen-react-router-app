@@ -44,6 +44,10 @@ body > main {
   transition: none !important; /* Optionally disable transition if causing flicker */
 }
 
+.max-w-prose {
+  max-width: 70ch;
+}
+
 @media (max-width: 768px) {
   .fancybox__dialog .is-horizontal.is-ltr button.f-button.is-arrow.is-prev,
   .fancybox__dialog .is-horizontal.is-ltr button.f-button.is-arrow.is-next {

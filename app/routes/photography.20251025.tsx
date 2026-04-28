@@ -1,6 +1,6 @@
 import type {LoaderFunctionArgs, MetaFunction} from 'react-router';
 import PhotographyPage from '~/components/PhotographyPage';
-import {article20251025 as seoData} from '~/lib/photographyArticleSeoData';
+import {journal20251025 as seoData} from '~/lib/photographyJournalSeoData';
 import {
   createPhotographyPageMeta,
   loadPhotographyPageData,
@@ -29,7 +29,7 @@ const images: PhotographyImageWithMetadata[] = [
   {
     alt: '',
     image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-25--014--full-frame--nikon-d850--sigma-105mm-f28-os-hsm-macro--45mp--iso-400--f8--1-640s.jpg?v=1766773289',
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-25--014--full-frame--nikon-d850--sigma-105mm-f28-os-hsm-macro--45mp--iso-400--f8--1-640s.webp',
       width: 2048,
       height: 1365,
     },
@@ -49,7 +49,7 @@ const images: PhotographyImageWithMetadata[] = [
   {
     alt: '',
     image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-25--013--full-frame--nikon-d850--sigma-105mm-f28-os-hsm-macro--45mp--iso-400--f8--1-640s.jpg?v=1766773289',
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-25--013--full-frame--nikon-d850--sigma-105mm-f28-os-hsm-macro--45mp--iso-400--f8--1-640s.webp',
       width: 2048,
       height: 1365,
     },
@@ -69,7 +69,7 @@ const images: PhotographyImageWithMetadata[] = [
   {
     alt: '',
     image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-25--012--full-frame--nikon-d850--sigma-105mm-f28-os-hsm-macro--45mp--iso-200--f8--1-400s.jpg?v=1766773289',
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-25--012--full-frame--nikon-d850--sigma-105mm-f28-os-hsm-macro--45mp--iso-200--f8--1-400s.webp',
       width: 2048,
       height: 1365,
     },
@@ -89,7 +89,7 @@ const images: PhotographyImageWithMetadata[] = [
   {
     alt: '',
     image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-25--011--full-frame--nikon-d850--nikkor-50mm-f18-ais--45mp--iso-64--f4--1-500s.jpg?v=1766772468',
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-25--011--full-frame--nikon-d850--nikkor-50mm-f18-ais--45mp--iso-64--f4--1-500s.webp',
       width: 2048,
       height: 1365,
     },
@@ -109,7 +109,7 @@ const images: PhotographyImageWithMetadata[] = [
   {
     alt: '',
     image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-25--010--full-frame--nikon-d850--nikkor-50mm-f18-ais--45mp--iso-64--f4--1-800s.jpg?v=1766772467',
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-25--010--full-frame--nikon-d850--nikkor-50mm-f18-ais--45mp--iso-64--f4--1-800s.webp',
       width: 2048,
       height: 1365,
     },
@@ -129,7 +129,7 @@ const images: PhotographyImageWithMetadata[] = [
   {
     alt: '',
     image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-25--009--full-frame--nikon-d850--nikkor-50mm-f18-ais--45mp--iso-64--f4--1-640s.jpg?v=1766772467',
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-25--009--full-frame--nikon-d850--nikkor-50mm-f18-ais--45mp--iso-64--f4--1-640s.webp',
       width: 2048,
       height: 1365,
     },
@@ -149,7 +149,7 @@ const images: PhotographyImageWithMetadata[] = [
   {
     alt: '',
     image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-25--008--full-frame--nikon-d850--sigma-105mm-f28-os-hsm-macro--45mp--iso-64--f8--1-400s.jpg?v=1766773288',
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-25--008--full-frame--nikon-d850--sigma-105mm-f28-os-hsm-macro--45mp--iso-64--f8--1-400s.webp',
       width: 2048,
       height: 1365,
     },
@@ -169,7 +169,7 @@ const images: PhotographyImageWithMetadata[] = [
   {
     alt: '',
     image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-25--007--full-frame--nikon-d850--sigma-105mm-f28-os-hsm-macro--45mp--iso-1000--f8--1-1600s.jpg?v=1766773289',
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-25--007--full-frame--nikon-d850--sigma-105mm-f28-os-hsm-macro--45mp--iso-1000--f8--1-1600s.webp',
       width: 2048,
       height: 1365,
     },
@@ -189,7 +189,7 @@ const images: PhotographyImageWithMetadata[] = [
   {
     alt: '',
     image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-25--006--full-frame--nikon-d850--sigma-105mm-f28-os-hsm-macro--45mp--iso-200--f8--1-100s.jpg?v=1766773290',
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-25--006--full-frame--nikon-d850--sigma-105mm-f28-os-hsm-macro--45mp--iso-200--f8--1-100s.webp',
       width: 2048,
       height: 1365,
     },
@@ -209,7 +209,7 @@ const images: PhotographyImageWithMetadata[] = [
   {
     alt: '',
     image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-25--005--full-frame--nikon-d850--sigma-105mm-f28-os-hsm-macro--45mp--iso-400--f8--1-800s.jpg?v=1766773288',
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-25--005--full-frame--nikon-d850--sigma-105mm-f28-os-hsm-macro--45mp--iso-400--f8--1-800s.webp',
       width: 2048,
       height: 1520,
     },
@@ -229,7 +229,7 @@ const images: PhotographyImageWithMetadata[] = [
   {
     alt: '',
     image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-25--004--full-frame--nikon-d850--sigma-105mm-f28-os-hsm-macro--45mp--iso-64--f8--1-50s.jpg?v=1766773289',
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-25--004--full-frame--nikon-d850--sigma-105mm-f28-os-hsm-macro--45mp--iso-64--f8--1-50s.webp',
       width: 2048,
       height: 1365,
     },
@@ -249,7 +249,7 @@ const images: PhotographyImageWithMetadata[] = [
   {
     alt: '',
     image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-25--003--full-frame--nikon-d850--sigma-105mm-f28-os-hsm-macro--45mp--iso-64--f8--1-30s.jpg?v=1766773289',
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-25--003--full-frame--nikon-d850--sigma-105mm-f28-os-hsm-macro--45mp--iso-64--f8--1-30s.webp',
       width: 2048,
       height: 1365,
     },
@@ -269,7 +269,7 @@ const images: PhotographyImageWithMetadata[] = [
   {
     alt: '',
     image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-25--002--full-frame--nikon-d850--nikkor-28mm-f28-ais--45mp--iso-400--f8--1-250s.jpg?v=1766772583',
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-25--002--full-frame--nikon-d850--nikkor-28mm-f28-ais--45mp--iso-400--f8--1-250s.webp',
       width: 2048,
       height: 1365,
     },
@@ -289,7 +289,7 @@ const images: PhotographyImageWithMetadata[] = [
   {
     alt: '',
     image: {
-      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-25--001--full-frame--nikon-d850--sigma-105mm-f28-os-hsm-macro--45mp--iso-64--f8--1-30s.jpg?v=1766773289',
+      url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-25--001--full-frame--nikon-d850--sigma-105mm-f28-os-hsm-macro--45mp--iso-64--f8--1-30s.webp',
       width: 2048,
       height: 1365,
     },
