@@ -59,14 +59,18 @@ export function Aside({
       role="dialog"
     >
       <button className="close-outside" onClick={close} />
-      <aside>
-        <header>
+      <aside className="bg-[var(--color-bg-5)]">
+        <header className="bg-[var(--color-bg-5)]">
           <h3>{heading}</h3>
-          <button className="close reset" onClick={close} aria-label="Close">
+          <button
+            className="close reset text-[var(--color-fg-text)]"
+            onClick={close}
+            aria-label="Close"
+          >
             &times;
           </button>
         </header>
-        <main>{children}</main>
+        <main className="bg-[var(--color-bg-5)]">{children}</main>
       </aside>
     </div>
   );

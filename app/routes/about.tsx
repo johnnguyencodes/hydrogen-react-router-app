@@ -35,121 +35,13 @@ export default function About() {
     right: 0,
   };
 
-  // Masonry gallery
-  const images: PhotographyMasonryGalleryImage[] = [
-    {
-      alt: 'image 1',
-      className: 'row-span-7 col-span-5',
-      image: {
-        url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-09-10--073--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.webp',
-        width: 2048,
-        height: 1365,
-      },
-      meta: {
-        fileType: 'photography',
-        date: '2025-09-10',
-        index: '073',
-        filmFormat: 'half-frame',
-        cameraBody: 'pentax-17',
-        lens: 'pentax-25mm-f35-hd-hf',
-        filmStockBrand: 'fujifilm',
-        isoNumber: '400',
-        aperture: 'unknown',
-        shutterspeed: 'unknown',
-      },
-    },
-    {
-      alt: 'image 2',
-      className: 'row-span-20 col-span-7',
-      image: {
-        url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-09-10--072--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.webp',
-        width: 1365,
-        height: 2048,
-      },
-      meta: {
-        fileType: 'photography',
-        date: '2025-09-10',
-        index: '072',
-        filmFormat: 'half-frame',
-        cameraBody: 'pentax-17',
-        lens: 'pentax-25mm-f35-hd-hf',
-        filmStockBrand: 'fujifilm',
-        isoNumber: '400',
-        aperture: 'unknown',
-        shutterspeed: 'unknown',
-      },
-    },
-    {
-      alt: 'image 3',
-      className: 'row-span-7 col-span-5',
-      image: {
-        url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-09-10--071--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.webp',
-        width: 1365,
-        height: 2048,
-      },
-      meta: {
-        fileType: 'photography',
-        date: '2025-09-10',
-        index: '071',
-        filmFormat: 'half-frame',
-        cameraBody: 'pentax-17',
-        lens: 'pentax-25mm-f35-hd-hf',
-        filmStockBrand: 'fujifilm',
-        isoNumber: '400',
-        aperture: 'unknown',
-        shutterspeed: 'unknown',
-      },
-    },
-    {
-      alt: '',
-      className: 'row-span-12 col-span-5',
-      image: {
-        url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-09-10--070--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.webp',
-        width: 1365,
-        height: 2048,
-      },
-      meta: {
-        fileType: 'photography',
-        date: '2025-09-10',
-        index: '070',
-        filmFormat: 'half-frame',
-        cameraBody: 'pentax-17',
-        lens: 'pentax-25mm-f35-hd-hf',
-        filmStockBrand: 'fujifilm',
-        isoNumber: '400',
-        aperture: 'unknown',
-        shutterspeed: 'unknown',
-      },
-    },
-    {
-      alt: '',
-      className: 'row-span-6 col-span-7',
-      image: {
-        url: 'https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-09-10--068--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.webp',
-        width: 1365,
-        height: 2048,
-      },
-      meta: {
-        fileType: 'photography',
-        date: '2025-09-10',
-        index: '068',
-        filmFormat: 'half-frame',
-        cameraBody: 'pentax-17',
-        lens: 'pentax-25mm-f35-hd-hf',
-        filmStockBrand: 'fujifilm',
-        isoNumber: '400',
-        aperture: 'unknown',
-        shutterspeed: 'unknown',
-      },
-    },
-  ];
-
   return (
     <div className="about-page xxs:mx-5 2xl:mx-0">
-      <p>This is the about page</p>
-      <p>This is the flowbite button</p>
+      <p>
+        I am the Web Operations & eCommerce manager at a Biotech Research
+        Company
+      </p>
       <Button> Hello </Button>
-      <MasonryGallery images={images} />
       <p>
         Donec cursus ipsum quis felis imperdiet pretium. Maecenas ut mauris
         pellentesque, blandit nunc ut, facilisis enim. Fusce cursus rhoncus
