@@ -158,9 +158,9 @@ export function Layout({children}: {children?: React.ReactNode}) {
         <Links />
       </head>
       <body
-        className={`${process.env.NODE_ENV === 'development' ? 'debug-screens' : ''} bg-[var(--color-bg-0)] overflow-x-hidden`}
+        className={`${process.env.NODE_ENV === 'development' ? 'debug-screens' : ''} bg-[var(--color-bg-0)]`}
       >
-        <div className="max-w-[1400px] mx-auto flex flex-col h-screen w-full">
+        <div className="max-w-[1400px] mx-auto flex flex-col min-h-screen w-full">
           {children}
           <ScrollRestoration nonce={nonce} />
           <Scripts nonce={nonce} />

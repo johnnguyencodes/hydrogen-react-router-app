@@ -10,7 +10,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          'bg-[var(--color-fg-orange)] text-[var(--color-bg-dim)] shadow-xs hover:bg-[var(--color-fg-orange)]/90 hover:cursor-pointer',
+          'bg-[var(--color-fg-orange)] text-[var(--color-bg-dim)] shadow-xs hover:bg-[var(--color-fg-orange)]/70 hover:cursor-pointer',
         banner:
           'mt-3 bg-[var(--color-bg-dim)] dark:bg-[var(--color-fg-text)] border-[var(--color-bg-dim)] dark:border-[var(--color-fg-text)] border-2 text-[var(--color-fg-text)] dark:text-[var(--color-bg-dim)] hover:cursor-pointer hover:bg-[var(--color-fg-text)] hover:text-[var(--color-bg-dim)] dark:hover:bg-[var(--color-bg-dim)] dark:hover:text-[var(--color-fg-text)]',
         destructive:
