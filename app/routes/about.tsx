@@ -38,8 +38,8 @@ export default function About() {
   return (
     <div className="about-page xxs:mx-5 2xl:mx-0">
       <p>
-        I am the Web Operations & eCommerce manager at a Biotech Research
-        Company
+        I am the Web Operations & eCommerce platform manager at a Biotech
+        Research Company
       </p>
       <Button> Hello </Button>
       <p>

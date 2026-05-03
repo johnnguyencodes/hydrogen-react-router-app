@@ -17,19 +17,19 @@ type Viewport = 'desktop' | 'mobile';
 export function Header({header, publicStoreDomain}: HeaderProps) {
   const {shop, menu} = header;
   return (
-    <div>
-      <header className="header relative bg-[var(--color-bg-5)] text-[var(--color-fg-text)] before:content-[''] before:absolute before:inset-0 before:-mx-[calc((100vw-100%)/2)] before:w-screen before:bg-[var(--color-bg-5)] flex items-center h-16 text-base w-full">
+    <div className="sticky top-0 z-50">
+      <header className="header top-0 z-50 bg-[var(--color-bg-5)] text-[var(--color-fg-text)] before:content-[''] before:absolute before:inset-0 before:-mx-[calc((100vw-100%)/2)] before:w-screen before:bg-[var(--color-bg-5)] flex items-center h-16 text-base w-full">
         <NavLink
           prefetch="intent"
           to="/"
           style={activeLinkStyle}
-          className="z-10 ml-5 2xl:ml-0"
+          className="z-10 ml-5 2xl:ml-0 font-semibold"
           end
         >
-          <strong>John Nguyen</strong>
+          John Nguyen
         </NavLink>
         <div className="relative z-10 flex-1">
-          <div className="hidden sm:block">
+          <div className="hidden md:block">
             <HeaderMenu
               menu={menu}
               viewport="desktop"
@@ -38,7 +38,7 @@ export function Header({header, publicStoreDomain}: HeaderProps) {
             />
           </div>
         </div>
-        <div className="flex sm:hidden z-50 items-center mr-5">
+        <div className="md:hidden z-50 m-0 p-0 mr-5">
           <HeaderMenuMobileToggle />
         </div>
       </header>
@@ -57,7 +57,13 @@ export function HeaderMenu({
   viewport: Viewport;
   publicStoreDomain: HeaderProps['publicStoreDomain'];
 }) {
-  const headerMenuClassName = `header-menu-${viewport} flex items-center justify-between w-full`;
+  const headerMenuClassName = `header-menu-${viewport} flex items-center w-full`;
+  const headerMenuDivider =
+    viewport === 'mobile' ? (
+      <hr className="border border-[var(--color-fg-text)] w-25" />
+    ) : (
+      <span className="mx-2">|</span>
+    );
   const {close} = useAside();
 
   const loadFromLocalStorage = (key: string): string | null => {
@@ -102,7 +108,9 @@ export function HeaderMenu({
   }
   return (
     <nav className={headerMenuClassName} role="navigation">
-      <div className="flex items-center mx-auto">
+      <div
+        className={`flex ${viewport === 'mobile' ? 'flex-col gap-4 items-end ml-auto' : 'items-center ml-auto mr-4'} `}
+      >
         {HEADER_MENU_1.items.map((item) => {
           if (!item.url) return null;
 
@@ -129,7 +137,8 @@ export function HeaderMenu({
             </NavLink>
           );
         })}
-        <span className="mx-2">|</span>
+        {/*
+        <span className="mx-2">{headerMenuDivider}</span>
         {HEADER_MENU_2.items.map((item) => {
           if (!item.url) return null;
 
@@ -156,7 +165,8 @@ export function HeaderMenu({
             </NavLink>
           );
         })}
-        <span className="mx-2">|</span>
+        <span className="mx-2">{headerMenuDivider}</span>
+        */}
         {HEADER_MENU_3.items.map((item) => {
           if (!item.url) return null;
 
@@ -183,19 +193,19 @@ export function HeaderMenu({
             </NavLink>
           );
         })}
+        <Button
+          onClick={toggleDarkMode}
+          className="w-7 h-7 ml-5 mr-2 md:mr-0"
+          data-testid="themeToggle"
+          variant="default"
+        >
+          {isDarkMode ? (
+            <MoonStar className="h-4 w-4"></MoonStar>
+          ) : (
+            <Sun className="h-4 w-4"></Sun>
+          )}
+        </Button>
       </div>
-      <Button
-        onClick={toggleDarkMode}
-        className="w-7 h-7 mr-5 2xl:mr-0"
-        data-testid="themeToggle"
-        variant="default"
-      >
-        {isDarkMode ? (
-          <MoonStar className="h-4 w-4"></MoonStar>
-        ) : (
-          <Sun className="h-4 w-4"></Sun>
-        )}
-      </Button>
     </nav>
   );
 }
@@ -204,10 +214,11 @@ function HeaderMenuMobileToggle() {
   const {open} = useAside();
   return (
     <nav role="navigation">
-      <button onClick={() => open('mobile')}>
-        <h3>
-          <AlignJustify />
-        </h3>
+      <button
+        className="hover:cursor-pointer flex items-center justify-center"
+        onClick={() => open('mobile')}
+      >
+        <AlignJustify />
       </button>
     </nav>
   );

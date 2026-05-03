@@ -12,7 +12,7 @@ export function PlantPageTitle({productTitle}: PlantPageTitleProps) {
           <Share />
         </Button>
       </div>
-      <h1 className="text-3xl font-medium leading-tight max-w-[30ch] text-balance text-[var(--color-fg-green)]">
+      <h1 className="text-3xl mt-4 font-medium leading-tight max-w-[30ch] text-balance text-[var(--color-fg-green)]">
         {productTitle}
       </h1>
     </div>

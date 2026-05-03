@@ -52,22 +52,6 @@ aside header {
   padding: 0 20px;
 }
 
-aside header h3 {
-  margin: 0;
-}
-
-aside header .close {
-  font-weight: bold;
-  opacity: 0.8;
-  text-decoration: none;
-  transition: all 200ms;
-  width: 20px;
-}
-
-aside header .close:hover {
-  opacity: 1;
-}
-
 aside header h2 {
   margin-bottom: 0.6rem;
   margin-top: 0;
@@ -130,6 +114,7 @@ aside li {
   opacity: 1;
   pointer-events: auto;
   visibility: visible;
+  z-index: 1000;
 }
 /* reveal aside */
 .overlay.expanded aside {
@@ -139,7 +124,6 @@ aside li {
 button.reset {
   border: 0;
   background: inherit;
-  font-size: inherit;
 }
 
 button.reset > * {
@@ -152,7 +136,6 @@ button.reset:not(:has(> *)) {
 }
 
 button.reset:hover:not(:has(> *)) {
-  text-decoration: underline;
   cursor: pointer;
 }
 
@@ -166,7 +149,6 @@ button.reset:hover:not(:has(> *)) {
   background: #fff;
   display: flex;
   height: var(--header-height);
-  padding: 0 1rem;
   position: sticky;
   top: 0;
   z-index: 1;
@@ -190,7 +172,6 @@ button.reset:hover:not(:has(> *)) {
   @media (min-width: 45em) {
     display: flex;
     grid-gap: 1rem;
-    margin-left: 3rem;
   }
 }
 

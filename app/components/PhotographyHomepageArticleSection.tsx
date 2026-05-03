@@ -1,7 +1,7 @@
 import {Image} from '@shopify/hydrogen';
 import {Link, useLocation} from 'react-router';
 
-export function PhotographyArticleSection({
+export function PhotographyHomepageArticleSection({
   photographyArticleSectionProps,
 }: {
   photographyArticleSectionProps: PhotographyArticleSectionProps;
@@ -9,14 +9,6 @@ export function PhotographyArticleSection({
   const location = useLocation();
   return (
     <div className="article-posts my-5">
-      <div className="mb-1">
-        <h2 className="text-3xl font-medium leading tight text-[var(--color-fg-green)]">
-          {photographyArticleSectionProps.sectionTitle}
-        </h2>
-        <p className="text-[var(--color-fg-text)] py-1">
-          {photographyArticleSectionProps.sectionDescription}
-        </p>
-      </div>
       <div className="w-full auto-rows-fr columns-1 md:columns-2 lg:columns-3 gap-3 space-y-3">
         {photographyArticleSectionProps.pageSeoDataArray.map(
           (post: PageSeoData) => {

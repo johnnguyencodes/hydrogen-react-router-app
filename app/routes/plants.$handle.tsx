@@ -245,7 +245,7 @@ export default function Plant() {
    */
 
   return (
-    <div className="plant-page xxs:mx-5 2xl:mx-0 mt-4" ref={fancyboxRef}>
+    <div className="plant-page xxs:mx-5 2xl:mx-0" ref={fancyboxRef}>
       <div className="grid lg:grid-cols-[1fr_440px] lg:grid-rows-[min-content_1fr] gap-5 gap-x-10 relative">
         {/* Render core product info immediately */}
         <PlantPageTitle productTitle={product.title} />

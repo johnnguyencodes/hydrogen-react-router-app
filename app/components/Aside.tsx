@@ -54,7 +54,7 @@ export function Aside({
 
   return (
     <div
-      aria-modal
+      aria-modal="true"
       className={`overlay ${expanded ? 'expanded' : ''}`}
       role="dialog"
     >
@@ -63,7 +63,7 @@ export function Aside({
         <header className="bg-[var(--color-bg-5)]">
           <h3>{heading}</h3>
           <button
-            className="close reset text-[var(--color-fg-text)]"
+            className="close reset text-[var(--color-fg-text)] text-3xl hover:!opacity-100"
             onClick={close}
             aria-label="Close"
           >
