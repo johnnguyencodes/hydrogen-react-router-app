@@ -4,7 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project overview
 
-A Shopify Hydrogen storefront ("Plants") built on React Router 7, deployed to Shopify Oxygen. It's a combined e-commerce + personal photography/journal site: product/collection/cart/account routes alongside `photography.*`, `plants.blog.*`, `about`, `trails`, and `web-dev` content routes.
+A Shopify Hydrogen storefront ("Plants") built on React Router 7, deployed to Shopify Oxygen. It's a personal photography/plant journal site: product/collection/cart/account routes alongside `photography.*`, `plants.blog.*`, `about`, `trails`, and `web-dev` content routes.
+
+Currently, the product, cart, and account routes are not being actively worked on and are not displayed in the website's menu in the header.
 
 ## Commands
 
@@ -37,7 +39,9 @@ Run `npm run codegen` after adding or editing any GraphQL query/mutation/fragmen
 
 **Photography section**: image galleries use `@fancyapps/ui` (Fancybox) via `app/lib/useFancybox.tsx` / `app/lib/fancyboxOptions.ts`, plus a masonry grid (`MasonryGallery`/`MasonryGalleryImage`) and `react-grid-gallery` (vendored under `app/components/react-grid-gallery/`). Per-page-type SEO metadata is centralized in dedicated `app/lib/photography*SeoData.ts` files (camera body, film format, film stock, journal, landing page, lens) rather than inlined per-route.
 
-**Sessions/cart**: custom session handling in `app/lib/session.ts` (`AppSession`), wired into the Hydrogen context in `app/lib/context.ts`. Cart uses a custom `CART_QUERY_FRAGMENT` from `app/lib/fragments.ts`.
+**Plants section**: each plant is modeled as a Shopify product (`plants.$handle.tsx`), with plant-specific data stored in `plant.*` metafields (`images`, `acquisition`, `measurement`, `watering-frequency`, `llifle-database-link`) rather than product options/variants — see the metafield JSON shape documented inline in the route's `loader`. A per-plant `journal` metafield holds a JSON array of dated entries, deferred-loaded and rendered via `PlantPageJournalComponent`/`JournalEntry`. `app/lib/plantPageUtils.ts` has the shared helpers for parsing metafields and deriving the latest carousel images/date. Plant care/how-to content lives in static `plants.blog.*` routes (soil, fertilizer-and-watering, plant-shelf-setup-and-care, recommended-sellers, knowledge-center), distinct from the photography journal.
+
+**Sessions/cart**: custom session handling in `app/lib/session.ts` (`AppSession`), wired into the Hydrogen context in `app/lib/context.ts`. Cart uses a custom `CART_QUERY_FRAGMENT` from `app/lib/fragments.ts`. However, the cart route is not being actively developed at the moment. E-commerce functionality will need to be turned off, although in the future it may be turned on again if the store owner wishes to sell his photography prints through the website.
 
 ## Environment
 
