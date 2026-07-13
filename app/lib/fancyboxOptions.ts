@@ -29,49 +29,46 @@ function pickWidthForViewport(): number {
 
 export const fancyboxOptions = {
   on: {
-    // Fancybox only builds/lazy-loads slides near the current index (its
-    // own `Lazyload.preload` just widens that window, it can't eagerly
-    // fetch the whole gallery). Warm the browser's HTTP cache for every
-    // image as soon as the gallery opens so swiping is served from cache
-    // instead of waiting on a fresh request. Prefetch the same
-    // viewport-appropriate size the modal `<img>` will actually request,
-    // not the raw original, so this doesn't undo the responsive sizing.
+    // Fires before Carousel builds each slide's <img>, so mutating the
+    // slide objects here (rather than the DOM later) is race-free: the
+    // Zoomable plugin reads `srcset`/`sizes` straight off the slide when
+    // it constructs the modal image the first and only time.
+    //
+    // This also warms the browser's HTTP cache for every image as soon as
+    // the gallery opens (Fancybox itself only builds/lazy-loads slides near
+    // the current index) so swiping is served from cache instead of
+    // waiting on a fresh request — using the same viewport-appropriate
+    // size the modal <img> will actually request, not the raw original.
     initSlides: (_fb, slides) => {
       const width = pickWidthForViewport();
       for (const slide of slides) {
-        if (slide.src) {
-          const img = new Image();
-          img.src = buildResponsiveImageUrl(slide.src, width);
-        }
+        if (!slide.src) continue;
+
+        slide.srcset = buildResponsiveSrcSet(slide.src);
+        slide.sizes = '100vw';
+
+        const img = new Image();
+        img.src = buildResponsiveImageUrl(slide.src, width);
       }
     },
   },
   placeFocusBack: false,
   Carousel: {
     on: {
-      // Fires whenever slides are (re)rendered/positioned, giving us
-      // direct access to each slide's DOM element and its raw `src`.
+      // Fires whenever slides are (re)rendered/positioned. Only used for
+      // loading hints here — the responsive srcset/sizes are already set
+      // on the slide objects above.
       render: (_carousel, slides) => {
         for (const slide of slides) {
           const img = slide.el?.querySelector(
             'img, picture img',
           ) as HTMLImageElement | null;
-          if (!img || !slide.src) continue;
+          if (!img) continue;
 
           img.loading = 'eager'; // don’t lazy the modal image
           // @ts-ignore – new attribute in modern browsers
           img.fetchPriority = 'high'; // promote in Chromium
           img.decoding = 'sync'; // decode sooner
-
-          if (!img.dataset.responsiveApplied) {
-            img.dataset.responsiveApplied = 'true';
-            img.sizes = '100vw';
-            img.srcset = buildResponsiveSrcSet(slide.src);
-            img.src = buildResponsiveImageUrl(
-              slide.src,
-              pickWidthForViewport(),
-            );
-          }
         }
       },
     },
