@@ -17,7 +17,6 @@ export function PhotographyGridImage({
       <a
         data-fancybox="gallery"
         href={image.image.url}
-        data-sizes="100vw"
         data-lazy-src={image.image.url}
       >
         <Image

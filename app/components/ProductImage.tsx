@@ -17,7 +17,6 @@ export function ProductImage({
       <a
         data-fancybox="gallery"
         href={image.url}
-        data-sizes="100vw"
         data-lazy-src={image.url}
       >
         <Image
