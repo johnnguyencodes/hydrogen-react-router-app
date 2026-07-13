@@ -17,7 +17,6 @@ export function PhotographyGridImage({
       <a
         data-fancybox="gallery"
         href={image.image.url}
-        data-sizes="100vw"
         data-lazy-src={image.image.url}
       >
         <Image
@@ -26,8 +25,7 @@ export function PhotographyGridImage({
           aspectRatio={`${width} / ${height}`}
           data={image.image}
           className={(clsx('w-full h-full object-cover'), className)}
-          height={height}
-          width={width}
+          sizes={`${width}px`}
           loading="lazy"
         ></Image>
       </a>
