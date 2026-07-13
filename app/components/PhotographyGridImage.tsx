@@ -26,8 +26,7 @@ export function PhotographyGridImage({
           aspectRatio={`${width} / ${height}`}
           data={image.image}
           className={(clsx('w-full h-full object-cover'), className)}
-          height={height}
-          width={width}
+          sizes={`${width}px`}
           loading="lazy"
         ></Image>
       </a>
