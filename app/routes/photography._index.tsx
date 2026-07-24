@@ -4,9 +4,7 @@ import {
   type LoaderFunctionArgs,
   type MetaFunction,
 } from 'react-router';
-import type {Route} from './+types/photography._index';
-import {formatTimeStampToMDY} from '~/lib/plantPageUtils';
-import {getSeoMeta, Image} from '@shopify/hydrogen';
+import {getSeoMeta} from '@shopify/hydrogen';
 import {PhotographyArticleSection} from '~/components/PhotographyArticleSection';
 import {photographyPhotos as pageSeoData} from '~/lib/photographyLandingPageSeoData';
 import {photographyJournalSeoData} from '~/lib/photographyJournalSeoData';
@@ -14,15 +12,10 @@ import {photographyJournalSeoData} from '~/lib/photographyJournalSeoData';
 // import {photographyFilmStockSeoData} from '~/lib/photographyFilmStockSeoData';
 // import {photographyFilmFormatSeoData} from '~/lib/photographyFilmFormatSeoData';
 // import {photographyCameraBodySeoData} from '~/lib/photographyCameraBodySeoData';
-import {photographyLandingPageSeoData} from '~/lib/photographyLandingPageSeoData';
-import {Gallery} from '../components/react-grid-gallery/';
-import {fancyboxOptions} from '~/lib/fancyboxOptions';
-import useFancybox from '~/lib/useFancybox';
 import {PHOTOGRAPHY_METAOBJECT_QUERY} from '~/lib/photographyPageUtils';
 
 import HeroCarousel from '~/components/HeroCarousel';
 import PhotographyPage from '~/components/PhotographyPage';
-import {useMemo} from 'react';
 import {Button} from '~/components/ui/button';
 
 export async function loader(args: LoaderFunctionArgs) {
@@ -66,7 +59,7 @@ const carouselItems = [
   >
     <div className="z-10 relative bottom-20 right-20 text-end">
       <h1 className="text-5xl font-bold mb-2">The Photography Shelf</h1>
-      <p className="text-lg">Welcome to my page all about my photographyyyyy</p>
+      <p className="text-lg">Welcome to my page all about my photography</p>
       <Link to="/photography/20251004">
         <Button variant="banner">Read more</Button>
       </Link>
@@ -78,7 +71,7 @@ const carouselItems = [
   >
     <div className="z-10 relative bottom-20 left-20">
       <h1 className="text-5xl font-bold mb-2">The Photography Shelf</h1>
-      <p className="text-lg">Welcome to my page all about my photographyyyyy</p>
+      <p className="text-lg">Welcome to my page all about my photography</p>
       <Link to="/photography/20251025">
         <Button variant="banner">Read more</Button>
       </Link>
@@ -90,8 +83,8 @@ const carouselItems = [
   >
     <div className="z-10 relative bottom-20 left-20">
       <h1 className="text-5xl font-bold mb-2">The Photography Shelf</h1>
-      <p className="text-lg">Welcome to my page all about my photographyyyyy</p>
-      <Link to="/photography/20251025">
+      <p className="text-lg">Welcome to my page all about my photography</p>
+      <Link to="/photography/20250822">
         <Button variant="banner">Read more</Button>
       </Link>
     </div>
@@ -221,10 +214,15 @@ export default function Photography() {
         autoPlayInterval={15000}
       />
 
-      <p className="text-[var(--color-fg-text)]">Recent images</p>
+      <h2 className="text-3xl font-medium leading-tight text-[var(--color-fg-green)]">
+        Recent images
+      </h2>
       <PhotographyPage images={displayedImages} />
       <div className="flex justify-end">
-        <Link to="/photography/photos" className="text-[var(--color-fg-text)]">
+        <Link
+          to="/photography/photos"
+          className="text-[var(--color-fg-text)] text-sm"
+        >
           See all photos
         </Link>
       </div>

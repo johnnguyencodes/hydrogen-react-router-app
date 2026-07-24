@@ -137,7 +137,7 @@ export default function Photography() {
   }
 
   return (
-    <div>
+    <div className="xxs:mx-5 2xl:mx-0">
       <button onClick={() => toggleFilter('nikon-d850')}>Nikon d850</button>
       <button onClick={() => toggleFilter('45mp')}>45mp</button>
       <p>Filter Strings: {filterStrings}</p>

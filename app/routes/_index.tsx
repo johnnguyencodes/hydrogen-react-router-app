@@ -83,7 +83,6 @@ async function loadCriticalData({context}: LoaderFunctionArgs) {
 
 export default function Homepage() {
   const data = useLoaderData<typeof loader>();
-  console.log('data:', data);
   return (
     <div className="home-page xxs:mx-5 2xl:mx-0 mt-4">
       <header className="hero rounded-md text-base lg:top-4">
@@ -134,7 +133,7 @@ export default function Homepage() {
             </div>
           </div>
         </section>
-        <section>
+        <section className="my-5">
           <h2 className="text-3xl font-medium leading-tight text-[var(--color-fg-green)]">
             Plants
           </h2>
