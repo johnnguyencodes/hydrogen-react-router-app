@@ -7,7 +7,7 @@ export function BlogPostSection() {
   return (
     <div className="plant-blog-posts 2xl:mb-16">
       <div className="mb-5">
-        <h2 className="text-3xl font-medium leading tight text-[var(--color-fg-green)]">
+        <h2 className="text-3xl font-medium leading-tight text-[var(--color-fg-green)]">
           Plant Knowledge Center
         </h2>
         <p className="text-[var(--color-fg-text)] py-1">
@@ -18,7 +18,7 @@ export function BlogPostSection() {
         {plantBlogPostSeo.map((blogPost, index) =>
           index === 0 ? (
             <div className="col-span-1" key={blogPost.relativeUrlPath}>
-              <div className="rounded-md bg-[var(--color-bg-1)] overflow-hidden flex-shrink-0 w-full p-2">
+              <div className="rounded-md bg-[var(--color-bg-2)] overflow-hidden flex-shrink-0 w-full p-2">
                 <Link
                   className="featured-product"
                   to={`${blogPost.relativeUrlPath}`}
@@ -30,7 +30,7 @@ export function BlogPostSection() {
                       sizes="(min-width: 45em) 20vw, 50vw"
                     />
                     <div className="pt-2">
-                      <h4 className="text-2xl font-medium text-[var(--color-fg-green)]">
+                      <h4 className="text-xl font-medium text-[var(--color-fg-green)]">
                         {blogPost.title}
                       </h4>
                       <div className="text-[var(--color-fg-text)] text-lg">
@@ -63,7 +63,7 @@ export function BlogPostSection() {
                         />
                       </div>
                       <div className="col-span-3 p-2">
-                        <h4 className="text-2xl font-medium text-[var(--color-fg-green)]">
+                        <h4 className="text-xl font-medium text-[var(--color-fg-green)]">
                           {blogPost.title}
                         </h4>
                         <div className="text-[var(--color-fg-text)] text-lg">

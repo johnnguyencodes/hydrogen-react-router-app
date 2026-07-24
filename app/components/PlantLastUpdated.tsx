@@ -1,17 +1,17 @@
 import {Suspense} from 'react';
 import {Await, Link} from 'react-router';
-import type {RecommendedProductsQuery} from 'storefrontapi.generated';
+import type {FeaturedProductsQuery} from 'storefrontapi.generated';
 import {PlantCard} from './PlantCard';
 
 export function PlantLastUpdated({
   products,
 }: {
-  products: Promise<RecommendedProductsQuery | null>;
+  products: Promise<FeaturedProductsQuery | null>;
 }) {
   return (
     <div className="featured-products 2xl:mb-16">
       <div className="flex flex-row mb-5 justify-between content-between">
-        <h2 className="text-3xl font-medium leading tight text-[var(--color-fg-green)]">
+        <h2 className="text-3xl font-medium leading-tight text-[var(--color-fg-green)]">
           Featured Plants
         </h2>
         <Link

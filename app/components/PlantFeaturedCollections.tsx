@@ -12,7 +12,7 @@ export function PlantFeaturedCollections({
   );
   return (
     <div className="2xl:mb-16">
-      <h2 className="text-3xl font-medium leading tight text-[var(--color-fg-green)]">
+      <h2 className="text-3xl font-medium leading-tight text-[var(--color-fg-green)]">
         Featured Collections
       </h2>
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-5">

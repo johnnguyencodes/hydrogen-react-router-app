@@ -834,5 +834,9 @@ function PhotographyHero(): React.JSX.Element {
 }
 
 export default function Route() {
-  return <PhotographyPage images={thumbnails} HeroContent={PhotographyHero} />;
+  return (
+    <div className="xxs:mx-5 2xl:mx-0">
+      <PhotographyPage images={thumbnails} HeroContent={PhotographyHero} />
+    </div>
+  );
 }

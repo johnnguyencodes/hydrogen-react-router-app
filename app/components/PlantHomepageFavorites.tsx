@@ -1,12 +1,12 @@
 import {Suspense} from 'react';
 import {Await} from 'react-router';
-import type {CollectionQuery} from 'storefrontapi.generated';
+import type {ProductsByCollectionQuery} from 'storefrontapi.generated';
 import {PlantCard} from './PlantCard';
 
 export function PlantsHomepageFavorites({
   collection,
 }: {
-  collection: Promise<CollectionQuery | null>;
+  collection: Promise<ProductsByCollectionQuery | null>;
 }) {
   return (
     <div className="favorite-products 2xl:mb-16">

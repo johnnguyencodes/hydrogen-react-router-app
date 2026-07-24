@@ -42,7 +42,7 @@ export function PhotographyHomepageArticleSection({
                             .map((tag: string) => (
                               <span
                                 key={tag}
-                                className="mx-1 text-[var(--color-fg-status-line-2)] bg-[var(--color-bg-5)] rounded-md px-1.5 text-sm border-[1.5px] border-[var(--color-fg-statusline-2)]"
+                                className="mx-1 text-[var(--color-fg-statusline-2)] bg-[var(--color-bg-5)] rounded-md px-1.5 text-sm border-[1.5px] border-[var(--color-fg-statusline-2)]"
                               >
                                 {tag}
                               </span>

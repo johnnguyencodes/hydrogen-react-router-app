@@ -17,13 +17,19 @@ export const meta: MetaFunction<typeof loader> = ({data, matches}) => {
 function PhotographyHero(): React.JSX.Element {
   return (
     <div>
-      <h1>{seoData.title}</h1>
+      <h1 className="text-3xl mt-4 font-medium leading-tight max-w-[30ch] text-balance text-[var(--color-fg-green)]">
+        {seoData.title}
+      </h1>
     </div>
   );
 }
 
 export default function Route() {
-  return <PhotographyPage images={images} HeroContent={PhotographyHero} />;
+  return (
+    <div className="xxs:mx-5 2xl:mx-0">
+      <PhotographyPage images={images} HeroContent={PhotographyHero} />
+    </div>
+  );
 }
 const images: PhotographyImageWithMetadata[] = [
   {
