@@ -7,7 +7,31 @@ import {
   ScissorsLineDashed,
   Shovel,
   Sprout,
+  type LucideIcon,
 } from 'lucide-react';
+
+const ICON_BADGE_DIAMETER = 44;
+
+function IconBadge({
+  icon: Icon,
+  size,
+  iconClassName,
+}: {
+  icon: LucideIcon;
+  size: number;
+  iconClassName?: string;
+}) {
+  const padding = (ICON_BADGE_DIAMETER - size) / 2;
+
+  return (
+    <div
+      className="relative rounded-4xl bg-[var(--color-bg-green)] text-[var(--color-fg-text)] border-[1.5px] border-[var(--color-fg-text)]"
+      style={{padding}}
+    >
+      <Icon className={iconClassName} size={size} />
+    </div>
+  );
+}
 
 export function PlantPageSpecs({
   productTitle,
@@ -40,18 +64,16 @@ export function PlantPageSpecs({
           )}
         </div>
         {parsedAcquisition && (
-          <div className="col-span-1 rounded-md bg-[var(--color-bg-1)] flex flex-col items-center p-5">
+          <div className="col-span-1 rounded-md bg-[var(--color-bg-2)] flex flex-col items-center p-5">
             {parsedAcquisition?.method && (
               <div className="flex flex-col items-center justify-center">
-                <div className="rounded-4xl bg-[var(--color-bg-green)] p-1 text-[var(--color-fg-text)] border-[1.5px] border-[var(--color-fg-text)]">
-                  {parsedAcquisition?.method === 'Seed Grown' ? (
-                    <Sprout size={36} />
-                  ) : parsedAcquisition?.method === 'Purchased from' ? (
-                    <BadgeDollarSign size={36} />
-                  ) : parsedAcquisition?.method === 'Cutting' ? (
-                    <ScissorsLineDashed size={36} />
-                  ) : null}
-                </div>
+                {parsedAcquisition?.method === 'Seed Grown' ? (
+                  <IconBadge icon={Sprout} size={36} />
+                ) : parsedAcquisition?.method === 'Purchased from' ? (
+                  <IconBadge icon={BadgeDollarSign} size={36} />
+                ) : parsedAcquisition?.method === 'Cutting' ? (
+                  <IconBadge icon={ScissorsLineDashed} size={36} />
+                ) : null}
                 {parsedAcquisition?.method.length > 0 && (
                   <p className="font-bold text-[var(--color-fg-green)] mt-1 text-sm">
                     {parsedAcquisition.method}
@@ -87,9 +109,7 @@ export function PlantPageSpecs({
         {parsedMeasurement && (
           <div className="col-span-1 rounded-md bg-[var(--color-bg-2)] p-5">
             <div className="flex flex-col items-center justify-center">
-              <div className="rounded-4xl bg-[var(--color-bg-green)] p-[5px] text-[var(--color-fg-text)] border-[1.5px] border-[var(--color-fg-text)]">
-                <Ruler size={34} />
-              </div>
+              <IconBadge icon={Ruler} size={34} />
               <p className="font-bold text-[var(--color-fg-green)] mt-1 text-sm">
                 Measurements
               </p>
@@ -106,14 +126,13 @@ export function PlantPageSpecs({
             </div>
           </div>
         )}
-        <div className="col-span-1 rounded-md bg-[var(--color-bg-3)] p-5">
+        <div className="col-span-1 rounded-md bg-[var(--color-bg-2)] p-5">
           <div className="flex flex-col items-center justify-center">
-            <div className="relative rounded-4xl bg-[var(--color-bg-green)] p-[7px] text-[var(--color-fg-text)] border-[1.5px] border-[var(--color-fg-text)]">
-              <Shovel
-                className="relative left-[1.25px] bottom-[1.25px]"
-                size={30}
-              />
-            </div>
+            <IconBadge
+              icon={Shovel}
+              size={30}
+              iconClassName="relative left-[1.25px] bottom-[1.25px]"
+            />
             <p className="font-bold text-[var(--color-fg-green)] mt-1 text-sm">
               Soil Mix
             </p>
@@ -131,14 +150,13 @@ export function PlantPageSpecs({
             </p>
           </div>
         </div>
-        <div className="col-span-1 rounded-md bg-[var(--color-bg-4)] p-5">
+        <div className="col-span-1 rounded-md bg-[var(--color-bg-2)] p-5">
           <div className="flex flex-col items-center justify-center">
-            <div className="relative rounded-4xl bg-[var(--color-bg-green)] p-[7px] text-[var(--color-fg-text)] border-[1.5px] border-[var(--color-fg-text)]">
-              <Pipette
-                className="relative left-[.25px] bottom-[.25px]"
-                size={30}
-              />
-            </div>
+            <IconBadge
+              icon={Pipette}
+              size={30}
+              iconClassName="relative left-[.25px] bottom-[.25px]"
+            />
             <p className="font-bold text-[var(--color-fg-green)] mt-1 text-sm">
               Fertilizer Regimen{' '}
             </p>
@@ -154,14 +172,13 @@ export function PlantPageSpecs({
             <li>30 mg chelated micronutrients</li>
           </ul>
         </div>
-        <div className="col-span-1 rounded-md bg-[var(--color-bg-5)] p-5">
+        <div className="col-span-1 rounded-md bg-[var(--color-bg-2)] p-5">
           <div className="flex flex-col items-center justify-center">
-            <div className="relative rounded-4xl bg-[var(--color-bg-green)] p-[7px] text-[var(--color-fg-text)] border-[1.5px] border-[var(--color-fg-text)]">
-              <Leaf
-                className="relative left-[1.25px] bottom-[1.25px]"
-                size={30}
-              />
-            </div>
+            <IconBadge
+              icon={Leaf}
+              size={30}
+              iconClassName="relative left-[1.25px] bottom-[1.25px]"
+            />
             <p className="font-bold text-[var(--color-fg-green)] mt-1 text-sm">
               Care Regimen
             </p>

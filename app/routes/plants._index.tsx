@@ -128,7 +128,7 @@ const carouselItems = [
 export default function Plantpage() {
   const data = useLoaderData<typeof loader>();
   return (
-    <div className="plants-page mt-5">
+    <div className="plants-page xxs:mx-5 2xl:mx-0 mt-5">
       <HeroCarousel
         items={carouselItems}
         autoPlay={true}
@@ -200,6 +200,7 @@ const PRODUCTS_BY_COLLECTION_QUERY = `#graphql
     updatedAt
     images(first: 1) {
       nodes {
+        id
         url
         altText
         width

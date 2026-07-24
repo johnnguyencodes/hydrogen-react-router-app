@@ -112,7 +112,7 @@ export default function Homepage() {
       </div>
       <div>
         <section className="my-5">
-          <h2 className="text-[var(--color-fg-green)] text-xl font-semibold">
+          <h2 className="text-3xl font-medium leading-tight text-[var(--color-fg-green)]">
             Photography
           </h2>
           <div className="flex justify-between">
@@ -135,7 +135,7 @@ export default function Homepage() {
           </div>
         </section>
         <section>
-          <h2 className="text-[var(--color-fg-green)] text-xl font-semibold">
+          <h2 className="text-3xl font-medium leading-tight text-[var(--color-fg-green)]">
             Plants
           </h2>
           <div className="flex justify-between">
@@ -160,7 +160,7 @@ export default function Homepage() {
           <h3>Gadgets</h3>
         </section>
         <section>
-          <h2 className="text-[var(--color-fg-green)] text-xl font-semibold">
+          <h2 className="text-3xl font-medium leading-tight text-[var(--color-fg-green)]">
             Projects
           </h2>
         </section>
@@ -178,6 +178,7 @@ const PRODUCTS_BY_COLLECTION_QUERY = `#graphql
     updatedAt
     images(first: 1) {
       nodes {
+        id
         url
         altText
         width

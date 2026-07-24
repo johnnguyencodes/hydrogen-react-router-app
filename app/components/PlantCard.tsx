@@ -19,7 +19,7 @@ export function PlantCard(props: PlantCardProps) {
             <div className="pt-1">
               {props.updatedAt ? (
                 <p className="text-[var(--color-fg-text)]">
-                  <p>{formatTimeStampToMDY(props.updatedAt)}</p>
+                  {formatTimeStampToMDY(props.updatedAt)}
                 </p>
               ) : null}
             </div>
