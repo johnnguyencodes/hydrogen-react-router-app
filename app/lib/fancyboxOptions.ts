@@ -39,16 +39,61 @@ export const fancyboxOptions = {
     // the current index) so swiping is served from cache instead of
     // waiting on a fresh request — using the same viewport-appropriate
     // size the modal <img> will actually request, not the raw original.
+    //
+    // All of these prefetches fire before the Carousel below has built the
+    // visible slide's real <img> (which is what sets fetchPriority "high"
+    // in the `render` handler), so without help here every other slide's
+    // fetch — issued at default priority in plain array order — can end up
+    // competing with, or effectively winning over, the one image the user
+    // is actually waiting to see. Explicitly prioritize the opened slide's
+    // request first, then its immediate neighbors (fetched right away at
+    // normal priority, since swiping to either is the most likely next
+    // action), and defer/deprioritize everything else so the visible image
+    // always wins the race.
     initSlides: (_fb, slides) => {
       const width = pickWidthForViewport();
+      const startIndex = _fb.getOptions().startIndex || 0;
+      const total = slides.length;
+
       for (const slide of slides) {
         if (!slide.src) continue;
-
         slide.srcset = buildResponsiveSrcSet(slide.src);
         slide.sizes = '100vw';
+      }
 
+      const prefetch = (src: string, priority: 'high' | 'auto' | 'low') => {
         const img = new Image();
-        img.src = buildResponsiveImageUrl(slide.src, width);
+        // @ts-ignore – new attribute in modern browsers
+        img.fetchPriority = priority;
+        img.src = buildResponsiveImageUrl(src, width);
+      };
+
+      // The carousel wraps (`infinite: true`), so "next"/"previous" wrap
+      // around the ends of the array too.
+      const neighborIndexes =
+        total > 1
+          ? new Set([(startIndex - 1 + total) % total, (startIndex + 1) % total])
+          : new Set<number>();
+      const priorityIndexes = new Set([startIndex, ...neighborIndexes]);
+
+      const currentSrc = slides[startIndex]?.src;
+      if (currentSrc) prefetch(currentSrc, 'high');
+
+      for (const index of neighborIndexes) {
+        const src = slides[index]?.src;
+        if (src) prefetch(src, 'auto');
+      }
+
+      for (const [index, slide] of slides.entries()) {
+        if (priorityIndexes.has(index) || !slide.src) continue;
+        const src = slide.src;
+        const deferredPrefetch = () => prefetch(src, 'low');
+
+        if (typeof requestIdleCallback === 'function') {
+          requestIdleCallback(deferredPrefetch);
+        } else {
+          setTimeout(deferredPrefetch, 0);
+        }
       }
     },
   },
