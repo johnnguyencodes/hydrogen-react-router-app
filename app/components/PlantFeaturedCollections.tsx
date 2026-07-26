@@ -16,12 +16,12 @@ export function PlantFeaturedCollections({
       <h2 className="text-3xl font-medium leading-tight text-[var(--color-fg-green)]">
         Featured Collections
       </h2>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-5">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-5">
         {featuredCollections.map((collection) => (
           <Link
             key={collection.handle}
             className="featured-collection group relative block overflow-hidden rounded-md transform-gpu"
-            to={`/collections/${collection.handle}`}
+            to={`/plants/collections/${collection.handle}`}
           >
             {collection.image && (
               <>

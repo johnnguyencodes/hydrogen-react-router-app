@@ -1,5 +1,5 @@
 import {useLoaderData, Link} from 'react-router';
-import type {Route} from './+types/collections._index';
+import type {Route} from './+types/plants.collections._index';
 import {getPaginationVariables, Image} from '@shopify/hydrogen';
 import type {CollectionFragment} from 'storefrontapi.generated';
 import {PaginatedResourceSection} from '~/components/PaginatedResourceSection';
@@ -75,7 +75,7 @@ function CollectionItem({
     <Link
       className="collection-item"
       key={collection.id}
-      to={`/collections/${collection.handle}`}
+      to={`/plants/collections/${collection.handle}`}
       prefetch="intent"
     >
       {collection?.image && (

@@ -134,7 +134,7 @@ function SearchResultsPredictiveCollections({
       <ul>
         {collections.map((collection) => {
           const collectionUrl = urlWithTrackingParams({
-            baseUrl: `/collections/${collection.handle}`,
+            baseUrl: `/plants/collections/${collection.handle}`,
             trackingParams: collection.trackingParameters,
             term: term.current,
           });

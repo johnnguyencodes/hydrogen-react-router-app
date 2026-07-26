@@ -17,7 +17,7 @@ export function PlantLastUpdated({
           Featured Plants
         </h2>
         <Button asChild variant="pill">
-          <Link to="/collections/all-plants">
+          <Link to="/plants/collections/all-plants">
             See all plants
             <ArrowRight />
           </Link>
