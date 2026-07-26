@@ -20,7 +20,7 @@ export function PlantFeaturedCollections({
         {featuredCollections.map((collection) => (
           <Link
             key={collection.handle}
-            className="featured-collection group relative block overflow-hidden rounded-md"
+            className="featured-collection group relative block overflow-hidden rounded-md transform-gpu"
             to={`/collections/${collection.handle}`}
           >
             {collection.image && (
@@ -29,7 +29,7 @@ export function PlantFeaturedCollections({
                   data={collection.image}
                   aspectRatio="1/1"
                   sizes="(min-width: 64em) 33vw, (min-width: 40em) 50vw, 100vw"
-                  className="h-full w-full rounded-md object-cover group-hover:brightness-90"
+                  className="h-full w-full object-cover group-hover:brightness-90"
                 />
                 <div
                   aria-hidden="true"

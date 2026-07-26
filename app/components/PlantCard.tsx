@@ -11,12 +11,14 @@ export function PlantCard(props: PlantCardProps) {
         to={`/plants/${props.handle}`}
       >
         <div className="relative">
-          <Image
-            data={props.images.nodes[0]}
-            aspectRatio="1/1"
-            sizes="(min-width: 45em) 20vw, 50vw"
-            className="rounded-md group-hover:brightness-90"
-          />
+          <div className="overflow-hidden rounded-md transform-gpu">
+            <Image
+              data={props.images.nodes[0]}
+              aspectRatio="1/1"
+              sizes="(min-width: 45em) 20vw, 50vw"
+              className="group-hover:brightness-90"
+            />
+          </div>
           {isRecentlyUpdated(props.updatedAt) && (
             <Badge variant="new" className="absolute top-2 left-2">
               New
