@@ -1,7 +1,9 @@
 import {Suspense} from 'react';
-import {Await} from 'react-router';
+import {Await, Link} from 'react-router';
+import {ArrowRight} from 'lucide-react';
 import type {ProductsByCollectionQuery} from 'storefrontapi.generated';
 import {PlantCard} from './PlantCard';
+import {Button} from '~/components/ui/button';
 
 export function PlantsFavorites({
   collection,
@@ -9,11 +11,17 @@ export function PlantsFavorites({
   collection: Promise<ProductsByCollectionQuery | null>;
 }) {
   return (
-    <div className="favorite-products 2xl:mb-16">
-      <div className="flex-row mb-5">
+    <div className="favorite-products mb-10 2xl:mb-16">
+      <div className="flex flex-row mb-5 justify-between items-center">
         <h2 className="text-3xl font-medium leading-tight text-[var(--color-fg-green)]">
           Favorite Plants
         </h2>
+        <Button asChild variant="pill">
+          <Link to="/collections/favorites">
+            See all favorites
+            <ArrowRight />
+          </Link>
+        </Button>
       </div>
       <Suspense fallback={<div>Loading...</div>}>
         <Await resolve={collection}>

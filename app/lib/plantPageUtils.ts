@@ -71,3 +71,17 @@ export function formatTimeStampToMDY(iso: string): string {
   const yyyy = d.getUTCFullYear();
   return `${mm}-${dd}-${yyyy}`;
 }
+
+export const RECENTLY_UPDATED_WINDOW_DAYS = 30;
+
+export function isRecentlyUpdated(
+  updatedAt?: string | null,
+  windowDays: number = RECENTLY_UPDATED_WINDOW_DAYS,
+): boolean {
+  if (!updatedAt) return false;
+  const updatedTime = new Date(updatedAt).getTime();
+  if (Number.isNaN(updatedTime)) return false;
+  const diffMs = Date.now() - updatedTime;
+  const windowMs = windowDays * 24 * 60 * 60 * 1000;
+  return diffMs >= 0 && diffMs <= windowMs;
+}

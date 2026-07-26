@@ -7,6 +7,7 @@ export const plantBlogPostSeoData = {
   url: 'https://www.johnnguyen.codes/plants/blog/knowledge-center',
   relativeUrlPath: '/plants/blog/knowledge-center',
   pageType: 'plants',
+  tags: 'Basics',
   updatedAt: '2025-11-23T12:53:28-08:00',
   publishedAt: '2020-05-04T03:20:10-07:00',
   media: [

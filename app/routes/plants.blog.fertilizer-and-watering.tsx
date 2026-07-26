@@ -7,6 +7,7 @@ export const plantBlogPostSeoData: PageSeoData = {
   url: 'https://www.johnnguyen.codes/plants/blog/fertilizer-and-watering',
   relativeUrlPath: '/plants/blog/fertilizer-and-watering',
   pageType: 'plants',
+  tags: 'Care Guide',
   updatedAt: '2025-11-22T12:53:28-08:00',
   publishedAt: '2020-05-03T03:20:10-07:00',
   media: [

@@ -7,6 +7,7 @@ export const plantBlogPostSeoData = {
   url: 'https://www.johnnguyen.codes/plants/blog/recommended-sellers',
   relativeUrlPath: '/plants/blog/recommended-sellers',
   pageType: 'plants',
+  tags: 'Shopping',
   updatedAt: '2025-11-25T12:53:28-08:00',
   publishedAt: '2020-05-06T03:20:10-07:00',
   media: [
