@@ -23,7 +23,7 @@ export function JournalEntry({
       className={`journal-entry ${bgColor} xxs:-mx-5 xxs:px-5 xxs:rounded-none xl:-mx-25 xl:px-25 pb-15 pt-10 xl:rounded-md`}
       key={entry.date}
     >
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 lg:grid lg:grid-cols-[440px_1fr] lg:items-start lg:gap-x-10">
         <div className="flex-1">
           <div className="mb-3 flex justify-between items-center">
             <div className="flex flex-col">
@@ -34,13 +34,13 @@ export function JournalEntry({
                 {formattedEntryDate}
               </span>
               <div
-                className="prose prose-p:text-[var(--color-fg-text)] prose-p:text-sm text-base prose-strong:text-[var(--color-fg-green)] max-w-prose mx-auto"
+                className="prose prose-p:text-[var(--color-fg-text)] prose-p:text-sm text-base prose-strong:text-[var(--color-fg-green)] max-w-[440px] mx-auto lg:mx-0"
                 dangerouslySetInnerHTML={{__html: entry.content}}
               ></div>
             </div>
           </div>
         </div>
-        <div className="journal-image-desktop-container lg:block">
+        <div className="journal-image-desktop-container">
           <div className="grid grid-cols-12 gap-1">
             {parsedImageData.map((image, idx) => {
               if (image.meta.date === entry.date) {
