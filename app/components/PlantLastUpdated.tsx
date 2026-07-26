@@ -1,7 +1,9 @@
 import {Suspense} from 'react';
 import {Await, Link} from 'react-router';
+import {ArrowRight} from 'lucide-react';
 import type {FeaturedProductsQuery} from 'storefrontapi.generated';
 import {PlantCard} from './PlantCard';
+import {Button} from '~/components/ui/button';
 
 export function PlantLastUpdated({
   products,
@@ -9,17 +11,17 @@ export function PlantLastUpdated({
   products: Promise<FeaturedProductsQuery | null>;
 }) {
   return (
-    <div className="featured-products 2xl:mb-16">
-      <div className="flex flex-row mb-5 justify-between content-between">
+    <div className="featured-products mb-10 2xl:mb-16">
+      <div className="flex flex-row mb-5 justify-between items-center">
         <h2 className="text-3xl font-medium leading-tight text-[var(--color-fg-green)]">
           Featured Plants
         </h2>
-        <Link
-          to="/collections/all-plants"
-          className="text-[var(--color-fg-text)] py-1"
-        >
-          See all plants
-        </Link>
+        <Button asChild variant="pill">
+          <Link to="/collections/all-plants">
+            See all plants
+            <ArrowRight />
+          </Link>
+        </Button>
       </div>
       <Suspense fallback={<div>Loading...</div>}>
         <Await resolve={products}>
