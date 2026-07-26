@@ -27,7 +27,7 @@ export function JournalEntry({
         <div className="flex-1">
           <div className="mb-3 flex justify-between items-center">
             <div className="flex flex-col">
-              <span className="text-2xl font-medium text-[var(--color-fg-green)]">
+              <span className="text-xl font-medium text-[var(--color-fg-green)]">
                 {entry.title}
               </span>
               <span className="text-lg font-medium text-[var(--color-fg-green)] mb-2">
