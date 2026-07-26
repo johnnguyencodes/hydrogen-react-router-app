@@ -19,15 +19,17 @@ export function ProductImage({
         href={image.url}
         data-lazy-src={image.url}
       >
-        <Image
-          id={id}
-          alt={alt || 'Product Image'}
-          aspectRatio="1/1"
-          data={image}
-          className={clsx(className)}
-          sizes={sizes}
-          loading="lazy"
-        ></Image>
+        <div className="overflow-hidden rounded-md transform-gpu">
+          <Image
+            id={id}
+            alt={alt || 'Product Image'}
+            aspectRatio="1/1"
+            data={image}
+            className={clsx(className)}
+            sizes={sizes}
+            loading="lazy"
+          ></Image>
+        </div>
       </a>
     </div>
   );

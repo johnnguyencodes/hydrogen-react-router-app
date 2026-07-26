@@ -278,7 +278,7 @@ export default function Plant() {
         thumbnailImageHeight={400}
         sizes=""
       />
-      <div className="w-full xl:mt-15"></div>
+      <div className="w-full xl:mt-10"></div>
     </div>
   );
 }
