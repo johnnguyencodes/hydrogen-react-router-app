@@ -127,6 +127,7 @@ export const fancyboxOptions = {
     Toolbar: {
       display: {
         left: ['counter'],
+        middle: ['iterateZoom'],
         right: ['close'],
       },
     },
