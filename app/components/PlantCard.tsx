@@ -5,7 +5,7 @@ import {Badge} from '~/components/ui/badge';
 
 export function PlantCard(props: PlantCardProps) {
   return (
-    <div className="rounded-md bg-[var(--color-bg-2)] overflow-hidden flex-shrink-0 w-64 p-2">
+    <div className="rounded-md overflow-hidden flex-shrink-0 w-64">
       <Link
         className="favorite-product group"
         to={`/plants/${props.handle}`}
@@ -22,11 +22,11 @@ export function PlantCard(props: PlantCardProps) {
               New
             </Badge>
           )}
-          <div className="pt-2">
+          <div className="pt-1">
             <h4 className="text-xl font-medium text-[var(--color-fg-green)]">
               {props.title}
             </h4>
-            <div className="pt-1">
+            <div>
               {props.updatedAt ? (
                 <p className="text-[var(--color-fg-text)] text-lg">
                   {formatTimeStampToMDY(props.updatedAt)}

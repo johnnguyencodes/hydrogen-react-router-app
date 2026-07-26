@@ -58,7 +58,7 @@ export function BlogPostSection() {
                         {blogPost.title}
                       </h4>
                       <div className="text-[var(--color-fg-text)] text-lg">
-                        <p className="py-1">{blogPost.description}</p>
+                        <p>{blogPost.description}</p>
                         <p>{formatTimeStampToMDY(blogPost.publishedAt)}</p>
                       </div>
                     </div>
