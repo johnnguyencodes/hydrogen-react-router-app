@@ -27,6 +27,96 @@ function pickWidthForViewport(): number {
   );
 }
 
+// Per-phase content for the zoom toggle button - what each phase's *next*
+// click will do. `label` shows the target zoom level below the icon, on
+// hover only; the 3rd phase only zooms back out, so it gets no label.
+const ZOOM_BUTTON_CONTENT = {
+  base: {label: 'Full', direction: 'in'},
+  cover: {label: '100%', direction: 'in'},
+  full: {label: '', direction: 'out'},
+} as const;
+
+type ZoomPhase = keyof typeof ZOOM_BUTTON_CONTENT;
+
+// `.f-button` is a fixed-size square icon button with `overflow:hidden` -
+// this positions the label as a floating pill below it (not affecting the
+// button's own box or the icon's centering) and fades it in only on
+// hover. Needs a real stylesheet rather than inline styles since inline
+// styles can't express `:hover`; injected once, client-side only (this
+// module's top-level code also runs during SSR, where `document` doesn't
+// exist), and only from a callback that's guaranteed to run in the
+// browser once the lightbox has actually opened.
+function ensureZoomToggleStyles(): void {
+  if (typeof document === 'undefined') return;
+  if (document.getElementById('zoom-toggle-label-style')) return;
+  const style = document.createElement('style');
+  style.id = 'zoom-toggle-label-style';
+  style.textContent = `
+    [data-fb-zoom-toggle] { overflow: visible; }
+    [data-fb-zoom-toggle] .zoom-toggle-label {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-top: 4px;
+      box-sizing: border-box;
+      width: var(--f-button-width, 46px);
+      padding: 2px 0;
+      border-radius: var(--f-button-border-radius, 0);
+      background: var(--f-button-bg, rgba(54, 54, 54, 0.75));
+      color: var(--f-button-color, #ddd);
+      font-size: 11px;
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: 0.02em;
+      text-align: center;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(-50%) translateY(-4px);
+      transition: opacity 0.15s ease, transform 0.15s ease;
+    }
+    [data-fb-zoom-toggle]:hover .zoom-toggle-label {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  `;
+  document.head.appendChild(style);
+}
+
+function zoomButtonInnerHtml(phase: ZoomPhase): string {
+  const {label, direction} = ZOOM_BUTTON_CONTENT[phase];
+  const plus =
+    direction === 'in' ? '<line x1="11" y1="8" x2="11" y2="14"/>' : '';
+  const labelSpan = label
+    ? `<span class="zoom-toggle-label">${label}</span>`
+    : '';
+  return `<svg>${plus}<circle cx="11" cy="11" r="7.5"/><path d="m21 21-4.35-4.35M8 11h6"/></svg>${labelSpan}`;
+}
+
+function zoomButtonTpl(phase: ZoomPhase): string {
+  return `<button data-fb-zoom-toggle class="f-button">${zoomButtonInnerHtml(phase)}</button>`;
+}
+
+function updateZoomButton(button: HTMLElement, phase: ZoomPhase): void {
+  button.innerHTML = zoomButtonInnerHtml(phase);
+}
+
+// Shared by both the "back to fit" click branch and the slide-change
+// handler below: restores the capped srcset and clears the true-original
+// width/height attributes, so a slide left zoomed-in doesn't keep holding
+// the full-resolution original in memory once it's no longer showing it.
+function resetSlideZoom(slide: any): void {
+  const img = slide?.panzoomRef?.getContent();
+  if (!img) return;
+  if (slide.srcset) {
+    img.srcset = slide.srcset;
+    img.sizes = slide.sizes || '';
+  }
+  img.removeAttribute('width');
+  img.removeAttribute('height');
+  slide.zoomPhase = 'base';
+}
+
 export const fancyboxOptions = {
   on: {
     // Fires before Carousel builds each slide's <img>, so mutating the
@@ -104,6 +194,7 @@ export const fancyboxOptions = {
       // loading hints here — the responsive srcset/sizes are already set
       // on the slide objects above.
       render: (_carousel, slides) => {
+        ensureZoomToggleStyles();
         for (const slide of slides) {
           const img = slide.el?.querySelector(
             'img, picture img',
@@ -114,6 +205,26 @@ export const fancyboxOptions = {
           // @ts-ignore – new attribute in modern browsers
           img.fetchPriority = 'high'; // promote in Chromium
           img.decoding = 'sync'; // decode sooner
+        }
+      },
+      // Fires when the active slide changes. Panzoom already resets a
+      // slide's *visual* zoom back to fit once it's no longer active, but
+      // doesn't know about our own zoomPhase tracking or the srcset/
+      // width/height swaps the zoom button makes - without this, swiping
+      // away from a zoomed-in slide and back would leave it still holding
+      // the full-resolution original in memory, and the toggle button
+      // would keep describing whatever phase that slide was left in
+      // rather than the newly-active slide's actual state.
+      change: (carousel: any) => {
+        const activeSlide = carousel.getPage?.()?.slides?.[0];
+        for (const slide of carousel.getSlides?.() ?? []) {
+          if (slide !== activeSlide) resetSlideZoom(slide);
+        }
+        const button = carousel
+          .getContainer?.()
+          ?.querySelector('[data-fb-zoom-toggle]');
+        if (button) {
+          updateZoomButton(button, activeSlide?.zoomPhase || 'base');
         }
       },
     },
@@ -140,23 +251,26 @@ export const fancyboxOptions = {
         // phase tracking always advances through exactly 3 real stops
         // regardless of what the scale values happen to be.
         zoomToggle: {
-          tpl: '<button data-fb-zoom-toggle class="f-button" title="Zoom"><svg><g><line x1="11" y1="8" x2="11" y2="14"></line></g><circle cx="11" cy="11" r="7.5"/><path d="m21 21-4.35-4.35M8 11h6"/></svg></button>',
-          click: (carousel: any) => {
+          tpl: zoomButtonTpl('base'),
+          click: (carousel: any, event: any) => {
             const slide = carousel.getPage()?.slides?.[0];
             const panzoom = slide?.panzoomRef;
             const img = panzoom?.getContent();
             if (!panzoom || !slide || !img) return;
 
-            const phase = slide.zoomPhase || 'base';
+            const button = event?.currentTarget as HTMLElement | undefined;
+            const phase: ZoomPhase = slide.zoomPhase || 'base';
 
             if (phase === 'base') {
               slide.zoomPhase = 'cover';
+              if (button) updateZoomButton(button, 'cover');
               panzoom.execute('zoomTo', {scale: panzoom.getScale('cover')});
               return;
             }
 
             if (phase === 'cover') {
               slide.zoomPhase = 'full';
+              if (button) updateZoomButton(button, 'full');
 
               // Our srcset caps out at RESPONSIVE_IMAGE_WIDTHS' largest
               // tier (3000px), which is still short of most source
@@ -219,13 +333,8 @@ export const fancyboxOptions = {
             // attributes set above - left in place, they'd make the next
             // visit to this slide's getScale('cover') think the true
             // original is still loaded.
-            slide.zoomPhase = 'base';
-            if (slide.srcset) {
-              img.srcset = slide.srcset;
-              img.sizes = slide.sizes || '';
-            }
-            img.removeAttribute('width');
-            img.removeAttribute('height');
+            resetSlideZoom(slide);
+            if (button) updateZoomButton(button, 'base');
             panzoom.execute('zoomTo', {scale: panzoom.getScale('base')});
           },
         },
