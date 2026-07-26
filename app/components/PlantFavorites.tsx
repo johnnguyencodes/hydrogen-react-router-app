@@ -17,7 +17,7 @@ export function PlantsFavorites({
           Favorite Plants
         </h2>
         <Button asChild variant="pill">
-          <Link to="/collections/favorites">
+          <Link to="/plants/collections/favorites">
             See all favorites
             <ArrowRight />
           </Link>

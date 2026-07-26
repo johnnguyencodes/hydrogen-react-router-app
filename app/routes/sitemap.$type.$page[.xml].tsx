@@ -12,8 +12,9 @@ export async function loader({
     params,
     locales: ['EN-US', 'EN-CA', 'FR-CA'],
     getLink: ({type, baseUrl, handle, locale}) => {
-      if (!locale) return `${baseUrl}/${type}/${handle}`;
-      return `${baseUrl}/${locale}/${type}/${handle}`;
+      const path = type === 'collections' ? `plants/collections` : type;
+      if (!locale) return `${baseUrl}/${path}/${handle}`;
+      return `${baseUrl}/${locale}/${path}/${handle}`;
     },
   });
 

@@ -21,7 +21,7 @@ export function PlantFeaturedCollections({
           <Link
             key={collection.handle}
             className="featured-collection group relative block overflow-hidden rounded-md transform-gpu"
-            to={`/collections/${collection.handle}`}
+            to={`/plants/collections/${collection.handle}`}
           >
             {collection.image && (
               <>
