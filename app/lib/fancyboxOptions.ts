@@ -117,6 +117,102 @@ function resetSlideZoom(slide: any): void {
   slide.zoomPhase = 'base';
 }
 
+// The single 3-stop zoom cycle (fit -> full/"cover" -> 100% -> back to
+// fit), shared by the toolbar button and by clicking the image directly -
+// both should behave identically, so both just call this. `center`
+// (client coordinates) anchors the zoom-in around wherever the user
+// actually clicked on the image, rather than always the middle - passed
+// through untouched to Panzoom's own `zoomTo` action, which already
+// supports this. Not used for the final "back to fit" step, where
+// recentering the whole image is what you'd actually want.
+function advanceZoomPhase(
+  carousel: any,
+  center?: {x: number; y: number},
+): void {
+  const slide = carousel.getPage?.()?.slides?.[0];
+  const panzoom = slide?.panzoomRef;
+  const img = panzoom?.getContent();
+  if (!panzoom || !slide || !img) return;
+
+  const button = carousel
+    .getContainer?.()
+    ?.querySelector('[data-fb-zoom-toggle]');
+  const phase: ZoomPhase = slide.zoomPhase || 'base';
+
+  if (phase === 'base') {
+    slide.zoomPhase = 'cover';
+    if (button) updateZoomButton(button, 'cover');
+    panzoom.execute('zoomTo', {scale: panzoom.getScale('cover'), center});
+    return;
+  }
+
+  if (phase === 'cover') {
+    slide.zoomPhase = 'full';
+    if (button) updateZoomButton(button, 'full');
+
+    // Our srcset caps out at RESPONSIVE_IMAGE_WIDTHS' largest tier
+    // (3000px), which is still short of most source photos' true
+    // resolution. Swap in the uncapped original (slide.src, never
+    // touched by the srcset-building above) and derive the target scale
+    // from values we already know: the viewport's currently-rendered
+    // pixel width is always (current scale) * (fit-width in CSS px), so
+    // fit-width = renderedPx / current. The scale that shows the
+    // swapped-in image's true native width in that same fit-width box is
+    // trueNaturalWidth * current / renderedPx.
+    const current = panzoom.getTransform(true).scale;
+    const viewport = panzoom.getViewport();
+    const renderedPx = parseFloat(viewport.style.width) || 0;
+
+    img.removeAttribute('srcset');
+    img.removeAttribute('sizes');
+    img.src = slide.src;
+
+    // This element previously had srcset/sizes for responsive selection,
+    // and even after clearing those attributes its own naturalWidth
+    // keeps reporting a density-adjusted size instead of the true file
+    // dimensions - so probe the real size with a brand new, stateless
+    // Image (resolves instantly, already in the HTTP cache from the swap
+    // above).
+    //
+    // Just computing our own correct scale from that isn't enough on its
+    // own, though: Panzoom's *internal* zoom ceiling (maxScale=1, i.e.
+    // its own idea of "full") is computed from this same element's
+    // contaminated naturalWidth too, via width/height attributes it
+    // checks before falling back to naturalWidth. Left cleared, our
+    // correct (larger) target scale exceeds Panzoom's own (wrongly
+    // small) ceiling and its bounds-safety logic snaps it back down.
+    // Setting the attributes to the *true* probed dimensions makes
+    // Panzoom's internal ceiling agree with our target instead of
+    // fighting it.
+    const probe = new Image();
+    const zoomToTrueFull = (trueWidth: number, trueHeight: number) => {
+      if (trueWidth && trueHeight) {
+        img.setAttribute('width', String(trueWidth));
+        img.setAttribute('height', String(trueHeight));
+      }
+      const trueScale =
+        renderedPx && trueWidth
+          ? (trueWidth * current) / renderedPx
+          : panzoom.getScale('full');
+      panzoom.execute('zoomTo', {scale: trueScale, center});
+    };
+    probe.onload = () =>
+      zoomToTrueFull(probe.naturalWidth, probe.naturalHeight);
+    probe.onerror = () => zoomToTrueFull(0, 0);
+    probe.src = slide.src;
+    return;
+  }
+
+  // phase === 'full' -> back to fit. Restore the capped srcset so we're
+  // not holding a multi-megabyte original in memory while zoomed out,
+  // and clear the true-original width/height attributes set above - left
+  // in place, they'd make the next visit to this slide's getScale
+  // ('cover') think the true original is still loaded.
+  resetSlideZoom(slide);
+  if (button) updateZoomButton(button, 'base');
+  panzoom.execute('zoomTo', {scale: panzoom.getScale('base')});
+}
+
 export const fancyboxOptions = {
   on: {
     // Fires before Carousel builds each slide's <img>, so mutating the
@@ -206,6 +302,31 @@ export const fancyboxOptions = {
           img.fetchPriority = 'high'; // promote in Chromium
           img.decoding = 'sync'; // decode sooner
         }
+
+        // Clicking the image itself should cycle through the same 3
+        // stops as the toolbar button - Panzoom's own default click
+        // behavior is disabled below (clickAction: false) specifically so
+        // this is the only thing that runs on click, rather than both
+        // firing and fighting over the scale.
+        //
+        // Delegated on the carousel's own (stable, never recreated)
+        // container rather than bound directly to each slide's content
+        // element: Panzoom can recreate that element between renders,
+        // which would silently defeat a per-element "already bound" flag
+        // and end up attaching a second listener - causing one real click
+        // to fire the cycle twice. Guarded on the container itself so this
+        // still only gets attached once per gallery session.
+        const container = _carousel.getContainer?.();
+        if (container && !container.dataset.zoomClickBound) {
+          container.dataset.zoomClickBound = 'true';
+          container.addEventListener('click', (event: MouseEvent) => {
+            const target = event.target as HTMLElement | null;
+            if (!target) return;
+            if (target.closest('[data-fb-zoom-toggle]')) return; // toolbar button handles its own click
+            if (!target.closest('.f-panzoom__viewport')) return; // only clicks on the actual image
+            advanceZoomPhase(_carousel, {x: event.clientX, y: event.clientY});
+          });
+        }
       },
       // Fires when the active slide changes. Panzoom already resets a
       // slide's *visual* zoom back to fit once it's no longer active, but
@@ -252,91 +373,7 @@ export const fancyboxOptions = {
         // regardless of what the scale values happen to be.
         zoomToggle: {
           tpl: zoomButtonTpl('base'),
-          click: (carousel: any, event: any) => {
-            const slide = carousel.getPage()?.slides?.[0];
-            const panzoom = slide?.panzoomRef;
-            const img = panzoom?.getContent();
-            if (!panzoom || !slide || !img) return;
-
-            const button = event?.currentTarget as HTMLElement | undefined;
-            const phase: ZoomPhase = slide.zoomPhase || 'base';
-
-            if (phase === 'base') {
-              slide.zoomPhase = 'cover';
-              if (button) updateZoomButton(button, 'cover');
-              panzoom.execute('zoomTo', {scale: panzoom.getScale('cover')});
-              return;
-            }
-
-            if (phase === 'cover') {
-              slide.zoomPhase = 'full';
-              if (button) updateZoomButton(button, 'full');
-
-              // Our srcset caps out at RESPONSIVE_IMAGE_WIDTHS' largest
-              // tier (3000px), which is still short of most source
-              // photos' true resolution. Swap in the uncapped original
-              // (slide.src, never touched by the srcset-building above)
-              // and derive the target scale from values we already know:
-              // the viewport's currently-rendered pixel width is always
-              // (current scale) * (fit-width in CSS px), so fit-width =
-              // renderedPx / current. The scale that shows the swapped-in
-              // image's true native width in that same fit-width box is
-              // trueNaturalWidth * current / renderedPx.
-              const current = panzoom.getTransform(true).scale;
-              const viewport = panzoom.getViewport();
-              const renderedPx = parseFloat(viewport.style.width) || 0;
-
-              img.removeAttribute('srcset');
-              img.removeAttribute('sizes');
-              img.src = slide.src;
-
-              // This element previously had srcset/sizes for responsive
-              // selection, and even after clearing those attributes its
-              // own naturalWidth keeps reporting a density-adjusted size
-              // instead of the true file dimensions - so probe the real
-              // size with a brand new, stateless Image (resolves
-              // instantly, already in the HTTP cache from the swap above).
-              //
-              // Just computing our own correct scale from that isn't
-              // enough on its own, though: Panzoom's *internal* zoom
-              // ceiling (maxScale=1, i.e. its own idea of "full") is
-              // computed from this same element's contaminated
-              // naturalWidth too, via width/height attributes it checks
-              // before falling back to naturalWidth. Left cleared, our
-              // correct (larger) target scale exceeds Panzoom's own
-              // (wrongly small) ceiling and its bounds-safety logic snaps
-              // it back down. Setting the attributes to the *true* probed
-              // dimensions makes Panzoom's internal ceiling agree with our
-              // target instead of fighting it.
-              const probe = new Image();
-              const zoomToTrueFull = (trueWidth: number, trueHeight: number) => {
-                if (trueWidth && trueHeight) {
-                  img.setAttribute('width', String(trueWidth));
-                  img.setAttribute('height', String(trueHeight));
-                }
-                const trueScale =
-                  renderedPx && trueWidth
-                    ? (trueWidth * current) / renderedPx
-                    : panzoom.getScale('full');
-                panzoom.execute('zoomTo', {scale: trueScale});
-              };
-              probe.onload = () =>
-                zoomToTrueFull(probe.naturalWidth, probe.naturalHeight);
-              probe.onerror = () => zoomToTrueFull(0, 0);
-              probe.src = slide.src;
-              return;
-            }
-
-            // phase === 'full' -> back to fit. Restore the capped srcset
-            // so we're not holding a multi-megabyte original in memory
-            // while zoomed out, and clear the true-original width/height
-            // attributes set above - left in place, they'd make the next
-            // visit to this slide's getScale('cover') think the true
-            // original is still loaded.
-            resetSlideZoom(slide);
-            if (button) updateZoomButton(button, 'base');
-            panzoom.execute('zoomTo', {scale: panzoom.getScale('base')});
-          },
+          click: (carousel: any) => advanceZoomPhase(carousel),
         },
       },
       display: {
@@ -354,6 +391,12 @@ export const fancyboxOptions = {
         // just blurs/upscales since we only load enough resolution to fill
         // the viewport (see buildResponsiveSrcSet above).
         maxScale: 1,
+        // Disables Panzoom's own default click-to-zoom (toggle between fit
+        // and its own idea of "full") - our click listener on the image
+        // (see the `render` handler above) replaces it with the same
+        // 3-stop cycle as the toolbar button. Without this, both would
+        // fire on every click and fight over the scale.
+        clickAction: false,
       },
     },
   },
