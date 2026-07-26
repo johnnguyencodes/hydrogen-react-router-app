@@ -16,19 +16,22 @@ export function ProductItem({
 
   return (
     <Link
-      className="product-item relative rounded-md overflow-hidden block w-full"
+      className="product-item group relative block w-full"
       key={product.id}
       prefetch="intent"
       to={`/plants/${product.handle}`}
     >
       {image && (
-        <Image
-          alt={image.altText || product.title}
-          aspectRatio="1/1"
-          data={image}
-          loading={loading}
-          sizes="(min-width: 45em) 400px, 100vw"
-        />
+        <div className="overflow-hidden rounded-md transform-gpu">
+          <Image
+            alt={image.altText || product.title}
+            aspectRatio="1/1"
+            data={image}
+            loading={loading}
+            sizes="(min-width: 45em) 400px, 100vw"
+            className="group-hover:brightness-90"
+          />
+        </div>
       )}
       {isRecentlyUpdated(updatedAt) && (
         <Badge variant="new" className="absolute top-2 left-2">

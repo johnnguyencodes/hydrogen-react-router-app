@@ -25,7 +25,7 @@ export function PaginatedResourceSection<NodesType>({
         return (
           <div>
             <div className="flex justify-center mb-5">
-              <PreviousLink className={cn(buttonVariants({variant: 'default'}))}>
+              <PreviousLink className={cn(buttonVariants({variant: 'pill'}))}>
                 {isLoading ? 'Loading...' : '↑ Load previous'}
               </PreviousLink>
             </div>
@@ -34,8 +34,8 @@ export function PaginatedResourceSection<NodesType>({
             ) : (
               resourcesMarkup
             )}
-            <div className="flex justify-center mt-5">
-              <NextLink className={cn(buttonVariants({variant: 'default'}))}>
+            <div className="flex justify-center mt-5 mb-4">
+              <NextLink className={cn(buttonVariants({variant: 'pill'}))}>
                 {isLoading ? 'Loading...' : 'Load more ↓'}
               </NextLink>
             </div>
