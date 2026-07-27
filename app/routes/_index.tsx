@@ -105,26 +105,31 @@ export default function Homepage() {
       </header>
       <div>
         <Link to="/about">
-          <Button className="my-2" variant="default">
+          <Button
+            className="my-2 rounded-full border-2 border-[var(--color-fg-orange)] hover:bg-transparent hover:text-[var(--color-fg-orange)]"
+            variant="default"
+          >
             About Me
           </Button>
         </Link>
       </div>
       <div>
-        <section className="my-5">
-          <h2 className="text-3xl font-medium leading-tight text-[var(--color-fg-green)]">
-            Photography
-          </h2>
-          <div className="flex justify-between">
-            <p className="text-[var(--color-fg-text)] text-sm">
+        <section className="mt-10 2xl:mt-16 mb-10 2xl:mb-16">
+          <div className="mb-1">
+            <div className="flex flex-row justify-between items-center">
+              <h2 className="text-3xl font-medium leading-tight text-[var(--color-fg-green)]">
+                Photography
+              </h2>
+              <Button asChild variant="pill">
+                <Link to="/photography">
+                  See all photography
+                  <ArrowRight />
+                </Link>
+              </Button>
+            </div>
+            <p className="text-[var(--color-fg-text)] py-1">
               See my photography
             </p>
-            <Link
-              to="/photography"
-              className="text-[var(--color-fg-text)] text-sm"
-            >
-              View more
-            </Link>
           </div>
           <div className="photography-homepage-journal-container flex-shrink-0 lg:inline lg:max-w-[350px] xl:max-w-[650px]">
             <div className="flex gap-3 overflow-x-auto scrollbar-hide">
