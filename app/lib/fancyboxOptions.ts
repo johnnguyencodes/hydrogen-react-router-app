@@ -47,6 +47,12 @@ function prefetchTrueOriginal(
   img.src = src;
 }
 
+// If "cover" (filling the viewport) is at least this fraction of true
+// 100% scale, the two stops are close enough to look identical - skip
+// the intermediate "cover" stop rather than making the user tap through
+// a step that visibly does nothing.
+const COVER_SKIP_THRESHOLD = 0.8;
+
 // The carousel wraps (`infinite: true`), so "previous"/"next" wrap
 // around the ends of the array too.
 function getNeighborIndexes(total: number, index: number): number[] {
@@ -230,11 +236,11 @@ function advanceZoomPhase(
       const coverScale = panzoom.getScale('cover');
       const fullScale = panzoom.getScale('full');
 
-      // Even the true original can't satisfy "cover" without exceeding
-      // true 100% - the "cover" and "100%" stops would land at the exact
-      // same scale, so the 2nd click would visibly do nothing. Skip
-      // straight to the 'full' phase instead of a redundant stop.
-      if (coverScale >= fullScale) {
+      // "cover" and true 100% are close enough (or "cover" would even
+      // need to exceed 100%) that stopping at "cover" first and 100%
+      // second would be two taps that look the same - skip straight to
+      // the 'full' phase instead of a redundant intermediate stop.
+      if (coverScale >= fullScale * COVER_SKIP_THRESHOLD) {
         slide.zoomPhase = 'full';
         if (button) updateZoomButton(button, 'full');
         panzoom.execute('zoomTo', {scale: fullScale, center});
