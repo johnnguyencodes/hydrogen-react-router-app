@@ -217,7 +217,7 @@ export default function Photography() {
       <h2 className="text-3xl font-medium leading-tight text-[var(--color-fg-green)]">
         Recent images
       </h2>
-      <PhotographyPage images={displayedImages} />
+      <PhotographyPage images={displayedImages} stretchLastRow />
       <div className="flex justify-end">
         <Link
           to="/photography/photos"

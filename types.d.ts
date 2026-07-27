@@ -100,6 +100,7 @@ declare global {
   type PhotographyPageProps = {
     images: PhotographyImageWithMetadata[];
     HeroContent?: ReactNode;
+    stretchLastRow?: boolean;
   };
 
   export type PhotographyImage = {
