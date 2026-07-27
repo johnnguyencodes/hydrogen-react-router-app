@@ -41,18 +41,20 @@ type ZoomPhase = keyof typeof ZOOM_BUTTON_CONTENT;
 // `.f-button` is a fixed-size square icon button with `overflow:hidden` -
 // this positions the label as a floating pill below it (not affecting the
 // button's own box or the icon's centering) and fades it in only on
-// hover. Needs a real stylesheet rather than inline styles since inline
-// styles can't express `:hover`; injected once, client-side only (this
-// module's top-level code also runs during SSR, where `document` doesn't
-// exist), and only from a callback that's guaranteed to run in the
-// browser once the lightbox has actually opened.
+// hover. Also adds a small right margin so the button doesn't sit flush
+// against the adjacent close button in the toolbar's right-hand group.
+// Needs a real stylesheet rather than inline styles since inline styles
+// can't express `:hover`; injected once, client-side only (this module's
+// top-level code also runs during SSR, where `document` doesn't exist),
+// and only from a callback that's guaranteed to run in the browser once
+// the lightbox has actually opened.
 function ensureZoomToggleStyles(): void {
   if (typeof document === 'undefined') return;
   if (document.getElementById('zoom-toggle-label-style')) return;
   const style = document.createElement('style');
   style.id = 'zoom-toggle-label-style';
   style.textContent = `
-    [data-fb-zoom-toggle] { overflow: visible; }
+    [data-fb-zoom-toggle] { overflow: visible; margin-right: 8px; }
     [data-fb-zoom-toggle] .zoom-toggle-label {
       position: absolute;
       top: 100%;
@@ -378,8 +380,7 @@ export const fancyboxOptions = {
       },
       display: {
         left: ['counter'],
-        middle: ['zoomToggle'],
-        right: ['close'],
+        right: ['zoomToggle', 'close'],
       },
     },
     Zoomable: {
