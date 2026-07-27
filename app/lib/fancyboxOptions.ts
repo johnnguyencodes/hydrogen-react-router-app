@@ -27,17 +27,31 @@ function pickWidthForViewport(): number {
   );
 }
 
-// Warms the browser's HTTP cache with a slide's uncapped original, at
-// the lowest fetch priority so it never competes with the capped image
-// the user is actually looking at - by the time (if ever) they zoom in
-// enough to need it, it's likely already cached rather than triggering
-// a live, multi-hundred-KB fetch right at the moment they click (see
-// advanceZoomPhase's swap-and-probe steps).
-function prefetchTrueOriginal(src: string): void {
+// Warms the browser's HTTP cache with a slide's uncapped original, so
+// by the time (if ever) someone zooms in far enough to need it, it's
+// likely already cached rather than triggering a live, multi-hundred-KB
+// fetch right at the moment they click (see advanceZoomPhase's
+// swap-and-probe steps). `priority` should match how likely this
+// specific slide is to be the one that gets zoomed into next - 'high'
+// for the current slide (competing on equal footing with its own capped
+// image, since it's the single most likely thing to get zoomed), 'low'
+// for neighbors (worth warming in case of a swipe-then-zoom, but much
+// less urgent than the slide actually being looked at).
+function prefetchTrueOriginal(
+  src: string,
+  priority: 'high' | 'auto' | 'low',
+): void {
   const img = new Image();
   // @ts-ignore – new attribute in modern browsers
-  img.fetchPriority = 'low';
+  img.fetchPriority = priority;
   img.src = src;
+}
+
+// The carousel wraps (`infinite: true`), so "previous"/"next" wrap
+// around the ends of the array too.
+function getNeighborIndexes(total: number, index: number): number[] {
+  if (total <= 1) return [];
+  return [(index - 1 + total) % total, (index + 1) % total];
 }
 
 // Per-phase content for the zoom toggle button - what each phase's *next*
@@ -337,23 +351,21 @@ export const fancyboxOptions = {
         img.src = buildResponsiveImageUrl(src, width);
       };
 
-      // The carousel wraps (`infinite: true`), so "next"/"previous" wrap
-      // around the ends of the array too.
-      const neighborIndexes =
-        total > 1
-          ? new Set([(startIndex - 1 + total) % total, (startIndex + 1) % total])
-          : new Set<number>();
+      const neighborIndexes = new Set(getNeighborIndexes(total, startIndex));
       const priorityIndexes = new Set([startIndex, ...neighborIndexes]);
 
       const currentSrc = slides[startIndex]?.src;
       if (currentSrc) {
         prefetch(currentSrc, 'high');
-        prefetchTrueOriginal(currentSrc);
+        prefetchTrueOriginal(currentSrc, 'high');
       }
 
       for (const index of neighborIndexes) {
         const src = slides[index]?.src;
-        if (src) prefetch(src, 'auto');
+        if (src) {
+          prefetch(src, 'auto');
+          prefetchTrueOriginal(src, 'low');
+        }
       }
 
       for (const [index, slide] of slides.entries()) {
@@ -435,8 +447,22 @@ export const fancyboxOptions = {
         }
         // Swiping to a slide is as likely a "might zoom in next" signal
         // as opening the gallery on it in the first place - keep warming
-        // the cache for whichever slide is now active.
-        if (activeSlide?.src) prefetchTrueOriginal(activeSlide.src);
+        // the cache for whichever slide is now active, and its
+        // neighbors, the same way the initial open does above.
+        if (activeSlide?.src) {
+          prefetchTrueOriginal(activeSlide.src, 'high');
+        }
+        const allSlides = carousel.getSlides?.() ?? [];
+        const activeIndex = carousel.getPageIndex?.() ?? -1;
+        if (activeIndex >= 0) {
+          for (const index of getNeighborIndexes(
+            allSlides.length,
+            activeIndex,
+          )) {
+            const src = allSlides[index]?.src;
+            if (src) prefetchTrueOriginal(src, 'low');
+          }
+        }
       },
     },
     Lazyload: {
