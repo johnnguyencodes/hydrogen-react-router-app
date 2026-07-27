@@ -11,6 +11,7 @@ export const Gallery = <T extends ImageInterface>({
   maxItems = 9999999,
   margin = 2,
   defaultContainerWidth = 1400,
+  stretchLastRow = false,
 }: GalleryProps<T>): JSX.Element => {
   const {containerRef, containerWidth} = useContainerWidth(
     defaultContainerWidth,
@@ -58,7 +59,7 @@ export const Gallery = <T extends ImageInterface>({
         }}
       >
         {thumbnails.map((thumbnail, index) => {
-          const isLastRow = lastRowIndices.includes(index);
+          const isLastRow = lastRowIndices.includes(index) && !stretchLastRow;
           const ratio = thumbnail.image.width / thumbnail.image.height;
 
           const calcWidth = isLastRow

@@ -10,7 +10,7 @@ const badgeVariants = cva(
       variant: {
         new: 'border-transparent bg-[var(--color-fg-orange)] text-[var(--color-bg-dim)] uppercase tracking-wide text-[10px] font-semibold',
         category:
-          'border-[1.5px] border-[var(--color-fg-statusline-2)] bg-[var(--color-bg-5)] text-[var(--color-fg-statusline-2)] text-sm',
+          'rounded-full border-[1.5px] border-[var(--color-fg-statusline-2)] bg-[var(--color-bg-5)] text-[var(--color-fg-statusline-2)] text-sm',
       },
     },
     defaultVariants: {

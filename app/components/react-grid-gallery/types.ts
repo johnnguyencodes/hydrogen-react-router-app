@@ -93,6 +93,7 @@ export interface GalleryProps<T extends Image = Image> {
   maxItems?: number;
   margin?: number;
   defaultContainerWidth?: number;
+  stretchLastRow?: boolean;
   onClick?: EventHandler<T>;
   tileViewportStyle?: StyleProp<T>;
   thumbnailStyle?: StyleProp<T>;

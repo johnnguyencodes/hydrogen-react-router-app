@@ -17,6 +17,7 @@ import {PHOTOGRAPHY_METAOBJECT_QUERY} from '~/lib/photographyPageUtils';
 import HeroCarousel from '~/components/HeroCarousel';
 import PhotographyPage from '~/components/PhotographyPage';
 import {Button} from '~/components/ui/button';
+import {ArrowRight} from 'lucide-react';
 
 export async function loader(args: LoaderFunctionArgs) {
   const criticalData = await loadCriticalData(args);
@@ -214,21 +215,24 @@ export default function Photography() {
         autoPlayInterval={15000}
       />
 
-      <h2 className="text-3xl font-medium leading-tight text-[var(--color-fg-green)]">
-        Recent images
-      </h2>
-      <PhotographyPage images={displayedImages} />
-      <div className="flex justify-end">
-        <Link
-          to="/photography/photos"
-          className="text-[var(--color-fg-text)] text-sm"
-        >
-          See all photos
-        </Link>
+      <div className="mb-10 2xl:mb-16">
+        <div className="flex flex-row mb-5 justify-between items-center">
+          <h2 className="text-3xl font-medium leading-tight text-[var(--color-fg-green)]">
+            Recent images
+          </h2>
+          <Button asChild variant="pill">
+            <Link to="/photography/photos">
+              See all photos
+              <ArrowRight />
+            </Link>
+          </Button>
+        </div>
+        <PhotographyPage images={displayedImages} stretchLastRow />
       </div>
       <PhotographyArticleSection
         photographyArticleSectionProps={articleProps}
       />
+      <div className="w-full xl:mt-10"></div>
     </div>
   );
 }

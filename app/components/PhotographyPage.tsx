@@ -5,6 +5,7 @@ import useFancybox from '~/lib/useFancybox';
 export default function PhotographyPage({
   images,
   HeroContent,
+  stretchLastRow,
 }: PhotographyPageProps) {
   const [fancyboxRef] = useFancybox(fancyboxOptions);
 
@@ -12,7 +13,11 @@ export default function PhotographyPage({
     <div ref={fancyboxRef}>
       <div className="photography mx-auto">
         {HeroContent && <HeroContent />}
-        <Gallery images={images} rowHeight={180} />
+        <Gallery
+          images={images}
+          rowHeight={180}
+          stretchLastRow={stretchLastRow}
+        />
       </div>
     </div>
   );

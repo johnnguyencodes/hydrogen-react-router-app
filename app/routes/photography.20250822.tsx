@@ -37,7 +37,7 @@ function PhotographyHero(): React.JSX.Element {
     <div>
       <div className="px-6 py-32 lg:px-8">
         <MasonryGallery images={masonryImagesGroup0} />
-        <div className="mx-auto max-w-3xl text-base/7 text-[var(--color-fg-text)]">
+        <div className="mx-auto max-w-[704px] text-base/7 text-[var(--color-fg-text)]">
           <p className="text-base/7 font-semibold text-[var(--color-fg-orange)]">
             Introducing
           </p>
@@ -116,7 +116,7 @@ function PhotographyHero(): React.JSX.Element {
           </div>
         </div>
         <MasonryGallery images={masonryImagesGroup1} />
-        <div className="mx-auto max-w-3xl text-base/7 text-[var(--color-fg-text)]">
+        <div className="mx-auto max-w-[704px] text-base/7 text-[var(--color-fg-text)]">
           <div>
             <h2 className="mt-16 text-3xl font-semibold tracking-tight text-pretty text-[var(--color-fg-green)]">
               From beginner to expert in 3 hours
@@ -148,7 +148,7 @@ function PhotographyHero(): React.JSX.Element {
           </div>
         </div>
         <MasonryGallery images={masonryImagesGroup15} />
-        <div className="mx-auto max-w-3xl text-base/7 text-[var(--color-fg-text)]">
+        <div className="mx-auto max-w-[704px] text-base/7 text-[var(--color-fg-text)]">
           <p className="text-base/7 font-semibold text-[var(--color-fg-orange)]">
             Introducing
           </p>
@@ -227,7 +227,7 @@ function PhotographyHero(): React.JSX.Element {
           </div>
         </div>
         <MasonryGallery images={masonryImagesGroup2} />
-        <div className="mx-auto max-w-3xl text-base/7 text-[var(--color-fg-text)]">
+        <div className="mx-auto max-w-[704px] text-base/7 text-[var(--color-fg-text)]">
           <div>
             <h2 className="mt-16 text-3xl font-semibold tracking-tight text-pretty text-[var(--color-fg-green)]">
               From beginner to expert in 3 hours
@@ -259,7 +259,7 @@ function PhotographyHero(): React.JSX.Element {
           </div>
         </div>
         <MasonryGallery images={masonryImagesGroup3} />
-        <div className="mx-auto max-w-3xl text-base/7 text-[var(--color-fg-text)]">
+        <div className="mx-auto max-w-[704px] text-base/7 text-[var(--color-fg-text)]">
           <p className="text-base/7 font-semibold text-[var(--color-fg-orange)]">
             Introducing
           </p>
@@ -338,7 +338,7 @@ function PhotographyHero(): React.JSX.Element {
           </div>
         </div>
         <MasonryGallery images={masonryImagesGroup4} />
-        <div className="mx-auto max-w-3xl text-base/7 text-[var(--color-fg-text)]">
+        <div className="mx-auto max-w-[704px] text-base/7 text-[var(--color-fg-text)]">
           <div>
             <h2 className="mt-16 text-3xl font-semibold tracking-tight text-pretty text-[var(--color-fg-green)]">
               From beginner to expert in 3 hours
@@ -370,7 +370,7 @@ function PhotographyHero(): React.JSX.Element {
           </div>
         </div>
         <MasonryGallery images={masonryImagesGroup5} />
-        <div className="mx-auto max-w-3xl text-base/7 text-[var(--color-fg-text)]">
+        <div className="mx-auto max-w-[704px] text-base/7 text-[var(--color-fg-text)]">
           <p className="text-base/7 font-semibold text-[var(--color-fg-orange)]">
             Introducing
           </p>
@@ -449,7 +449,7 @@ function PhotographyHero(): React.JSX.Element {
           </div>
         </div>
         <MasonryGallery images={masonryImagesGroup6} />
-        <div className="mx-auto max-w-3xl text-base/7 text-[var(--color-fg-text)]">
+        <div className="mx-auto max-w-[704px] text-base/7 text-[var(--color-fg-text)]">
           <div>
             <h2 className="mt-16 text-3xl font-semibold tracking-tight text-pretty text-[var(--color-fg-green)]">
               From beginner to expert in 3 hours
@@ -481,7 +481,7 @@ function PhotographyHero(): React.JSX.Element {
           </div>
         </div>
         <MasonryGallery images={masonryImagesGroup7} />
-        <div className="mx-auto max-w-3xl text-base/7 text-[var(--color-fg-text)]">
+        <div className="mx-auto max-w-[704px] text-base/7 text-[var(--color-fg-text)]">
           <p className="text-base/7 font-semibold text-[var(--color-fg-orange)]">
             Introducing
           </p>
@@ -560,7 +560,7 @@ function PhotographyHero(): React.JSX.Element {
           </div>
         </div>
         <MasonryGallery images={masonryImagesGroup8} />
-        <div className="mx-auto max-w-3xl text-base/7 text-[var(--color-fg-text)]">
+        <div className="mx-auto max-w-[704px] text-base/7 text-[var(--color-fg-text)]">
           <div>
             <h2 className="mt-16 text-3xl font-semibold tracking-tight text-pretty text-[var(--color-fg-green)]">
               From beginner to expert in 3 hours
@@ -592,7 +592,7 @@ function PhotographyHero(): React.JSX.Element {
           </div>
         </div>
         <MasonryGallery images={masonryImagesGroup9} />
-        <div className="mx-auto max-w-3xl text-base/7 text-[var(--color-fg-text)]">
+        <div className="mx-auto max-w-[704px] text-base/7 text-[var(--color-fg-text)]">
           <p className="text-base/7 font-semibold text-[var(--color-fg-orange)]">
             Introducing
           </p>
@@ -671,7 +671,7 @@ function PhotographyHero(): React.JSX.Element {
           </div>
         </div>
         <MasonryGallery images={masonryImagesGroup10} />
-        <div className="mx-auto max-w-3xl text-base/7 text-[var(--color-fg-text)]">
+        <div className="mx-auto max-w-[704px] text-base/7 text-[var(--color-fg-text)]">
           <p className="text-base/7 font-semibold text-[var(--color-fg-orange)]">
             Introducing
           </p>
@@ -750,7 +750,7 @@ function PhotographyHero(): React.JSX.Element {
           </div>
         </div>
         <MasonryGallery images={masonryImagesGroup11} />
-        <div className="mx-auto max-w-3xl text-base/7 text-[var(--color-fg-text)]">
+        <div className="mx-auto max-w-[704px] text-base/7 text-[var(--color-fg-text)]">
           <p className="text-base/7 font-semibold text-[var(--color-fg-orange)]">
             Introducing
           </p>
