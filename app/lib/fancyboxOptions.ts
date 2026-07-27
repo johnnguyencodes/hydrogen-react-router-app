@@ -136,6 +136,18 @@ function advanceZoomPhase(
   const img = panzoom?.getContent();
   if (!panzoom || !slide || !img) return;
 
+  // Panzoom only finishes creating its zoom/pan tween once the image has
+  // actually finished loading - execute() is a silent no-op before that.
+  // Without this guard, tapping the image while it's still loading (rare
+  // locally, where these images are already warm in the browser cache
+  // from repeated dev testing, but common on a real visitor's first,
+  // real-network production load) would still advance slide.zoomPhase
+  // and the button's label even though nothing visibly changed - so the
+  // next tap, and Panzoom's own first real render once loading finishes,
+  // both land a step ahead of what the user actually sees. That's what
+  // produces a phantom zoom-in-then-bounce-back on that first tap only.
+  if (!panzoom.getTween()) return;
+
   const button = carousel
     .getContainer?.()
     ?.querySelector('[data-fb-zoom-toggle]');
