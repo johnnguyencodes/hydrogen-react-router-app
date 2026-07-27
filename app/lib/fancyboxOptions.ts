@@ -192,9 +192,6 @@ function advanceZoomPhase(
   const phase: ZoomPhase = slide.zoomPhase || 'base';
 
   if (phase === 'base') {
-    slide.zoomPhase = 'cover';
-    if (button) updateZoomButton(button, 'cover');
-
     // "full" here is Panzoom's own internal zoom ceiling (native
     // resolution of whatever's currently loaded, given our maxScale: 1
     // option below) - capping "cover" at that ceiling avoids fighting
@@ -218,27 +215,42 @@ function advanceZoomPhase(
     // cover, so the common case (a candidate already big enough) stays
     // a single, immediate zoomTo with no extra network fetch.
     if (panzoom.getScale('cover') <= panzoom.getScale('full')) {
+      slide.zoomPhase = 'cover';
+      if (button) updateZoomButton(button, 'cover');
       panzoom.execute('zoomTo', {scale: panzoom.getScale('cover'), center});
       return;
     }
 
     const probe = new Image();
-    const zoomToCover = (trueWidth: number, trueHeight: number) => {
+    const finishBaseStep = (trueWidth: number, trueHeight: number) => {
       if (trueWidth && trueHeight) {
         img.setAttribute('width', String(trueWidth));
         img.setAttribute('height', String(trueHeight));
       }
-      const coverScale = Math.min(
-        panzoom.getScale('cover'),
-        panzoom.getScale('full'),
-      );
+      const coverScale = panzoom.getScale('cover');
+      const fullScale = panzoom.getScale('full');
+
+      // Even the true original can't satisfy "cover" without exceeding
+      // true 100% - the "cover" and "100%" stops would land at the exact
+      // same scale, so the 2nd click would visibly do nothing. Skip
+      // straight to the 'full' phase instead of a redundant stop.
+      if (coverScale >= fullScale) {
+        slide.zoomPhase = 'full';
+        if (button) updateZoomButton(button, 'full');
+        panzoom.execute('zoomTo', {scale: fullScale, center});
+        return;
+      }
+
+      slide.zoomPhase = 'cover';
+      if (button) updateZoomButton(button, 'cover');
       panzoom.execute('zoomTo', {scale: coverScale, center});
     };
     img.removeAttribute('srcset');
     img.removeAttribute('sizes');
     img.src = slide.src;
-    probe.onload = () => zoomToCover(probe.naturalWidth, probe.naturalHeight);
-    probe.onerror = () => zoomToCover(0, 0);
+    probe.onload = () =>
+      finishBaseStep(probe.naturalWidth, probe.naturalHeight);
+    probe.onerror = () => finishBaseStep(0, 0);
     probe.src = slide.src;
     return;
   }
