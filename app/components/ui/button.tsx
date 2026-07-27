@@ -12,7 +12,7 @@ const buttonVariants = cva(
         default:
           'bg-[var(--color-fg-orange)] text-[var(--color-bg-dim)] shadow-xs hover:bg-[var(--color-fg-orange)]/70 hover:cursor-pointer',
         banner:
-          'mt-3 bg-[var(--color-bg-dim)] dark:bg-[var(--color-fg-text)] border-[var(--color-bg-dim)] dark:border-[var(--color-fg-text)] border-2 text-[var(--color-fg-text)] dark:text-[var(--color-bg-dim)] hover:cursor-pointer hover:bg-[var(--color-fg-text)] hover:text-[var(--color-bg-dim)] dark:hover:bg-[var(--color-bg-dim)] dark:hover:text-[var(--color-fg-text)]',
+          'mt-3 rounded-full bg-[var(--color-bg-dim)] dark:bg-[var(--color-fg-text)] border-[var(--color-bg-dim)] dark:border-[var(--color-fg-text)] border-2 text-[var(--color-fg-text)] dark:text-[var(--color-bg-dim)] hover:cursor-pointer hover:bg-[var(--color-fg-text)] hover:text-[var(--color-bg-dim)] dark:hover:bg-[var(--color-bg-dim)] dark:hover:text-[var(--color-fg-text)]',
         destructive:
           'bg-destructive text-white shadow-xs hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60',
         outline:
