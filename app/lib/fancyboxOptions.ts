@@ -138,15 +138,26 @@ function advanceZoomPhase(
 
   // Panzoom only finishes creating its zoom/pan tween once the image has
   // actually finished loading - execute() is a silent no-op before that.
-  // Without this guard, tapping the image while it's still loading (rare
-  // locally, where these images are already warm in the browser cache
-  // from repeated dev testing, but common on a real visitor's first,
-  // real-network production load) would still advance slide.zoomPhase
-  // and the button's label even though nothing visibly changed - so the
-  // next tap, and Panzoom's own first real render once loading finishes,
-  // both land a step ahead of what the user actually sees. That's what
-  // produces a phantom zoom-in-then-bounce-back on that first tap only.
-  if (!panzoom.getTween()) return;
+  //
+  // Separately, and this is the one that actually matters here: Fancybox
+  // plays its own "reveal" effect on open - animating the image from the
+  // clicked thumbnail's on-screen position/size into its fit position -
+  // using this *same* shared tween (zoomEffect option, on by default).
+  // That only ever runs once, on the initial slide, right as the gallery
+  // opens. If the very first tap/click lands while that reveal animation
+  // is still playing, our own execute('zoomTo', ...) call fights over the
+  // same tween mid-flight: the resulting target position/scale is
+  // computed from wherever that in-progress animation happens to be at
+  // that instant, not from the settled fit position, producing exactly
+  // the "zooms in, then bounces back to fit" glitch on that first
+  // interaction only - every later tap happens after the reveal has long
+  // since settled, so it behaves correctly.
+  //
+  // Ignoring taps while *any* animation on this slide's tween is still
+  // running (not just while the tween doesn't exist yet) covers both
+  // cases: the image-still-loading window and the opening reveal effect.
+  const tween = panzoom.getTween();
+  if (!tween || tween.isRunning()) return;
 
   const button = carousel
     .getContainer?.()
