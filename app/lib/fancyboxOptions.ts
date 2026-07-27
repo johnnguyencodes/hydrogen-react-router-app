@@ -167,7 +167,20 @@ function advanceZoomPhase(
   if (phase === 'base') {
     slide.zoomPhase = 'cover';
     if (button) updateZoomButton(button, 'cover');
-    panzoom.execute('zoomTo', {scale: panzoom.getScale('cover'), center});
+    // For a low-resolution source photo (e.g. a small scan), filling the
+    // viewport ("cover") can require upscaling past the image's own
+    // native pixel resolution ("full", Panzoom's own internal zoom
+    // ceiling given our maxScale: 1 option below). Asking Panzoom to
+    // zoom past its own ceiling doesn't error - it silently snaps back
+    // down once the animation settles, which looks exactly like the
+    // zoom bouncing back to fit. Capping at whichever is smaller keeps
+    // us consistent with that ceiling instead of fighting it, matching
+    // the "100% is the ceiling for every zoom path" intent below.
+    const coverScale = Math.min(
+      panzoom.getScale('cover'),
+      panzoom.getScale('full'),
+    );
+    panzoom.execute('zoomTo', {scale: coverScale, center});
     return;
   }
 
