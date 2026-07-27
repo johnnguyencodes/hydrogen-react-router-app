@@ -7,6 +7,7 @@ import {
 import HeroCarousel from '../components/HeroCarousel';
 import type {Route} from './+types/_index';
 import {Button} from '../components/ui/button';
+import {ArrowRight} from 'lucide-react';
 import {PhotographyHomepageArticleSection} from '~/components/PhotographyHomepageArticleSection';
 import {photographyJournalSeoData} from '~/lib/photographyJournalSeoData';
 import {PlantsHomepageFavorites} from '~/components/PlantHomepageFavorites';
@@ -134,14 +135,16 @@ export default function Homepage() {
           </div>
         </section>
         <section className="my-5">
-          <h2 className="text-3xl font-medium leading-tight text-[var(--color-fg-green)]">
-            Plants
-          </h2>
-          <div className="flex justify-between">
-            <p className="text-[var(--color-fg-text)] text-sm">See my plants</p>
-            <Link to="/plants" className="text-[var(--color-fg-text)] text-sm">
-              View more
-            </Link>
+          <div className="flex flex-row mb-5 justify-between items-center">
+            <h2 className="text-3xl font-medium leading-tight text-[var(--color-fg-green)]">
+              Plants
+            </h2>
+            <Button asChild variant="pill">
+              <Link to="/plants">
+                See all plants
+                <ArrowRight />
+              </Link>
+            </Button>
           </div>
           <PlantsHomepageFavorites collection={data.data.favoriteCollection} />
         </section>
