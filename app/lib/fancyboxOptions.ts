@@ -167,20 +167,52 @@ function advanceZoomPhase(
   if (phase === 'base') {
     slide.zoomPhase = 'cover';
     if (button) updateZoomButton(button, 'cover');
-    // For a low-resolution source photo (e.g. a small scan), filling the
-    // viewport ("cover") can require upscaling past the image's own
-    // native pixel resolution ("full", Panzoom's own internal zoom
-    // ceiling given our maxScale: 1 option below). Asking Panzoom to
-    // zoom past its own ceiling doesn't error - it silently snaps back
-    // down once the animation settles, which looks exactly like the
-    // zoom bouncing back to fit. Capping at whichever is smaller keeps
-    // us consistent with that ceiling instead of fighting it, matching
-    // the "100% is the ceiling for every zoom path" intent below.
-    const coverScale = Math.min(
-      panzoom.getScale('cover'),
-      panzoom.getScale('full'),
-    );
-    panzoom.execute('zoomTo', {scale: coverScale, center});
+
+    // "full" here is Panzoom's own internal zoom ceiling (native
+    // resolution of whatever's currently loaded, given our maxScale: 1
+    // option below) - capping "cover" at that ceiling avoids fighting
+    // Panzoom's own bounds-safety, which would otherwise silently snap
+    // an over-target back down once the animation settles (visible as
+    // the zoom bouncing back to fit).
+    //
+    // But that ceiling is only meaningful for the currently-loaded
+    // srcset candidate, which our own srcset/sizes deliberately size for
+    // the image's *base* footprint (sizes="100vw" at fit scale) - not
+    // for "cover", which can need a visibly larger footprint than base
+    // (e.g. a portrait photo in a landscape viewport). So a capped
+    // candidate can legitimately be too small for "cover" even when the
+    // real source photo has plenty of resolution to spare, and clamping
+    // against that undersized candidate's own ceiling would wrongly cap
+    // "cover" back down to (or below) fit - looking like the first tap
+    // does nothing at all.
+    //
+    // Only pay for a swap-and-probe (same approach as the cover -> full
+    // step below) when the currently-loaded candidate actually can't
+    // cover, so the common case (a candidate already big enough) stays
+    // a single, immediate zoomTo with no extra network fetch.
+    if (panzoom.getScale('cover') <= panzoom.getScale('full')) {
+      panzoom.execute('zoomTo', {scale: panzoom.getScale('cover'), center});
+      return;
+    }
+
+    const probe = new Image();
+    const zoomToCover = (trueWidth: number, trueHeight: number) => {
+      if (trueWidth && trueHeight) {
+        img.setAttribute('width', String(trueWidth));
+        img.setAttribute('height', String(trueHeight));
+      }
+      const coverScale = Math.min(
+        panzoom.getScale('cover'),
+        panzoom.getScale('full'),
+      );
+      panzoom.execute('zoomTo', {scale: coverScale, center});
+    };
+    img.removeAttribute('srcset');
+    img.removeAttribute('sizes');
+    img.src = slide.src;
+    probe.onload = () => zoomToCover(probe.naturalWidth, probe.naturalHeight);
+    probe.onerror = () => zoomToCover(0, 0);
+    probe.src = slide.src;
     return;
   }
 
