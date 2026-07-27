@@ -27,6 +27,19 @@ function pickWidthForViewport(): number {
   );
 }
 
+// Warms the browser's HTTP cache with a slide's uncapped original, at
+// the lowest fetch priority so it never competes with the capped image
+// the user is actually looking at - by the time (if ever) they zoom in
+// enough to need it, it's likely already cached rather than triggering
+// a live, multi-hundred-KB fetch right at the moment they click (see
+// advanceZoomPhase's swap-and-probe steps).
+function prefetchTrueOriginal(src: string): void {
+  const img = new Image();
+  // @ts-ignore – new attribute in modern browsers
+  img.fetchPriority = 'low';
+  img.src = src;
+}
+
 // Per-phase content for the zoom toggle button - what each phase's *next*
 // click will do. `label` shows the target zoom level below the icon, on
 // hover only; the 3rd phase only zooms back out, so it gets no label.
@@ -333,7 +346,10 @@ export const fancyboxOptions = {
       const priorityIndexes = new Set([startIndex, ...neighborIndexes]);
 
       const currentSrc = slides[startIndex]?.src;
-      if (currentSrc) prefetch(currentSrc, 'high');
+      if (currentSrc) {
+        prefetch(currentSrc, 'high');
+        prefetchTrueOriginal(currentSrc);
+      }
 
       for (const index of neighborIndexes) {
         const src = slides[index]?.src;
@@ -417,6 +433,10 @@ export const fancyboxOptions = {
         if (button) {
           updateZoomButton(button, activeSlide?.zoomPhase || 'base');
         }
+        // Swiping to a slide is as likely a "might zoom in next" signal
+        // as opening the gallery on it in the first place - keep warming
+        // the cache for whichever slide is now active.
+        if (activeSlide?.src) prefetchTrueOriginal(activeSlide.src);
       },
     },
     Lazyload: {
