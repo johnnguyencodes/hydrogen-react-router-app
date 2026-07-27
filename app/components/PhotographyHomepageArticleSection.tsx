@@ -8,8 +8,8 @@ export function PhotographyHomepageArticleSection({
 }) {
   const location = useLocation();
   return (
-    <div className="article-posts my-5">
-      <div className="w-full auto-rows-fr columns-1 md:columns-2 lg:columns-3 gap-3 space-y-3">
+    <div className="article-posts">
+      <div className="w-full columns-1 md:columns-2 lg:columns-3 gap-3 space-y-3">
         {photographyArticleSectionProps.pageSeoDataArray.map(
           (post: PageSeoData) => {
             const dateObj = new Date(post.publishedAt);
@@ -18,6 +18,13 @@ export function PhotographyHomepageArticleSection({
               month: 'long',
               day: 'numeric',
             });
+            const tags =
+              location.pathname === '/photography/journal' && post.tags
+                ? post.tags
+                    .split(',')
+                    .map((tag: string) => tag.trim())
+                    .filter((tag: string) => tag !== '')
+                : [];
 
             return post.status === 'active' ? (
               <Link
@@ -25,30 +32,18 @@ export function PhotographyHomepageArticleSection({
                 key={post.relativeUrlPath}
                 className="block break-inside-avoid"
               >
-                <article className="relative flex flex-col overflow-hidden rounded-md bg-[var(--color-bg-2)] mb-3">
+                <article className="flex flex-col rounded-md bg-[var(--color-bg-2)] mb-3">
                   <div className="px-4 py-2 flex flex-col flex-1">
-                    <h3 className="mt-2 text-lg/6 font-semibold text-[var(--color-fg-green)]">
+                    <h3 className="text-xl font-semibold text-[var(--color-fg-green)]">
                       {post.title}
                     </h3>
-                    <div className="flex flex-wrap mt-2 overflow-hidden text-sm text-[var(--color-fg-text)] items-center">
-                      <p>
-                        {formattedDate}
-                        {location.pathname === '/photography/journal' &&
-                          post.tags &&
-                          post.tags
-                            .split(',')
-                            .map((tag: string) => tag.trim())
-                            .filter((tag: string) => tag !== '')
-                            .map((tag: string) => (
-                              <span
-                                key={tag}
-                                className="mx-1 text-[var(--color-fg-statusline-2)] bg-[var(--color-bg-5)] rounded-md px-1.5 text-sm border-[1.5px] border-[var(--color-fg-statusline-2)]"
-                              >
-                                {tag}
-                              </span>
-                            ))}
-                      </p>
-                    </div>
+                    <p className="mt-1 text-xs tracking-wide uppercase text-[color-mix(in_oklab,var(--color-fg-text)_70%,transparent)]">
+                      {formattedDate}
+                      {tags.length > 0
+                        ? ' ' +
+                          tags.map((tag) => `#${tag.toUpperCase()}`).join(' ')
+                        : null}
+                    </p>
                   </div>
                   <div className="w-full">
                     <Image
@@ -58,8 +53,8 @@ export function PhotographyHomepageArticleSection({
                       className="block w-full h-auto object-contain"
                     />
                   </div>
-                  <div className="px-4 pt-0.5 pb-3 flex flex-col flex-1 bg-[var(--color-bg-1)]">
-                    <p className="mt-1 line-clamp-3 text-sm/6 text-[var(--color-fg-text)]">
+                  <div className="px-4 pt-2 pb-3 flex flex-col flex-1">
+                    <p className="text-[var(--color-fg-text)]">
                       {post.description}
                     </p>
                   </div>
