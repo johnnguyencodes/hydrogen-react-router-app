@@ -27,6 +27,39 @@ function pickWidthForViewport(): number {
   );
 }
 
+// Warms the browser's HTTP cache with a slide's uncapped original, so
+// by the time (if ever) someone zooms in far enough to need it, it's
+// likely already cached rather than triggering a live, multi-hundred-KB
+// fetch right at the moment they click (see advanceZoomPhase's
+// swap-and-probe steps). `priority` should match how likely this
+// specific slide is to be the one that gets zoomed into next - 'high'
+// for the current slide (competing on equal footing with its own capped
+// image, since it's the single most likely thing to get zoomed), 'low'
+// for neighbors (worth warming in case of a swipe-then-zoom, but much
+// less urgent than the slide actually being looked at).
+function prefetchTrueOriginal(
+  src: string,
+  priority: 'high' | 'auto' | 'low',
+): void {
+  const img = new Image();
+  // @ts-ignore – new attribute in modern browsers
+  img.fetchPriority = priority;
+  img.src = src;
+}
+
+// If "cover" (filling the viewport) is at least this fraction of true
+// 100% scale, the two stops are close enough to look identical - skip
+// the intermediate "cover" stop rather than making the user tap through
+// a step that visibly does nothing.
+const COVER_SKIP_THRESHOLD = 0.8;
+
+// The carousel wraps (`infinite: true`), so "previous"/"next" wrap
+// around the ends of the array too.
+function getNeighborIndexes(total: number, index: number): number[] {
+  if (total <= 1) return [];
+  return [(index - 1 + total) % total, (index + 1) % total];
+}
+
 // Per-phase content for the zoom toggle button - what each phase's *next*
 // click will do. `label` shows the target zoom level below the icon, on
 // hover only; the 3rd phase only zooms back out, so it gets no label.
@@ -165,22 +198,66 @@ function advanceZoomPhase(
   const phase: ZoomPhase = slide.zoomPhase || 'base';
 
   if (phase === 'base') {
-    slide.zoomPhase = 'cover';
-    if (button) updateZoomButton(button, 'cover');
-    // For a low-resolution source photo (e.g. a small scan), filling the
-    // viewport ("cover") can require upscaling past the image's own
-    // native pixel resolution ("full", Panzoom's own internal zoom
-    // ceiling given our maxScale: 1 option below). Asking Panzoom to
-    // zoom past its own ceiling doesn't error - it silently snaps back
-    // down once the animation settles, which looks exactly like the
-    // zoom bouncing back to fit. Capping at whichever is smaller keeps
-    // us consistent with that ceiling instead of fighting it, matching
-    // the "100% is the ceiling for every zoom path" intent below.
-    const coverScale = Math.min(
-      panzoom.getScale('cover'),
-      panzoom.getScale('full'),
-    );
-    panzoom.execute('zoomTo', {scale: coverScale, center});
+    // "full" here is Panzoom's own internal zoom ceiling (native
+    // resolution of whatever's currently loaded, given our maxScale: 1
+    // option below) - capping "cover" at that ceiling avoids fighting
+    // Panzoom's own bounds-safety, which would otherwise silently snap
+    // an over-target back down once the animation settles (visible as
+    // the zoom bouncing back to fit).
+    //
+    // But that ceiling is only meaningful for the currently-loaded
+    // srcset candidate, which our own srcset/sizes deliberately size for
+    // the image's *base* footprint (sizes="100vw" at fit scale) - not
+    // for "cover", which can need a visibly larger footprint than base
+    // (e.g. a portrait photo in a landscape viewport). So a capped
+    // candidate can legitimately be too small for "cover" even when the
+    // real source photo has plenty of resolution to spare, and clamping
+    // against that undersized candidate's own ceiling would wrongly cap
+    // "cover" back down to (or below) fit - looking like the first tap
+    // does nothing at all.
+    //
+    // Only pay for a swap-and-probe (same approach as the cover -> full
+    // step below) when the currently-loaded candidate actually can't
+    // cover, so the common case (a candidate already big enough) stays
+    // a single, immediate zoomTo with no extra network fetch.
+    if (panzoom.getScale('cover') <= panzoom.getScale('full')) {
+      slide.zoomPhase = 'cover';
+      if (button) updateZoomButton(button, 'cover');
+      panzoom.execute('zoomTo', {scale: panzoom.getScale('cover'), center});
+      return;
+    }
+
+    const probe = new Image();
+    const finishBaseStep = (trueWidth: number, trueHeight: number) => {
+      if (trueWidth && trueHeight) {
+        img.setAttribute('width', String(trueWidth));
+        img.setAttribute('height', String(trueHeight));
+      }
+      const coverScale = panzoom.getScale('cover');
+      const fullScale = panzoom.getScale('full');
+
+      // "cover" and true 100% are close enough (or "cover" would even
+      // need to exceed 100%) that stopping at "cover" first and 100%
+      // second would be two taps that look the same - skip straight to
+      // the 'full' phase instead of a redundant intermediate stop.
+      if (coverScale >= fullScale * COVER_SKIP_THRESHOLD) {
+        slide.zoomPhase = 'full';
+        if (button) updateZoomButton(button, 'full');
+        panzoom.execute('zoomTo', {scale: fullScale, center});
+        return;
+      }
+
+      slide.zoomPhase = 'cover';
+      if (button) updateZoomButton(button, 'cover');
+      panzoom.execute('zoomTo', {scale: coverScale, center});
+    };
+    img.removeAttribute('srcset');
+    img.removeAttribute('sizes');
+    img.src = slide.src;
+    probe.onload = () =>
+      finishBaseStep(probe.naturalWidth, probe.naturalHeight);
+    probe.onerror = () => finishBaseStep(0, 0);
+    probe.src = slide.src;
     return;
   }
 
@@ -292,20 +369,21 @@ export const fancyboxOptions = {
         img.src = buildResponsiveImageUrl(src, width);
       };
 
-      // The carousel wraps (`infinite: true`), so "next"/"previous" wrap
-      // around the ends of the array too.
-      const neighborIndexes =
-        total > 1
-          ? new Set([(startIndex - 1 + total) % total, (startIndex + 1) % total])
-          : new Set<number>();
+      const neighborIndexes = new Set(getNeighborIndexes(total, startIndex));
       const priorityIndexes = new Set([startIndex, ...neighborIndexes]);
 
       const currentSrc = slides[startIndex]?.src;
-      if (currentSrc) prefetch(currentSrc, 'high');
+      if (currentSrc) {
+        prefetch(currentSrc, 'high');
+        prefetchTrueOriginal(currentSrc, 'high');
+      }
 
       for (const index of neighborIndexes) {
         const src = slides[index]?.src;
-        if (src) prefetch(src, 'auto');
+        if (src) {
+          prefetch(src, 'auto');
+          prefetchTrueOriginal(src, 'low');
+        }
       }
 
       for (const [index, slide] of slides.entries()) {
@@ -384,6 +462,24 @@ export const fancyboxOptions = {
           ?.querySelector('[data-fb-zoom-toggle]');
         if (button) {
           updateZoomButton(button, activeSlide?.zoomPhase || 'base');
+        }
+        // Swiping to a slide is as likely a "might zoom in next" signal
+        // as opening the gallery on it in the first place - keep warming
+        // the cache for whichever slide is now active, and its
+        // neighbors, the same way the initial open does above.
+        if (activeSlide?.src) {
+          prefetchTrueOriginal(activeSlide.src, 'high');
+        }
+        const allSlides = carousel.getSlides?.() ?? [];
+        const activeIndex = carousel.getPageIndex?.() ?? -1;
+        if (activeIndex >= 0) {
+          for (const index of getNeighborIndexes(
+            allSlides.length,
+            activeIndex,
+          )) {
+            const src = allSlides[index]?.src;
+            if (src) prefetchTrueOriginal(src, 'low');
+          }
         }
       },
     },
