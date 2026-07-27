@@ -17,9 +17,7 @@ export function PhotographyArticleSection({
           {photographyArticleSectionProps.sectionDescription}
         </p>
       </div>
-      <div
-        className="w-full columns-1 md:columns-2 lg:columns-3 gap-16 [column-rule-width:1px] [column-rule-style:solid] [column-rule-color:color-mix(in_oklab,var(--color-fg-text)_20%,transparent)]"
-      >
+      <div className="w-full columns-1 md:columns-2 lg:columns-3 gap-3 space-y-3">
         {photographyArticleSectionProps.pageSeoDataArray.map(
           (post: PageSeoData) => {
             const dateObj = new Date(post.publishedAt);
@@ -40,20 +38,22 @@ export function PhotographyArticleSection({
               <Link
                 to={post.relativeUrlPath}
                 key={post.relativeUrlPath}
-                className="block break-inside-avoid mb-6 pb-6 border-b border-[color-mix(in_oklab,var(--color-fg-text)_15%,transparent)] last:mb-0 last:border-b-0 last:pb-0"
+                className="block break-inside-avoid"
               >
-                <article className="flex flex-col">
-                  <h3 className="text-xl font-semibold text-[var(--color-fg-green)]">
-                    {post.title}
-                  </h3>
-                  <p className="mt-1 text-xs tracking-wide uppercase text-[color-mix(in_oklab,var(--color-fg-text)_70%,transparent)]">
-                    {formattedDate}
-                    {tags.length > 0
-                      ? ' ' +
-                        tags.map((tag) => `#${tag.toUpperCase()}`).join(' ')
-                      : null}
-                  </p>
-                  <div className="w-full mt-3">
+                <article className="flex flex-col rounded-md bg-[var(--color-bg-2)] mb-3">
+                  <div className="px-4 py-2 flex flex-col flex-1">
+                    <h3 className="text-xl font-semibold text-[var(--color-fg-green)]">
+                      {post.title}
+                    </h3>
+                    <p className="mt-1 text-xs tracking-wide uppercase text-[color-mix(in_oklab,var(--color-fg-text)_70%,transparent)]">
+                      {formattedDate}
+                      {tags.length > 0
+                        ? ' ' +
+                          tags.map((tag) => `#${tag.toUpperCase()}`).join(' ')
+                        : null}
+                    </p>
+                  </div>
+                  <div className="w-full">
                     <Image
                       data={post.media[0]}
                       aspectRatio={`${post.media[0].width.toString()}/${post.media[0].height.toString()}`}
@@ -61,9 +61,11 @@ export function PhotographyArticleSection({
                       className="block w-full h-auto object-contain"
                     />
                   </div>
-                  <p className="mt-3 text-[var(--color-fg-text)]">
-                    {post.description}
-                  </p>
+                  <div className="px-4 pt-2 pb-3 flex flex-col flex-1">
+                    <p className="text-[var(--color-fg-text)]">
+                      {post.description}
+                    </p>
+                  </div>
                 </article>
               </Link>
             ) : null;
