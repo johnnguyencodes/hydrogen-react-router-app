@@ -45,6 +45,27 @@ export async function fetchAllPhotos(
   }));
 }
 
+export function buildPhotoLookup(
+  photos: PhotographyImageWithMetadata[],
+): Map<string, PhotographyImageWithMetadata> {
+  return new Map(
+    photos.map((photo) => [`${photo.meta.date}-${photo.meta.index}`, photo]),
+  );
+}
+
+// Resolves a journal article's masonry layout (date/index/className only)
+// against the fetched photos, skipping any entry whose photo isn't found
+// (e.g. before a migration has run) instead of throwing.
+export function resolveMasonryImages(
+  layout: MasonryLayoutEntry[],
+  photosByKey: Map<string, PhotographyImageWithMetadata>,
+): MasonryGalleryImage[] {
+  return layout.flatMap((entry) => {
+    const photo = photosByKey.get(`${entry.date}-${entry.index}`);
+    return photo ? [{...photo, className: entry.className}] : [];
+  });
+}
+
 export async function loadPhotographyPageData(
   args: LoaderFunctionArgs,
   seoData: PageSeoData,

@@ -1,31 +1,25 @@
-import type {LoaderFunctionArgs, MetaFunction} from 'react-router';
+import {useLoaderData, type LoaderFunctionArgs, type MetaFunction} from 'react-router';
 import PhotographyPage from '~/components/PhotographyPage';
 import {journal20250822 as seoData} from '~/lib/photographyJournalSeoData';
 import {
   createPhotographyPageMeta,
-  loadPhotographyJournalData,
+  fetchAllPhotos,
+  buildPhotoLookup,
+  resolveMasonryImages,
 } from '~/lib/photographyPageUtils';
-import {
-  masonryImagesGroup0,
-  masonryImagesGroup1,
-  masonryImagesGroup15,
-  masonryImagesGroup2,
-  masonryImagesGroup3,
-  masonryImagesGroup4,
-  masonryImagesGroup5,
-  masonryImagesGroup6,
-  masonryImagesGroup7,
-  masonryImagesGroup8,
-  masonryImagesGroup9,
-  masonryImagesGroup10,
-  masonryImagesGroup11,
-  thumbnails,
-} from '~/assets/imageData20250822';
+import {masonryLayoutGroups} from '~/assets/imageData20250822';
 import MasonryGallery from '~/components/MasonryGallery';
 import {SunIcon} from 'lucide-react';
 
 export async function loader(args: LoaderFunctionArgs) {
-  return loadPhotographyJournalData(seoData);
+  const photos = await fetchAllPhotos(args.context.storefront);
+
+  return {
+    criticalData: {
+      seo: seoData,
+      photos,
+    },
+  };
 }
 
 export const meta: MetaFunction<typeof loader> = ({data, matches}) => {
@@ -33,10 +27,18 @@ export const meta: MetaFunction<typeof loader> = ({data, matches}) => {
 };
 
 function PhotographyHero(): React.JSX.Element {
+  const {criticalData} = useLoaderData<typeof loader>();
+  const photosByKey = buildPhotoLookup(criticalData.photos);
+
   return (
     <div>
       <div className="px-6 py-32 lg:px-8">
-        <MasonryGallery images={masonryImagesGroup0} />
+        <MasonryGallery
+          images={resolveMasonryImages(
+            masonryLayoutGroups.masonryImagesGroup0,
+            photosByKey,
+          )}
+        />
         <div className="mx-auto max-w-[704px] text-base/7 text-[var(--color-fg-text)]">
           <p className="text-base/7 font-semibold text-[var(--color-fg-yellow)]">
             Introducing
@@ -115,7 +117,9 @@ function PhotographyHero(): React.JSX.Element {
             </p>
           </div>
         </div>
-        <MasonryGallery images={masonryImagesGroup1} />
+        <MasonryGallery
+          images={resolveMasonryImages(masonryLayoutGroups.masonryImagesGroup1, photosByKey)}
+        />
         <div className="mx-auto max-w-[704px] text-base/7 text-[var(--color-fg-text)]">
           <div>
             <h2 className="mt-16 text-3xl font-semibold tracking-tight text-pretty text-[var(--color-fg-blue)]">
@@ -147,7 +151,9 @@ function PhotographyHero(): React.JSX.Element {
             </p>
           </div>
         </div>
-        <MasonryGallery images={masonryImagesGroup15} />
+        <MasonryGallery
+          images={resolveMasonryImages(masonryLayoutGroups.masonryImagesGroup15, photosByKey)}
+        />
         <div className="mx-auto max-w-[704px] text-base/7 text-[var(--color-fg-text)]">
           <p className="text-base/7 font-semibold text-[var(--color-fg-yellow)]">
             Introducing
@@ -226,7 +232,9 @@ function PhotographyHero(): React.JSX.Element {
             </p>
           </div>
         </div>
-        <MasonryGallery images={masonryImagesGroup2} />
+        <MasonryGallery
+          images={resolveMasonryImages(masonryLayoutGroups.masonryImagesGroup2, photosByKey)}
+        />
         <div className="mx-auto max-w-[704px] text-base/7 text-[var(--color-fg-text)]">
           <div>
             <h2 className="mt-16 text-3xl font-semibold tracking-tight text-pretty text-[var(--color-fg-blue)]">
@@ -258,7 +266,9 @@ function PhotographyHero(): React.JSX.Element {
             </p>
           </div>
         </div>
-        <MasonryGallery images={masonryImagesGroup3} />
+        <MasonryGallery
+          images={resolveMasonryImages(masonryLayoutGroups.masonryImagesGroup3, photosByKey)}
+        />
         <div className="mx-auto max-w-[704px] text-base/7 text-[var(--color-fg-text)]">
           <p className="text-base/7 font-semibold text-[var(--color-fg-yellow)]">
             Introducing
@@ -337,7 +347,9 @@ function PhotographyHero(): React.JSX.Element {
             </p>
           </div>
         </div>
-        <MasonryGallery images={masonryImagesGroup4} />
+        <MasonryGallery
+          images={resolveMasonryImages(masonryLayoutGroups.masonryImagesGroup4, photosByKey)}
+        />
         <div className="mx-auto max-w-[704px] text-base/7 text-[var(--color-fg-text)]">
           <div>
             <h2 className="mt-16 text-3xl font-semibold tracking-tight text-pretty text-[var(--color-fg-blue)]">
@@ -369,7 +381,9 @@ function PhotographyHero(): React.JSX.Element {
             </p>
           </div>
         </div>
-        <MasonryGallery images={masonryImagesGroup5} />
+        <MasonryGallery
+          images={resolveMasonryImages(masonryLayoutGroups.masonryImagesGroup5, photosByKey)}
+        />
         <div className="mx-auto max-w-[704px] text-base/7 text-[var(--color-fg-text)]">
           <p className="text-base/7 font-semibold text-[var(--color-fg-yellow)]">
             Introducing
@@ -448,7 +462,9 @@ function PhotographyHero(): React.JSX.Element {
             </p>
           </div>
         </div>
-        <MasonryGallery images={masonryImagesGroup6} />
+        <MasonryGallery
+          images={resolveMasonryImages(masonryLayoutGroups.masonryImagesGroup6, photosByKey)}
+        />
         <div className="mx-auto max-w-[704px] text-base/7 text-[var(--color-fg-text)]">
           <div>
             <h2 className="mt-16 text-3xl font-semibold tracking-tight text-pretty text-[var(--color-fg-blue)]">
@@ -480,7 +496,9 @@ function PhotographyHero(): React.JSX.Element {
             </p>
           </div>
         </div>
-        <MasonryGallery images={masonryImagesGroup7} />
+        <MasonryGallery
+          images={resolveMasonryImages(masonryLayoutGroups.masonryImagesGroup7, photosByKey)}
+        />
         <div className="mx-auto max-w-[704px] text-base/7 text-[var(--color-fg-text)]">
           <p className="text-base/7 font-semibold text-[var(--color-fg-yellow)]">
             Introducing
@@ -559,7 +577,9 @@ function PhotographyHero(): React.JSX.Element {
             </p>
           </div>
         </div>
-        <MasonryGallery images={masonryImagesGroup8} />
+        <MasonryGallery
+          images={resolveMasonryImages(masonryLayoutGroups.masonryImagesGroup8, photosByKey)}
+        />
         <div className="mx-auto max-w-[704px] text-base/7 text-[var(--color-fg-text)]">
           <div>
             <h2 className="mt-16 text-3xl font-semibold tracking-tight text-pretty text-[var(--color-fg-blue)]">
@@ -591,7 +611,9 @@ function PhotographyHero(): React.JSX.Element {
             </p>
           </div>
         </div>
-        <MasonryGallery images={masonryImagesGroup9} />
+        <MasonryGallery
+          images={resolveMasonryImages(masonryLayoutGroups.masonryImagesGroup9, photosByKey)}
+        />
         <div className="mx-auto max-w-[704px] text-base/7 text-[var(--color-fg-text)]">
           <p className="text-base/7 font-semibold text-[var(--color-fg-yellow)]">
             Introducing
@@ -670,7 +692,9 @@ function PhotographyHero(): React.JSX.Element {
             </p>
           </div>
         </div>
-        <MasonryGallery images={masonryImagesGroup10} />
+        <MasonryGallery
+          images={resolveMasonryImages(masonryLayoutGroups.masonryImagesGroup10, photosByKey)}
+        />
         <div className="mx-auto max-w-[704px] text-base/7 text-[var(--color-fg-text)]">
           <p className="text-base/7 font-semibold text-[var(--color-fg-yellow)]">
             Introducing
@@ -749,7 +773,9 @@ function PhotographyHero(): React.JSX.Element {
             </p>
           </div>
         </div>
-        <MasonryGallery images={masonryImagesGroup11} />
+        <MasonryGallery
+          images={resolveMasonryImages(masonryLayoutGroups.masonryImagesGroup11, photosByKey)}
+        />
         <div className="mx-auto max-w-[704px] text-base/7 text-[var(--color-fg-text)]">
           <p className="text-base/7 font-semibold text-[var(--color-fg-yellow)]">
             Introducing
@@ -836,7 +862,7 @@ function PhotographyHero(): React.JSX.Element {
 export default function Route() {
   return (
     <div className="xxs:mx-5 2xl:mx-0">
-      <PhotographyPage images={thumbnails} HeroContent={PhotographyHero} />
+      <PhotographyPage images={[]} HeroContent={PhotographyHero} />
     </div>
   );
 }
