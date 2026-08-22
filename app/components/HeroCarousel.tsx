@@ -46,21 +46,23 @@ export default function HeroCarousel({
       </div>
 
       {/* Dot Navigation */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-        {items.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => goToSlide(index)}
-            className={cn(
-              'h-2 rounded-full transition-all duration-300 hover:cursor-pointer',
-              currentIndex === index
-                ? 'w-8 bg-[var(--color-bg-dim)] dark:bg-[var(--color-fg-text)]'
-                : 'w-2 bg-[var(--color-bg-dim)]/30 hover:bg-[var(--color-bg-dim)]/50 dark:bg-[var(--color-fg-text)]/30 dark:hover:bg-[var(--color-fg-text)]/50',
-            )}
-            aria-label={`Go to slide ${index + 1}`}
-          />
-        ))}
-      </div>
+      {items.length > 1 && (
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+          {items.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => goToSlide(index)}
+              className={cn(
+                'h-2 rounded-full transition-all duration-300 hover:cursor-pointer',
+                currentIndex === index
+                  ? 'w-8 bg-[var(--color-bg-dim)] dark:bg-[var(--color-fg-text)]'
+                  : 'w-2 bg-[var(--color-bg-dim)]/30 hover:bg-[var(--color-bg-dim)]/50 dark:bg-[var(--color-fg-text)]/30 dark:hover:bg-[var(--color-fg-text)]/50',
+              )}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
