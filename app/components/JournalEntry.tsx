@@ -27,14 +27,14 @@ export function JournalEntry({
         <div className="flex-1">
           <div className="mb-3 flex justify-between items-center">
             <div className="flex flex-col">
-              <span className="text-xl font-medium text-[var(--color-fg-green)]">
+              <span className="text-xl font-medium text-[var(--color-fg-blue)]">
                 {entry.title}
               </span>
-              <span className="text-lg font-medium text-[var(--color-fg-green)] mb-2">
+              <span className="text-lg font-medium text-[var(--color-fg-blue)] mb-2">
                 {formattedEntryDate}
               </span>
               <div
-                className="prose prose-p:text-[var(--color-fg-text)] prose-p:text-sm text-base prose-strong:text-[var(--color-fg-green)] max-w-[440px] mx-auto lg:mx-0"
+                className="prose prose-p:text-[var(--color-fg-text)] prose-p:text-sm text-base prose-strong:text-[var(--color-fg-blue)] max-w-[440px] mx-auto lg:mx-0"
                 dangerouslySetInnerHTML={{__html: entry.content}}
               ></div>
             </div>

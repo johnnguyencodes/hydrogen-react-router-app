@@ -173,7 +173,7 @@ export default function Homepage() {
     <div className="home-page xxs:mx-5 2xl:mx-0 mt-4">
       <HeroCarousel items={carouselItems} />
       <header className="hero rounded-md text-base lg:top-4">
-        <h1 className="hero-title text-pretty text-7xl font-medium text-[var(--color-fg-green)] max-w-[30ch] mb-5">
+        <h1 className="hero-title text-pretty text-7xl font-medium text-[var(--color-fg-blue)] max-w-[30ch] mb-5">
           John Nguyen
         </h1>
         <div className="prose max-w-prose prose-p:text-small space-y-2">
@@ -191,7 +191,7 @@ export default function Homepage() {
       <div>
         <Link to="/about">
           <Button
-            className="my-2 rounded-full border-2 border-[var(--color-fg-orange)] hover:bg-transparent hover:text-[var(--color-fg-orange)]"
+            className="my-2 rounded-full border-2 border-[var(--color-fg-yellow)] hover:bg-transparent hover:text-[var(--color-fg-yellow)]"
             variant="default"
           >
             About Me
@@ -205,7 +205,7 @@ export default function Homepage() {
             <Link to={card.href} key={card.href} className="block">
               <article className="flex flex-col rounded-md overflow-hidden">
                 <div className="px-4 py-2 bg-[var(--color-bg-2)]">
-                  <h3 className="text-xl font-semibold text-[var(--color-fg-green)]">
+                  <h3 className="text-xl font-semibold text-[var(--color-fg-blue)]">
                     {card.title}
                   </h3>
                 </div>
@@ -226,7 +226,7 @@ export default function Homepage() {
         </section>
         <section className="mt-10 2xl:mt-16 mb-10 2xl:mb-16">
           <div className="mb-1">
-            <h2 className="text-3xl font-medium leading-tight text-[var(--color-fg-green)]">
+            <h2 className="text-3xl font-medium leading-tight text-[var(--color-fg-blue)]">
               Latest
             </h2>
             <p className="text-[var(--color-fg-text)] py-1">
@@ -275,7 +275,7 @@ export default function Homepage() {
           <h3>Gadgets</h3>
         </section>
         <section>
-          <h2 className="text-3xl font-medium leading-tight text-[var(--color-fg-green)]">
+          <h2 className="text-3xl font-medium leading-tight text-[var(--color-fg-blue)]">
             Projects
           </h2>
         </section>

@@ -17,7 +17,7 @@ export const meta: MetaFunction<typeof loader> = ({data, matches}) => {
 function PhotographyHero(): React.JSX.Element {
   return (
     <div>
-      <h1 className="text-3xl mt-4 font-medium leading-tight max-w-[30ch] text-balance text-[var(--color-fg-green)]">
+      <h1 className="text-3xl mt-4 font-medium leading-tight max-w-[30ch] text-balance text-[var(--color-fg-blue)]">
         {seoData.title}
       </h1>
     </div>

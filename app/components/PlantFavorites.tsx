@@ -13,7 +13,7 @@ export function PlantsFavorites({
   return (
     <div className="favorite-products mb-10 2xl:mb-16">
       <div className="flex flex-row mb-5 justify-between items-center">
-        <h2 className="text-3xl font-medium leading-tight text-[var(--color-fg-green)]">
+        <h2 className="text-3xl font-medium leading-tight text-[var(--color-fg-blue)]">
           Favorite Plants
         </h2>
         <Button asChild variant="pill">

@@ -26,7 +26,7 @@ export function BlogPostSection() {
   return (
     <div className="plant-blog-posts mb-10 2xl:mb-16">
       <div className="mb-5">
-        <h2 className="text-3xl font-medium leading-tight text-[var(--color-fg-green)]">
+        <h2 className="text-3xl font-medium leading-tight text-[var(--color-fg-blue)]">
           Plant Knowledge Center
         </h2>
         <p className="text-[var(--color-fg-text)] text-lg py-1">
@@ -54,7 +54,7 @@ export function BlogPostSection() {
                     />
                     <div className="pt-2">
                       <BlogPostTags tags={blogPost.tags} />
-                      <h4 className="text-xl font-medium text-[var(--color-fg-green)]">
+                      <h4 className="text-xl font-medium text-[var(--color-fg-blue)]">
                         {blogPost.title}
                       </h4>
                       <div className="text-[var(--color-fg-text)] text-lg">
@@ -89,7 +89,7 @@ export function BlogPostSection() {
                       </div>
                       <div className="min-w-0 flex-1 p-2">
                         <BlogPostTags tags={blogPost.tags} />
-                        <h4 className="text-xl font-medium text-[var(--color-fg-green)]">
+                        <h4 className="text-xl font-medium text-[var(--color-fg-blue)]">
                           {blogPost.title}
                         </h4>
                         <div className="text-[var(--color-fg-text)] text-lg">

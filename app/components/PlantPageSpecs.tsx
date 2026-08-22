@@ -46,7 +46,7 @@ export function PlantPageSpecs({
     <div>
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
         <div className="cols-span-1 flex flex-col justify-center">
-          <h2 className="text-balance text-5xl font-medium text-[var(--color-fg-green)]">
+          <h2 className="text-balance text-5xl font-medium text-[var(--color-fg-blue)]">
             {productTitle}
           </h2>
           {llifleDatabaseLink && (
@@ -75,7 +75,7 @@ export function PlantPageSpecs({
                   <IconBadge icon={ScissorsLineDashed} size={36} />
                 ) : null}
                 {parsedAcquisition?.method.length > 0 && (
-                  <p className="font-bold text-[var(--color-fg-green)] mt-1 text-sm">
+                  <p className="font-bold text-[var(--color-fg-blue)] mt-1 text-sm">
                     {parsedAcquisition.method}
                   </p>
                 )}
@@ -110,7 +110,7 @@ export function PlantPageSpecs({
           <div className="col-span-1 rounded-md bg-[var(--color-bg-2)] p-5">
             <div className="flex flex-col items-center justify-center">
               <IconBadge icon={Ruler} size={34} />
-              <p className="font-bold text-[var(--color-fg-green)] mt-1 text-sm">
+              <p className="font-bold text-[var(--color-fg-blue)] mt-1 text-sm">
                 Measurements
               </p>
               <p className="text-[var(--color-fg-text)] text-sm">
@@ -133,7 +133,7 @@ export function PlantPageSpecs({
               size={30}
               iconClassName="relative left-[1.25px] bottom-[1.25px]"
             />
-            <p className="font-bold text-[var(--color-fg-green)] mt-1 text-sm">
+            <p className="font-bold text-[var(--color-fg-blue)] mt-1 text-sm">
               Soil Mix
             </p>
             <ul className="text-[var(--color-fg-text)] text-center text-pretty text-sm">
@@ -141,7 +141,7 @@ export function PlantPageSpecs({
               <li>1 part calcinated clay</li>
               <li>1 part cactus soil</li>
             </ul>
-            <p className="font-bold text-[var(--color-fg-green)] mt-3 text-sm">
+            <p className="font-bold text-[var(--color-fg-blue)] mt-3 text-sm">
               Top Dressing
             </p>
             <p className="text-[var(--color-fg-text)] text-sm">
@@ -157,7 +157,7 @@ export function PlantPageSpecs({
               size={30}
               iconClassName="relative left-[.25px] bottom-[.25px]"
             />
-            <p className="font-bold text-[var(--color-fg-green)] mt-1 text-sm">
+            <p className="font-bold text-[var(--color-fg-blue)] mt-1 text-sm">
               Fertilizer Regimen{' '}
             </p>
           </div>
@@ -179,7 +179,7 @@ export function PlantPageSpecs({
               size={30}
               iconClassName="relative left-[1.25px] bottom-[1.25px]"
             />
-            <p className="font-bold text-[var(--color-fg-green)] mt-1 text-sm">
+            <p className="font-bold text-[var(--color-fg-blue)] mt-1 text-sm">
               Care Regimen
             </p>
             <ul className="text-[var(--color-fg-text)] text-center text-pretty text-sm">

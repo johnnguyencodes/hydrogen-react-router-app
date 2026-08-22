@@ -25,7 +25,7 @@ export function PlantCard(props: PlantCardProps) {
             </Badge>
           )}
           <div className="pt-1">
-            <h4 className="text-xl font-medium text-[var(--color-fg-green)]">
+            <h4 className="text-xl font-medium text-[var(--color-fg-blue)]">
               {props.title}
             </h4>
             <div>
