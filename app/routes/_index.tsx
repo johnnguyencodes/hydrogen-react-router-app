@@ -7,7 +7,7 @@ import {
 import HeroCarousel from '../components/HeroCarousel';
 import type {Route} from './+types/_index';
 import {Button} from '../components/ui/button';
-import {ArrowRight} from 'lucide-react';
+import {ArrowRight, ImageIcon} from 'lucide-react';
 import {PhotographyHomepageArticleSection} from '~/components/PhotographyHomepageArticleSection';
 import {photographyJournalSeoData} from '~/lib/photographyJournalSeoData';
 import {PlantsHomepageFavorites} from '~/components/PlantHomepageFavorites';
@@ -87,20 +87,35 @@ export default function Homepage() {
   return (
     <div className="home-page xxs:mx-5 2xl:mx-0 mt-4">
       <header className="hero rounded-md text-base lg:top-4">
-        <h1 className="hero-title text-pretty text-7xl font-medium text-[var(--color-fg-green)] max-w-[30ch] mb-5">
-          Hullo, I'm John!
-        </h1>
-        <div className="prose max-w-prose prose-p:text-small">
-          <p className="hero-paragraph font-medium leading-tight max-w-prose text-pretty text-[var(--color-fg-text)]">
-            I am a web developer, plant dad, gym rat, suntanned from so much
-            hiking, and <br className="hidden md:block" /> an{' '}
-            <span className="bg-[var(--color-bg-4)]">
-              <i>
-                <u>obsessed</u>
-              </i>{' '}
-            </span>
-            beginner photographer.
-          </p>
+        <div className="flex flex-col-reverse sm:flex-row sm:items-center gap-6 sm:gap-10">
+          <div className="flex-1">
+            <h1 className="hero-title text-pretty text-7xl font-medium text-[var(--color-fg-green)] max-w-[30ch] mb-5">
+              Hullo, I'm John!
+            </h1>
+            <div className="prose max-w-prose prose-p:text-small space-y-2">
+              <p className="hero-paragraph font-medium leading-tight max-w-prose text-pretty text-[var(--color-fg-text)]">
+                I am a web developer, plant dad, and gym rat.
+              </p>
+              <p className="hero-paragraph font-medium leading-tight max-w-prose text-pretty text-[var(--color-fg-text)]">
+                Suntanned from so much hiking,
+              </p>
+              <p className="hero-paragraph font-medium leading-tight max-w-prose text-pretty text-[var(--color-fg-text)]">
+                and an{' '}
+                <span className="bg-[var(--color-bg-4)]">
+                  <i>
+                    <u>obsessed</u>
+                  </i>{' '}
+                </span>
+                beginner photographer.
+              </p>
+            </div>
+          </div>
+          <div
+            className="shrink-0 size-40 sm:size-48 rounded-md border-2 border-dashed border-[var(--color-fg-gray-1)] bg-[var(--color-bg-2)] flex items-center justify-center text-[var(--color-fg-gray-1)]"
+            aria-hidden="true"
+          >
+            <ImageIcon className="size-10" />
+          </div>
         </div>
       </header>
       <div>
