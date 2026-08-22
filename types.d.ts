@@ -131,6 +131,12 @@ declare global {
     className: string;
   };
 
+  export type MasonryLayoutEntry = {
+    date: string;
+    index: string;
+    className: string;
+  };
+
   export type MasonryGalleryImageProps = {
     image: PhotographyImageWithMetadata;
     id: string;

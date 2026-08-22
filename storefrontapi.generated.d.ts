@@ -288,15 +288,57 @@ export type FooterQuery = {
   >;
 };
 
-export type GetPhotographyImagesQueryVariables = StorefrontAPI.Exact<{
-  handle: StorefrontAPI.Scalars['String']['input'];
-  type: StorefrontAPI.Scalars['String']['input'];
+export type AllPhotosQueryVariables = StorefrontAPI.Exact<{
+  first: StorefrontAPI.Scalars['Int']['input'];
 }>;
 
-export type GetPhotographyImagesQuery = {
-  metaobject?: StorefrontAPI.Maybe<{
-    images?: StorefrontAPI.Maybe<Pick<StorefrontAPI.MetaobjectField, 'value'>>;
-  }>;
+export type AllPhotosQuery = {
+  metaobjects: {
+    nodes: Array<{
+      alt?: StorefrontAPI.Maybe<Pick<StorefrontAPI.MetaobjectField, 'value'>>;
+      imageUrl?: StorefrontAPI.Maybe<
+        Pick<StorefrontAPI.MetaobjectField, 'value'>
+      >;
+      imageWidth?: StorefrontAPI.Maybe<
+        Pick<StorefrontAPI.MetaobjectField, 'value'>
+      >;
+      imageHeight?: StorefrontAPI.Maybe<
+        Pick<StorefrontAPI.MetaobjectField, 'value'>
+      >;
+      date?: StorefrontAPI.Maybe<Pick<StorefrontAPI.MetaobjectField, 'value'>>;
+      index?: StorefrontAPI.Maybe<Pick<StorefrontAPI.MetaobjectField, 'value'>>;
+      fileType?: StorefrontAPI.Maybe<
+        Pick<StorefrontAPI.MetaobjectField, 'value'>
+      >;
+      iso?: StorefrontAPI.Maybe<Pick<StorefrontAPI.MetaobjectField, 'value'>>;
+      aperture?: StorefrontAPI.Maybe<
+        Pick<StorefrontAPI.MetaobjectField, 'value'>
+      >;
+      shutterspeed?: StorefrontAPI.Maybe<
+        Pick<StorefrontAPI.MetaobjectField, 'value'>
+      >;
+      cameraBody?: StorefrontAPI.Maybe<{
+        reference?: StorefrontAPI.Maybe<
+          Pick<StorefrontAPI.Metaobject, 'handle'>
+        >;
+      }>;
+      lens?: StorefrontAPI.Maybe<{
+        reference?: StorefrontAPI.Maybe<
+          Pick<StorefrontAPI.Metaobject, 'handle'>
+        >;
+      }>;
+      filmStock?: StorefrontAPI.Maybe<{
+        reference?: StorefrontAPI.Maybe<
+          Pick<StorefrontAPI.Metaobject, 'handle'>
+        >;
+      }>;
+      filmFormat?: StorefrontAPI.Maybe<{
+        reference?: StorefrontAPI.Maybe<
+          Pick<StorefrontAPI.Metaobject, 'handle'>
+        >;
+      }>;
+    }>;
+  };
 };
 
 export type StoreRobotsQueryVariables = StorefrontAPI.Exact<{
@@ -1350,9 +1392,9 @@ interface GeneratedQueryTypes {
     return: FooterQuery;
     variables: FooterQueryVariables;
   };
-  '#graphql\n  query getPhotographyImages($handle: String!, $type: String!) {\n    metaobject(handle: {handle: $handle, type: $type}) {\n      images: field(key: "images") {\n        value\n      }\n    }\n  }\n': {
-    return: GetPhotographyImagesQuery;
-    variables: GetPhotographyImagesQueryVariables;
+  '#graphql\n  query AllPhotos($first: Int!) {\n    metaobjects(type: "photo", first: $first) {\n      nodes {\n        alt: field(key: "alt") { value }\n        imageUrl: field(key: "image_url") { value }\n        imageWidth: field(key: "image_width") { value }\n        imageHeight: field(key: "image_height") { value }\n        date: field(key: "date") { value }\n        index: field(key: "index") { value }\n        fileType: field(key: "file_type") { value }\n        iso: field(key: "iso") { value }\n        aperture: field(key: "aperture") { value }\n        shutterspeed: field(key: "shutterspeed") { value }\n        cameraBody: field(key: "camera_body") {\n          reference {\n            ... on Metaobject { handle }\n          }\n        }\n        lens: field(key: "lens") {\n          reference {\n            ... on Metaobject { handle }\n          }\n        }\n        filmStock: field(key: "film_stock") {\n          reference {\n            ... on Metaobject { handle }\n          }\n        }\n        filmFormat: field(key: "film_format") {\n          reference {\n            ... on Metaobject { handle }\n          }\n        }\n      }\n    }\n  }\n': {
+    return: AllPhotosQuery;
+    variables: AllPhotosQueryVariables;
   };
   '#graphql\n  query StoreRobots($country: CountryCode, $language: LanguageCode)\n   @inContext(country: $country, language: $language) {\n    shop {\n      id\n    }\n  }\n': {
     return: StoreRobotsQuery;

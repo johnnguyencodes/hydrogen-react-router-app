@@ -12,7 +12,7 @@ import {photographyJournalSeoData} from '~/lib/photographyJournalSeoData';
 // import {photographyFilmStockSeoData} from '~/lib/photographyFilmStockSeoData';
 // import {photographyFilmFormatSeoData} from '~/lib/photographyFilmFormatSeoData';
 // import {photographyCameraBodySeoData} from '~/lib/photographyCameraBodySeoData';
-import {PHOTOGRAPHY_METAOBJECT_QUERY} from '~/lib/photographyPageUtils';
+import {fetchAllPhotos} from '~/lib/photographyPageUtils';
 
 import HeroCarousel from '~/components/HeroCarousel';
 import PhotographyPage from '~/components/PhotographyPage';
@@ -28,19 +28,11 @@ export async function loader(args: LoaderFunctionArgs) {
 async function loadCriticalData(args: LoaderFunctionArgs) {
   const {context} = args;
 
-  const metaobjectType = 'allphotos';
-  const metaobjectHandle = 'allphotos';
-
-  const metaobject = await context.storefront.query(
-    PHOTOGRAPHY_METAOBJECT_QUERY,
-    {
-      variables: {type: metaobjectType, handle: metaobjectHandle},
-    },
-  );
+  const images = await fetchAllPhotos(context.storefront);
 
   return {
     criticalData: {
-      metaobject,
+      images,
       seo: pageSeoData,
     },
   };
@@ -161,28 +153,7 @@ const articleProps: PhotographyArticleSectionProps = {
 export default function Photography() {
   const {criticalData} = useLoaderData<typeof loader>();
 
-  const rawMasterImages = JSON.parse(
-    criticalData.metaobject.metaobject.images.value,
-  ) as RawMasterPhotographyImages;
-
-  const parsedImages: PhotographyImageWithMetadata[] = [];
-  const seenUrls = new Set<string>(); // Tracks unique image URLs
-
-  for (const categoryKey in rawMasterImages) {
-    const subCategories = rawMasterImages[categoryKey];
-
-    for (const subCategoryKey in rawMasterImages[categoryKey]) {
-      const imagesArray = subCategories[subCategoryKey];
-
-      for (const item of imagesArray) {
-        // Check if we've already added this image URL
-        if (!seenUrls.has(item.image.url)) {
-          parsedImages.push(item); // Pushes the whole item
-          seenUrls.add(item.image.url); // Marks URL as seen
-        }
-      }
-    }
-  }
+  const parsedImages = [...criticalData.images];
 
   function sortImages(
     a: PhotographyImageWithMetadata,

@@ -7,7 +7,7 @@ import {
 import {getSeoMeta} from '@shopify/hydrogen';
 import HeroCarousel from '~/components/HeroCarousel';
 import {photographyPhotos as pageSeoData} from '~/lib/photographyLandingPageSeoData';
-import {PHOTOGRAPHY_METAOBJECT_QUERY} from '~/lib/photographyPageUtils';
+import {fetchAllPhotos} from '~/lib/photographyPageUtils';
 import PhotographyPage from '~/components/PhotographyPage';
 import {useEffect, useMemo, useState} from 'react';
 
@@ -20,19 +20,11 @@ export async function loader(args: LoaderFunctionArgs) {
 async function loadCriticalData(args: LoaderFunctionArgs) {
   const {context} = args;
 
-  const metaobjectType = 'allphotos';
-  const metaobjectHandle = 'allphotos';
-
-  const metaobject = await context.storefront.query(
-    PHOTOGRAPHY_METAOBJECT_QUERY,
-    {
-      variables: {type: metaobjectType, handle: metaobjectHandle},
-    },
-  );
+  const images = await fetchAllPhotos(context.storefront);
 
   return {
     criticalData: {
-      metaobject,
+      images,
       seo: pageSeoData,
     },
   };
@@ -53,30 +45,7 @@ export default function Photography() {
   >([]);
 
   const parsedImages = useMemo<PhotographyImageWithMetadata[]>(() => {
-    const rawMasterImages = JSON.parse(
-      criticalData.metaobject.metaobject.images.value,
-    ) as RawMasterPhotographyImages;
-
-    const images: PhotographyImageWithMetadata[] = [];
-    const seenUrls = new Set<string>();
-
-    for (const categoryKey in rawMasterImages) {
-      const subCategories = rawMasterImages[categoryKey];
-
-      for (const subCategoryKey in rawMasterImages[categoryKey]) {
-        const imagesArray = subCategories[subCategoryKey];
-
-        for (const item of imagesArray) {
-          // Check if we've already added this image URL
-          if (!seenUrls.has(item.image.url)) {
-            images.push(item); // Pushes the whole item
-            seenUrls.add(item.image.url); // Marks URL as seen
-          }
-        }
-      }
-    }
-
-    return images.sort(sortImages);
+    return [...criticalData.images].sort(sortImages);
   }, [criticalData]);
 
   useEffect(() => {

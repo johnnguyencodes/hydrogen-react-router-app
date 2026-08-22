@@ -1,25 +1,93 @@
 import type {LoaderFunctionArgs} from 'react-router';
 import {getSeoMeta} from '@shopify/hydrogen';
 
+// Maps a page's metaobjectType (the URL segment's category) to the field on
+// each `photo` metaobject that should be matched against the URL's handle.
+// 'allphotos' has no entry, since that page shows every photo unfiltered.
+const REFERENCE_FIELD_BY_METAOBJECT_TYPE: Record<
+  string,
+  keyof PhotographyImageWithMetadata['meta']
+> = {
+  camerabody: 'cameraBody',
+  lens: 'lens',
+  filmstock: 'filmStockBrand',
+  filmformat: 'filmFormat',
+};
+
+type StorefrontClient = LoaderFunctionArgs['context']['storefront'];
+
+export async function fetchAllPhotos(
+  storefront: StorefrontClient,
+): Promise<PhotographyImageWithMetadata[]> {
+  const response = await storefront.query(ALL_PHOTOS_QUERY, {
+    variables: {first: 250},
+  });
+
+  return response.metaobjects.nodes.map((node) => ({
+    alt: node.alt?.value ?? '',
+    image: {
+      url: node.imageUrl?.value ?? '',
+      width: Number(node.imageWidth?.value ?? 0),
+      height: Number(node.imageHeight?.value ?? 0),
+    },
+    meta: {
+      fileType: node.fileType?.value ?? '',
+      date: node.date?.value ?? '',
+      index: node.index?.value ?? '',
+      filmFormat: node.filmFormat?.reference?.handle ?? '',
+      cameraBody: node.cameraBody?.reference?.handle ?? '',
+      lens: node.lens?.reference?.handle ?? '',
+      filmStockBrand: node.filmStock?.reference?.handle ?? '',
+      isoNumber: node.iso?.value ?? '',
+      aperture: node.aperture?.value ?? '',
+      shutterspeed: node.shutterspeed?.value ?? '',
+    },
+  }));
+}
+
+export function buildPhotoLookup(
+  photos: PhotographyImageWithMetadata[],
+): Map<string, PhotographyImageWithMetadata> {
+  return new Map(
+    photos.map((photo) => [`${photo.meta.date}-${photo.meta.index}`, photo]),
+  );
+}
+
+// Resolves a journal article's masonry layout (date/index/className only)
+// against the fetched photos, skipping any entry whose photo isn't found
+// (e.g. before a migration has run) instead of throwing.
+export function resolveMasonryImages(
+  layout: MasonryLayoutEntry[],
+  photosByKey: Map<string, PhotographyImageWithMetadata>,
+): MasonryGalleryImage[] {
+  return layout.flatMap((entry) => {
+    const photo = photosByKey.get(`${entry.date}-${entry.index}`);
+    return photo ? [{...photo, className: entry.className}] : [];
+  });
+}
+
 export async function loadPhotographyPageData(
   args: LoaderFunctionArgs,
   seoData: PageSeoData,
 ) {
   const {context} = args;
 
-  const metaobjectType = seoData.metaobjectType;
-  const metaobjectHandle = seoData.relativeUrlPath.split('/')[3];
+  const allPhotos = await fetchAllPhotos(context.storefront);
 
-  const metaobject = await context.storefront.query(
-    PHOTOGRAPHY_METAOBJECT_QUERY,
-    {
-      variables: {type: metaobjectType, handle: metaobjectHandle},
-    },
-  );
+  const metaobjectType = seoData.metaobjectType ?? 'allphotos';
+  const referenceField = REFERENCE_FIELD_BY_METAOBJECT_TYPE[metaobjectType];
+
+  const images = referenceField
+    ? allPhotos.filter(
+        (photo) =>
+          photo.meta[referenceField] ===
+          seoData.relativeUrlPath.split('/')[3],
+      )
+    : allPhotos;
 
   return {
     criticalData: {
-      metaobject,
+      images,
       seo: seoData,
     },
   };
@@ -40,12 +108,41 @@ export function createPhotographyPageMeta(matches: any, data: any) {
   return getSeoMeta(rootSeo, pageSeo);
 }
 
-export const PHOTOGRAPHY_METAOBJECT_QUERY = `#graphql
-  query getPhotographyImages($handle: String!, $type: String!) {
-    metaobject(handle: {handle: $handle, type: $type}) {
-      images: field(key: "images") {
-        value
+export const ALL_PHOTOS_QUERY = `#graphql
+  query AllPhotos($first: Int!) {
+    metaobjects(type: "photo", first: $first) {
+      nodes {
+        alt: field(key: "alt") { value }
+        imageUrl: field(key: "image_url") { value }
+        imageWidth: field(key: "image_width") { value }
+        imageHeight: field(key: "image_height") { value }
+        date: field(key: "date") { value }
+        index: field(key: "index") { value }
+        fileType: field(key: "file_type") { value }
+        iso: field(key: "iso") { value }
+        aperture: field(key: "aperture") { value }
+        shutterspeed: field(key: "shutterspeed") { value }
+        cameraBody: field(key: "camera_body") {
+          reference {
+            ... on Metaobject { handle }
+          }
+        }
+        lens: field(key: "lens") {
+          reference {
+            ... on Metaobject { handle }
+          }
+        }
+        filmStock: field(key: "film_stock") {
+          reference {
+            ... on Metaobject { handle }
+          }
+        }
+        filmFormat: field(key: "film_format") {
+          reference {
+            ... on Metaobject { handle }
+          }
+        }
       }
     }
   }
-`;
+` as const;
