@@ -72,6 +72,34 @@ export function formatTimeStampToMDY(iso: string): string {
   return `${mm}-${dd}-${yyyy}`;
 }
 
+export function getLatestJournalEntry(
+  journal: JournalEntry[],
+): JournalEntry | null {
+  if (journal.length === 0) return null;
+
+  return journal.reduce((latest, entry) => {
+    return entry.date > latest.date ? entry : latest;
+  }, journal[0]);
+}
+
+export function getEntryImage(
+  images: AdminImageWithMetadata[],
+  entryDate: string,
+): AdminImageWithMetadata | null {
+  const entryImages = images
+    .filter((image) => image.meta.date === entryDate)
+    .sort((a, b) => a.meta.index - b.meta.index);
+
+  return entryImages[0] ?? null;
+}
+
+export function stripHtml(html: string): string {
+  return html
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 export const RECENTLY_UPDATED_WINDOW_DAYS = 30;
 
 export function isRecentlyUpdated(
