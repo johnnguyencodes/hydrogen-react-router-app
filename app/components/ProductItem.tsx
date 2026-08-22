@@ -39,7 +39,7 @@ export function ProductItem({
         </Badge>
       )}
       <div className="pt-2">
-        <h4 className="text-xl font-medium text-[var(--color-fg-green)]">
+        <h4 className="text-xl font-medium text-[var(--color-fg-blue)]">
           {product.title}
         </h4>
         {updatedAt ? (

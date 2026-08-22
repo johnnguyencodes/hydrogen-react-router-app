@@ -19,8 +19,6 @@
 @plugin 'tailwindcss-debug-screens';
 @plugin 'tailwindcss-animate';
 
-@custom-variant dark (&:where(.dark, .dark *));
-
 @layer base {
   *,
   *::before,
@@ -54,40 +52,39 @@
 }
 
 :root {
-  /* light mode colors, taken from everforest, soft */
-  /* https://github.com/sainnhe/everforest */
-  --color-bg-dim: #e5dfc5; /* dimmed background */
-  --color-bg-0: #f3ead3; /* default background */
-  --color-bg-1: #eae4ca; /* */
-  --color-bg-2: #e5dfc5; /* card background, active */
-  --color-bg-3: #ddd8be; /* card background, inactive */
-  --color-bg-4: #d8d3ba; /* breaks */
-  --color-bg-5: #b9c0ab; /* */
+  /* Anchored on Pantone 11-4201 "Cloud Dancer", Pantone's 2026 Color of the Year */
+  --color-bg-dim: #f7f5f1; /* near-white, used for text/icons on colored surfaces */
+  --color-bg-0: #f0eee9; /* default background — Cloud Dancer */
+  --color-bg-1: #e7e4dd; /* */
+  --color-bg-2: #e0dcd3; /* card background, active */
+  --color-bg-3: #d6d1c5; /* card background, inactive */
+  --color-bg-4: #ccc5b5; /* breaks */
+  --color-bg-5: #b8af9c; /* header/footer/nav chrome */
 
-  --color-bg-visual: #e1e4bd; /* visual selection */
-  --color-bg-red: #f4dbd0; /* error highlight */
-  --color-bg-green: #e5e6c5; /* hint highlight */
-  --color-bg-blue: #e1e7dd; /* info highlight */
-  --color-bg-yellow: #f1e4c5; /* warning highlight */
+  --color-bg-visual: #dad2be; /* visual selection */
+  --color-bg-red: #f0dcd8; /* error highlight */
+  --color-bg-green: #dce0d0; /* hint highlight */
+  --color-bg-blue: #dce3e3; /* info highlight */
+  --color-bg-yellow: #ede4ce; /* warning highlight */
 
-  --color-fg-text: #5c6a72; /* text color */
-  --color-fg-text-hover: black;
+  --color-fg-text: #4a473f; /* text color */
+  --color-fg-text-hover: #211f1b;
 
-  --color-fg-red: #f85552;
-  --color-fg-orange: #f57d26;
-  --color-fg-yellow: #dfa000;
-  --color-fg-green: #8da101;
-  --color-fg-blue: #3a94c5;
-  --color-fg-aqua: #35a77c;
-  --color-fg-purple: #df69ba;
+  --color-fg-red: #b85450;
+  --color-fg-orange: #8d593f; /* deepened from Pantone 12-1107 Peach Dust */
+  --color-fg-yellow: #c99a3e;
+  --color-fg-green: #5b6e4f;
+  --color-fg-blue: #5c7a88;
+  --color-fg-aqua: #4f8577;
+  --color-fg-purple: #9a6f86;
 
-  --color-fg-statusline-1: #93b259;
-  --color-fg-statusline-2: #708089;
-  --color-fg-statusline-3: #e66868;
+  --color-fg-statusline-1: #7c8f5e;
+  --color-fg-statusline-2: #6b655a;
+  --color-fg-statusline-3: #a0524a;
 
-  --color-fg-gray-0: #a6b0a0;
-  --color-fg-gray-1: #939f91;
-  --color-fg-gray-2: #829181;
+  --color-fg-gray-0: #a39c8c;
+  --color-fg-gray-1: #9b9484;
+  --color-fg-gray-2: #8c8573;
 
   --radius: 0.625rem;
   --background: oklch(1 0 0);
@@ -121,75 +118,6 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-}
-
-.dark {
-  /* dark mode colors, taken from everforest, soft */
-  /* https://github.com/sainnhe/everforest */
-  --color-bg-dim: #1e2326; /* dimmed background */
-  --color-bg-0: #272e33; /* default background */
-  --color-bg-1: #2e383c; /*  */
-  --color-bg-2: #374145; /* card background, active */
-  --color-bg-3: #414b50; /* card background, inactive */
-  --color-bg-4: #495156; /* breaks */
-  --color-bg-5: #4f5b58; /* */
-
-  --color-bg-visual: #493b40; /* visual selection */
-  --color-bg-red: #5c3f4f; /* error highlight */
-  --color-bg-green: #3c4841; /* hint highlight */
-  --color-bg-blue: #384b55; /* info highlight */
-  --color-bg-yellow: #45443c; /* warning highlight */
-
-  --color-fg-text: #d3c6aa; /* text color */
-  --color-fg-text-hover: white;
-
-  --color-fg-red: #e67e80;
-  --color-fg-orange: #e69875;
-  --color-fg-yellow: #dbbc7f;
-  --color-fg-green: #a7c080;
-  --color-fg-aqua: #83c092;
-  --color-fg-blue: #7fbbb3;
-  --color-fg-purple: #d699b6;
-
-  --color-fg-statusline-1: #a7c080;
-  --color-fg-statusline-2: #d3c6aa;
-  --color-fg-statusline-3: #e67e80;
-
-  --color-fg-gray-0: #7a8478;
-  --color-fg-gray-1: #859289;
-  --color-fg-gray-2: #9da9a0;
-
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
 }
 
 @theme inline {

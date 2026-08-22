@@ -70,7 +70,7 @@ export default function Collection() {
 
   return (
     <div className="collection xxs:mx-5 2xl:mx-0">
-      <h1 className="text-3xl mt-4 font-medium leading-tight max-w-[30ch] text-balance text-[var(--color-fg-green)]">
+      <h1 className="text-3xl mt-4 font-medium leading-tight max-w-[30ch] text-balance text-[var(--color-fg-blue)]">
         {collection.title}
       </h1>
       {collection.description ? (

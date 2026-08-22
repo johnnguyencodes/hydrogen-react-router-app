@@ -38,10 +38,10 @@ function PhotographyHero(): React.JSX.Element {
       <div className="px-6 py-32 lg:px-8">
         <MasonryGallery images={masonryImagesGroup0} />
         <div className="mx-auto max-w-[704px] text-base/7 text-[var(--color-fg-text)]">
-          <p className="text-base/7 font-semibold text-[var(--color-fg-orange)]">
+          <p className="text-base/7 font-semibold text-[var(--color-fg-yellow)]">
             Introducing
           </p>
-          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[var(--color-fg-green)] sm:text-5xl ">
+          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[var(--color-fg-blue)] sm:text-5xl ">
             JavaScript for beginners
           </h1>
           <p className="mt-6 text-xl/8">
@@ -68,10 +68,10 @@ function PhotographyHero(): React.JSX.Element {
               <li className="flex gap-x-3">
                 <SunIcon
                   aria-hidden="true"
-                  className="mt-1 size-5 flex-none text-[var(--color-fg-orange)]"
+                  className="mt-1 size-5 flex-none text-[var(--color-fg-yellow)]"
                 />
                 <span>
-                  <strong className="font-semibold text-[var(--color-fg-green)]">
+                  <strong className="font-semibold text-[var(--color-fg-blue)]">
                     Data types.
                   </strong>{' '}
                   Lorem ipsum, dolor sit amet consectetur adipisicing elit.
@@ -82,10 +82,10 @@ function PhotographyHero(): React.JSX.Element {
               <li className="flex gap-x-3">
                 <SunIcon
                   aria-hidden="true"
-                  className="mt-1 size-5 flex-none text-[var(--color-fg-orange)]"
+                  className="mt-1 size-5 flex-none text-[var(--color-fg-yellow)]"
                 />
                 <span>
-                  <strong className="font-semibold text-[var(--color-fg-green)]">
+                  <strong className="font-semibold text-[var(--color-fg-blue)]">
                     Loops.
                   </strong>{' '}
                   Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure
@@ -95,10 +95,10 @@ function PhotographyHero(): React.JSX.Element {
               <li className="flex gap-x-3">
                 <SunIcon
                   aria-hidden="true"
-                  className="mt-1 size-5 flex-none text-[var(--color-fg-orange)]"
+                  className="mt-1 size-5 flex-none text-[var(--color-fg-yellow)]"
                 />
                 <span>
-                  <strong className="font-semibold text-[var(--color-fg-green)]">
+                  <strong className="font-semibold text-[var(--color-fg-blue)]">
                     Events.
                   </strong>{' '}
                   Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus.
@@ -118,7 +118,7 @@ function PhotographyHero(): React.JSX.Element {
         <MasonryGallery images={masonryImagesGroup1} />
         <div className="mx-auto max-w-[704px] text-base/7 text-[var(--color-fg-text)]">
           <div>
-            <h2 className="mt-16 text-3xl font-semibold tracking-tight text-pretty text-[var(--color-fg-green)]">
+            <h2 className="mt-16 text-3xl font-semibold tracking-tight text-pretty text-[var(--color-fg-blue)]">
               From beginner to expert in 3 hours
             </h2>
             <p className="mt-6">
@@ -129,7 +129,7 @@ function PhotographyHero(): React.JSX.Element {
               cursus ridiculus mi. Pellentesque nam sed nullam sed diam turpis
               ipsum eu a sed convallis diam.
             </p>
-            <figure className="mt-10 border-l border-[var(--color-fg-orange)] pl-9">
+            <figure className="mt-10 border-l border-[var(--color-fg-yellow)] pl-9">
               <blockquote className="font-semibold text-[var(--color-fg-statusline-3)]">
                 <p>
                   "Vel ultricies morbi odio facilisi ultrices accumsan donec
@@ -149,10 +149,10 @@ function PhotographyHero(): React.JSX.Element {
         </div>
         <MasonryGallery images={masonryImagesGroup15} />
         <div className="mx-auto max-w-[704px] text-base/7 text-[var(--color-fg-text)]">
-          <p className="text-base/7 font-semibold text-[var(--color-fg-orange)]">
+          <p className="text-base/7 font-semibold text-[var(--color-fg-yellow)]">
             Introducing
           </p>
-          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[var(--color-fg-green)] sm:text-5xl ">
+          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[var(--color-fg-blue)] sm:text-5xl ">
             JavaScript for beginners
           </h1>
           <p className="mt-6 text-xl/8">
@@ -179,10 +179,10 @@ function PhotographyHero(): React.JSX.Element {
               <li className="flex gap-x-3">
                 <SunIcon
                   aria-hidden="true"
-                  className="mt-1 size-5 flex-none text-[var(--color-fg-orange)]"
+                  className="mt-1 size-5 flex-none text-[var(--color-fg-yellow)]"
                 />
                 <span>
-                  <strong className="font-semibold text-[var(--color-fg-green)]">
+                  <strong className="font-semibold text-[var(--color-fg-blue)]">
                     Data types.
                   </strong>{' '}
                   Lorem ipsum, dolor sit amet consectetur adipisicing elit.
@@ -193,10 +193,10 @@ function PhotographyHero(): React.JSX.Element {
               <li className="flex gap-x-3">
                 <SunIcon
                   aria-hidden="true"
-                  className="mt-1 size-5 flex-none text-[var(--color-fg-orange)]"
+                  className="mt-1 size-5 flex-none text-[var(--color-fg-yellow)]"
                 />
                 <span>
-                  <strong className="font-semibold text-[var(--color-fg-green)]">
+                  <strong className="font-semibold text-[var(--color-fg-blue)]">
                     Loops.
                   </strong>{' '}
                   Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure
@@ -206,10 +206,10 @@ function PhotographyHero(): React.JSX.Element {
               <li className="flex gap-x-3">
                 <SunIcon
                   aria-hidden="true"
-                  className="mt-1 size-5 flex-none text-[var(--color-fg-orange)]"
+                  className="mt-1 size-5 flex-none text-[var(--color-fg-yellow)]"
                 />
                 <span>
-                  <strong className="font-semibold text-[var(--color-fg-green)]">
+                  <strong className="font-semibold text-[var(--color-fg-blue)]">
                     Events.
                   </strong>{' '}
                   Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus.
@@ -229,7 +229,7 @@ function PhotographyHero(): React.JSX.Element {
         <MasonryGallery images={masonryImagesGroup2} />
         <div className="mx-auto max-w-[704px] text-base/7 text-[var(--color-fg-text)]">
           <div>
-            <h2 className="mt-16 text-3xl font-semibold tracking-tight text-pretty text-[var(--color-fg-green)]">
+            <h2 className="mt-16 text-3xl font-semibold tracking-tight text-pretty text-[var(--color-fg-blue)]">
               From beginner to expert in 3 hours
             </h2>
             <p className="mt-6">
@@ -240,7 +240,7 @@ function PhotographyHero(): React.JSX.Element {
               cursus ridiculus mi. Pellentesque nam sed nullam sed diam turpis
               ipsum eu a sed convallis diam.
             </p>
-            <figure className="mt-10 border-l border-[var(--color-fg-orange)] pl-9">
+            <figure className="mt-10 border-l border-[var(--color-fg-yellow)] pl-9">
               <blockquote className="font-semibold text-[var(--color-fg-statusline-3)]">
                 <p>
                   "Vel ultricies morbi odio facilisi ultrices accumsan donec
@@ -260,10 +260,10 @@ function PhotographyHero(): React.JSX.Element {
         </div>
         <MasonryGallery images={masonryImagesGroup3} />
         <div className="mx-auto max-w-[704px] text-base/7 text-[var(--color-fg-text)]">
-          <p className="text-base/7 font-semibold text-[var(--color-fg-orange)]">
+          <p className="text-base/7 font-semibold text-[var(--color-fg-yellow)]">
             Introducing
           </p>
-          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[var(--color-fg-green)] sm:text-5xl ">
+          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[var(--color-fg-blue)] sm:text-5xl ">
             JavaScript for beginners
           </h1>
           <p className="mt-6 text-xl/8">
@@ -290,10 +290,10 @@ function PhotographyHero(): React.JSX.Element {
               <li className="flex gap-x-3">
                 <SunIcon
                   aria-hidden="true"
-                  className="mt-1 size-5 flex-none text-[var(--color-fg-orange)]"
+                  className="mt-1 size-5 flex-none text-[var(--color-fg-yellow)]"
                 />
                 <span>
-                  <strong className="font-semibold text-[var(--color-fg-green)]">
+                  <strong className="font-semibold text-[var(--color-fg-blue)]">
                     Data types.
                   </strong>{' '}
                   Lorem ipsum, dolor sit amet consectetur adipisicing elit.
@@ -304,10 +304,10 @@ function PhotographyHero(): React.JSX.Element {
               <li className="flex gap-x-3">
                 <SunIcon
                   aria-hidden="true"
-                  className="mt-1 size-5 flex-none text-[var(--color-fg-orange)]"
+                  className="mt-1 size-5 flex-none text-[var(--color-fg-yellow)]"
                 />
                 <span>
-                  <strong className="font-semibold text-[var(--color-fg-green)]">
+                  <strong className="font-semibold text-[var(--color-fg-blue)]">
                     Loops.
                   </strong>{' '}
                   Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure
@@ -317,10 +317,10 @@ function PhotographyHero(): React.JSX.Element {
               <li className="flex gap-x-3">
                 <SunIcon
                   aria-hidden="true"
-                  className="mt-1 size-5 flex-none text-[var(--color-fg-orange)]"
+                  className="mt-1 size-5 flex-none text-[var(--color-fg-yellow)]"
                 />
                 <span>
-                  <strong className="font-semibold text-[var(--color-fg-green)]">
+                  <strong className="font-semibold text-[var(--color-fg-blue)]">
                     Events.
                   </strong>{' '}
                   Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus.
@@ -340,7 +340,7 @@ function PhotographyHero(): React.JSX.Element {
         <MasonryGallery images={masonryImagesGroup4} />
         <div className="mx-auto max-w-[704px] text-base/7 text-[var(--color-fg-text)]">
           <div>
-            <h2 className="mt-16 text-3xl font-semibold tracking-tight text-pretty text-[var(--color-fg-green)]">
+            <h2 className="mt-16 text-3xl font-semibold tracking-tight text-pretty text-[var(--color-fg-blue)]">
               From beginner to expert in 3 hours
             </h2>
             <p className="mt-6">
@@ -351,7 +351,7 @@ function PhotographyHero(): React.JSX.Element {
               cursus ridiculus mi. Pellentesque nam sed nullam sed diam turpis
               ipsum eu a sed convallis diam.
             </p>
-            <figure className="mt-10 border-l border-[var(--color-fg-orange)] pl-9">
+            <figure className="mt-10 border-l border-[var(--color-fg-yellow)] pl-9">
               <blockquote className="font-semibold text-[var(--color-fg-statusline-3)]">
                 <p>
                   "Vel ultricies morbi odio facilisi ultrices accumsan donec
@@ -371,10 +371,10 @@ function PhotographyHero(): React.JSX.Element {
         </div>
         <MasonryGallery images={masonryImagesGroup5} />
         <div className="mx-auto max-w-[704px] text-base/7 text-[var(--color-fg-text)]">
-          <p className="text-base/7 font-semibold text-[var(--color-fg-orange)]">
+          <p className="text-base/7 font-semibold text-[var(--color-fg-yellow)]">
             Introducing
           </p>
-          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[var(--color-fg-green)] sm:text-5xl ">
+          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[var(--color-fg-blue)] sm:text-5xl ">
             JavaScript for beginners
           </h1>
           <p className="mt-6 text-xl/8">
@@ -401,10 +401,10 @@ function PhotographyHero(): React.JSX.Element {
               <li className="flex gap-x-3">
                 <SunIcon
                   aria-hidden="true"
-                  className="mt-1 size-5 flex-none text-[var(--color-fg-orange)]"
+                  className="mt-1 size-5 flex-none text-[var(--color-fg-yellow)]"
                 />
                 <span>
-                  <strong className="font-semibold text-[var(--color-fg-green)]">
+                  <strong className="font-semibold text-[var(--color-fg-blue)]">
                     Data types.
                   </strong>{' '}
                   Lorem ipsum, dolor sit amet consectetur adipisicing elit.
@@ -415,10 +415,10 @@ function PhotographyHero(): React.JSX.Element {
               <li className="flex gap-x-3">
                 <SunIcon
                   aria-hidden="true"
-                  className="mt-1 size-5 flex-none text-[var(--color-fg-orange)]"
+                  className="mt-1 size-5 flex-none text-[var(--color-fg-yellow)]"
                 />
                 <span>
-                  <strong className="font-semibold text-[var(--color-fg-green)]">
+                  <strong className="font-semibold text-[var(--color-fg-blue)]">
                     Loops.
                   </strong>{' '}
                   Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure
@@ -428,10 +428,10 @@ function PhotographyHero(): React.JSX.Element {
               <li className="flex gap-x-3">
                 <SunIcon
                   aria-hidden="true"
-                  className="mt-1 size-5 flex-none text-[var(--color-fg-orange)]"
+                  className="mt-1 size-5 flex-none text-[var(--color-fg-yellow)]"
                 />
                 <span>
-                  <strong className="font-semibold text-[var(--color-fg-green)]">
+                  <strong className="font-semibold text-[var(--color-fg-blue)]">
                     Events.
                   </strong>{' '}
                   Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus.
@@ -451,7 +451,7 @@ function PhotographyHero(): React.JSX.Element {
         <MasonryGallery images={masonryImagesGroup6} />
         <div className="mx-auto max-w-[704px] text-base/7 text-[var(--color-fg-text)]">
           <div>
-            <h2 className="mt-16 text-3xl font-semibold tracking-tight text-pretty text-[var(--color-fg-green)]">
+            <h2 className="mt-16 text-3xl font-semibold tracking-tight text-pretty text-[var(--color-fg-blue)]">
               From beginner to expert in 3 hours
             </h2>
             <p className="mt-6">
@@ -462,7 +462,7 @@ function PhotographyHero(): React.JSX.Element {
               cursus ridiculus mi. Pellentesque nam sed nullam sed diam turpis
               ipsum eu a sed convallis diam.
             </p>
-            <figure className="mt-10 border-l border-[var(--color-fg-orange)] pl-9">
+            <figure className="mt-10 border-l border-[var(--color-fg-yellow)] pl-9">
               <blockquote className="font-semibold text-[var(--color-fg-statusline-3)]">
                 <p>
                   "Vel ultricies morbi odio facilisi ultrices accumsan donec
@@ -482,10 +482,10 @@ function PhotographyHero(): React.JSX.Element {
         </div>
         <MasonryGallery images={masonryImagesGroup7} />
         <div className="mx-auto max-w-[704px] text-base/7 text-[var(--color-fg-text)]">
-          <p className="text-base/7 font-semibold text-[var(--color-fg-orange)]">
+          <p className="text-base/7 font-semibold text-[var(--color-fg-yellow)]">
             Introducing
           </p>
-          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[var(--color-fg-green)] sm:text-5xl ">
+          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[var(--color-fg-blue)] sm:text-5xl ">
             JavaScript for beginners
           </h1>
           <p className="mt-6 text-xl/8">
@@ -512,10 +512,10 @@ function PhotographyHero(): React.JSX.Element {
               <li className="flex gap-x-3">
                 <SunIcon
                   aria-hidden="true"
-                  className="mt-1 size-5 flex-none text-[var(--color-fg-orange)]"
+                  className="mt-1 size-5 flex-none text-[var(--color-fg-yellow)]"
                 />
                 <span>
-                  <strong className="font-semibold text-[var(--color-fg-green)]">
+                  <strong className="font-semibold text-[var(--color-fg-blue)]">
                     Data types.
                   </strong>{' '}
                   Lorem ipsum, dolor sit amet consectetur adipisicing elit.
@@ -526,10 +526,10 @@ function PhotographyHero(): React.JSX.Element {
               <li className="flex gap-x-3">
                 <SunIcon
                   aria-hidden="true"
-                  className="mt-1 size-5 flex-none text-[var(--color-fg-orange)]"
+                  className="mt-1 size-5 flex-none text-[var(--color-fg-yellow)]"
                 />
                 <span>
-                  <strong className="font-semibold text-[var(--color-fg-green)]">
+                  <strong className="font-semibold text-[var(--color-fg-blue)]">
                     Loops.
                   </strong>{' '}
                   Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure
@@ -539,10 +539,10 @@ function PhotographyHero(): React.JSX.Element {
               <li className="flex gap-x-3">
                 <SunIcon
                   aria-hidden="true"
-                  className="mt-1 size-5 flex-none text-[var(--color-fg-orange)]"
+                  className="mt-1 size-5 flex-none text-[var(--color-fg-yellow)]"
                 />
                 <span>
-                  <strong className="font-semibold text-[var(--color-fg-green)]">
+                  <strong className="font-semibold text-[var(--color-fg-blue)]">
                     Events.
                   </strong>{' '}
                   Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus.
@@ -562,7 +562,7 @@ function PhotographyHero(): React.JSX.Element {
         <MasonryGallery images={masonryImagesGroup8} />
         <div className="mx-auto max-w-[704px] text-base/7 text-[var(--color-fg-text)]">
           <div>
-            <h2 className="mt-16 text-3xl font-semibold tracking-tight text-pretty text-[var(--color-fg-green)]">
+            <h2 className="mt-16 text-3xl font-semibold tracking-tight text-pretty text-[var(--color-fg-blue)]">
               From beginner to expert in 3 hours
             </h2>
             <p className="mt-6">
@@ -573,7 +573,7 @@ function PhotographyHero(): React.JSX.Element {
               cursus ridiculus mi. Pellentesque nam sed nullam sed diam turpis
               ipsum eu a sed convallis diam.
             </p>
-            <figure className="mt-10 border-l border-[var(--color-fg-orange)] pl-9">
+            <figure className="mt-10 border-l border-[var(--color-fg-yellow)] pl-9">
               <blockquote className="font-semibold text-[var(--color-fg-statusline-3)]">
                 <p>
                   "Vel ultricies morbi odio facilisi ultrices accumsan donec
@@ -593,10 +593,10 @@ function PhotographyHero(): React.JSX.Element {
         </div>
         <MasonryGallery images={masonryImagesGroup9} />
         <div className="mx-auto max-w-[704px] text-base/7 text-[var(--color-fg-text)]">
-          <p className="text-base/7 font-semibold text-[var(--color-fg-orange)]">
+          <p className="text-base/7 font-semibold text-[var(--color-fg-yellow)]">
             Introducing
           </p>
-          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[var(--color-fg-green)] sm:text-5xl ">
+          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[var(--color-fg-blue)] sm:text-5xl ">
             JavaScript for beginners
           </h1>
           <p className="mt-6 text-xl/8">
@@ -623,10 +623,10 @@ function PhotographyHero(): React.JSX.Element {
               <li className="flex gap-x-3">
                 <SunIcon
                   aria-hidden="true"
-                  className="mt-1 size-5 flex-none text-[var(--color-fg-orange)]"
+                  className="mt-1 size-5 flex-none text-[var(--color-fg-yellow)]"
                 />
                 <span>
-                  <strong className="font-semibold text-[var(--color-fg-green)]">
+                  <strong className="font-semibold text-[var(--color-fg-blue)]">
                     Data types.
                   </strong>{' '}
                   Lorem ipsum, dolor sit amet consectetur adipisicing elit.
@@ -637,10 +637,10 @@ function PhotographyHero(): React.JSX.Element {
               <li className="flex gap-x-3">
                 <SunIcon
                   aria-hidden="true"
-                  className="mt-1 size-5 flex-none text-[var(--color-fg-orange)]"
+                  className="mt-1 size-5 flex-none text-[var(--color-fg-yellow)]"
                 />
                 <span>
-                  <strong className="font-semibold text-[var(--color-fg-green)]">
+                  <strong className="font-semibold text-[var(--color-fg-blue)]">
                     Loops.
                   </strong>{' '}
                   Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure
@@ -650,10 +650,10 @@ function PhotographyHero(): React.JSX.Element {
               <li className="flex gap-x-3">
                 <SunIcon
                   aria-hidden="true"
-                  className="mt-1 size-5 flex-none text-[var(--color-fg-orange)]"
+                  className="mt-1 size-5 flex-none text-[var(--color-fg-yellow)]"
                 />
                 <span>
-                  <strong className="font-semibold text-[var(--color-fg-green)]">
+                  <strong className="font-semibold text-[var(--color-fg-blue)]">
                     Events.
                   </strong>{' '}
                   Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus.
@@ -672,10 +672,10 @@ function PhotographyHero(): React.JSX.Element {
         </div>
         <MasonryGallery images={masonryImagesGroup10} />
         <div className="mx-auto max-w-[704px] text-base/7 text-[var(--color-fg-text)]">
-          <p className="text-base/7 font-semibold text-[var(--color-fg-orange)]">
+          <p className="text-base/7 font-semibold text-[var(--color-fg-yellow)]">
             Introducing
           </p>
-          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[var(--color-fg-green)] sm:text-5xl ">
+          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[var(--color-fg-blue)] sm:text-5xl ">
             JavaScript for beginners
           </h1>
           <p className="mt-6 text-xl/8">
@@ -702,10 +702,10 @@ function PhotographyHero(): React.JSX.Element {
               <li className="flex gap-x-3">
                 <SunIcon
                   aria-hidden="true"
-                  className="mt-1 size-5 flex-none text-[var(--color-fg-orange)]"
+                  className="mt-1 size-5 flex-none text-[var(--color-fg-yellow)]"
                 />
                 <span>
-                  <strong className="font-semibold text-[var(--color-fg-green)]">
+                  <strong className="font-semibold text-[var(--color-fg-blue)]">
                     Data types.
                   </strong>{' '}
                   Lorem ipsum, dolor sit amet consectetur adipisicing elit.
@@ -716,10 +716,10 @@ function PhotographyHero(): React.JSX.Element {
               <li className="flex gap-x-3">
                 <SunIcon
                   aria-hidden="true"
-                  className="mt-1 size-5 flex-none text-[var(--color-fg-orange)]"
+                  className="mt-1 size-5 flex-none text-[var(--color-fg-yellow)]"
                 />
                 <span>
-                  <strong className="font-semibold text-[var(--color-fg-green)]">
+                  <strong className="font-semibold text-[var(--color-fg-blue)]">
                     Loops.
                   </strong>{' '}
                   Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure
@@ -729,10 +729,10 @@ function PhotographyHero(): React.JSX.Element {
               <li className="flex gap-x-3">
                 <SunIcon
                   aria-hidden="true"
-                  className="mt-1 size-5 flex-none text-[var(--color-fg-orange)]"
+                  className="mt-1 size-5 flex-none text-[var(--color-fg-yellow)]"
                 />
                 <span>
-                  <strong className="font-semibold text-[var(--color-fg-green)]">
+                  <strong className="font-semibold text-[var(--color-fg-blue)]">
                     Events.
                   </strong>{' '}
                   Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus.
@@ -751,10 +751,10 @@ function PhotographyHero(): React.JSX.Element {
         </div>
         <MasonryGallery images={masonryImagesGroup11} />
         <div className="mx-auto max-w-[704px] text-base/7 text-[var(--color-fg-text)]">
-          <p className="text-base/7 font-semibold text-[var(--color-fg-orange)]">
+          <p className="text-base/7 font-semibold text-[var(--color-fg-yellow)]">
             Introducing
           </p>
-          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[var(--color-fg-green)] sm:text-5xl ">
+          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[var(--color-fg-blue)] sm:text-5xl ">
             JavaScript for beginners
           </h1>
           <p className="mt-6 text-xl/8">
@@ -781,10 +781,10 @@ function PhotographyHero(): React.JSX.Element {
               <li className="flex gap-x-3">
                 <SunIcon
                   aria-hidden="true"
-                  className="mt-1 size-5 flex-none text-[var(--color-fg-orange)]"
+                  className="mt-1 size-5 flex-none text-[var(--color-fg-yellow)]"
                 />
                 <span>
-                  <strong className="font-semibold text-[var(--color-fg-green)]">
+                  <strong className="font-semibold text-[var(--color-fg-blue)]">
                     Data types.
                   </strong>{' '}
                   Lorem ipsum, dolor sit amet consectetur adipisicing elit.
@@ -795,10 +795,10 @@ function PhotographyHero(): React.JSX.Element {
               <li className="flex gap-x-3">
                 <SunIcon
                   aria-hidden="true"
-                  className="mt-1 size-5 flex-none text-[var(--color-fg-orange)]"
+                  className="mt-1 size-5 flex-none text-[var(--color-fg-yellow)]"
                 />
                 <span>
-                  <strong className="font-semibold text-[var(--color-fg-green)]">
+                  <strong className="font-semibold text-[var(--color-fg-blue)]">
                     Loops.
                   </strong>{' '}
                   Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure
@@ -808,10 +808,10 @@ function PhotographyHero(): React.JSX.Element {
               <li className="flex gap-x-3">
                 <SunIcon
                   aria-hidden="true"
-                  className="mt-1 size-5 flex-none text-[var(--color-fg-orange)]"
+                  className="mt-1 size-5 flex-none text-[var(--color-fg-yellow)]"
                 />
                 <span>
-                  <strong className="font-semibold text-[var(--color-fg-green)]">
+                  <strong className="font-semibold text-[var(--color-fg-blue)]">
                     Events.
                   </strong>{' '}
                   Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus.

@@ -56,7 +56,7 @@ export const meta: MetaFunction<typeof loader> = ({data, matches}) => {
 const carouselItems = [
   <div
     key="1"
-    className="relative flex h-[600px] items-end-safe justify-end bg-[linear-gradient(rgba(0,0,0,0.40),rgba(0,0,0,0.40)),url('https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-04--001--full-frame--nikon-f2--nikkor-35mm-105mm-f35-f45-ais--kodak-gold--200--unknown--unknown.webp')] bg-cover bg-center text-[var(--color-bg-dim)] dark:text-[var(--color-fg-text)]"
+    className="relative flex h-[600px] items-end-safe justify-end bg-[linear-gradient(rgba(0,0,0,0.40),rgba(0,0,0,0.40)),url('https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-04--001--full-frame--nikon-f2--nikkor-35mm-105mm-f35-f45-ais--kodak-gold--200--unknown--unknown.webp')] bg-cover bg-center text-[var(--color-bg-dim)]"
   >
     <div className="z-10 relative bottom-20 right-20 text-end">
       <h1 className="text-5xl font-bold mb-2">The Photography Shelf</h1>
@@ -68,7 +68,7 @@ const carouselItems = [
   </div>,
   <div
     key="2"
-    className="relative flex h-[600px] items-end-safe justify-start bg-[linear-gradient(rgba(0,0,0,0.25),rgba(0,0,0,0.25)),url('https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-25--008--full-frame--nikon-d850--sigma-105mm-f28-os-hsm-macro--45mp--iso-64--f8--1-400s.webp')] bg-cover bg-[center_85%] text-[var(--color-bg-dim)] dark:text-[var(--color-fg-text)]"
+    className="relative flex h-[600px] items-end-safe justify-start bg-[linear-gradient(rgba(0,0,0,0.25),rgba(0,0,0,0.25)),url('https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-10-25--008--full-frame--nikon-d850--sigma-105mm-f28-os-hsm-macro--45mp--iso-64--f8--1-400s.webp')] bg-cover bg-[center_85%] text-[var(--color-bg-dim)]"
   >
     <div className="z-10 relative bottom-20 left-20">
       <h1 className="text-5xl font-bold mb-2">The Photography Shelf</h1>
@@ -80,7 +80,7 @@ const carouselItems = [
   </div>,
   <div
     key="3"
-    className="relative flex h-[600px] items-end-safe justify-start bg-[linear-gradient(rgba(0,0,0,0.25),rgba(0,0,0,0.25)),url('https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-08-22--038--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.webp')] bg-cover bg-[center_81%] text-[var(--color-bg-dim)] dark:text-[var(--color-fg-text)]"
+    className="relative flex h-[600px] items-end-safe justify-start bg-[linear-gradient(rgba(0,0,0,0.25),rgba(0,0,0,0.25)),url('https://cdn.shopify.com/s/files/1/0934/9293/6987/files/photography--2025-08-22--038--half-frame--pentax-17--pentax-25mm-f35-hd-hf--fujifilm--400--unknown--unknown.webp')] bg-cover bg-[center_81%] text-[var(--color-bg-dim)]"
   >
     <div className="z-10 relative bottom-20 left-20">
       <h1 className="text-5xl font-bold mb-2">The Photography Shelf</h1>
@@ -217,7 +217,7 @@ export default function Photography() {
 
       <div className="mb-10 2xl:mb-16">
         <div className="flex flex-row mb-5 justify-between items-center">
-          <h2 className="text-3xl font-medium leading-tight text-[var(--color-fg-green)]">
+          <h2 className="text-3xl font-medium leading-tight text-[var(--color-fg-blue)]">
             Recent images
           </h2>
           <Button asChild variant="pill">

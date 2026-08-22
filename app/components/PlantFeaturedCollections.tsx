@@ -13,7 +13,7 @@ export function PlantFeaturedCollections({
   );
   return (
     <div className="mb-10 2xl:mb-16">
-      <h2 className="text-3xl font-medium leading-tight text-[var(--color-fg-green)]">
+      <h2 className="text-3xl font-medium leading-tight text-[var(--color-fg-blue)]">
         Featured Collections
       </h2>
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-5">
@@ -37,12 +37,12 @@ export function PlantFeaturedCollections({
                 />
               </>
             )}
-            <h3 className="absolute bottom-3 left-3 text-xl font-medium text-[var(--color-bg-dim)] dark:text-[var(--color-fg-text)] drop-shadow-sm">
+            <h3 className="absolute bottom-3 left-3 text-xl font-medium text-[var(--color-bg-dim)] drop-shadow-sm">
               {collection.title}
             </h3>
             <span
               aria-hidden="true"
-              className="absolute bottom-3 right-3 inline-flex size-7 items-center justify-center rounded-full border-2 border-[var(--color-fg-green)] bg-[var(--color-fg-green)] text-[var(--color-bg-dim)] transition-colors group-hover:bg-transparent group-hover:text-[var(--color-fg-green)]"
+              className="absolute bottom-3 right-3 inline-flex size-7 items-center justify-center rounded-full border-2 border-[var(--color-fg-blue)] bg-[var(--color-fg-blue)] text-[var(--color-bg-dim)] transition-colors group-hover:bg-transparent group-hover:text-[var(--color-fg-blue)]"
             >
               <ArrowRight className="size-3.5" />
             </span>

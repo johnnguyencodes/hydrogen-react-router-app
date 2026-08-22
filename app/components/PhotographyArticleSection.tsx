@@ -10,7 +10,7 @@ export function PhotographyArticleSection({
   return (
     <div className="article-posts my-5">
       <div className="mb-1">
-        <h2 className="text-3xl font-medium leading-tight text-[var(--color-fg-green)]">
+        <h2 className="text-3xl font-medium leading-tight text-[var(--color-fg-blue)]">
           {photographyArticleSectionProps.sectionTitle}
         </h2>
         <p className="text-[var(--color-fg-text)] py-1">
@@ -42,7 +42,7 @@ export function PhotographyArticleSection({
               >
                 <article className="flex flex-col rounded-md bg-[var(--color-bg-2)] mb-3">
                   <div className="px-4 py-2 flex flex-col flex-1">
-                    <h3 className="text-xl font-semibold text-[var(--color-fg-green)]">
+                    <h3 className="text-xl font-semibold text-[var(--color-fg-blue)]">
                       {post.title}
                     </h3>
                     <p className="mt-1 text-xs tracking-wide uppercase text-[color-mix(in_oklab,var(--color-fg-text)_70%,transparent)]">
