@@ -1,3 +1,13 @@
+// "nikon-d850" -> "Nikon D850". Used as a fallback display label wherever a
+// photo's display_name (authored on its metaobject reference) isn't
+// available yet, both in the lightbox popover and the All Photos filter bar.
+export function humanizeHandle(handle: string): string {
+  return handle
+    .split('-')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+}
+
 // Carries a photography image's metadata onto its `data-fancybox="gallery"`
 // trigger element as plain data-* attributes, so the lightbox (a vanilla-JS
 // Fancybox instance, see ~/lib/fancyboxOptions.ts) can read it back off
