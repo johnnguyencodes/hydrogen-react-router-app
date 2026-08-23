@@ -35,9 +35,16 @@ export async function fetchAllPhotos(
       date: node.date?.value ?? '',
       index: node.index?.value ?? '',
       filmFormat: node.filmFormat?.reference?.handle ?? '',
+      filmFormatDisplayName:
+        node.filmFormat?.reference?.displayName?.value ?? undefined,
       cameraBody: node.cameraBody?.reference?.handle ?? '',
+      cameraBodyDisplayName:
+        node.cameraBody?.reference?.displayName?.value ?? undefined,
       lens: node.lens?.reference?.handle ?? '',
+      lensDisplayName: node.lens?.reference?.displayName?.value ?? undefined,
       filmStockBrand: node.filmStock?.reference?.handle ?? '',
+      filmStockDisplayName:
+        node.filmStock?.reference?.displayName?.value ?? undefined,
       isoNumber: node.iso?.value ?? '',
       aperture: node.aperture?.value ?? '',
       shutterspeed: node.shutterspeed?.value ?? '',
@@ -124,22 +131,34 @@ export const ALL_PHOTOS_QUERY = `#graphql
         shutterspeed: field(key: "shutterspeed") { value }
         cameraBody: field(key: "camera_body") {
           reference {
-            ... on Metaobject { handle }
+            ... on Metaobject {
+              handle
+              displayName: field(key: "display_name") { value }
+            }
           }
         }
         lens: field(key: "lens") {
           reference {
-            ... on Metaobject { handle }
+            ... on Metaobject {
+              handle
+              displayName: field(key: "display_name") { value }
+            }
           }
         }
         filmStock: field(key: "film_stock") {
           reference {
-            ... on Metaobject { handle }
+            ... on Metaobject {
+              handle
+              displayName: field(key: "display_name") { value }
+            }
           }
         }
         filmFormat: field(key: "film_format") {
           reference {
-            ... on Metaobject { handle }
+            ... on Metaobject {
+              handle
+              displayName: field(key: "display_name") { value }
+            }
           }
         }
       }

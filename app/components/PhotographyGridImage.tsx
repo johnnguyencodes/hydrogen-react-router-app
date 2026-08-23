@@ -1,5 +1,6 @@
 import {Image} from '@shopify/hydrogen';
 import clsx from 'clsx';
+import {buildPhotoMetaDataAttributes} from '~/lib/photoMetaDataAttributes';
 
 export function PhotographyGridImage({
   image,
@@ -18,6 +19,7 @@ export function PhotographyGridImage({
         data-fancybox="gallery"
         href={image.image.url}
         data-lazy-src={image.image.url}
+        {...buildPhotoMetaDataAttributes(image.meta)}
       >
         <Image
           id={id}

@@ -118,9 +118,13 @@ declare global {
       date: string;
       index: string;
       filmFormat: string;
+      filmFormatDisplayName?: string;
       cameraBody: string;
+      cameraBodyDisplayName?: string;
       lens: string;
+      lensDisplayName?: string;
       filmStockBrand: string;
+      filmStockDisplayName?: string;
       isoNumber: string;
       aperture: string;
       shutterspeed: string;
@@ -146,8 +150,10 @@ declare global {
     width: number;
   };
 
-  export type GalleryThumbnail<T> = {
-    image: T;
+  // Matches the flat merge buildLayout.ts's ImageExtended<T> actually
+  // produces at runtime (T's own fields spread alongside scaledWidth/
+  // scaledHeight, not nested under a separate `image` key).
+  export type GalleryThumbnail<T> = T & {
     scaledWidth: number;
     scaledHeight: number;
   };

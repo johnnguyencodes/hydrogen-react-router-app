@@ -136,6 +136,238 @@ function updateZoomButton(button: HTMLElement, phase: ZoomPhase): void {
   button.innerHTML = zoomButtonInnerHtml(phase);
 }
 
+// Photo metadata popover — shows a photography image's camera/lens/film/date
+// info while it's open in the lightbox. The data itself rides in as
+// data-photo-* attributes on the slide's trigger element (see
+// ~/lib/photoMetaDataAttributes.ts), which PhotographyGridImage.tsx and
+// MasonryGalleryImage.tsx already set — plant images have no such
+// attributes, so the button just hides itself for those.
+//
+// Styled and wired the same way as the zoom toggle above: one persistent
+// toolbar button (not per-slide DOM), CSS handles the hover reveal for
+// desktop, and a delegated click listener (bound once per container, same
+// guard pattern as the zoom click handler) toggles it open/closed for touch.
+function ensureInfoPopoverStyles(): void {
+  if (typeof document === 'undefined') return;
+  if (document.getElementById('photo-info-popover-style')) return;
+  const style = document.createElement('style');
+  style.id = 'photo-info-popover-style';
+  style.textContent = `
+    [data-fb-info-toggle] { overflow: visible; margin-right: 8px; position: relative; }
+    .photo-info-popover {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      margin-top: 8px;
+      min-width: 200px;
+      max-width: 280px;
+      box-sizing: border-box;
+      padding: 12px 14px;
+      border-radius: 6px;
+      background: var(--f-button-bg, rgba(54, 54, 54, 0.9));
+      color: var(--f-button-color, #ddd);
+      font-size: 12px;
+      line-height: 1.5;
+      text-align: left;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-4px);
+      transition: opacity 0.15s ease, transform 0.15s ease;
+      z-index: 1;
+    }
+    [data-fb-info-toggle]:hover .photo-info-popover,
+    .photo-info-popover[data-open="true"] {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+    .photo-info-row { display: flex; justify-content: space-between; gap: 12px; }
+    .photo-info-row + .photo-info-row { margin-top: 4px; }
+    .photo-info-label { opacity: 0.65; white-space: nowrap; }
+    .photo-info-value { text-align: right; }
+  `;
+  document.head.appendChild(style);
+}
+
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+// "nikon-d850" -> "Nikon D850". Good enough for camera/lens/film handles
+// (which are just kebab-cased model names/numbers) without attempting
+// anything fancier like aperture/shutter-speed fraction parsing below.
+function humanizeHandle(handle: string): string {
+  return handle
+    .split('-')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+}
+
+// "1-250s" -> "1/250s" (a fraction-of-a-second exposure); "1s"/"30s" (no
+// hyphen, a whole number of seconds) are left as-is. Unlike aperture below,
+// this encoding is unambiguous — the hyphen always separates numerator from
+// denominator, never a decimal — so it's safe to reformat with confidence.
+function formatShutterSpeed(raw: string): string {
+  const match = raw.match(/^(\d+)-(\d+)s$/);
+  return match ? `${match[1]}/${match[2]}s` : raw;
+}
+
+// Older filenames encode aperture as "f" + digits with the decimal point
+// removed (e.g. "f56" -> f/5.6, "f8" -> f/8), which collides for a handful
+// of codes between a decimal value under f/10 and a whole value at or
+// above it (e.g. "f16" could mean f/1.6 or f/16). For those, every code is
+// resolved to its whole-number reading - the decimal alternatives (f/1.1,
+// f/1.4, f/1.6, f/1.8, f/2.2, f/2.5, f/3.2) aren't realistic max apertures
+// for any lens in this collection, so on the assumption that all existing
+// photos used the larger (smaller-opening) aperture, the whole-number
+// reading is correct for all of them.
+//
+// Newer filenames avoid the ambiguity altogether by using the same
+// dash-as-decimal-point convention as shutter speed below: "f1-1" for
+// f/1.1, vs. plain "f11" for f/11 - see formatAperture's dash branch.
+const APERTURE_DISPLAY: Record<string, string> = {
+  '1': '1',
+  '2': '2',
+  '4': '4',
+  '5': '5',
+  '8': '8',
+  '9': '9',
+  '10': '10',
+  '11': '11',
+  '12': '1.2',
+  '13': '13',
+  '14': '14',
+  '16': '16',
+  '18': '18',
+  '20': '20',
+  '22': '22',
+  '25': '25',
+  '28': '2.8',
+  '29': '29',
+  '32': '32',
+  '35': '3.5',
+  '45': '4.5',
+  '56': '5.6',
+  '63': '6.3',
+  '71': '7.1',
+};
+
+function formatAperture(raw: string): string {
+  // New, unambiguous convention: "f1-1" -> f/1.1 (a dash always means a
+  // decimal point here, exactly like formatShutterSpeed's fraction dash).
+  const dashed = raw.match(/^f(\d+)-(\d+)$/);
+  if (dashed) return `f/${dashed[1]}.${dashed[2]}`;
+
+  // Older convention: plain digit run, resolved via the table above.
+  const digits = raw.match(/^f(\d+)$/)?.[1];
+  const formatted = digits ? APERTURE_DISPLAY[digits] : undefined;
+  return formatted ? `f/${formatted}` : raw;
+}
+
+function formatPhotoMetaRows(
+  dataset: DOMStringMap,
+): {label: string; value: string}[] {
+  const rows: {label: string; value: string}[] = [];
+
+  if (dataset.photoDate) {
+    const date = new Date(`${dataset.photoDate}T00:00:00`);
+    rows.push({
+      label: 'Date',
+      value: date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      }),
+    });
+  }
+  if (dataset.photoCameraBody) {
+    rows.push({
+      label: 'Camera',
+      value: dataset.photoCameraBodyName || humanizeHandle(dataset.photoCameraBody),
+    });
+  }
+  if (dataset.photoLens) {
+    rows.push({
+      label: 'Lens',
+      value: dataset.photoLensName || humanizeHandle(dataset.photoLens),
+    });
+  }
+  if (dataset.photoFilmStock) {
+    rows.push({
+      label: 'Film',
+      value:
+        dataset.photoFilmStockName ||
+        (dataset.photoFilmStock === '45mp'
+          ? 'Digital'
+          : humanizeHandle(dataset.photoFilmStock)),
+    });
+  }
+  if (dataset.photoFilmFormat) {
+    rows.push({
+      label: 'Format',
+      value: dataset.photoFilmFormatName || humanizeHandle(dataset.photoFilmFormat),
+    });
+  }
+  if (dataset.photoIso) {
+    rows.push({label: 'ISO', value: dataset.photoIso.replace(/^iso-/, '')});
+  }
+  if (dataset.photoAperture) {
+    rows.push({label: 'Aperture', value: formatAperture(dataset.photoAperture)});
+  }
+  if (dataset.photoShutterspeed) {
+    rows.push({
+      label: 'Shutter',
+      value: formatShutterSpeed(dataset.photoShutterspeed),
+    });
+  }
+
+  return rows;
+}
+
+function infoPopoverContentHtml(dataset: DOMStringMap): string {
+  return formatPhotoMetaRows(dataset)
+    .map(
+      ({label, value}) =>
+        `<div class="photo-info-row"><span class="photo-info-label">${escapeHtml(label)}</span><span class="photo-info-value">${escapeHtml(value)}</span></div>`,
+    )
+    .join('');
+}
+
+function infoButtonTpl(): string {
+  return `<button data-fb-info-toggle class="f-button" aria-label="Photo details">
+    <svg><circle cx="11" cy="11" r="7.5"/><line x1="11" y1="10" x2="11" y2="15"/><circle cx="11" cy="7" r="0.9" fill="currentColor" stroke="none"/></svg>
+    <div class="photo-info-popover"></div>
+  </button>`;
+}
+
+// Called on every active-slide change (and once for the initial slide) so
+// the popover always describes whichever image is currently showing.
+function updateInfoButton(
+  container: HTMLElement | null | undefined,
+  activeSlide: any,
+): void {
+  const button = container?.querySelector(
+    '[data-fb-info-toggle]',
+  ) as HTMLElement | null;
+  if (!button) return;
+  const popover = button.querySelector(
+    '.photo-info-popover',
+  ) as HTMLElement | null;
+  if (!popover) return;
+
+  const dataset = activeSlide?.triggerEl?.dataset ?? {};
+  const html = infoPopoverContentHtml(dataset);
+
+  button.style.display = html ? '' : 'none';
+  popover.innerHTML = html;
+  if (!html) popover.removeAttribute('data-open');
+}
+
 // Shared by both the "back to fit" click branch and the slide-change
 // handler below: restores the capped srcset and clears the true-original
 // width/height attributes, so a slide left zoomed-in doesn't keep holding
@@ -407,6 +639,7 @@ export const fancyboxOptions = {
       // on the slide objects above.
       render: (_carousel, slides) => {
         ensureZoomToggleStyles();
+        ensureInfoPopoverStyles();
         for (const slide of slides) {
           const img = slide.el?.querySelector(
             'img, picture img',
@@ -443,6 +676,38 @@ export const fancyboxOptions = {
             advanceZoomPhase(_carousel, {x: event.clientX, y: event.clientY});
           });
         }
+
+        // Tapping the info button toggles its popover open/closed - CSS
+        // alone handles the hover reveal on desktop, but touch devices have
+        // no hover, so this is what actually shows/hides it on mobile.
+        // Tapping anywhere else in the lightbox (including the image, or
+        // just swiping) closes it again. Bound once per container, same
+        // guard pattern as the zoom click listener above.
+        if (container && !container.dataset.infoClickBound) {
+          container.dataset.infoClickBound = 'true';
+          container.addEventListener('click', (event: MouseEvent) => {
+            const target = event.target as HTMLElement | null;
+            if (!target) return;
+            const popover = container.querySelector(
+              '.photo-info-popover',
+            ) as HTMLElement | null;
+            if (!popover) return;
+            if (target.closest('.photo-info-popover')) return; // reading the popover's own text shouldn't close it
+            if (target.closest('[data-fb-info-toggle]')) {
+              const isOpen = popover.getAttribute('data-open') === 'true';
+              popover.setAttribute('data-open', isOpen ? 'false' : 'true');
+              return;
+            }
+            popover.removeAttribute('data-open');
+          });
+        }
+
+        // `change` (below) doesn't fire for the very first slide when a
+        // gallery first opens - only on subsequent navigation - so the info
+        // popover needs its initial content set here too, once the toolbar
+        // button actually exists in the DOM. Harmless to also run again on
+        // later renders; it's just re-setting the same content.
+        updateInfoButton(container, _carousel.getPage?.()?.slides?.[0]);
       },
       // Fires when the active slide changes. Panzoom already resets a
       // slide's *visual* zoom back to fit once it's no longer active, but
@@ -457,12 +722,12 @@ export const fancyboxOptions = {
         for (const slide of carousel.getSlides?.() ?? []) {
           if (slide !== activeSlide) resetSlideZoom(slide);
         }
-        const button = carousel
-          .getContainer?.()
-          ?.querySelector('[data-fb-zoom-toggle]');
+        const container = carousel.getContainer?.();
+        const button = container?.querySelector('[data-fb-zoom-toggle]');
         if (button) {
           updateZoomButton(button, activeSlide?.zoomPhase || 'base');
         }
+        updateInfoButton(container, activeSlide);
         // Swiping to a slide is as likely a "might zoom in next" signal
         // as opening the gallery on it in the first place - keep warming
         // the cache for whichever slide is now active, and its
@@ -509,10 +774,18 @@ export const fancyboxOptions = {
           tpl: zoomButtonTpl('base'),
           click: (carousel: any) => advanceZoomPhase(carousel),
         },
+        // Shows a popover with the current photo's metadata (camera, lens,
+        // film, date) on hover/tap - see updateInfoButton/ensureInfoPopoverStyles
+        // above. Hidden entirely for slides with no photo metadata (e.g. a
+        // plant image, since this same fancyboxOptions config is shared
+        // across photography and plant pages).
+        infoToggle: {
+          tpl: infoButtonTpl(),
+        },
       },
       display: {
         left: ['counter'],
-        right: ['zoomToggle', 'close'],
+        right: ['infoToggle', 'zoomToggle', 'close'],
       },
     },
     Zoomable: {
