@@ -1,15 +1,19 @@
 import {
-  Link,
   useLoaderData,
+  useSearchParams,
   type LoaderFunctionArgs,
   type MetaFunction,
 } from 'react-router';
 import {getSeoMeta} from '@shopify/hydrogen';
-import HeroCarousel from '~/components/HeroCarousel';
 import {photographyPhotos as pageSeoData} from '~/lib/photographyLandingPageSeoData';
 import {fetchAllPhotos} from '~/lib/photographyPageUtils';
 import PhotographyPage from '~/components/PhotographyPage';
-import {useEffect, useMemo, useState} from 'react';
+import {
+  PhotoFilterBar,
+  buildActivePhotoFilters,
+  filterPhotosByActiveFilters,
+} from '~/components/PhotoFilterBar';
+import {useMemo, useRef} from 'react';
 
 export async function loader(args: LoaderFunctionArgs) {
   const criticalData = await loadCriticalData(args);
@@ -37,80 +41,78 @@ export const meta: MetaFunction<typeof loader> = ({data, matches}) => {
   return getSeoMeta(rootSeo, pageSeo);
 };
 
+function sortImages(
+  a: PhotographyImageWithMetadata,
+  b: PhotographyImageWithMetadata,
+): number {
+  const {date: aDate, index: aIndex} = a.meta;
+  const {date: bDate, index: bIndex} = b.meta;
+
+  // sort by date (most recent first)
+  const aDateObj = new Date(aDate);
+  const bDateObj = new Date(bDate);
+
+  if (bDateObj.getTime() !== aDateObj.getTime()) {
+    return bDateObj.getTime() - aDateObj.getTime();
+  }
+
+  // Then, sort by index from highest to lowest (highest index is most recent)
+  return Number(bIndex) - Number(aIndex);
+}
+
 export default function Photography() {
   const {criticalData} = useLoaderData<typeof loader>();
-  const [filterStrings, setFilterStrings] = useState<string[]>([]);
-  const [filteredImages, setFilteredImages] = useState<
-    PhotographyImageWithMetadata[]
-  >([]);
+  const [searchParams] = useSearchParams();
 
   const parsedImages = useMemo<PhotographyImageWithMetadata[]>(() => {
     return [...criticalData.images].sort(sortImages);
   }, [criticalData]);
 
-  useEffect(() => {
-    setFilteredImages(filterImages(parsedImages, filterStrings));
-  }, [parsedImages, filterStrings]);
+  const filteredImages = useMemo(() => {
+    const active = buildActivePhotoFilters(searchParams);
+    return filterPhotosByActiveFilters(parsedImages, active);
+  }, [parsedImages, searchParams]);
 
-  function sortImages(
-    a: PhotographyImageWithMetadata,
-    b: PhotographyImageWithMetadata,
-  ): number {
-    const {date: aDate, index: aIndex} = a.meta;
-    const {date: bDate, index: bIndex} = b.meta;
+  // PhotographyPage's HeroContent prop is invoked as <HeroContent /> with no
+  // props, so a freshly-defined component here would get a new identity on
+  // every render (this route re-renders on every filter change) - React
+  // would then remount it, wiping PhotoFilterBar's internal open-dropdown
+  // state on each click. A ref keeps the component's identity stable across
+  // renders while still reading the latest data each time it's invoked.
+  const heroDataRef = useRef({parsedImages, filteredImages});
+  heroDataRef.current = {parsedImages, filteredImages};
 
-    // sort by date (most recent first)
-    const aDateObj = new Date(aDate);
-    const bDateObj = new Date(bDate);
-
-    if (bDateObj.getTime() !== aDateObj.getTime()) {
-      return bDateObj.getTime() - aDateObj.getTime();
-    }
-
-    // Then, sort by index from highest to lowest (highest index is most recent)
-    return Number(bIndex) - Number(aIndex);
-  }
-
-  parsedImages.sort(sortImages);
-
-  function toggleFilter(filterString: string) {
-    setFilterStrings((prev) =>
-      prev.includes(filterString)
-        ? prev.filter((f) => f !== filterString)
-        : [...prev, filterString],
-    );
-  }
-
-  function filterImages(
-    images: PhotographyImageWithMetadata[],
-    filterStrings: string[],
-  ) {
-    if (filterStrings.length === 0) return images;
-
-    return images.filter((image) =>
-      filterStrings.some((filter) => image.image.url.includes(filter)),
-    );
-  }
-
-  function PhotographyHero(): React.JSX.Element {
-    return (
-      <div>
-        <p>I have uploaded {parsedImages.length} images so far.</p>
-        <p>
-          Browse them all or use filter by lens, film stocks, formats, or camera
-          bodies!
-        </p>
-        <p>You are now viewing {filteredImages.length} images</p>
-      </div>
-    );
+  const PhotographyHeroRef = useRef<() => React.JSX.Element>();
+  if (!PhotographyHeroRef.current) {
+    PhotographyHeroRef.current = function PhotographyHero() {
+      const {parsedImages, filteredImages} = heroDataRef.current;
+      return (
+        <div className="mb-5">
+          <h1 className="text-3xl mt-4 font-medium leading-tight max-w-[30ch] text-balance text-[var(--color-fg-blue)]">
+            Photos
+          </h1>
+          <p className="mt-2 text-[var(--color-fg-text)]">
+            All my photography photos on one page. Browse them all or filter
+            them using the categories below.
+          </p>
+          <p className="mt-2 text-[var(--color-fg-text)]">
+            {parsedImages.length} photos total &middot; viewing{' '}
+            {filteredImages.length}
+          </p>
+          <div className="mt-3">
+            <PhotoFilterBar images={parsedImages} />
+          </div>
+        </div>
+      );
+    };
   }
 
   return (
     <div className="xxs:mx-5 2xl:mx-0">
-      <button onClick={() => toggleFilter('nikon-d850')}>Nikon d850</button>
-      <button onClick={() => toggleFilter('45mp')}>45mp</button>
-      <p>Filter Strings: {filterStrings}</p>
-      <PhotographyPage images={filteredImages} HeroContent={PhotographyHero} />
+      <PhotographyPage
+        images={filteredImages}
+        HeroContent={PhotographyHeroRef.current}
+      />
     </div>
   );
 }

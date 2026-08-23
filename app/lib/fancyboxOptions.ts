@@ -1,3 +1,5 @@
+import {humanizeHandle} from './photoMetaDataAttributes';
+
 // The trigger anchors always point at the raw, untransformed Shopify CDN
 // image (no `?width=` param), so Fancybox's modal `<img>` would otherwise
 // always load the full original regardless of viewport/DPR. Build a real
@@ -201,13 +203,6 @@ function escapeHtml(value: string): string {
 // "nikon-d850" -> "Nikon D850". Good enough for camera/lens/film handles
 // (which are just kebab-cased model names/numbers) without attempting
 // anything fancier like aperture/shutter-speed fraction parsing below.
-function humanizeHandle(handle: string): string {
-  return handle
-    .split('-')
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
-}
-
 // "1-250s" -> "1/250s" (a fraction-of-a-second exposure); "1s"/"30s" (no
 // hyphen, a whole number of seconds) are left as-is. Unlike aperture below,
 // this encoding is unambiguous — the hyphen always separates numerator from
