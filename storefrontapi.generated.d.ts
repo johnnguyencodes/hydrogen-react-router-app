@@ -319,22 +319,38 @@ export type AllPhotosQuery = {
       >;
       cameraBody?: StorefrontAPI.Maybe<{
         reference?: StorefrontAPI.Maybe<
-          Pick<StorefrontAPI.Metaobject, 'handle'>
+          Pick<StorefrontAPI.Metaobject, 'handle'> & {
+            displayName?: StorefrontAPI.Maybe<
+              Pick<StorefrontAPI.MetaobjectField, 'value'>
+            >;
+          }
         >;
       }>;
       lens?: StorefrontAPI.Maybe<{
         reference?: StorefrontAPI.Maybe<
-          Pick<StorefrontAPI.Metaobject, 'handle'>
+          Pick<StorefrontAPI.Metaobject, 'handle'> & {
+            displayName?: StorefrontAPI.Maybe<
+              Pick<StorefrontAPI.MetaobjectField, 'value'>
+            >;
+          }
         >;
       }>;
       filmStock?: StorefrontAPI.Maybe<{
         reference?: StorefrontAPI.Maybe<
-          Pick<StorefrontAPI.Metaobject, 'handle'>
+          Pick<StorefrontAPI.Metaobject, 'handle'> & {
+            displayName?: StorefrontAPI.Maybe<
+              Pick<StorefrontAPI.MetaobjectField, 'value'>
+            >;
+          }
         >;
       }>;
       filmFormat?: StorefrontAPI.Maybe<{
         reference?: StorefrontAPI.Maybe<
-          Pick<StorefrontAPI.Metaobject, 'handle'>
+          Pick<StorefrontAPI.Metaobject, 'handle'> & {
+            displayName?: StorefrontAPI.Maybe<
+              Pick<StorefrontAPI.MetaobjectField, 'value'>
+            >;
+          }
         >;
       }>;
     }>;
@@ -1392,7 +1408,7 @@ interface GeneratedQueryTypes {
     return: FooterQuery;
     variables: FooterQueryVariables;
   };
-  '#graphql\n  query AllPhotos($first: Int!) {\n    metaobjects(type: "photo", first: $first) {\n      nodes {\n        alt: field(key: "alt") { value }\n        imageUrl: field(key: "image_url") { value }\n        imageWidth: field(key: "image_width") { value }\n        imageHeight: field(key: "image_height") { value }\n        date: field(key: "date") { value }\n        index: field(key: "index") { value }\n        fileType: field(key: "file_type") { value }\n        iso: field(key: "iso") { value }\n        aperture: field(key: "aperture") { value }\n        shutterspeed: field(key: "shutterspeed") { value }\n        cameraBody: field(key: "camera_body") {\n          reference {\n            ... on Metaobject { handle }\n          }\n        }\n        lens: field(key: "lens") {\n          reference {\n            ... on Metaobject { handle }\n          }\n        }\n        filmStock: field(key: "film_stock") {\n          reference {\n            ... on Metaobject { handle }\n          }\n        }\n        filmFormat: field(key: "film_format") {\n          reference {\n            ... on Metaobject { handle }\n          }\n        }\n      }\n    }\n  }\n': {
+  '#graphql\n  query AllPhotos($first: Int!) {\n    metaobjects(type: "photo", first: $first) {\n      nodes {\n        alt: field(key: "alt") { value }\n        imageUrl: field(key: "image_url") { value }\n        imageWidth: field(key: "image_width") { value }\n        imageHeight: field(key: "image_height") { value }\n        date: field(key: "date") { value }\n        index: field(key: "index") { value }\n        fileType: field(key: "file_type") { value }\n        iso: field(key: "iso") { value }\n        aperture: field(key: "aperture") { value }\n        shutterspeed: field(key: "shutterspeed") { value }\n        cameraBody: field(key: "camera_body") {\n          reference {\n            ... on Metaobject {\n              handle\n              displayName: field(key: "display_name") { value }\n            }\n          }\n        }\n        lens: field(key: "lens") {\n          reference {\n            ... on Metaobject {\n              handle\n              displayName: field(key: "display_name") { value }\n            }\n          }\n        }\n        filmStock: field(key: "film_stock") {\n          reference {\n            ... on Metaobject {\n              handle\n              displayName: field(key: "display_name") { value }\n            }\n          }\n        }\n        filmFormat: field(key: "film_format") {\n          reference {\n            ... on Metaobject {\n              handle\n              displayName: field(key: "display_name") { value }\n            }\n          }\n        }\n      }\n    }\n  }\n': {
     return: AllPhotosQuery;
     variables: AllPhotosQueryVariables;
   };

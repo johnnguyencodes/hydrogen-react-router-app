@@ -1,5 +1,6 @@
 import {Image} from '@shopify/hydrogen';
 import clsx from 'clsx';
+import {buildPhotoMetaDataAttributes} from '~/lib/photoMetaDataAttributes';
 
 export function MasonryGalleryImage({image, className, dataFancyboxName}) {
   if (!image) return null;
@@ -45,7 +46,11 @@ export function MasonryGalleryImage({image, className, dataFancyboxName}) {
 
   return (
     <div className="product-image h-full w-full">
-      <a data-fancybox={dataFancyboxName} href={image.image.url}>
+      <a
+        data-fancybox={dataFancyboxName}
+        href={image.image.url}
+        {...buildPhotoMetaDataAttributes(image.meta)}
+      >
         <Image
           data={image.image}
           alt={image.alt || 'Photography Image'}
